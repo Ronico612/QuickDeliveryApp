@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuickDeliveryApp.Models
 {
-    public partial class User
+    class User
     {
         public User()
         {
