@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using QuickDeliveryApp.Views;
 
 namespace QuickDeliveryApp
 {
@@ -18,7 +19,7 @@ namespace QuickDeliveryApp
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new TheMainTabbedPage();
         }
 
         protected override void OnStart()

@@ -11,18 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace QuickDeliveryApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TheMainTabbedPage : TabbedPage
+    public partial class Shops : ContentPage
     {
-        public Shops shopsPage;
-
-        public TheMainTabbedPage()
+        public Shops()
         {
-            this.BindingContext = new TheMainTabbedPageViewModel();
+            this.BindingContext = new ShopsViewModel();
             InitializeComponent();
-
-            shopsPage = new Shops();
-            shopsPage.Title = "Shops";
-            this.Children.Add(shopsPage);
         }
     }
 }
