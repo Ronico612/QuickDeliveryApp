@@ -4,8 +4,7 @@
              x:Class="QuickDeliveryApp.MainPage">
 
     <StackLayout>
-        <Button x:Name="btn" Text="Press Me" Clicked="btn_Clicked"></Button>
-        <Label x:Name="lbl"></Label>
+
     </StackLayout>
 
 </ContentPage>

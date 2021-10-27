@@ -4,9 +4,8 @@
              x:Class="QuickDeliveryApp.Views.Shops">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Button Text="press me!" Clicked="Button_Clicked"></Button>
+            <Label x:Name="lbl"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

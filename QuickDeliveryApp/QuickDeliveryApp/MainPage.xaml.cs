@@ -15,11 +15,5 @@ namespace QuickDeliveryApp
         {
             InitializeComponent();
         }
-
-        private async void btn_Clicked(object sender, EventArgs e)
-        {
-            QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
-            lbl.Text = await proxy.TestAsync(); 
-        }
     }
 }

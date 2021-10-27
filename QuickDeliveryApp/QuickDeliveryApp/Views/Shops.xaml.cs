@@ -1,4 +1,5 @@
-﻿using QuickDeliveryApp.ViewModels;
+﻿using QuickDeliveryApp.Services;
+using QuickDeliveryApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,14 @@ namespace QuickDeliveryApp.Views
         {
             this.BindingContext = new ShopsViewModel();
             InitializeComponent();
+
+
+        }
+
+        private async void Button_Clicked(object sender, EventArgs e)
+        {
+            QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
+            lbl.Text = await quickDeliveryAPIProxy.GetTest();
         }
     }
 }

@@ -28,7 +28,6 @@ namespace QuickDeliveryApp.Models
         public int? NumCode { get; set; }
         public int? ValidityCreditCard { get; set; }
 
-        public virtual UserType TypeUser { get; set; }
         public virtual DelPerson DelPerson { get; set; }
         public virtual ShopManager ShopManager { get; set; }
         public virtual List<Order> Orders { get; set; }

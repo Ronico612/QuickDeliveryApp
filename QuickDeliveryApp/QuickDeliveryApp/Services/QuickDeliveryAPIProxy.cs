@@ -80,6 +80,35 @@ namespace QuickDeliveryApp.Services
 
         public string GetBasePhotoUri() { return this.basePhotosUri; }
 
+        public async Task<string> GetTest()
+        {
+            try
+            {
+
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Test");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    string str = JsonSerializer.Deserialize<string>(content, options);
+                    return str;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
         public async Task<List<Shop>> GetShopsAsync()
         {
             try
