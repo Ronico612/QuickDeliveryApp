@@ -25,7 +25,7 @@ namespace QuickDeliveryApp.Views
         private async void Button_Clicked(object sender, EventArgs e)
         {
             QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
-            lbl.Text = await quickDeliveryAPIProxy.GetTest();
+            lbl.Text = await quickDeliveryAPIProxy.GetTestAsync();
         }
     }
 }

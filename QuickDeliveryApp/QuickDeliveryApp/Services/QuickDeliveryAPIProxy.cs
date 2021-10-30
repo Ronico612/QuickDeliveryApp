@@ -80,7 +80,7 @@ namespace QuickDeliveryApp.Services
 
         public string GetBasePhotoUri() { return this.basePhotosUri; }
 
-        public async Task<string> GetTest()
+        public async Task<string> GetTestAsync()
         {
             try
             {
