@@ -4,8 +4,40 @@
              x:Class="QuickDeliveryApp.Views.Shops">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="press me!" Clicked="Button_Clicked"></Button>
-            <Label x:Name="lbl"></Label>
+            <SearchBar x:Name="searchBar" 
+                       Placeholder="Type a Search Term" 
+                       Text="{Binding SearchTerm}"
+                       />
+            <RefreshView x:Name="refreshView"
+             Command="{Binding RefreshCommand}"
+             IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView EmptyView="לא נמצאו חנויות התואמות לחיפושך" x:Name="collectionName" ItemsSource="{Binding FilteredContacts}" SelectionMode="Single" BackgroundColor="White"
+                                SelectionChangedCommand="{Binding UpdateContact}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Span="1" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            
+                                <Grid Margin="7">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"/>
+                                        <RowDefinition Height="50"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding Path=FirstName, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="Caption"  Grid.Row="0" Grid.Column="0"/>
+                                    <Label Text="{Binding Path=LastName, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="Caption" FontAttributes="Bold" Grid.Row="1" Grid.Column="0" Margin="0,0,5,0"/>
+                                    <Image Source="{Binding ImgSource}" Grid.Column="1" Grid.RowSpan="2" Grid.Row="0"/>
+                                </Grid>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

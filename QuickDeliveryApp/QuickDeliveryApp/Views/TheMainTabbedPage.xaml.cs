@@ -15,6 +15,7 @@ namespace QuickDeliveryApp.Views
     public partial class TheMainTabbedPage : TabbedPage
     {
         public Shops shopsPage;
+        public ShoppingCart ShoppingCart;
 
         public TheMainTabbedPage()
         {
@@ -24,6 +25,10 @@ namespace QuickDeliveryApp.Views
             shopsPage = new Shops();
             shopsPage.Title = "Shops";
             this.Children.Add(shopsPage);
+
+            ShoppingCart = new ShoppingCart();
+            ShoppingCart.Title = "Shopping Cart";
+            this.Children.Add(ShoppingCart);
         }
     }
 }

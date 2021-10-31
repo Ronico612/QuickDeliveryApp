@@ -84,7 +84,6 @@ namespace QuickDeliveryApp.Services
         {
             try
             {
-
                 HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/Test");
                 if (response.IsSuccessStatusCode)
                 {
@@ -94,8 +93,7 @@ namespace QuickDeliveryApp.Services
                         PropertyNameCaseInsensitive = true
                     };
                     string content = await response.Content.ReadAsStringAsync();
-                    string str = JsonSerializer.Deserialize<string>(content, options);
-                    return str;
+                    return content;
                 }
                 else
                 {
