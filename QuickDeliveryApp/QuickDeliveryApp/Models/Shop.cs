@@ -16,7 +16,7 @@ namespace QuickDeliveryApp.Models
         public string ShopAdress { get; set; }
         public int? ShopManagerId { get; set; }
         public string ShopCity { get; set; }
-        public int ShopPhone { get; set; }
+        public string ShopPhone { get; set; }
 
         public virtual ShopManager ShopManager { get; set; }
         public virtual ICollection<Product> Products { get; set; }
