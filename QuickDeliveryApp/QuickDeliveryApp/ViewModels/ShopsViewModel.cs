@@ -64,10 +64,9 @@ namespace QuickDeliveryApp.ViewModels
             InitShops();
         }
 
-        private void InitShops()
+        private async void InitShops()
         {
-            Task task = GetAllShops(); // לקבל את רשימת החנויות 
-            //task.Wait(); 
+            await GetAllShops(); // לקבל את רשימת החנויות 
             this.FilteredShops = new ObservableCollection<Shop>(this.allShops.OrderBy(s => s.ShopName));
         }
 

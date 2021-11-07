@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using QuickDeliveryApp.Services;
 
 namespace QuickDeliveryApp.Models
 {
@@ -20,5 +21,16 @@ namespace QuickDeliveryApp.Models
 
         public virtual ShopManager ShopManager { get; set; }
         public virtual ICollection<Product> Products { get; set; }
+
+        //Added Properties only for client!!
+        public string ImgSource
+        { 
+            get
+            {
+                QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
+
+                return $"{proxy.GetBasePhotoUri()}ShopsPhotos/{ShopId}.png";
+            }
+        }
     }
 }
