@@ -5,14 +5,14 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar x:Name="searchBar" 
-                       Placeholder="Type a Search Term" 
+                       Placeholder="Type a search text" 
                        Text="{Binding SearchTerm}"
                        />
             <RefreshView x:Name="refreshView"
              Command="{Binding RefreshCommand}"
              IsRefreshing="{Binding IsRefreshing}">
-                <CollectionView EmptyView="לא נמצאו חנויות התואמות לחיפושך" x:Name="collectionName" ItemsSource="{Binding FilteredShops}" SelectionMode="Single" BackgroundColor="White"
-                                SelectionChangedCommand="{Binding UpdateContact}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
+                <CollectionView EmptyView="לא נמצאו חנויות התואמות לחיפושך" x:Name="collectionName" ItemsSource="{Binding FilteredShops}" SelectionMode="Single"  BackgroundColor="White"
+                        SelectedItem="{Binding SelectedShop}"   SelectionChangedCommand="{Binding ShowShopProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="1" Orientation="Vertical" />
                     </CollectionView.ItemsLayout>

@@ -14,21 +14,21 @@ namespace QuickDeliveryApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TheMainTabbedPage : TabbedPage
     {
-        public Shops shopsPage;
-        public ShoppingCart ShoppingCart;
+        public NavigationPage shopsPage;
+        public ShoppingCart shoppingCart;
 
         public TheMainTabbedPage()
         {
             this.BindingContext = new TheMainTabbedPageViewModel();
             InitializeComponent();
 
-            shopsPage = new Shops();
+            shopsPage = new NavigationPage(new Shops());
             shopsPage.Title = "Shops";
             this.Children.Add(shopsPage);
 
-            ShoppingCart = new ShoppingCart();
-            ShoppingCart.Title = "Shopping Cart";
-            this.Children.Add(ShoppingCart);
+            shoppingCart = new ShoppingCart();
+            shoppingCart.Title = "Shopping Cart";
+            this.Children.Add(shoppingCart);
         }
     }
 }

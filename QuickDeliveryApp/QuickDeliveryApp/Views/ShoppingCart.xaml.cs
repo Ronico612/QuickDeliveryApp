@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using QuickDeliveryApp.ViewModels;
 
 namespace QuickDeliveryApp.Views
 {
@@ -15,6 +16,7 @@ namespace QuickDeliveryApp.Views
     {
         public ShoppingCart()
         {
+            this.BindingContext = new ShoppingCartViewModel();
             InitializeComponent();
         }
 

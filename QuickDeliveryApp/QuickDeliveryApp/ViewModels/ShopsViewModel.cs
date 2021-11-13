@@ -9,6 +9,7 @@ using System.Windows.Input;
 using QuickDeliveryApp.Models;
 using QuickDeliveryApp.Services;
 using Xamarin.Forms;
+using QuickDeliveryApp.Views;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -58,6 +59,25 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private Shop selectedShop;
+        public Shop SelectedShop
+        {
+            get
+            {
+                return this.selectedShop;
+            }
+            set
+            {
+                if (this.selectedShop != value)
+                {
+
+                    this.selectedShop = value;
+                    OnPropertyChanged("SelectedShop");
+                }
+            }
+        }
+
+
         public ShopsViewModel()
         {
             this.SearchTerm = string.Empty;
@@ -95,13 +115,13 @@ namespace QuickDeliveryApp.ViewModels
             {
                 foreach (Shop s in this.allShops)
                 {
-                    string contactString = $"{s.ShopName}|{s.ShopCity}";
+                    string contactString = $"{s.ShopName.ToLower()}|{s.ShopCity.ToLower()}";
 
                     if (!this.FilteredShops.Contains(s) &&
-                        contactString.Contains(search))
+                        contactString.Contains(search.ToLower()))
                         this.FilteredShops.Add(s);
                     else if (this.FilteredShops.Contains(s) &&
-                        !contactString.Contains(search))
+                        !contactString.Contains(search.ToLower()))
                         this.FilteredShops.Remove(s);
                 }
             }
@@ -130,5 +150,15 @@ namespace QuickDeliveryApp.ViewModels
         #endregion
 
 
+        public ICommand ShowShopProductsCommand => new Command(ShowShopProducts);
+        public async void ShowShopProducts()
+        {
+            Page p = new ShopProducts();
+            p.Title = SelectedShop.ShopName;
+            await ((TheMainTabbedPage)Application.Current.MainPage).shopsPage.Navigation.PushAsync(p);
+            //this.SelectedShop = null;
+        }
+
+        
     }
 }
