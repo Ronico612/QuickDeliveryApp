@@ -155,6 +155,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             Page p = new ShopProducts();
             p.Title = SelectedShop.ShopName;
+            p.BindingContext = new ShopProductsViewModel(this.SelectedShop);
             await ((TheMainTabbedPage)Application.Current.MainPage).shopsPage.Navigation.PushAsync(p);
             //this.SelectedShop = null;
         }

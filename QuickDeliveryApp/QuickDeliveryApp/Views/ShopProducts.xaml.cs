@@ -15,7 +15,6 @@ namespace QuickDeliveryApp.Views
     {
         public ShopProducts()
         {
-            this.BindingContext = new ShopProductsViewModel();
             InitializeComponent();
         }
     }

@@ -39,12 +39,9 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        public ShopProductsViewModel()
+        public ShopProductsViewModel(Shop selected)
         {
-            TheMainTabbedPage t = (TheMainTabbedPage)App.Current.MainPage;
-            Shops ss = (Shops)t.shopsPage.CurrentPage;
-            ShopsViewModel s = (ShopsViewModel)ss.BindingContext;
-            Shop CurrentShop = s.SelectedShop;
+            Shop CurrentShop = selected;
             InitProductTypes();
         }
 
