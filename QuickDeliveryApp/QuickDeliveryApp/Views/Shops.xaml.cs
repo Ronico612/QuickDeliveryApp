@@ -19,5 +19,15 @@ namespace QuickDeliveryApp.Views
             this.BindingContext = new ShopsViewModel();
             InitializeComponent();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ShopsViewModel context = (ShopsViewModel)this.BindingContext;
+            collectionName.SelectedItem = null;
+
+        }
     }
+
+    
 }

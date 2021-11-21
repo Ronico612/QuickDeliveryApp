@@ -88,6 +88,8 @@ namespace QuickDeliveryApp.ViewModels
         {
             await GetAllShops(); // לקבל את רשימת החנויות 
             this.FilteredShops = new ObservableCollection<Shop>(this.allShops.OrderBy(s => s.ShopName));
+            OnTextChanged(SearchTerm);
+            IsRefreshing = false;
         }
 
         private async Task GetAllShops()
@@ -145,7 +147,7 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand RefreshCommand => new Command(OnRefresh);
         public void OnRefresh()
         {
-            InitShops();
+            InitShops(); 
         }
         #endregion
 
@@ -153,11 +155,13 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand ShowShopProductsCommand => new Command(ShowShopProducts);
         public async void ShowShopProducts()
         {
-            Page p = new ShopProducts();
-            p.Title = SelectedShop.ShopName;
-            p.BindingContext = new ShopProductsViewModel(this.SelectedShop);
-            await ((TheMainTabbedPage)Application.Current.MainPage).shopsPage.Navigation.PushAsync(p);
-            //this.SelectedShop = null;
+            if (SelectedShop != null)
+            {
+                Page p = new ShopProducts();
+                p.Title = SelectedShop.ShopName;
+                p.BindingContext = new ShopProductsViewModel(this.SelectedShop);
+                await ((TheMainTabbedPage)Application.Current.MainPage).shopsPage.Navigation.PushAsync(p);
+            }
         }
 
         
