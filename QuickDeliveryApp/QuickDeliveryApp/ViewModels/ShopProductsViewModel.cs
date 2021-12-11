@@ -39,6 +39,24 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private ObservableCollection<ProductType> productTypes;
+        public ObservableCollection<ProductType> ProductTypes
+        {
+            get
+            {
+                return this.productTypes;
+            }
+            set
+            {
+                if (this.productTypes != value)
+                {
+
+                    this.productTypes = value;
+                    OnPropertyChanged("ProductTypes");
+                }
+            }
+        }
+
         public ShopProductsViewModel(Shop selected)
         {
             Shop CurrentShop = selected;
@@ -47,9 +65,13 @@ namespace QuickDeliveryApp.ViewModels
 
         private async void InitProductTypes()
         {
-            await GetAllTypeProducts(); // לקבל את רשימת החנויות 
+            await GetAllTypeProducts(); // לקבל את רשימת סוגי מוצרים 
             this.AgeTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId >= 1 && p.ProductTypeId <= 4).OrderBy(pp => pp.ProductTypeId));
+            this.ProductTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId > 4));
         }
+
+        //להוסיף פעולה שמביאה את כל המוצרים של החנות הספיציפית הזאת ואז מזה לסנן 
+        // לבדוק אם צריך גם פוסט וגם גט 
 
         private async Task GetAllTypeProducts()
         {
