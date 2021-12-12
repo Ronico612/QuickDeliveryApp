@@ -67,8 +67,8 @@ namespace QuickDeliveryApp.ViewModels
         private async void InitProductTypes()
         {
             await GetAllTypeProducts(); // לקבל את רשימת סוגי מוצרים 
-            this.AgeTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId >= 1 && p.ProductTypeId <= 4).OrderBy(pp => pp.ProductTypeId));
-            this.ProductTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId > 4));
+            this.AgeTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId >= 1 && p.ProductTypeId <= 4 && p.AllTypesOfPrducts.Count > 0).OrderBy(pp => pp.ProductTypeId));
+            this.ProductTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId > 4 && p.AllTypesOfPrducts.Count > 0));
         }
 
         //להוסיף פעולה שמביאה את כל המוצרים של החנות הספיציפית הזאת ואז מזה לסנן 
