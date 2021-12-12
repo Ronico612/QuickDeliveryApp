@@ -4,8 +4,8 @@
              x:Class="QuickDeliveryApp.Views.ShopProducts">
     <ContentPage.Content>
         <StackLayout>
-            <CollectionView x:Name="collectionAge" ItemsSource="{Binding AgeTypes}" SelectionMode="Single" BackgroundColor="White">
-                <!--SelectedItem="{Binding SelectedShop}"   SelectionChangedCommand="{Binding ShowShopProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">-->
+            <CollectionView x:Name="collectionAge" ItemsSource="{Binding AgeTypes}" SelectionMode="Single" BackgroundColor="White"
+                SelectedItem="{Binding SelectedAgeType}" SelectionChangedCommand="{Binding ShowProductTypesCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionAge}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout HorizontalItemSpacing="10" Orientation="Horizontal"/>
                 </CollectionView.ItemsLayout>
@@ -21,8 +21,8 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <CollectionView x:Name="collectionProductTypes" ItemsSource="{Binding ProductTypes}" SelectionMode="Single" BackgroundColor="White">
-                <!--SelectedItem="{Binding SelectedShop}"   SelectionChangedCommand="{Binding ShowShopProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">-->
+            <CollectionView x:Name="collectionProductTypes" ItemsSource="{Binding ProductTypes}" SelectionMode="Single" BackgroundColor="White"
+                SelectedItem="{Binding SelectedProductType}" SelectionChangedCommand="{Binding ShowProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionProductTypes}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout HorizontalItemSpacing="20" Orientation="Horizontal"/>
                 </CollectionView.ItemsLayout>

@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using QuickDeliveryApp.Services;
 using System.Linq;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -57,6 +59,42 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private ProductType selectedAgeType;
+        public ProductType SelectedAgeType
+        {
+            get
+            {
+                return this.selectedAgeType;
+            }
+            set
+            {
+                if (this.selectedAgeType != value)
+                {
+
+                    this.selectedAgeType = value;
+                    OnPropertyChanged("SelectedAgeType");
+                }
+            }
+        }
+
+        private ProductType selectedProductType;
+        public ProductType SelectedProductType
+        {
+            get
+            {
+                return this.selectedProductType;
+            }
+            set
+            {
+                if (this.selectedProductType != value)
+                {
+
+                    this.selectedProductType = value;
+                    OnPropertyChanged("SelectedProductType");
+                }
+            }
+        }
+
         public Shop CurrentShop;
         public ShopProductsViewModel(Shop selected)
         {
@@ -68,7 +106,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             await GetAllTypeProducts(); // לקבל את רשימת סוגי מוצרים 
             this.AgeTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId >= 1 && p.ProductTypeId <= 4 && p.AllTypesOfPrducts.Count > 0).OrderBy(pp => pp.ProductTypeId));
-            this.ProductTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId > 4 && p.AllTypesOfPrducts.Count > 0));
+            this.selectedAgeType = AgeTypes.First();
         }
 
         //להוסיף פעולה שמביאה את כל המוצרים של החנות הספיציפית הזאת ואז מזה לסנן 
@@ -79,5 +117,14 @@ namespace QuickDeliveryApp.ViewModels
             this.allProductTypes = await quickDeliveryAPIProxy.GetProductTypesAsync(CurrentShop.ShopId);
         }
 
+        public ICommand ShowProductTypesCommand => new Command(ShowProductTypes);
+        public void ShowProductTypes()
+        {
+            this.ProductTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId > 4 && p.AllTypesOfPrducts.Count > 0));
+            this.selectedProductType = productTypes.First();
+
+            this.ProductTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId == this.selectedAgeType.ProductTypeId && p.AllTypesOfPrducts.Count > 0));
+            this.selectedProductType = productTypes.First();
+        }
     }
 }
