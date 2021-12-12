@@ -57,9 +57,10 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        public Shop CurrentShop;
         public ShopProductsViewModel(Shop selected)
         {
-            Shop CurrentShop = selected;
+            CurrentShop = selected;
             InitProductTypes();
         }
 
@@ -71,12 +72,11 @@ namespace QuickDeliveryApp.ViewModels
         }
 
         //להוסיף פעולה שמביאה את כל המוצרים של החנות הספיציפית הזאת ואז מזה לסנן 
-        // לבדוק אם צריך גם פוסט וגם גט 
 
         private async Task GetAllTypeProducts()
         {
             QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
-            this.allProductTypes = await quickDeliveryAPIProxy.GetProductTypesAsync();
+            this.allProductTypes = await quickDeliveryAPIProxy.GetProductTypesAsync(CurrentShop.ShopId);
         }
 
     }

@@ -16,7 +16,7 @@ namespace QuickDeliveryApp.Models
         public string ProductName { get; set; }
         public int? ShopId { get; set; }
         public int CountProductInShop { get; set; }
-        public int ProductPrice { get; set; }
+        public decimal ProductPrice { get; set; }
 
         public virtual Shop Shop { get; set; }
         public virtual ICollection<AllTypesOfPrduct> AllTypesOfPrducts { get; set; }

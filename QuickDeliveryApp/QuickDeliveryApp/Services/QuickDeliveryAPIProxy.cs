@@ -136,12 +136,12 @@ namespace QuickDeliveryApp.Services
             }
         }
 
-        public async Task<List<ProductType>> GetProductTypesAsync()
+        public async Task<List<ProductType>> GetProductTypesAsync(int shopID)
         {
             try
             {
 
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetProductTypes");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetProductTypes?shopID={shopID}");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
