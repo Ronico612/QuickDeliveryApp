@@ -8,11 +8,10 @@ namespace QuickDeliveryApp.Models
     {
         public User()
         {
-            Orders = new List<Order>();
+            Orders = new HashSet<Order>();
         }
 
         public int UserId { get; set; }
-        
         public string UserFname { get; set; }
         public string UserLname { get; set; }
         public string Username { get; set; }
@@ -28,8 +27,8 @@ namespace QuickDeliveryApp.Models
         public int? NumCode { get; set; }
         public int? ValidityCreditCard { get; set; }
 
-        public virtual DelPerson DelPerson { get; set; }
+        public virtual DeliveryPerson DeliveryPerson { get; set; }
         public virtual ShopManager ShopManager { get; set; }
-        public virtual List<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }

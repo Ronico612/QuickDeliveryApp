@@ -136,12 +136,42 @@ namespace QuickDeliveryApp.Services
             }
         }
 
-        public async Task<List<ProductType>> GetProductTypesAsync(int shopID)
+        public async Task<List<AgeProductType>> GetAgeTypesAsync(int shopID)
         {
             try
             {
 
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetProductTypes?shopID={shopID}");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetAgeTypes?shopID={shopID}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    List<AgeProductType> eList = JsonSerializer.Deserialize<List<AgeProductType>>(content, options);
+                    return eList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+
+        public async Task<List<ProductType>> GetProductTypesForSelectedAgeAsync(int ageTypeProductID, int shopID)
+        {
+            try
+            {
+
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetProductTypesForSelectedAge?shopID={shopID}?ageTypeProductID={ageTypeProductID}");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
@@ -164,6 +194,5 @@ namespace QuickDeliveryApp.Services
                 return null;
             }
         }
-
     }
 }

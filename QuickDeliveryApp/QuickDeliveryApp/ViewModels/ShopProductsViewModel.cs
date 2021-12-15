@@ -22,9 +22,10 @@ namespace QuickDeliveryApp.ViewModels
         }
 
 
-        private List<ProductType> allProductTypes;
-        private ObservableCollection<ProductType> ageTypes;
-        public ObservableCollection<ProductType> AgeTypes
+        private List<AgeProductType> ageTypesList;
+        private List<ProductType> productTypesList;
+        private ObservableCollection<AgeProductType> ageTypes;
+        public ObservableCollection<AgeProductType> AgeTypes
         {
             get
             {
@@ -59,8 +60,8 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        private ProductType selectedAgeType;
-        public ProductType SelectedAgeType
+        private AgeProductType selectedAgeType;
+        public AgeProductType SelectedAgeType
         {
             get
             {
@@ -99,36 +100,37 @@ namespace QuickDeliveryApp.ViewModels
         public ShopProductsViewModel(Shop selected)
         {
             CurrentShop = selected;
-            InitProductTypes();
+            InitAgeTypes();
         }
 
-        private async void InitProductTypes()
+        private async void InitAgeTypes()
         {
-            await GetAllTypeProducts(); // לקבל את רשימת סוגי מוצרים 
-            this.AgeTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId >= 1 && p.ProductTypeId <= 4 && p.AllTypesOfPrducts.Count > 0).OrderBy(pp => pp.ProductTypeId));
+            await GetAgeTypes();  
+            this.AgeTypes = new ObservableCollection<AgeProductType>(this.ageTypesList);
+            //(p.AllTypesOfPrducts.Count > 0)
             this.selectedAgeType = AgeTypes.First();
+
+        }
+
+        private async Task GetAgeTypes()
+        {
+            QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
+            this.ageTypesList = await quickDeliveryAPIProxy.GetAgeTypesAsync(CurrentShop.ShopId);
         }
 
         //להוסיף פעולה שמביאה את כל המוצרים של החנות הספיציפית הזאת ואז מזה לסנן 
 
-        private async Task GetAllTypeProducts()
+        private async Task GetProductTypesForSelectedAge()
         {
             QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
-            this.allProductTypes = await quickDeliveryAPIProxy.GetProductTypesAsync(CurrentShop.ShopId);
+            this.productTypesList = await quickDeliveryAPIProxy.GetProductTypesForSelectedAgeAsync(this.selectedAgeType.AgeProductTypeId, CurrentShop.ShopId);
         }
 
         public ICommand ShowProductTypesCommand => new Command(ShowProductTypes);
-        public void ShowProductTypes()
+        public async void ShowProductTypes()
         {
-            List<AllTypesOfPrduct> productsTypesOfProducts = SelectedAgeType.AllTypesOfPrducts.ToList();
-            List<Product> products = new List<Product>();
-            foreach (AllTypesOfPrduct a in productsTypesOfProducts)
-                products.Add(a.Product);
-
-            this.ProductTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId > 4 && p.AllTypesOfPrducts.Count > 0));
-            this.selectedProductType = productTypes.First();
-
-            this.ProductTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId == this.selectedAgeType.ProductTypeId && p.AllTypesOfPrducts.Count > 0));
+            await GetProductTypesForSelectedAge();
+            this.ProductTypes = new ObservableCollection<ProductType>(this.productTypesList);
             this.selectedProductType = productTypes.First();
         }
     }
