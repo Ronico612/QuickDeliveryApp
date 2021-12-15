@@ -120,6 +120,11 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand ShowProductTypesCommand => new Command(ShowProductTypes);
         public void ShowProductTypes()
         {
+            List<AllTypesOfPrduct> productsTypesOfProducts = SelectedAgeType.AllTypesOfPrducts.ToList();
+            List<Product> products = new List<Product>();
+            foreach (AllTypesOfPrduct a in productsTypesOfProducts)
+                products.Add(a.Product);
+
             this.ProductTypes = new ObservableCollection<ProductType>(this.allProductTypes.Where(p => p.ProductTypeId > 4 && p.AllTypesOfPrducts.Count > 0));
             this.selectedProductType = productTypes.First();
 
