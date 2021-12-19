@@ -111,6 +111,24 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private Product selectedProduct;
+        public Product SelectedProduct
+        {
+            get
+            {
+                return this.selectedProduct;
+            }
+            set
+            {
+                if (this.selectedProduct != value)
+                {
+
+                    this.selectedProduct = value;
+                    OnPropertyChanged("SelectedProduct");
+                }
+            }
+        }
+
         public Shop CurrentShop;
         public ShopProductsViewModel(Shop selected)
         {
@@ -168,7 +186,19 @@ namespace QuickDeliveryApp.ViewModels
 
         public ICommand ShowProductTypesCommand => new Command(ShowProductTypesForSelectedAge);
         public ICommand ShowProductsCommand => new Command(InitProducts);
+        public ICommand ShowProductCommand => new Command(ShowProduct);
+        public async void ShowProduct()
+        {
+            if (SelectedProduct != null)
+            {
+                Page p = new ProductSelected();
+                p.Title = SelectedProduct.ProductName;
+                p.BindingContext = new ProductSelectedViewModel(this.SelectedProduct);
+                TheMainTabbedPage tabbed = (TheMainTabbedPage)Application.Current.MainPage;
+                NavigationPage shopsProducts = tabbed.shopProductsPage;
+                await shopsProducts.Navigation.PushAsync(p);
 
-
+            }
+        }
     }
 }

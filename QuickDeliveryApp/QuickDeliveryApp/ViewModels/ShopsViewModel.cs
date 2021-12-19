@@ -160,7 +160,6 @@ namespace QuickDeliveryApp.ViewModels
                 Page p = new ShopProducts();
                 p.Title = SelectedShop.ShopName;
                 p.BindingContext = new ShopProductsViewModel(this.SelectedShop);
-                //Application.Current.MainPage = p;
                 TheMainTabbedPage tabbed = (TheMainTabbedPage)Application.Current.MainPage;
                 NavigationPage shops = tabbed.shopsPage;
                 await shops.Navigation.PushAsync(p);
