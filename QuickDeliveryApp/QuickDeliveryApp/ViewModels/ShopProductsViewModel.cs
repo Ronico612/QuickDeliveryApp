@@ -22,8 +22,6 @@ namespace QuickDeliveryApp.ViewModels
         }
 
 
-        private List<AgeProductType> ageTypesList;
-        private List<ProductType> productTypesList;
         private ObservableCollection<AgeProductType> ageTypes;
         public ObservableCollection<AgeProductType> AgeTypes
         {
@@ -105,33 +103,45 @@ namespace QuickDeliveryApp.ViewModels
 
         private async void InitAgeTypes()
         {
-            await GetAgeTypes();  
-            this.AgeTypes = new ObservableCollection<AgeProductType>(this.ageTypesList);
+            GetAgeTypes();  
             //(p.AllTypesOfPrducts.Count > 0)
-            this.selectedAgeType = AgeTypes.First();
+            this.SelectedAgeType = AgeTypes.First();
+            GetProductTypesForSelectedAge();
 
         }
 
-        private async Task GetAgeTypes()
+        private void GetAgeTypes()
         {
-            QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
-            this.ageTypesList = await quickDeliveryAPIProxy.GetAgeTypesAsync(CurrentShop.ShopId);
+            this.AgeTypes = new ObservableCollection<AgeProductType>();
+            foreach(Product p in this.CurrentShop.Products)
+            {
+                if (this.AgeTypes.Where(a => a.AgeProductTypeId == p.AgeProductTypeId).FirstOrDefault() == null)
+                    this.AgeTypes.Add(p.AgeProductType);
+            }
         }
 
         //להוסיף פעולה שמביאה את כל המוצרים של החנות הספיציפית הזאת ואז מזה לסנן 
 
-        private async Task GetProductTypesForSelectedAge()
+        private void GetProductTypesForSelectedAge()
         {
-            QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
-            this.productTypesList = await quickDeliveryAPIProxy.GetProductTypesForSelectedAgeAsync(this.selectedAgeType.AgeProductTypeId, CurrentShop.ShopId);
+            this.ProductTypes = new ObservableCollection<ProductType>();
+            foreach (Product p in this.CurrentShop.Products)
+            {
+                if (p.AgeProductTypeId == SelectedAgeType.AgeProductTypeId)
+                {
+                    if (this.ProductTypes.Where(a => a.ProductTypeId == p.ProductTypeId).FirstOrDefault() == null)
+                        this.ProductTypes.Add(p.ProductType);
+                }
+                
+            }
+            
         }
 
         public ICommand ShowProductTypesCommand => new Command(ShowProductTypes);
-        public async void ShowProductTypes()
+        public void ShowProductTypes()
         {
-            await GetProductTypesForSelectedAge();
-            this.ProductTypes = new ObservableCollection<ProductType>(this.productTypesList);
-            this.selectedProductType = productTypes.First();
+            GetProductTypesForSelectedAge();
+            this.SelectedProductType = ProductTypes.First();
         }
     }
 }

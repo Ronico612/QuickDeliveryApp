@@ -15,7 +15,7 @@
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
-                            <Label Grid.Row="0" Text="{Binding Path=ProductTypeName, StringFormat='{0}'}" />
+                            <Label Grid.Row="0" Text="{Binding Path=AgeProductTypeName, StringFormat='{0}'}" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
