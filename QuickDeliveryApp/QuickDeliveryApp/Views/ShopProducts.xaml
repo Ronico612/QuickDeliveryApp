@@ -37,6 +37,27 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+
+            <CollectionView x:Name="collectionProducts" ItemsSource="{Binding FilteredProducts}" SelectionMode="Single" BackgroundColor="White"
+                SelectedItem="{Binding SelectedProduct}" SelectionChangedCommand="{Binding ShowProductCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionProducts}, Path=SelectedItem}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout HorizontalItemSpacing="20" Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                       
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="{Binding Path=ImgSource}" Grid.Row="0"/>
+                            <Label Grid.Row="1" Text="{Binding Path=ProductName, StringFormat='{0}'}" />
+                            <Label Grid.Row="2" Text="{Binding Path=ProductPrice, StringFormat='{0}'}" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

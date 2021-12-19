@@ -21,6 +21,23 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private ObservableCollection<Product> filteredProducts;
+        public ObservableCollection<Product> FilteredProducts
+        {
+            get
+            {
+                return this.filteredProducts;
+            }
+            set
+            {
+                if (this.filteredProducts != value)
+                {
+
+                    this.filteredProducts = value;
+                    OnPropertyChanged("FilteredProducts");
+                }
+            }
+        }
 
         private ObservableCollection<AgeProductType> ageTypes;
         public ObservableCollection<AgeProductType> AgeTypes
@@ -98,16 +115,28 @@ namespace QuickDeliveryApp.ViewModels
         public ShopProductsViewModel(Shop selected)
         {
             CurrentShop = selected;
-            InitAgeTypes();
+            InitAgeTypes();   
         }
 
-        private async void InitAgeTypes()
+        private void InitProducts()
+        {
+            this.FilteredProducts = new ObservableCollection<Product>();
+            foreach (Product p in this.CurrentShop.Products)
+            {
+                if (p.AgeProductTypeId == SelectedAgeType.AgeProductTypeId && p.ProductTypeId == selectedProductType.ProductTypeId)
+                {
+                    if (this.FilteredProducts.Where(a => a.ProductId == p.ProductId).FirstOrDefault() == null)
+                        this.FilteredProducts.Add(p);
+                }
+            }
+        }
+
+        private void InitAgeTypes()
         {
             GetAgeTypes();  
-            //(p.AllTypesOfPrducts.Count > 0)
             this.SelectedAgeType = AgeTypes.First();
-            GetProductTypesForSelectedAge();
-
+            ShowProductTypesForSelectedAge();
+            InitProducts();
         }
 
         private void GetAgeTypes()
@@ -120,9 +149,8 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        //להוסיף פעולה שמביאה את כל המוצרים של החנות הספיציפית הזאת ואז מזה לסנן 
 
-        private void GetProductTypesForSelectedAge()
+        private void ShowProductTypesForSelectedAge()
         {
             this.ProductTypes = new ObservableCollection<ProductType>();
             foreach (Product p in this.CurrentShop.Products)
@@ -134,14 +162,13 @@ namespace QuickDeliveryApp.ViewModels
                 }
                 
             }
-            
+            this.SelectedProductType = ProductTypes.First();
+            InitProducts();
         }
 
-        public ICommand ShowProductTypesCommand => new Command(ShowProductTypes);
-        public void ShowProductTypes()
-        {
-            GetProductTypesForSelectedAge();
-            this.SelectedProductType = ProductTypes.First();
-        }
+        public ICommand ShowProductTypesCommand => new Command(ShowProductTypesForSelectedAge);
+        public ICommand ShowProductsCommand => new Command(InitProducts);
+
+
     }
 }
