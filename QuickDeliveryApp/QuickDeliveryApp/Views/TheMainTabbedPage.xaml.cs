@@ -15,17 +15,12 @@ namespace QuickDeliveryApp.Views
     public partial class TheMainTabbedPage : TabbedPage
     {
         public NavigationPage shopsPage;
-        public NavigationPage shopProductsPage;
         public ShoppingCart shoppingCart;
 
         public TheMainTabbedPage()
         {
             this.BindingContext = new TheMainTabbedPageViewModel();
             InitializeComponent();
-
-            shopProductsPage = new NavigationPage(new ShopProducts());
-            //shopProductsPage.Title = "Shops";
-            //this.Children.Add(shopProductsPage);
 
             shopsPage = new NavigationPage(new Shops());
             shopsPage.Title = "Shops";

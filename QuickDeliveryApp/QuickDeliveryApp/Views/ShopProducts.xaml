@@ -4,7 +4,7 @@
              x:Class="QuickDeliveryApp.Views.ShopProducts">
     <ContentPage.Content>
         <StackLayout>
-            <CollectionView x:Name="collectionAge" ItemsSource="{Binding AgeTypes}" SelectionMode="Single" BackgroundColor="White"
+            <CollectionView x:Name="collectionAge" HeightRequest="20" ItemsSource="{Binding AgeTypes}" SelectionMode="Single" BackgroundColor="White"
                 SelectedItem="{Binding SelectedAgeType}" SelectionChangedCommand="{Binding ShowProductTypesCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionAge}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout HorizontalItemSpacing="10" Orientation="Horizontal"/>
@@ -21,7 +21,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <CollectionView x:Name="collectionProductTypes" ItemsSource="{Binding ProductTypes}" SelectionMode="Single" BackgroundColor="White"
+            <CollectionView x:Name="collectionProductTypes" HeightRequest="20" ItemsSource="{Binding ProductTypes}" SelectionMode="Single" BackgroundColor="White"
                 SelectedItem="{Binding SelectedProductType}" SelectionChangedCommand="{Binding ShowProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionProductTypes}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout HorizontalItemSpacing="20" Orientation="Horizontal"/>
@@ -39,16 +39,19 @@
             </CollectionView>
 
             <CollectionView x:Name="collectionProducts" ItemsSource="{Binding FilteredProducts}" SelectionMode="Single" BackgroundColor="White"
-                SelectedItem="{Binding SelectedProduct}" SelectionChangedCommand="{Binding ShowProductCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionProducts}, Path=SelectedItem}">
+                SelectedItem="{Binding SelectedProduct}" SelectionChangedCommand="{Binding ShowProductCommand}">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout HorizontalItemSpacing="20" Orientation="Horizontal"/>
+                    <GridItemsLayout Orientation="Vertical"
+                        Span="2" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                        
                         <Grid>
                             <Grid.RowDefinitions>
+                                <RowDefinition Height="200"/>
                                 <RowDefinition Height="20"/>
+                                <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Image Source="{Binding Path=ImgSource}" Grid.Row="0"/>
                             <Label Grid.Row="1" Text="{Binding Path=ProductName, StringFormat='{0}'}" />

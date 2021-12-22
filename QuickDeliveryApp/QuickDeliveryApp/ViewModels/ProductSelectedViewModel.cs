@@ -21,7 +21,23 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public Product CurrentProduct;
+        private Product currentProduct;
+        public Product CurrentProduct
+        {
+            get
+            {
+                return this.currentProduct;
+            }
+            set
+            {
+                if (this.currentProduct != value)
+                {
+
+                    this.currentProduct = value;
+                    OnPropertyChanged("CurrentProduct");
+                }
+            }
+        }
         public ProductSelectedViewModel(Product selectedProduct)
         {
             CurrentProduct = selectedProduct;
