@@ -197,7 +197,7 @@ namespace QuickDeliveryApp.ViewModels
                 TheMainTabbedPage tabbed = (TheMainTabbedPage)Application.Current.MainPage;
                 NavigationPage shops = tabbed.shopsPage;
                 await shops.Navigation.PushAsync(p);
-
+                SelectedProduct = null;
             }
         }
     }

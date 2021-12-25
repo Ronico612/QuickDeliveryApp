@@ -4,9 +4,9 @@
              x:Class="QuickDeliveryApp.Views.ProductSelected">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding CurrentProduct.ProductName}"></Label>
+            <Label HorizontalOptions="Center" Text="{Binding CurrentProduct.ProductName}"></Label>
             <Image Source="{Binding CurrentProduct.ImgSource}"/>
-            <Label Text="{Binding CurrentProduct.ProductPrice}"/>
+            <Label HorizontalOptions="Center" Text="{Binding CurrentProduct.ProductPrice}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

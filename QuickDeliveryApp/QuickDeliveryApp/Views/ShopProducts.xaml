@@ -54,8 +54,8 @@
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
                             <Image Source="{Binding Path=ImgSource}" Grid.Row="0"/>
-                            <Label Grid.Row="1" Text="{Binding Path=ProductName, StringFormat='{0}'}" />
-                            <Label Grid.Row="2" Text="{Binding Path=ProductPrice, StringFormat='{0}'}" />
+                            <Label HorizontalTextAlignment="Center" Grid.Row="1" Text="{Binding Path=ProductName, StringFormat='{0}'}" />
+                            <Label HorizontalOptions="Center" Grid.Row="2" Text="{Binding Path=ProductPrice, StringFormat='{0}'}" />
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
