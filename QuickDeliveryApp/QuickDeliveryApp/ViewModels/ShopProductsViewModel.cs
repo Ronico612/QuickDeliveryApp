@@ -146,15 +146,19 @@ namespace QuickDeliveryApp.ViewModels
                     if (this.FilteredProducts.Where(a => a.ProductId == p.ProductId).FirstOrDefault() == null)
                         this.FilteredProducts.Add(p);
                 }
-            }
+            }    
         }
 
         private void InitAgeTypes()
         {
-            GetAgeTypes();  
-            this.SelectedAgeType = AgeTypes.First();
-            ShowProductTypesForSelectedAge();
-            InitProducts();
+            GetAgeTypes();
+            if (AgeTypes != null && AgeTypes.Count > 0)
+            {
+                this.SelectedAgeType = AgeTypes.First();
+                ShowProductTypesForSelectedAge();
+                //InitProducts();
+                IsRefreshing = false;
+            }
         }
 
         private void GetAgeTypes()
@@ -183,6 +187,27 @@ namespace QuickDeliveryApp.ViewModels
             this.SelectedProductType = ProductTypes.First();
             InitProducts();
         }
+
+        #region Refresh
+        private bool isRefreshing;
+        public bool IsRefreshing
+        {
+            get => isRefreshing;
+            set
+            {
+                if (this.isRefreshing != value)
+                {
+                    this.isRefreshing = value;
+                    OnPropertyChanged(nameof(IsRefreshing));
+                }
+            }
+        }
+        public ICommand RefreshCommand => new Command(OnRefresh);
+        public void OnRefresh()
+        {
+            InitAgeTypes();
+        }
+        #endregion
 
         public ICommand ShowProductTypesCommand => new Command(ShowProductTypesForSelectedAge);
         public ICommand ShowProductsCommand => new Command(InitProducts);
