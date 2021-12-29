@@ -89,7 +89,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Search.png" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\QuickDeliveryApp\QuickDeliveryApp.csproj">
       <Project>{DC9611EA-E1C1-4383-BF1A-409ADF71964E}</Project>
@@ -97,7 +99,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\a.png" />
+    <AndroidResource Include="Resources\drawable\ShoppingCart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Login.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>

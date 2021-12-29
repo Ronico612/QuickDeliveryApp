@@ -16,18 +16,26 @@ namespace QuickDeliveryApp.Views
     {
         public Shops shopsPage;
         public ShoppingCart shoppingCart;
+        public Login login;
 
         public TheMainTabbedPage()
         {
             this.BindingContext = new TheMainTabbedPageViewModel();
             InitializeComponent();
 
+            login = new Login();
+            login.Title = "Login";
+            login.IconImageSource = "Login.png";
+            this.Children.Add(login);
+
             shopsPage = new Shops();
             shopsPage.Title = "Shops";
+            shopsPage.IconImageSource = "Search.png";
             this.Children.Add(shopsPage);
 
             shoppingCart = new ShoppingCart();
             shoppingCart.Title = "Shopping Cart";
+            shoppingCart.IconImageSource = "ShoppingCart.png";
             this.Children.Add(shoppingCart);
         }
     }

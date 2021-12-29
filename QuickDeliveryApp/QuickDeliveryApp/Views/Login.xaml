@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickDeliveryApp.Views.Login">
+    <ContentPage.Content>
+      <ScrollView>
+        <StackLayout>
+            <Label Text="{Binding TitleText}" HorizontalOptions="Center"></Label>
+            <Grid BackgroundColor="LightCyan">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" Text="First Name" IsVisible="{Binding IsRegister}"></Label>
+                    <Entry Grid.Row="0" Grid.Column="1" Text="{Binding FName}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
+                    <Label Grid.Row="1" Grid.Column="0" Text="Last Name" IsVisible="{Binding IsRegister}"></Label>
+                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding LName}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
+                    <Label Grid.Row="2" Grid.Column="0" Text="Email"></Label>
+                    <Entry Grid.Row="2" Grid.Column="1" Text="{Binding Email}" HorizontalOptions="FillAndExpand" Keyboard="Email"/>
+                    <Label Grid.Row="3" Grid.Column="0" Text="Password"></Label>
+                    <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Password}" HorizontalOptions="FillAndExpand" Focused="Password_Focused"/>
+                    <Label Grid.Row="4" Grid.Column="0" Text="Phone" IsVisible="{Binding IsRegister}"></Label>
+                    <Entry Grid.Row="4" Grid.Column="1" Text="{Binding Phone}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
+                    <Label Grid.Row="5" Grid.Column="0" Text="Birth date" IsVisible="{Binding IsRegister}"></Label>
+                    <DatePicker Grid.Row="5" Grid.Column="1" Date="{Binding BirthDate}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
+                    <Label Grid.Row="6" Grid.Column="0" Text="Address" IsVisible="{Binding IsRegister}"></Label>
+                    <Entry Grid.Row="6" Grid.Column="1" Text="{Binding Address}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
+                    <Label Grid.Row="7" Grid.Column="0" Text="City" IsVisible="{Binding IsRegister}"></Label>
+                    <Entry Grid.Row="7" Grid.Column="1" Text="{Binding City}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
+                    <Label Grid.Row="8" Grid.Column="0" Text="Credit card number" IsVisible="{Binding IsRegister}"/>
+                    <Entry Grid.Row="8" Grid.Column="1" Text="{Binding NumCreditCard}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
+                    <Label Grid.Row="9" Grid.Column="0" Text="CVV" IsVisible="{Binding IsRegister}"></Label>
+                    <Entry Grid.Row="9" Grid.Column="1" Text="{Binding NumCode}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
+                    <Label Grid.Row="10" Grid.Column="0" Text="Validity Credit Card" IsVisible="{Binding IsRegister}"></Label>
+                    <DatePicker Grid.Row="10" Grid.Column="1" Date="{Binding ValidityCreditCard}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
+                </Grid>
+                <Button Command="{Binding SubmitCommand}" Text="Submit"/>
+                <Button Command="{Binding GotoCommand}" Text="{Binding GoToText}"/>
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
