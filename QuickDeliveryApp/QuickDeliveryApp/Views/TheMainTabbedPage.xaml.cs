@@ -14,7 +14,7 @@ namespace QuickDeliveryApp.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TheMainTabbedPage : TabbedPage
     {
-        public NavigationPage shopsPage;
+        public Shops shopsPage;
         public ShoppingCart shoppingCart;
 
         public TheMainTabbedPage()
@@ -22,7 +22,7 @@ namespace QuickDeliveryApp.Views
             this.BindingContext = new TheMainTabbedPageViewModel();
             InitializeComponent();
 
-            shopsPage = new NavigationPage(new Shops());
+            shopsPage = new Shops();
             shopsPage.Title = "Shops";
             this.Children.Add(shopsPage);
 

@@ -219,9 +219,8 @@ namespace QuickDeliveryApp.ViewModels
                 Page p = new ProductSelected();
                 p.Title = SelectedProduct.ProductName;
                 p.BindingContext = new ProductSelectedViewModel(this.SelectedProduct);
-                TheMainTabbedPage tabbed = (TheMainTabbedPage)Application.Current.MainPage;
-                NavigationPage shops = tabbed.shopsPage;
-                await shops.Navigation.PushAsync(p);
+                NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+                await tabbed.Navigation.PushAsync(p);
                 SelectedProduct = null;
             }
         }

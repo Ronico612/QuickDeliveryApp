@@ -19,7 +19,7 @@ namespace QuickDeliveryApp
         {
             InitializeComponent();
 
-            MainPage = new TheMainTabbedPage();
+            MainPage = new NavigationPage(new TheMainTabbedPage());
         }
 
         protected override void OnStart()
