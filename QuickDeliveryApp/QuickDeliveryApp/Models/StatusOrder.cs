@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuickDeliveryApp.Models
 {
-    class StatusOrder
+    public class StatusOrder
     {
         public StatusOrder()
         {

@@ -2,6 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using QuickDeliveryApp.Views;
+using QuickDeliveryApp.Models;
 
 namespace QuickDeliveryApp
 {
@@ -13,6 +14,11 @@ namespace QuickDeliveryApp
             {
                 return true;
             }
+        }
+
+        public User CurrentUser
+        {
+            get; set;
         }
 
         public App()

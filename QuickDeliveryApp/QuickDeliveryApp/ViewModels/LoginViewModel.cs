@@ -6,6 +6,7 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using QuickDeliveryApp.Services;
 using QuickDeliveryApp.Models;
+using System.Threading.Tasks;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -164,7 +165,7 @@ namespace QuickDeliveryApp.ViewModels
         public LoginViewModel()
         {
             isRegister = false;
-            //SubmitCommand = new Command(OnSubmit);
+            SubmitCommand = new Command(OnSubmit);
         }
 
         private string serverStatus;
@@ -199,37 +200,37 @@ namespace QuickDeliveryApp.ViewModels
         {
             if (this.IsRegister)
             {
-                if(!Register())
+                if (!(await Register()))
                     return;
             }
-            Login();    
+            Login();
         }
 
-        public async bool Register()
+        public async Task<bool> Register()
         {
-            if ((FName == "") || (LName == "") || (Email == "") ||
-                (Password == "") || (Phone == "") || (Address == "") ||
-                (City == "") || (NumCreditCard == "") || (NumCode == ""))
-                //תאריך לידה ותוקף כקטיס אשראי
-            {
-                await App.Current.MainPage.DisplayAlert("QuickDelivery", "Please fill all the fields", "Ok");
-                return false;
-            }
-            User user = new User();
-            user.UserFname = FName;
-            user.UserLname = LName;
-            user.UserEmail = Email;
-            user.UserPassword = Password;
-            user.UserPhone = Phone;
-            user.UserBirthDate = birthDate;
-            user.UserAddress = Address;
-            user.UserCity = City;
-            user.NumCreditCard = NumCreditCard;
-            user.NumCode = NumCode;
-            user.ValidityCreditCard = ValidityCreditCard;
-            QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
-            bool isRegisterSucceed = await proxy.RegisterUser(user);
-            
+            //    if ((FName == "") || (LName == "") || (Email == "") ||
+            //        (Password == "") || (Phone == "") || (Address == "") ||
+            //        (City == "") || (NumCreditCard == "") || (NumCode == ""))
+            //        //תאריך לידה ותוקף כקטיס אשראי
+            //    {
+            //        await App.Current.MainPage.DisplayAlert("QuickDelivery", "Please fill all the fields", "Ok");
+            //        return false;
+            //    }
+            //    User user = new User();
+            //    user.UserFname = FName;
+            //    user.UserLname = LName;
+            //    user.UserEmail = Email;
+            //    user.UserPassword = Password;
+            //    user.UserPhone = Phone;
+            //    user.UserBirthDate = birthDate;
+            //    user.UserAddress = Address;
+            //    user.UserCity = City;
+            //    user.NumCreditCard = NumCreditCard;
+            //    user.NumCode = NumCode;
+            //    user.ValidityCreditCard = ValidityCreditCard;
+            //    QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
+            //    bool isRegisterSucceed = await proxy.RegisterUser(user);
+
             //if (isRegisterSucceed)
             //{
             //    TheMainTabbedPage theMainTabbedPage = (TheMainTabbedPage)Application.Current.MainPage;
@@ -247,44 +248,29 @@ namespace QuickDeliveryApp.ViewModels
             //EntryNickName = "";
             //EntryPass = "";
 
-            return isRegisterSucceed;
+            //    return isRegisterSucceed;
+            return true;
         }
 
         public async void Login()
         {
-            //ServerStatus = "מתחבר לשרת...";
-            //await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatusPage(this));
-            //QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
-            //User user = await proxy.LoginAsync(Email, Password);
-            //if (user == null)
-            //{
-            //    await App.Current.MainPage.Navigation.PopModalAsync();
-            //    await App.Current.MainPage.DisplayAlert("שגיאה", "התחברות נכשלה, בדוק שם משתמש וסיסמה ונסה שוב", "בסדר");
-            //}
-            //else
-            //{
-            //    ServerStatus = "קורא נתונים...";
-            //    App theApp = (App)App.Current;
-            //    theApp.CurrentUser = user;
-            //    bool success = await LoadPhoneTypes(theApp);
-            //    if (!success)
-            //    {
-            //        await App.Current.MainPage.Navigation.PopModalAsync();
-            //        await App.Current.MainPage.DisplayAlert("שגיאה", "קריאת נתונים נכשלה. נסה שוב מאוחר יותר", "בסדר");
-            //    }
-            //    else
-            //    {
-            //        //Initiate all phone types refrence to the same objects of PhoneTypes
-            //        foreach (UserContact uc in user.UserContacts)
-            //        {
-            //            foreach (Models.ContactPhone cp in uc.ContactPhones)
-            //                cp.PhoneType = theApp.PhoneTypes.Where(pt => pt.TypeId == cp.PhoneTypeId).FirstOrDefault();
-            //        }
-
-            //        Page p = new NavigationPage(new Views.ContactsList());
-            //        App.Current.MainPage = p;
-            //    }
-            //}
+            ServerStatus = "מתחבר לשרת...";
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
+            QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
+            User user = await proxy.LoginAsync(Email, Password);
+            if (user == null)
+            {
+                await App.Current.MainPage.Navigation.PopModalAsync();
+                await App.Current.MainPage.DisplayAlert("שגיאה", "התחברות נכשלה, בדוק שם משתמש וסיסמה ונסה שוב", "בסדר");
+            }
+            else
+            {
+                ServerStatus = "קורא נתונים...";
+                App theApp = (App)App.Current;
+                theApp.CurrentUser = user;
+                await App.Current.MainPage.Navigation.PopModalAsync();
+                await App.Current.MainPage.DisplayAlert("היפ היפ הוריי", "התחברת הצליחה", "בסדר");
+            }
         }
     }
 }

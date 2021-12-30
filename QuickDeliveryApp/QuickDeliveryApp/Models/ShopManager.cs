@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuickDeliveryApp.Models
 {
-    class ShopManager
+    public class ShopManager
     {
         public ShopManager()
         {

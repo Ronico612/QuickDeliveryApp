@@ -5,7 +5,7 @@ using System.Text;
 
 namespace QuickDeliveryApp.Models
 {
-    class Product
+    public class Product
     {
         public Product()
         {

@@ -5,7 +5,7 @@ using QuickDeliveryApp.Services;
 
 namespace QuickDeliveryApp.Models
 {
-    class Shop
+    public class Shop
     {
         public Shop()
         {

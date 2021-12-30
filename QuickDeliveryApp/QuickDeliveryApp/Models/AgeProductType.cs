@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuickDeliveryApp.Models
 {
-    class AgeProductType
+    public class AgeProductType
     {
         public AgeProductType()
         {

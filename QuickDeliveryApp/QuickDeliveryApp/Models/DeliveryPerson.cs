@@ -4,7 +4,7 @@ using System.Text;
 
 namespace QuickDeliveryApp.Models
 {
-    class DeliveryPerson
+    public class DeliveryPerson
     {
         public DeliveryPerson()
         {
