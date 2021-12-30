@@ -150,8 +150,8 @@ namespace QuickDeliveryApp.Services
                 {
 
                     string jsonContent = await response.Content.ReadAsStringAsync();
-                    bool b = JsonSerializer.Deserialize<bool>(jsonContent, options);
-                    return b;
+                    bool success = JsonSerializer.Deserialize<bool>(jsonContent, options);
+                    return true;
                 }
                 else
                 {

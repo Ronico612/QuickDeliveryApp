@@ -164,7 +164,9 @@ namespace QuickDeliveryApp.ViewModels
 
         public LoginViewModel()
         {
-            isRegister = false;
+            IsRegister = false;
+            this.TitleText = "Login";
+            this.GoToText = "To register";
             SubmitCommand = new Command(OnSubmit);
         }
 
@@ -185,14 +187,14 @@ namespace QuickDeliveryApp.ViewModels
             if (this.IsRegister)
             {
                 this.IsRegister = false;
-                this.titleText = "Login";
-                this.goToText = "Register";
+                this.TitleText = "Login";
+                this.GoToText = "To register";
             }   
             else
             {
                 this.IsRegister = true;
-                this.titleText = "Register";
-                this.goToText = "Back to login";
+                this.TitleText = "Register";
+                this.GoToText = "Back to login";
             }
         }
 
@@ -208,48 +210,42 @@ namespace QuickDeliveryApp.ViewModels
 
         public async Task<bool> Register()
         {
-            //    if ((FName == "") || (LName == "") || (Email == "") ||
-            //        (Password == "") || (Phone == "") || (Address == "") ||
-            //        (City == "") || (NumCreditCard == "") || (NumCode == ""))
-            //        //תאריך לידה ותוקף כקטיס אשראי
-            //    {
-            //        await App.Current.MainPage.DisplayAlert("QuickDelivery", "Please fill all the fields", "Ok");
-            //        return false;
-            //    }
-            //    User user = new User();
-            //    user.UserFname = FName;
-            //    user.UserLname = LName;
-            //    user.UserEmail = Email;
-            //    user.UserPassword = Password;
-            //    user.UserPhone = Phone;
-            //    user.UserBirthDate = birthDate;
-            //    user.UserAddress = Address;
-            //    user.UserCity = City;
-            //    user.NumCreditCard = NumCreditCard;
-            //    user.NumCode = NumCode;
-            //    user.ValidityCreditCard = ValidityCreditCard;
-            //    QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
-            //    bool isRegisterSucceed = await proxy.RegisterUser(user);
+            if ((FName == "") || (LName == "") || (Email == "") ||
+                (Password == "") || (Phone == "") || (Address == "") ||
+                (City == "") || (NumCreditCard == "") || (NumCode == ""))
+            //תאריך לידה ותוקף כקטיס אשראי
+            {
+                await App.Current.MainPage.DisplayAlert("QuickDelivery", "Please fill all the fields", "Ok");
+                return false;
+            }
+            User user = new User();
+            user.UserFname = FName;
+            user.UserLname = LName;
+            user.UserEmail = Email;
+            user.UserPassword = Password;
+            user.UserPhone = Phone;
+            user.UserBirthDate = birthDate;
+            user.UserAddress = Address;
+            user.UserCity = City;
+            user.NumCreditCard = NumCreditCard;
+            user.NumCode = NumCode;
+            user.ValidityCreditCard = ValidityCreditCard;
 
-            //if (isRegisterSucceed)
-            //{
-            //    TheMainTabbedPage theMainTabbedPage = (TheMainTabbedPage)Application.Current.MainPage;
-            //    ((TheMainTabbedPageViewModel)(theMainTabbedPage).BindingContext).LoginUser = user;
-            //    await App.Current.MainPage.DisplayAlert("Trivia", "You are logged in now!", "Ok");
-            //    HomePageViewModel homePageViewModel = (HomePageViewModel)((theMainTabbedPage).home.BindingContext);
-            //    if ((homePageViewModel.CounterCorrectAnswers > 0) && (homePageViewModel.CounterCorrectAnswers % 3 == 0))
-            //        theMainTabbedPage.AddTab((theMainTabbedPage).addQTab);
-            //}
-            //else
-            //{
-            //    await App.Current.MainPage.DisplayAlert("QuickDelivery", "Register is failed, please try again", "Ok");
-            //}
+            QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
+            bool registerSucceed = await proxy.RegisterUser(user);
+
+            if (registerSucceed)
+            {
+            }
+            else
+            {
+                await App.Current.MainPage.DisplayAlert("QuickDelivery", "Register is failed, please try again", "Ok");
+            }
             //EntryEmail = "";
             //EntryNickName = "";
             //EntryPass = "";
 
-            //    return isRegisterSucceed;
-            return true;
+            return registerSucceed;
         }
 
         public async void Login()
