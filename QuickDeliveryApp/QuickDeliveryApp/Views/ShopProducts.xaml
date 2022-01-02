@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.ShopProducts">
     <ContentPage.Content>
-        <StackLayout>
-            <RefreshView x:Name="refreshView"
+        <RefreshView x:Name="refreshView"
              Command="{Binding RefreshCommand}"
              IsRefreshing="{Binding IsRefreshing}">
+        <StackLayout>
+            
             <CollectionView x:Name="collectionAge" HeightRequest="20" ItemsSource="{Binding AgeTypes}" SelectionMode="Single" BackgroundColor="White"
                 SelectedItem="{Binding SelectedAgeType}" SelectionChangedCommand="{Binding ShowProductTypesCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionAge}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
@@ -23,7 +24,7 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            </RefreshView>
+            
             <CollectionView x:Name="collectionProductTypes" HeightRequest="20" ItemsSource="{Binding ProductTypes}" SelectionMode="Single" BackgroundColor="White"
                 SelectedItem="{Binding SelectedProductType}" SelectionChangedCommand="{Binding ShowProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionProductTypes}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
@@ -65,5 +66,6 @@
             </CollectionView>
 
         </StackLayout>
+        </RefreshView>
     </ContentPage.Content>
 </ContentPage>

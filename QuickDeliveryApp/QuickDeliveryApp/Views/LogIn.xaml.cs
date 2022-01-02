@@ -24,5 +24,7 @@ namespace QuickDeliveryApp.Views
             Entry entry = (Entry)sender;
             entry.IsPassword = true;
         }
+
+
     }
 }
