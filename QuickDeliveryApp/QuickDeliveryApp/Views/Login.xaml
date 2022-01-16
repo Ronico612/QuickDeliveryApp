@@ -2,71 +2,177 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.Login">
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout>
-
-                
-
-                <Grid BackgroundColor="LightCyan">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding TitleText}" HorizontalOptions="Center"></Label>
-                    <Label Grid.Row="1" Grid.Column="0" Text="First Name" IsVisible="{Binding IsRegister}"></Label>
-                    <Entry Grid.Row="1" Grid.Column="1" Text="{Binding FName}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
-                    <Label Grid.Row="2" Grid.Column="0" Text="Last Name" IsVisible="{Binding IsRegister}"></Label>
-                    <Entry Grid.Row="2" Grid.Column="1" Text="{Binding LName}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
-                    <Label Grid.Row="3" Grid.Column="0" Text="Email"></Label>
-                    <Entry Grid.Row="3" Grid.Column="1" Text="{Binding Email}" HorizontalOptions="FillAndExpand" Keyboard="Email"/>
-                    <Label Grid.Row="4" Grid.Column="0" Text="Password"></Label>
-                    <Entry Grid.Row="4" Grid.Column="1" Text="{Binding Password}" HorizontalOptions="FillAndExpand" Focused="Password_Focused"/>
-                    <Label Grid.Row="5" Grid.Column="0" Text="Phone" IsVisible="{Binding IsRegister}"></Label>
-                    <Entry Grid.Row="5" Grid.Column="1" Text="{Binding Phone}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
-                    <Label Grid.Row="6" Grid.Column="0" Text="Birth date" IsVisible="{Binding IsRegister}"></Label>
-                    <DatePicker Grid.Row="6" Grid.Column="1" Date="{Binding BirthDate}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
-                    <Label Grid.Row="7" Grid.Column="0" Text="Address" IsVisible="{Binding IsRegister}"></Label>
-                    <Entry Grid.Row="7" Grid.Column="1" Text="{Binding Address}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
-                    <Label Grid.Row="8" Grid.Column="0" Text="City" IsVisible="{Binding IsRegister}"></Label>
-                    <Entry Grid.Row="8" Grid.Column="1" Text="{Binding City}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
-                    <Label Grid.Row="9" Grid.Column="0" Text="Credit card number" IsVisible="{Binding IsRegister}"/>
-                    <Entry Grid.Row="9" Grid.Column="1" Text="{Binding NumCreditCard}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
-                    <Label Grid.Row="10" Grid.Column="0" Text="CVV" IsVisible="{Binding IsRegister}"></Label>
-                    <Entry Grid.Row="10" Grid.Column="1" Text="{Binding NumCode}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
-                    <Label Grid.Row="11" Grid.Column="0" Text="Validity Credit Card" IsVisible="{Binding IsRegister}"></Label>
-                    <DatePicker Grid.Row="11" Grid.Column="1" Date="{Binding ValidityCreditCard}" IsVisible="{Binding IsRegister}" HorizontalOptions="FillAndExpand"/>
-                    <Grid Grid.Row="12" Grid.Column="0" Grid.ColumnSpan="2"  BackgroundColor="LightCyan">
+        <StackLayout>
+            <ScrollView>
+                <StackLayout Padding="0,20,0,0">
+                    <!-- שם פרטי -->
+                    <Grid IsVisible="{Binding IsRegister}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
-                            <RowDefinition></RowDefinition>
+                            <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Button Grid.Row="0" Grid.Column="0" Command="{Binding SubmitCommand}" Text="Submit"/>
-                        <Button Grid.Row="0" Grid.Column="1" Command="{Binding GotoCommand}" Text="{Binding GoToText}"/>
-                        
+                        <Label Text="{Binding FNameError}" IsVisible="{Binding ShowFNameError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="שם פרטי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                     </Grid>
-                </Grid>
-            </StackLayout>
+                    <Entry Placeholder="הכנס שם פרטי" Text="{Binding FName}" Style="{StaticResource entryStyle}" IsVisible="{Binding IsRegister}" MaxLength="30"/>
 
+                    <!-- שם משפחה -->
+                    <Grid IsVisible="{Binding IsRegister}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding LNameError}" IsVisible="{Binding ShowLNameError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="שם משפחה" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                    </Grid>
+                    <Entry Placeholder="הכנס שם משפחה" Text="{Binding LName}" Style="{StaticResource entryStyle}" IsVisible="{Binding IsRegister}" MaxLength="30"/>
 
-        </ScrollView>
+                    <!-- דואר אלקטרוני-->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding EmailError}" IsVisible="{Binding ShowEmailError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="דואר אלקטרוני" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                    </Grid>
+                    <Entry Placeholder="הכנס דואר אלקטרוני" Text="{Binding Email}" Style="{StaticResource entryStyle}" MaxLength="30"/>
+
+                    <!-- סיסמא -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding PasswordError}" IsVisible="{Binding ShowPasswordError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="סיסמא" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                    </Grid>
+                    <Entry Focused="Password_Focused" Placeholder="הכנס סיסמא" Text="{Binding Password}" Style="{StaticResource entryStyle}" MaxLength="15"/>
+
+                    <!-- טלפון -->
+                    <Grid IsVisible="{Binding IsRegister}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding PhoneError}" IsVisible="{Binding ShowPhoneError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="טלפון" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                    </Grid>
+                    <Entry Placeholder="הכנס מספר טלפון" Text="{Binding Phone}" Style="{StaticResource entryStyle}" IsVisible="{Binding IsRegister}" MaxLength="20"/>
+
+                    <!-- תאריך לידה -->
+                    <Grid IsVisible="{Binding IsRegister}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding BirthDateError}" IsVisible="{Binding ShowBirthDateError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="תאריך לידה" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                    </Grid>
+                    <DatePicker Date="{Binding BirthDate}" IsVisible="{Binding IsRegister}"/>
+
+                    <!-- כתובת -->
+                    <Grid IsVisible="{Binding IsRegister}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding AddressError}" IsVisible="{Binding ShowAddressError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="כתובת" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                    </Grid>
+                    <Entry Placeholder="הכנס כתובת" Text="{Binding Address}" Style="{StaticResource entryStyle}" IsVisible="{Binding IsRegister}" MaxLength="30"/>
+
+                    <!-- עיר -->
+                    <Grid IsVisible="{Binding IsRegister}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="עיר" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                    </Grid>
+                    <Entry Placeholder="הכנס עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" IsVisible="{Binding IsRegister}" MaxLength="30"/>
+
+                    <!-- כרטיס אשראי -->
+                    <Grid IsVisible="{Binding IsRegister}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding NumCreditCardError}" IsVisible="{Binding ShowNumCreditCardError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="כרטיס אשראי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                    </Grid>
+                    <Entry Placeholder="הכנס מספר כרטיס אשראי" Text="{Binding NumCreditCard}" Style="{StaticResource entryStyle}" IsVisible="{Binding IsRegister}" MaxLength="16"/>
+
+                    <!-- מספר סודי -->
+                    <Grid IsVisible="{Binding IsRegister}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding NumCodeError}" IsVisible="{Binding ShowNumCodeError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="מספר סודי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                    </Grid>
+                    <Entry Placeholder="הכנס מספר סודי" Text="{Binding NumCode}" Style="{StaticResource entryStyle}" IsVisible="{Binding IsRegister}" MaxLength="3"/>
+
+                    <!-- תוקף כרטיס אשראי -->
+                    <Grid IsVisible="{Binding IsRegister}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <Label Text="{Binding ValidityCreditCardError}" IsVisible="{Binding ShowValidityCreditCardError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                        <Label Text="תוקף כרטיס אשראי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                    </Grid>
+                    <DatePicker Date="{Binding ValidityCreditCard}" IsVisible="{Binding IsRegister}"/>
+                </StackLayout>
+            </ScrollView>
+            <Grid BackgroundColor="LightCyan">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Grid.Column="0" Command="{Binding SubmitCommand}" Text="אישור"/>
+                <Button Grid.Row="0" Grid.Column="1" Command="{Binding GotoCommand}" Text="{Binding GoToText}"/>
+            </Grid>
+        </StackLayout>
     </ContentPage.Content>
 </ContentPage>
