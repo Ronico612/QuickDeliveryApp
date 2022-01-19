@@ -168,11 +168,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Grid.Row="0" Grid.Column="0" Command="{Binding SubmitCommand}" Text="אישור"/>
                 <Button Grid.Row="0" Grid.Column="1" Command="{Binding GotoCommand}" Text="{Binding GoToText}"/>
             </Grid>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

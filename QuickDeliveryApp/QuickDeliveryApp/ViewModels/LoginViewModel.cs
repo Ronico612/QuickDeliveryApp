@@ -648,14 +648,19 @@ namespace QuickDeliveryApp.ViewModels
                 return false;
             }
 
+            ServerStatus = "בודק תקינות מייל...";
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
+
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
             bool isEmailExist = await proxy.IsUserEmailExistAsync(Email);
             if (isEmailExist)
             {
+                await App.Current.MainPage.Navigation.PopModalAsync();
                 await App.Current.MainPage.DisplayAlert("שגיאה בשמירת נתונים", "אימייל זה כבר קיים במערכת, נסה שנית", "אישור", FlowDirection.RightToLeft);
                 return false;
             }
 
+            ServerStatus = "מבצע הרשמה...";
             User user = new User();
             user.UserFname = FName;
             user.UserLname = LName;
@@ -671,9 +676,11 @@ namespace QuickDeliveryApp.ViewModels
 
            
             bool registerSucceed = await proxy.RegisterUser(user);
-
+            await App.Current.MainPage.Navigation.PopModalAsync();
+            
             if (registerSucceed)
             {
+
             }
             else
             {
