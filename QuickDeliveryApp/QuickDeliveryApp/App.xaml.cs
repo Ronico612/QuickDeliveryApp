@@ -23,10 +23,8 @@ namespace QuickDeliveryApp
             get; set;
         }
 
-        // שיודיע על שינויים
-
-        private List<Product> productsInShoppingCart;
-        public List<Product> ProductsInShoppingCart
+        private ObservableCollection<Product> productsInShoppingCart;
+        public ObservableCollection<Product> ProductsInShoppingCart
         {
             get
             {
@@ -38,6 +36,7 @@ namespace QuickDeliveryApp
                 {
 
                     this.productsInShoppingCart = value;
+                    OnPropertyChanged("ProductsInShoppingCart");
                 }
             }
         }
@@ -45,7 +44,7 @@ namespace QuickDeliveryApp
         public App()
         {
             InitializeComponent();
-
+            ProductsInShoppingCart = new ObservableCollection<Product>();
             MainPage = new NavigationPage(new TheMainTabbedPage());
         }
 

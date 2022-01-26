@@ -60,7 +60,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             IsRefreshing = false;
             App app = (App)Application.Current;
-            ProductsInShoppingCart = new ObservableCollection<Product>(app.ProductsInShoppingCart);
+            ProductsInShoppingCart = app.ProductsInShoppingCart;
 
         }
       
