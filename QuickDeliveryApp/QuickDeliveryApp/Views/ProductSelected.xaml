@@ -7,6 +7,7 @@
             <Label HorizontalOptions="Center" Text="{Binding CurrentProduct.ProductName}"></Label>
             <Image Source="{Binding CurrentProduct.ImgSource}"/>
             <Label HorizontalOptions="Center" Text="{Binding CurrentProduct.ProductPrice}"/>
+            <Button Text="Add to shopping cart" Command="{Binding AddToShoppingCartCommand}" BackgroundColor="LightPink" ImageSource="shoppingbag.png"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

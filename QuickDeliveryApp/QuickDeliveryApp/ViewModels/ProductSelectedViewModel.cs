@@ -43,6 +43,12 @@ namespace QuickDeliveryApp.ViewModels
             CurrentProduct = selectedProduct;
         }
 
+        public ICommand AddToShoppingCartCommand => new Command(AddToShoppingCart);
+        public void AddToShoppingCart()
+        {
+            App app = (App)Application.Current;
+            app.ProductsInShoppingCart.Add(CurrentProduct);
+        }
 
     }
 }

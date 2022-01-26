@@ -19,11 +19,5 @@ namespace QuickDeliveryApp.Views
             this.BindingContext = new ShoppingCartViewModel();
             InitializeComponent();
         }
-
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
-            lbl.Text = await quickDeliveryAPIProxy.GetTestAsync();
-        }
     }
 }

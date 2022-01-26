@@ -4,8 +4,37 @@
              x:Class="QuickDeliveryApp.Views.ShoppingCart">
     <ContentPage.Content>
         <StackLayout>
-            <Button Text="press me!" Clicked="Button_Clicked"></Button>
-            <Label x:Name="lbl"></Label>
+            <RefreshView x:Name="refreshView"
+             Command="{Binding RefreshCommand}"
+             IsRefreshing="{Binding IsRefreshing}">
+                <CollectionView EmptyView="אין מוצרים בסל הקניות" x:Name="collectionName" ItemsSource="{Binding ProductsInShoppingCart}" SelectionMode="Single"  BackgroundColor="White"
+                        SelectedItem="{Binding SelectedProduct}" SelectionChangedCommand="{Binding ShowSelectedProductCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Span="1" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+
+                            <Grid Margin="7">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="100" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="60"/>
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding ImgSource}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.RowSpan="3" Grid.Row="0"/>
+                                <Label Text="{Binding Path=ProductName, StringFormat='{0}'}" HorizontalTextAlignment="End"  FontSize="Caption" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Margin="0,0,20,0"/>
+                                <Label Text="{Binding Path=ProductPrice, StringFormat='{0}'}"  HorizontalTextAlignment="Start" FontSize="Caption"  Grid.Row="1" Grid.Column="0" Margin="0,0,20,0"/>
+                            </Grid>
+
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            <Button Text="מעבר לתשלום" Command="{Binding GoToPay}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -3,6 +3,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using QuickDeliveryApp.Views;
 using QuickDeliveryApp.Models;
+using System.Collections.ObjectModel;
+using System.Collections.Generic;
 
 namespace QuickDeliveryApp
 {
@@ -19,6 +21,25 @@ namespace QuickDeliveryApp
         public User CurrentUser
         {
             get; set;
+        }
+
+        // שיודיע על שינויים
+
+        private List<Product> productsInShoppingCart;
+        public List<Product> ProductsInShoppingCart
+        {
+            get
+            {
+                return this.productsInShoppingCart;
+            }
+            set
+            {
+                if (this.productsInShoppingCart != value)
+                {
+
+                    this.productsInShoppingCart = value;
+                }
+            }
         }
 
         public App()
