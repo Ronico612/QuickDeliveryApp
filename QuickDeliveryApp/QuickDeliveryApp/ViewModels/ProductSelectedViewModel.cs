@@ -48,6 +48,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             App app = (App)Application.Current;
             app.ProductsInShoppingCart.Add(CurrentProduct);
+
         }
 
     }

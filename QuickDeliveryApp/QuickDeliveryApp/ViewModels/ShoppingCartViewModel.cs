@@ -64,6 +64,7 @@ namespace QuickDeliveryApp.ViewModels
 
         }
       
+        // לתקן 
         #region Refresh
         private bool isRefreshing;
         public bool IsRefreshing

@@ -710,7 +710,7 @@ namespace QuickDeliveryApp.ViewModels
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
                 await App.Current.MainPage.Navigation.PopModalAsync();
-                await App.Current.MainPage.DisplayAlert("היפ היפ הוריי", "התחברת הצליחה", "בסדר");
+                await App.Current.MainPage.DisplayAlert("היפ הופ הוריי", "התחברת בהצלחה למערכת", "בסדר");
             }
         }
     }
