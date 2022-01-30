@@ -19,8 +19,8 @@ namespace QuickDeliveryApp.ViewModels
         }
 
        
-        private ObservableCollection<Product> productsInShoppingCart;
-        public ObservableCollection<Product> ProductsInShoppingCart
+        private ObservableCollection<ProductShoppingCart> productsInShoppingCart;
+        public ObservableCollection<ProductShoppingCart> ProductsInShoppingCart
         {
             get
             {
@@ -38,8 +38,8 @@ namespace QuickDeliveryApp.ViewModels
         }
 
 
-        private Product selectedProduct;
-        public Product SelectedProduct
+        private ProductShoppingCart selectedProduct;
+        public ProductShoppingCart SelectedProduct
         {
             get
             {
@@ -64,7 +64,6 @@ namespace QuickDeliveryApp.ViewModels
 
         }
       
-        // לתקן 
         #region Refresh
         private bool isRefreshing;
         public bool IsRefreshing
@@ -87,6 +86,17 @@ namespace QuickDeliveryApp.ViewModels
         #endregion
 
 
+        public ICommand RemoveCountProductCommand => new Command<ProductShoppingCart>(RemoveCountProduct);
+        public void RemoveCountProduct(ProductShoppingCart productShoppingCart)
+        {
+            productShoppingCart.Count--;
+        }
+
+        public ICommand AddCountProductCommand => new Command<ProductShoppingCart>(AddCountProduct);
+        public void AddCountProduct(ProductShoppingCart productShoppingCart)
+        {
+            productShoppingCart.Count++;
+        }
 
         public ICommand ShowSelectedProductCommand => new Command(ShowSelectedProduct);
         public async void ShowSelectedProduct()

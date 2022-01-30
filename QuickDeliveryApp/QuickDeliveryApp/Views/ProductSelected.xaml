@@ -3,11 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.ProductSelected">
     <ContentPage.Content>
-        <StackLayout>
-            <Label HorizontalOptions="Center" Text="{Binding CurrentProduct.ProductName}"></Label>
-            <Image Source="{Binding CurrentProduct.ImgSource}"/>
-            <Label HorizontalOptions="Center" Text="{Binding CurrentProduct.ProductPrice}"/>
-            <Button Text="Add to shopping cart" Command="{Binding AddToShoppingCartCommand}" BackgroundColor="LightPink" ImageSource="shoppingbag.png"/>
-        </StackLayout>
+        <ScrollView>
+    <StackLayout>
+        <Label HorizontalOptions="Center" Text="{Binding CurrentProduct.ProductName}"></Label>
+        <Image HeightRequest="400" Source="{Binding CurrentProduct.ImgSource}"/>
+        <Label HorizontalOptions="Center" Text="{Binding CurrentProduct.ProductPrice}"/>
+        <Button Text="{Binding IsAddedText}" Command="{Binding AddToShoppingCartCommand}" BackgroundColor="LightPink" ImageSource="{Binding IconSource}"/>
+        <Button Text="מעבר לסל הקניות" Command="{Binding GoToShoppingCartCommand}" IsVisible="{Binding IsAddedToShoppingCart}" BackgroundColor="Gray" ImageSource="ShoppingBag.png"/>
+    </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

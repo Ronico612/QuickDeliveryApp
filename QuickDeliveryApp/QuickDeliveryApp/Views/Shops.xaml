@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout>
             <SearchBar x:Name="searchBar" 
-                       Placeholder="Search shop" 
+                       Placeholder="חיפוש חנות" 
                        Text="{Binding SearchTerm}"
                        />
             <RefreshView x:Name="refreshView"

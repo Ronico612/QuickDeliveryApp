@@ -23,8 +23,8 @@ namespace QuickDeliveryApp
             get; set;
         }
 
-        private ObservableCollection<Product> productsInShoppingCart;
-        public ObservableCollection<Product> ProductsInShoppingCart
+        private ObservableCollection<ProductShoppingCart> productsInShoppingCart;
+        public ObservableCollection<ProductShoppingCart> ProductsInShoppingCart
         {
             get
             {
@@ -44,7 +44,7 @@ namespace QuickDeliveryApp
         public App()
         {
             InitializeComponent();
-            ProductsInShoppingCart = new ObservableCollection<Product>();
+            ProductsInShoppingCart = new ObservableCollection<ProductShoppingCart>();
             MainPage = new NavigationPage(new TheMainTabbedPage());
         }
 

@@ -24,18 +24,18 @@ namespace QuickDeliveryApp.Views
             InitializeComponent();
 
             login = new Login();
-            login.Title = "Login";
+            login.Title = "התחברות";
             login.IconImageSource = "Login.png";
             this.Children.Add(login);
 
             shopsPage = new Shops();
-            shopsPage.Title = "Shops";
+            shopsPage.Title = "חנויות";
             shopsPage.IconImageSource = "Search.png";
             this.Children.Add(shopsPage);
 
             shoppingCart = new ShoppingCart();
-            shoppingCart.Title = "Shopping Cart";
-            shoppingCart.IconImageSource = "ShoppingCart.png";
+            shoppingCart.Title = "סל קניות";
+            shoppingCart.IconImageSource = "ShoppingBag.png";
             this.Children.Add(shoppingCart);
         }
     }
