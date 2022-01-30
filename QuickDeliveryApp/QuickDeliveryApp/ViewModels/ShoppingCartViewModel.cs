@@ -82,7 +82,7 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand RefreshCommand => new Command(OnRefresh);
         public void OnRefresh()
         {
-           // InitShops();
+            IsRefreshing = false;
         }
         #endregion
 
