@@ -26,15 +26,50 @@ namespace QuickDeliveryApp.Models
                 {
 
                     this.count = value;
+                    this.ProductTotalPrice = Count * Decimal.ToDouble(this.ProductPrice);
                     OnPropertyChanged("Count");
                 }
             }
         }
 
+        private string errorText;
+        public string ErrorText
+        {
+            get
+            {
+                return this.errorText;
+            }
+            set
+            {
+                if (this.errorText != value)
+                {
+
+                    this.errorText = value;
+                    OnPropertyChanged("ErrorText");
+                }
+            }
+        }
+
+        private double productTotalPrice;
+        public double ProductTotalPrice
+        {
+            get
+            {
+                return this.productTotalPrice;
+            }
+            set
+            {
+                if (this.productTotalPrice != value)
+                {
+
+                    this.productTotalPrice = value;
+                    OnPropertyChanged("ProductTotalPrice");
+                }
+            }
+        }
 
         public ProductShoppingCart(Product p)
         {
-            Count = 1;
             this.ProductId = p.ProductId;
             this.ProductName = p.ProductName;
             this.ShopId = p.ShopId;
@@ -46,6 +81,9 @@ namespace QuickDeliveryApp.Models
             this.ProductType = p.ProductType;
             this.Shop = p.Shop;
             this.OrderProducts = p.OrderProducts;
+
+            Count = 1;
+            ErrorText = "";
         }
     }
 }

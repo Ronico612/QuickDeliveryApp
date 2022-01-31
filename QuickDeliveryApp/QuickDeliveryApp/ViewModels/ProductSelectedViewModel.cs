@@ -39,20 +39,20 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        private bool isAddedToShoppingCart;
-        public bool IsAddedToShoppingCart
+        private bool isGoToShoppingCart;
+        public bool IsGoToShoppingCart
         {
             get
             {
-                return this.isAddedToShoppingCart;
+                return this.isGoToShoppingCart;
             }
             set
             {
-                if (this.isAddedToShoppingCart != value)
+                if (this.isGoToShoppingCart != value)
                 {
 
-                    this.isAddedToShoppingCart = value;
-                    OnPropertyChanged("IsAddedToShoppingCart");
+                    this.isGoToShoppingCart = value;
+                    OnPropertyChanged("IsGoToShoppingCart");
                 }
             }
         }
@@ -75,6 +75,41 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private bool errorProductText;
+        public bool ErrorProductText
+        {
+            get
+            {
+                return this.errorProductText;
+            }
+            set
+            {
+                if (this.errorProductText != value)
+                {
+
+                    this.errorProductText = value;
+                    OnPropertyChanged("ErrorProductText");
+                }
+            }
+        }
+
+        private bool isEnabledButtonAddProduct;
+        public bool IsEnabledButtonAddProduct
+        {
+            get
+            {
+                return this.isEnabledButtonAddProduct;
+            }
+            set
+            {
+                if (this.isEnabledButtonAddProduct != value)
+                {
+
+                    this.isEnabledButtonAddProduct = value;
+                    OnPropertyChanged("IsEnabledButtonAddProduct");
+                }
+            }
+        }
         private string iconSource;
         public string IconSource
         {
@@ -92,15 +127,16 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
-        
+
 
         public ProductSelectedViewModel(Product selectedProduct)
         {
             CurrentProduct = selectedProduct;
-            IsAddedToShoppingCart = false;
+            IsGoToShoppingCart = false;
             IsAddedText = "הוספה לסל הקניות";
             IconSource = "Plus.png";
-
+            ErrorProductText = false;
+            IsEnabledButtonAddProduct = true;
         }
 
         public ICommand AddToShoppingCartCommand => new Command(AddToShoppingCart);
@@ -109,13 +145,13 @@ namespace QuickDeliveryApp.ViewModels
             App app = (App)Application.Current;
             bool isFound = false;
             bool isError = false;
-            int countInList = 0;
+            int countInList;
 
             foreach (ProductShoppingCart p in app.ProductsInShoppingCart)
             {
                 if (p.ProductId == CurrentProduct.ProductId)
                 {
-                    countInList++;
+                    countInList = p.Count;
                     if (!isFound)
                     {
                         if (countInList + 1 <= this.CurrentProduct.CountProductInShop)
@@ -127,21 +163,25 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
 
-            if (!isFound)
+            if (!isFound && this.CurrentProduct.CountProductInShop > 0)
             {
                 ProductShoppingCart productShoppingCart = new ProductShoppingCart(CurrentProduct);
                 app.ProductsInShoppingCart.Add(productShoppingCart);
             }
 
-            IsAddedToShoppingCart = true;
-            IsAddedText = "הפריט נוסף לסל הקניות";
-            IconSource = "Done.png";
-
             if (isError)
             {
-                IsAddedText = "אין פריט זה במלאי";
+                ErrorProductText = true;
                 IconSource = "";
             }
+            else
+            {
+                IsAddedText = "הפריט נוסף לסל הקניות";
+                IconSource = "Done.png";
+            }
+
+            IsEnabledButtonAddProduct = false;
+            IsGoToShoppingCart = true;
         }
 
         //***

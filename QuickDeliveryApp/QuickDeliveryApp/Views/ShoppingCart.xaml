@@ -15,32 +15,50 @@
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
 
-                            <Grid Margin="7">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="100" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="20"/>
-                                </Grid.RowDefinitions>
-                                <Image Source="{Binding ImgSource}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.RowSpan="3" Grid.Row="0"/>
-                                <Label Text="{Binding ProductName, StringFormat='{0}'}" HorizontalTextAlignment="End"  FontSize="Caption" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Margin="0,0,20,0"/>
-                                <Label Text="{Binding ProductPrice, StringFormat='{0}'}"  HorizontalTextAlignment="Start" FontSize="Caption"  Grid.Row="1" Grid.Column="0" Margin="0,0,20,0"/>
+                            <!--<SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="Delete"
+                       IconImageSource="Delete.png"
+                       BackgroundColor="LightPink"
+                       Command="{Binding DeleteProductsCommand}"
+                       CommandParameter="{Binding}">
+                                        </SwipeItem>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>-->
 
-                                <StackLayout Grid.Row="2" Orientation="Horizontal">
-                                    <Button ImageSource="Remove.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.RemoveCountProductCommand}" CommandParameter="{Binding}" BackgroundColor="White"></Button>
-                                <Label Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" FontAttributes="Bold"/>
-                                    <Button ImageSource="Plus.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddCountProductCommand}" CommandParameter="{Binding}" BackgroundColor="White"></Button>
-                            </StackLayout>
-                                <Label Grid.Row="3" Grid.Column="1" Text="{Binding ErrorText}" TextColor="Red"></Label>
-                            </Grid>
+                                <Grid Margin="7">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="100" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <Image Source="{Binding ImgSource}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.RowSpan="4" Grid.Row="0"/>
+                                    <Label Text="{Binding ProductName, StringFormat='{0}'}" HorizontalTextAlignment="End"  FontSize="Caption" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Margin="0,0,20,0"/>
+                                    <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}"  HorizontalTextAlignment="Start" FontSize="Caption"  Grid.Row="1" Grid.Column="0" Margin="0,0,20,0"/>
+
+                                    <StackLayout Grid.Row="2" Orientation="Horizontal">
+                                        <Button ImageSource="Remove.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.RemoveCountProductCommand}" CommandParameter="{Binding}" BackgroundColor="White"></Button>
+                                        <Label Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" FontAttributes="Bold"/>
+                                        <Button ImageSource="Plus.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddCountProductCommand}" CommandParameter="{Binding}" BackgroundColor="White"></Button>
+                                    </StackLayout>
+                                    <Label Grid.Row="3" Grid.Column="0" Text="{Binding Path=ErrorText, Mode=TwoWay, StringFormat='{0}'}" TextColor="Red" HorizontalTextAlignment="End"></Label>
+                                </Grid>
+                                
+                            <!--</SwipeView>-->
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="{Binding TotalPrice}"></Label>
+                <Label Text="סהכ לתשלום"></Label>
+            </StackLayout>
             <Button Text="מעבר לתשלום" Command="{Binding GoToPay}"></Button>
         </StackLayout>
     </ContentPage.Content>

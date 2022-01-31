@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using QuickDeliveryApp.Models;
 using System.Collections.ObjectModel;
 using QuickDeliveryApp.Views;
+using System.Threading.Tasks;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -37,20 +38,20 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        private string errorText;
-        public string ErrorText
+        private double totalPrice;
+        public double TotalPrice
         {
             get
             {
-                return this.errorText;
+                return this.totalPrice;
             }
             set
             {
-                if (this.errorText != value)
+                if (this.totalPrice != value)
                 {
 
-                    this.errorText = value;
-                    OnPropertyChanged("ErrorText");
+                    this.totalPrice = value;
+                    OnPropertyChanged("TotalPrice");
                 }
             }
         }
@@ -73,12 +74,17 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+
         public ShoppingCartViewModel()
         {
             IsRefreshing = false;
             App app = (App)Application.Current;
             ProductsInShoppingCart = app.ProductsInShoppingCart;
-
+            TotalPrice = 0;
+            foreach (ProductShoppingCart p in ProductsInShoppingCart)
+            {
+                TotalPrice += Decimal.ToDouble(p.ProductPrice) * p.Count;
+            }
         }
       
         #region Refresh
@@ -104,22 +110,51 @@ namespace QuickDeliveryApp.ViewModels
 
 
         public ICommand RemoveCountProductCommand => new Command<ProductShoppingCart>(RemoveCountProduct);
-        public void RemoveCountProduct(ProductShoppingCart productShoppingCart)
+        public async void RemoveCountProduct(ProductShoppingCart productShoppingCart)
         {
-            if (productShoppingCart.Count > 0)
+            if (productShoppingCart.Count == 1)
+            {
+                bool answer = await App.Current.MainPage.DisplayAlert("", "האם ברצונך להוריד את הפריט מסל הקניות?", "כן", "לא", FlowDirection.RightToLeft);
+                if (answer)
+                {
+                    TotalPrice -= Decimal.ToDouble(productShoppingCart.ProductPrice);
+                    productShoppingCart.Count = 0;
+                    this.ProductsInShoppingCart.Remove(productShoppingCart);
+                }
+            }
+            if (productShoppingCart.Count > 1)
+            {
                 productShoppingCart.Count--;
+                TotalPrice -= Decimal.ToDouble(productShoppingCart.ProductPrice);
+                productShoppingCart.ErrorText = "";
+            }
         }
 
         public ICommand AddCountProductCommand => new Command<ProductShoppingCart>(AddCountProduct);
         public void AddCountProduct(ProductShoppingCart productShoppingCart)
         {
             if (productShoppingCart.Count + 1 > productShoppingCart.CountProductInShop)
-                ErrorText = "אין פריט זה במלאי";
+                productShoppingCart.ErrorText = "הפריט אזל מהמלאי";
             else
             {
                 productShoppingCart.Count++;
+                TotalPrice += Decimal.ToDouble(productShoppingCart.ProductPrice);
+
             }
         }
+
+        public ICommand DeleteProductsCommand => new Command<ProductShoppingCart>(DeleteProducts);
+        public async void DeleteProducts(ProductShoppingCart productShoppingCart)
+        {
+            bool answer = await App.Current.MainPage.DisplayAlert("", "האם ברצונך להוריד את הפריט מסל הקניות?", "כן", "לא", FlowDirection.RightToLeft);
+            if (answer)
+            {
+                TotalPrice -= Decimal.ToDouble(productShoppingCart.ProductPrice) * productShoppingCart.Count;
+                productShoppingCart.Count = 0;
+                this.ProductsInShoppingCart.Remove(productShoppingCart);
+            }
+        }
+        
 
         public ICommand ShowSelectedProductCommand => new Command(ShowSelectedProduct);
         public async void ShowSelectedProduct()
