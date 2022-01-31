@@ -37,6 +37,23 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private string errorText;
+        public string ErrorText
+        {
+            get
+            {
+                return this.errorText;
+            }
+            set
+            {
+                if (this.errorText != value)
+                {
+
+                    this.errorText = value;
+                    OnPropertyChanged("ErrorText");
+                }
+            }
+        }
 
         private ProductShoppingCart selectedProduct;
         public ProductShoppingCart SelectedProduct
@@ -89,13 +106,19 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand RemoveCountProductCommand => new Command<ProductShoppingCart>(RemoveCountProduct);
         public void RemoveCountProduct(ProductShoppingCart productShoppingCart)
         {
-            productShoppingCart.Count--;
+            if (productShoppingCart.Count > 0)
+                productShoppingCart.Count--;
         }
 
         public ICommand AddCountProductCommand => new Command<ProductShoppingCart>(AddCountProduct);
         public void AddCountProduct(ProductShoppingCart productShoppingCart)
         {
-            productShoppingCart.Count++;
+            if (productShoppingCart.Count + 1 > productShoppingCart.CountProductInShop)
+                ErrorText = "אין פריט זה במלאי";
+            else
+            {
+                productShoppingCart.Count++;
+            }
         }
 
         public ICommand ShowSelectedProductCommand => new Command(ShowSelectedProduct);

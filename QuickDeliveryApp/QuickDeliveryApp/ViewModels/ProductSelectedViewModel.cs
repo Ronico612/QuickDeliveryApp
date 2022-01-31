@@ -108,25 +108,40 @@ namespace QuickDeliveryApp.ViewModels
         {
             App app = (App)Application.Current;
             bool isFound = false;
+            bool isError = false;
+            int countInList = 0;
 
             foreach (ProductShoppingCart p in app.ProductsInShoppingCart)
             {
-                if (p.ProductId == CurrentProduct.ProductId && !isFound)
+                if (p.ProductId == CurrentProduct.ProductId)
                 {
-                    p.Count++;
-                    isFound = true;
-                }      
+                    countInList++;
+                    if (!isFound)
+                    {
+                        if (countInList + 1 <= this.CurrentProduct.CountProductInShop)
+                            p.Count++;
+                        else
+                            isError = true;
+                        isFound = true;
+                    }
+                }
             }
 
             if (!isFound)
             {
-               ProductShoppingCart productShoppingCart = new ProductShoppingCart(CurrentProduct);
-               app.ProductsInShoppingCart.Add(productShoppingCart);
+                ProductShoppingCart productShoppingCart = new ProductShoppingCart(CurrentProduct);
+                app.ProductsInShoppingCart.Add(productShoppingCart);
             }
 
             IsAddedToShoppingCart = true;
             IsAddedText = "הפריט נוסף לסל הקניות";
             IconSource = "Done.png";
+
+            if (isError)
+            {
+                IsAddedText = "אין פריט זה במלאי";
+                IconSource = "";
+            }
         }
 
         //***

@@ -1,12 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 
 namespace QuickDeliveryApp.Models
 {
-    public class ProductShoppingCart : Product
+    public class ProductShoppingCart : Product, INotifyPropertyChanged
     {
-        public int Count {get; set;}
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private int count;
+        public int Count
+        {
+            get
+            {
+                return this.count;
+            }
+            set
+            {
+                if (this.count != value)
+                {
+
+                    this.count = value;
+                    OnPropertyChanged("Count");
+                }
+            }
+        }
+
 
         public ProductShoppingCart(Product p)
         {
