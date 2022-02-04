@@ -40,9 +40,12 @@
                                     </Grid.RowDefinitions>
                                     <Image Source="{Binding ImgSource}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.RowSpan="4" Grid.Row="0"/>
                                     <Label Text="{Binding ProductName, StringFormat='{0}'}" HorizontalTextAlignment="End"  FontSize="Caption" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Margin="0,0,20,0"/>
-                                    <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}"  HorizontalTextAlignment="Start" FontSize="Caption"  Grid.Row="1" Grid.Column="0" Margin="0,0,20,0"/>
-
-                                    <StackLayout Grid.Row="2" Orientation="Horizontal">
+                                <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="0,0,20,0">
+                                    <Label Text="₪"/>
+                                    <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="Caption"/>
+                                </StackLayout>
+                                
+                                <StackLayout Grid.Row="2" Orientation="Horizontal">
                                         <Button ImageSource="Remove.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.RemoveCountProductCommand}" CommandParameter="{Binding}" BackgroundColor="White"></Button>
                                         <Label Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" FontAttributes="Bold"/>
                                         <Button ImageSource="Plus.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddCountProductCommand}" CommandParameter="{Binding}" BackgroundColor="White"></Button>
@@ -55,11 +58,13 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="{Binding TotalPrice}"></Label>
-                <Label Text="סהכ לתשלום"></Label>
+            <StackLayout Orientation="Horizontal" IsVisible="{Binding IsProductsInList}">
+                <Label Text="₪"/>
+                <Label Text="{Binding TotalPrice}"/>
+                <Label Text="סך הכל לתשלום:"></Label>
             </StackLayout>
-            <Button Text="מעבר לתשלום" Command="{Binding GoToPay}"></Button>
+
+            <Button Text="מעבר לתשלום" Command="{Binding GoToPay}"  IsVisible="{Binding IsProductsInList}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

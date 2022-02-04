@@ -38,8 +38,27 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        private double totalPrice;
-        public double TotalPrice
+        
+        private bool isProductsInList;
+        public bool IsProductsInList
+        {
+            get
+            {
+                return this.isProductsInList;
+            }
+            set
+            {
+                if (this.isProductsInList != value)
+                {
+
+                    this.isProductsInList = value;
+                    OnPropertyChanged("IsProductsInList");
+                }
+            }
+        }
+
+        private decimal totalPrice;
+        public decimal TotalPrice
         {
             get
             {
@@ -83,8 +102,9 @@ namespace QuickDeliveryApp.ViewModels
             TotalPrice = 0;
             foreach (ProductShoppingCart p in ProductsInShoppingCart)
             {
-                TotalPrice += Decimal.ToDouble(p.ProductPrice) * p.Count;
+                TotalPrice += p.ProductPrice * p.Count;
             }
+            IsProductsInList = ProductsInShoppingCart.Count > 0;
         }
       
         #region Refresh
@@ -117,15 +137,16 @@ namespace QuickDeliveryApp.ViewModels
                 bool answer = await App.Current.MainPage.DisplayAlert("", "האם ברצונך להוריד את הפריט מסל הקניות?", "כן", "לא", FlowDirection.RightToLeft);
                 if (answer)
                 {
-                    TotalPrice -= Decimal.ToDouble(productShoppingCart.ProductPrice);
+                    TotalPrice -= productShoppingCart.ProductPrice;
                     productShoppingCart.Count = 0;
                     this.ProductsInShoppingCart.Remove(productShoppingCart);
+                    IsProductsInList = ProductsInShoppingCart.Count > 0;
                 }
             }
             if (productShoppingCart.Count > 1)
             {
                 productShoppingCart.Count--;
-                TotalPrice -= Decimal.ToDouble(productShoppingCart.ProductPrice);
+                TotalPrice -= productShoppingCart.ProductPrice;
                 productShoppingCart.ErrorText = "";
             }
         }
@@ -138,7 +159,7 @@ namespace QuickDeliveryApp.ViewModels
             else
             {
                 productShoppingCart.Count++;
-                TotalPrice += Decimal.ToDouble(productShoppingCart.ProductPrice);
+                TotalPrice += productShoppingCart.ProductPrice;
 
             }
         }
@@ -149,10 +170,12 @@ namespace QuickDeliveryApp.ViewModels
             bool answer = await App.Current.MainPage.DisplayAlert("", "האם ברצונך להוריד את הפריט מסל הקניות?", "כן", "לא", FlowDirection.RightToLeft);
             if (answer)
             {
-                TotalPrice -= Decimal.ToDouble(productShoppingCart.ProductPrice) * productShoppingCart.Count;
+                TotalPrice -= productShoppingCart.ProductPrice * productShoppingCart.Count;
                 productShoppingCart.Count = 0;
                 this.ProductsInShoppingCart.Remove(productShoppingCart);
             }
+
+            IsProductsInList = ProductsInShoppingCart.Count > 0;
         }
         
 

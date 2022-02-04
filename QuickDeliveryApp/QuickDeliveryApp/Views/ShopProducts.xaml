@@ -59,8 +59,11 @@
                             </Grid.RowDefinitions>
                             <Image Source="{Binding Path=ImgSource}" Grid.Row="0"/>
                             <Label HorizontalTextAlignment="Center" Grid.Row="1" Text="{Binding Path=ProductName, StringFormat='{0}'}" />
-                            <Label HorizontalOptions="Center" Grid.Row="2" Text="{Binding Path=ProductPrice, StringFormat='{0}'}" />
-                        </Grid>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Row="2">
+                                    <Label Text="₪"/>
+                                    <Label Text="{Binding Path=ProductPrice, StringFormat='{0}'}"/>
+                                </StackLayout>
+                            </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

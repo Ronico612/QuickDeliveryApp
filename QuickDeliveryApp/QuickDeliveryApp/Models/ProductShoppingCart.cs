@@ -26,7 +26,7 @@ namespace QuickDeliveryApp.Models
                 {
 
                     this.count = value;
-                    this.ProductTotalPrice = Count * Decimal.ToDouble(this.ProductPrice);
+                    this.ProductTotalPrice = Count * this.ProductPrice;
                     OnPropertyChanged("Count");
                 }
             }
@@ -50,8 +50,8 @@ namespace QuickDeliveryApp.Models
             }
         }
 
-        private double productTotalPrice;
-        public double ProductTotalPrice
+        private decimal productTotalPrice;
+        public decimal ProductTotalPrice
         {
             get
             {
