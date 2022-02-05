@@ -21,7 +21,7 @@
                                         <SwipeItem Text="Delete"
                        IconImageSource="Delete.png"
                        BackgroundColor="LightPink"
-                       Command="{Binding DeleteProductsCommand}"
+                       Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteProductsCommand}"
                        CommandParameter="{Binding}">
                                         </SwipeItem>
                                     </SwipeItems>
@@ -64,7 +64,7 @@
                 <Label Text="סך הכל לתשלום:"></Label>
             </StackLayout>
 
-            <Button Text="מעבר לתשלום" Command="{Binding GoToPay}"  IsVisible="{Binding IsProductsInList}"/>
+            <Button Text="מעבר לתשלום" Command="{Binding GoToPayCommand}"  IsVisible="{Binding IsProductsInList}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -193,5 +193,23 @@ namespace QuickDeliveryApp.ViewModels
 
             }
         }
+
+        public ICommand GoToPayCommand => new Command(GoToPay);
+        public async void GoToPay()
+        {
+            App theApp = (App)App.Current;
+            if (theApp.CurrentUser == null)
+            {
+                await App.Current.MainPage.DisplayAlert("לא ניתן לבצע תשלום", "על מנת לבצע תשלום יש להתחבר למערכת", "אישור", FlowDirection.RightToLeft);
+            }
+            else
+            {
+                Page p = new Pay();
+                //p.Title
+                p.BindingContext = new PayViewModel();
+                NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+                await tabbed.Navigation.PushAsync(p);
+            }
+        }
     }
 }
