@@ -41,11 +41,57 @@ namespace QuickDeliveryApp
             }
         }
 
+        private bool isProductsInList;
+        public bool IsProductsInList
+        {
+            get
+            {
+                return this.isProductsInList;
+            }
+            set
+            {
+                if (this.isProductsInList != value)
+                {
+
+                    this.isProductsInList = value;
+                    OnPropertyChanged("IsProductsInList");
+                }
+            }
+        }
+
+        private decimal totalPrice;
+        public decimal TotalPrice
+        {
+            get
+            {
+                return this.totalPrice;
+            }
+            set
+            {
+                if (this.totalPrice != value)
+                {
+
+                    this.totalPrice = value;
+                    OnPropertyChanged("TotalPrice");
+                }
+            }
+        }
+
         public App()
         {
             InitializeComponent();
             ProductsInShoppingCart = new ObservableCollection<ProductShoppingCart>();
             MainPage = new NavigationPage(new TheMainTabbedPage());
+        }
+
+        public void UpdateShoppingCartPage()
+        {
+            this.IsProductsInList = this.ProductsInShoppingCart.Count > 0;
+            this.TotalPrice = 0;
+            foreach (ProductShoppingCart p in ProductsInShoppingCart)
+            {
+                TotalPrice += p.ProductTotalPrice;
+            }
         }
 
         protected override void OnStart()

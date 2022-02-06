@@ -15,6 +15,7 @@ namespace QuickDeliveryApp.ViewModels
     {
         public const string REQUIRED_FIELD = "זהו שדה חובה";
         public const string BAD_EMAIL = "מייל לא תקין";
+        public const string BAD_NUM_CREDIT_CARD = "מספר כרטיס אשראי לא תקין";
         public const string BAD_NUMBER = "השדה חייב להכיל רק מספרים";
     }
 
@@ -261,7 +262,7 @@ namespace QuickDeliveryApp.ViewModels
             this.ShowPhoneError = string.IsNullOrEmpty(Phone);
             if (!this.ShowPhoneError)
             {
-                if (!Regex.IsMatch(this.Phone, @"^[0-9]"))
+                if (!Regex.IsMatch(this.Phone, @"^[0-9]*$"))
                 {
                     this.ShowPhoneError = true;
                     this.PhoneError = ERROR_MESSAGES.BAD_NUMBER;
@@ -437,11 +438,16 @@ namespace QuickDeliveryApp.ViewModels
         {
             this.ShowNumCreditCardError = string.IsNullOrEmpty(NumCreditCard);
             if (!this.ShowNumCreditCardError)
-            {
-                if (!Regex.IsMatch(this.NumCreditCard, @"^[0-9]"))
+            { 
+                if (!Regex.IsMatch(this.NumCreditCard, @"^[0-9]*$"))
                 {
                     this.ShowNumCreditCardError = true;
                     this.NumCreditCardError = ERROR_MESSAGES.BAD_NUMBER;
+                }
+                if (this.NumCreditCard.Length != 16)
+                {
+                    this.ShowNumCreditCardError = true;
+                    this.NumCreditCardError = ERROR_MESSAGES.BAD_NUM_CREDIT_CARD;
                 }
             }
             else
@@ -489,7 +495,7 @@ namespace QuickDeliveryApp.ViewModels
             this.ShowNumCodeError = string.IsNullOrEmpty(NumCode);
             if (!this.ShowNumCodeError)
             {
-                if (!Regex.IsMatch(this.NumCode, @"^[0-9]"))
+                if (!Regex.IsMatch(this.NumCode, @"^[0-9]*$"))
                 {
                     this.ShowNumCodeError = true;
                     this.NumCodeError = ERROR_MESSAGES.BAD_NUMBER;

@@ -38,43 +38,6 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        
-        private bool isProductsInList;
-        public bool IsProductsInList
-        {
-            get
-            {
-                return this.isProductsInList;
-            }
-            set
-            {
-                if (this.isProductsInList != value)
-                {
-
-                    this.isProductsInList = value;
-                    OnPropertyChanged("IsProductsInList");
-                }
-            }
-        }
-
-        private decimal totalPrice;
-        public decimal TotalPrice
-        {
-            get
-            {
-                return this.totalPrice;
-            }
-            set
-            {
-                if (this.totalPrice != value)
-                {
-
-                    this.totalPrice = value;
-                    OnPropertyChanged("TotalPrice");
-                }
-            }
-        }
-
         private ProductShoppingCart selectedProduct;
         public ProductShoppingCart SelectedProduct
         {
@@ -93,18 +56,13 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        public App App { get; set; }
 
         public ShoppingCartViewModel()
         {
             IsRefreshing = false;
-            App app = (App)Application.Current;
-            ProductsInShoppingCart = app.ProductsInShoppingCart;
-            TotalPrice = 0;
-            foreach (ProductShoppingCart p in ProductsInShoppingCart)
-            {
-                TotalPrice += p.ProductPrice * p.Count;
-            }
-            IsProductsInList = ProductsInShoppingCart.Count > 0;
+            this.App = (App)Application.Current;
+            ProductsInShoppingCart = App.ProductsInShoppingCart;
         }
       
         #region Refresh
@@ -137,16 +95,14 @@ namespace QuickDeliveryApp.ViewModels
                 bool answer = await App.Current.MainPage.DisplayAlert("", "האם ברצונך להוריד את הפריט מסל הקניות?", "כן", "לא", FlowDirection.RightToLeft);
                 if (answer)
                 {
-                    TotalPrice -= productShoppingCart.ProductPrice;
                     productShoppingCart.Count = 0;
                     this.ProductsInShoppingCart.Remove(productShoppingCart);
-                    IsProductsInList = ProductsInShoppingCart.Count > 0;
+                    App.UpdateShoppingCartPage();
                 }
             }
             if (productShoppingCart.Count > 1)
             {
                 productShoppingCart.Count--;
-                TotalPrice -= productShoppingCart.ProductPrice;
                 productShoppingCart.ErrorText = "";
             }
         }
@@ -159,7 +115,6 @@ namespace QuickDeliveryApp.ViewModels
             else
             {
                 productShoppingCart.Count++;
-                TotalPrice += productShoppingCart.ProductPrice;
 
             }
         }
@@ -170,12 +125,10 @@ namespace QuickDeliveryApp.ViewModels
             bool answer = await App.Current.MainPage.DisplayAlert("", "האם ברצונך להוריד את הפריט מסל הקניות?", "כן", "לא", FlowDirection.RightToLeft);
             if (answer)
             {
-                TotalPrice -= productShoppingCart.ProductPrice * productShoppingCart.Count;
-                productShoppingCart.Count = 0;
-                this.ProductsInShoppingCart.Remove(productShoppingCart);
+                  productShoppingCart.Count = 0;
+                  this.ProductsInShoppingCart.Remove(productShoppingCart);
+                  App.UpdateShoppingCartPage();
             }
-
-            IsProductsInList = ProductsInShoppingCart.Count > 0;
         }
         
 
@@ -200,12 +153,18 @@ namespace QuickDeliveryApp.ViewModels
             App theApp = (App)App.Current;
             if (theApp.CurrentUser == null)
             {
-                await App.Current.MainPage.DisplayAlert("לא ניתן לבצע תשלום", "על מנת לבצע תשלום יש להתחבר למערכת", "אישור", FlowDirection.RightToLeft);
+                bool answer = await App.Current.MainPage.DisplayAlert("", "על מנת לבצע תשלום יש להתחבר למערכת", "מעבר לדף התחברות", "אישור", FlowDirection.RightToLeft);
+                if (answer)
+                {
+                    NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+                    TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
+                    theTabs.SelectLoginTab();
+                }                
             }
             else
             {
                 Page p = new Pay();
-                //p.Title
+                p.Title = "ביצוע הזמנה";
                 p.BindingContext = new PayViewModel();
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 await tabbed.Navigation.PushAsync(p);

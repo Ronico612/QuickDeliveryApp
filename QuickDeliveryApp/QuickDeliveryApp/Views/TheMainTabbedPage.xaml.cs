@@ -43,5 +43,9 @@ namespace QuickDeliveryApp.Views
         {
             this.CurrentPage = shoppingCart;
         }
+        public void SelectLoginTab()
+        {
+            this.CurrentPage = login;
+        }
     }
 }

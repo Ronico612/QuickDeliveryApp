@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace QuickDeliveryApp.ViewModels
@@ -34,23 +35,89 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        private string addressUser;
-        public string AddressUser
+        #region Address
+        private string address;
+        public string Address
         {
-            get
-            {
-                return this.addressUser;
-            }
+            get { return address; }
             set
             {
-                if (this.addressUser != value)
-                {
-
-                    this.addressUser = value;
-                    OnPropertyChanged("AddressUser");
-                }
+                address = value;
+                ValidateAddress();
+                this.UpdateIsFormValid();
+                OnPropertyChanged("Address");
             }
         }
+
+        private bool showAddressError;
+        public bool ShowAddressError
+        {
+            get => showAddressError;
+            set
+            {
+                showAddressError = value;
+                OnPropertyChanged("ShowAddressError");
+            }
+        }
+
+        private string addressError;
+        public string AddressError
+        {
+            get => addressError;
+            set
+            {
+                addressError = value;
+                OnPropertyChanged("AddressError");
+            }
+        }
+
+        private void ValidateAddress()
+        {
+            this.ShowAddressError = string.IsNullOrEmpty(Address);
+        }
+        #endregion
+
+        #region City
+        private string city;
+        public string City
+        {
+            get { return city; }
+            set
+            {
+                city = value;
+                ValidateCity();
+                this.UpdateIsFormValid();
+                OnPropertyChanged("City");
+            }
+        }
+
+        private bool showCityError;
+        public bool ShowCityError
+        {
+            get => showCityError;
+            set
+            {
+                showCityError = value;
+                OnPropertyChanged("ShowCityError");
+            }
+        }
+
+        private string cityError;
+        public string CityError
+        {
+            get => cityError;
+            set
+            {
+                cityError = value;
+                OnPropertyChanged("CityError");
+            }
+        }
+
+        private void ValidateCity()
+        {
+            this.ShowCityError = string.IsNullOrEmpty(City);
+        }
+        #endregion
 
         private string userNumCard;
         public string UserNumCard
@@ -70,13 +137,51 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        
+        private bool isFormValid;
+        public bool IsFormValid
+        {
+            get
+            {
+                return this.isFormValid;
+            }
+            set
+            {
+                if (this.isFormValid != value)
+                {
+
+                    this.isFormValid = value;
+                    OnPropertyChanged("IsFormValid");
+                }
+            }
+        }
+
+        public App App { get; set; }
+
         public PayViewModel()
         {
-            App app = (App)Application.Current;
-            ProductsInShoppingCart = app.ProductsInShoppingCart;
-            AddressUser = app.CurrentUser.UserAddress;
-            UserNumCard = app.CurrentUser.NumCreditCard;
+            this.App = (App)Application.Current;
+            ProductsInShoppingCart = App.ProductsInShoppingCart;
+            Address = App.CurrentUser.UserAddress;
+            City = App.CurrentUser.UserCity;
+            UserNumCard = "************" + App.CurrentUser.NumCreditCard.Substring(App.CurrentUser.NumCreditCard.Length - 4, 4); 
+        }
+
+        private void UpdateIsFormValid()
+        {
+            this.ValidateAddress();
+            this.ValidateCity();
+
+            //Check if any validation failed
+            if (ShowAddressError || ShowCityError)
+                IsFormValid = false;
+            IsFormValid = true;
+        }
+
+        public ICommand PayCommand => new Command(Pay);
+        public void Pay()
+        {
+            UpdateIsFormValid(); 
+
         }
     }
 }

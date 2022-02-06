@@ -155,7 +155,9 @@ namespace QuickDeliveryApp.ViewModels
                     if (!isFound)
                     {
                         if (countInList + 1 <= this.CurrentProduct.CountProductInShop)
+                        {
                             p.Count++;
+                        }      
                         else
                             isError = true;
                         isFound = true;
@@ -167,6 +169,7 @@ namespace QuickDeliveryApp.ViewModels
             {
                 ProductShoppingCart productShoppingCart = new ProductShoppingCart(CurrentProduct);
                 app.ProductsInShoppingCart.Add(productShoppingCart);
+                app.UpdateShoppingCartPage();
             }
 
             if (isError)

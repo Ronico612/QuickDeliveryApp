@@ -4,45 +4,63 @@
              x:Class="QuickDeliveryApp.Views.Pay">
     <ContentPage.Content>
         <StackLayout>
+            <Label Text="סיכום פרטי הזמנה" TextDecorations="Underline" FontAttributes="Bold" HorizontalOptions="CenterAndExpand" Margin="0,10,0,30"></Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="60"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                </Grid.RowDefinitions>
 
-            <Label Text="סיכום פרטי הזמנה"></Label>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                <Label Text="סהכ"></Label>
-                <Label Text="כמות"></Label>
-                <Label Text="מוצר"></Label>
-            </StackLayout>
-            
-            <CollectionView x:Name="collectionName" ItemsSource="{Binding ProductsInShoppingCart}" SelectionMode="None"  BackgroundColor="White">
+                <Label Grid.Column="0" Text="סהכ" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"></Label>
+                <Label Grid.Column="1" Text="כמות" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"></Label>
+                <Label Grid.Column="3" Text="מוצר" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"></Label>
+            </Grid>
+            <CollectionView HeightRequest="100" x:Name="collectionName" ItemsSource="{Binding ProductsInShoppingCart}" SelectionMode="None"  BackgroundColor="White">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="1" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
-                        <StackLayout Orientation="Horizontal">
-                            <Label Text="₪"/>
-                            <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="Caption"/>
-                        </StackLayout>
-                        <Label Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" FontAttributes="Bold"/>
-                        <Image  Source="{Binding ImgSource}"/>
-                            <Label Text="{Binding ProductName, StringFormat='{0}'}"/>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="50"/>
+                            </Grid.RowDefinitions>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Grid.Column="0">
+                                <Label Text="₪" VerticalOptions="Center"/>
+                                <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="Caption" VerticalOptions="Center"/>
                             </StackLayout>
-
-                        <Label Text="כתובת הזמנה"></Label>
-                        <Entry Text="{Binding AddressUser}"></Entry>
-                        <Label Text="כרטיס אשראי"></Label>
-                        <Label Text="{Binding UserNumCard}"></Label>
-                        <Button HeightRequest="20" Text="בצע הזמנה"></Button>
-
+                            <Label Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" FontAttributes="Bold"/>
+                            <Image Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Source="{Binding ImgSource}"></Image>
+                            <Label Grid.Column="3" VerticalOptions="Center" LineBreakMode="TailTruncation" Text="{Binding ProductName, StringFormat='{0}'}"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
-           
-
-
+            <StackLayout Orientation="Horizontal">
+                <Label Text="₪"/>
+                <Label Text="{Binding App.TotalPrice}"></Label>
+                <Label Text="סך הכל"></Label>
+            </StackLayout>
+            <Label Text="כתובת הזמנה (ניתן לשנות)"></Label>
+            <Entry Text="{Binding Address}"></Entry>
+            <Label Text="{Binding AddressError}" IsVisible="{Binding ShowAddressError}" TextColor="Red"></Label>
+            <Label Text="עיר להזמנה (ניתן לשנות)"></Label>
+            <Entry Text="{Binding City}"></Entry>
+            <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" TextColor="Red"></Label>
+            <Label Text="כרטיס אשראי"></Label>
+            <Label Text="{Binding UserNumCard}"></Label>
+            <Button Text="בצע הזמנה" IsEnabled="{Binding IsFormValid}" Command="{Binding PayCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using Xamarin.Forms;
 
 namespace QuickDeliveryApp.Models
 {
@@ -27,6 +28,8 @@ namespace QuickDeliveryApp.Models
 
                     this.count = value;
                     this.ProductTotalPrice = Count * this.ProductPrice;
+                    App app = (App)Application.Current;
+                    app.UpdateShoppingCartPage();
                     OnPropertyChanged("Count");
                 }
             }
