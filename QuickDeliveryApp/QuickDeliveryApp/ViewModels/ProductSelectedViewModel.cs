@@ -184,14 +184,13 @@ namespace QuickDeliveryApp.ViewModels
             IsGoToShoppingCart = true;
         }
 
-        //***
         public ICommand GoToShoppingCartCommand => new Command(GoToShoppingCart);
         public async void GoToShoppingCart()
         {
-            Page p = new ShoppingCart();
-            p.BindingContext = new ShoppingCartViewModel();
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
-            await tabbed.Navigation.PushAsync(p);
+            await tabbed.Navigation.PopToRootAsync();
+            TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
+            theTabs.SelectShoppingCartTab();
         }
 
     }

@@ -38,5 +38,10 @@ namespace QuickDeliveryApp.Views
             shoppingCart.IconImageSource = "ShoppingBag.png";
             this.Children.Add(shoppingCart);
         }
+
+        public void SelectShoppingCartTab()
+        {
+            this.CurrentPage = shoppingCart;
+        }
     }
 }
