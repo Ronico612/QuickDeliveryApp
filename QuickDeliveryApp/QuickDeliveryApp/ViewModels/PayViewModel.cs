@@ -1,4 +1,5 @@
 ﻿using QuickDeliveryApp.Models;
+using QuickDeliveryApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -155,12 +156,32 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private int rowsHeight;
+        public int RowsHeight
+        {
+            get
+            {
+                return this.rowsHeight;
+            }
+            set
+            {
+                if (this.rowsHeight != value)
+                {
+
+                    this.rowsHeight = value;
+                    OnPropertyChanged("RowsHeight");
+                }
+            }
+        }
         public App App { get; set; }
 
         public PayViewModel()
         {
             this.App = (App)Application.Current;
             ProductsInShoppingCart = App.ProductsInShoppingCart;
+            RowsHeight = ProductsInShoppingCart.Count * 50;
+            this.AddressError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
             Address = App.CurrentUser.UserAddress;
             City = App.CurrentUser.UserCity;
             UserNumCard = "************" + App.CurrentUser.NumCreditCard.Substring(App.CurrentUser.NumCreditCard.Length - 4, 4); 
@@ -168,19 +189,20 @@ namespace QuickDeliveryApp.ViewModels
 
         private void UpdateIsFormValid()
         {
-            this.ValidateAddress();
-            this.ValidateCity();
-
             //Check if any validation failed
             if (ShowAddressError || ShowCityError)
                 IsFormValid = false;
-            IsFormValid = true;
+            else
+                IsFormValid = true;
         }
 
         public ICommand PayCommand => new Command(Pay);
-        public void Pay()
+        public async void Pay()
         {
-            UpdateIsFormValid(); 
+            QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
+            Order order = new Order();
+            order.UserId = App.CurrentUser.UserId;
+        //    order.OrderDate = DateTime.Now;
 
         }
     }
