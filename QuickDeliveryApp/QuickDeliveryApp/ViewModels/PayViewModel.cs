@@ -184,7 +184,7 @@ namespace QuickDeliveryApp.ViewModels
             this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
             Address = App.CurrentUser.UserAddress;
             City = App.CurrentUser.UserCity;
-            UserNumCard = "************" + App.CurrentUser.NumCreditCard.Substring(App.CurrentUser.NumCreditCard.Length - 4, 4); 
+            UserNumCard = "************" + App.CurrentUser.NumCreditCard.Substring(App.CurrentUser.NumCreditCard.Length - 4, 4);
         }
 
         private void UpdateIsFormValid()
@@ -199,11 +199,58 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand PayCommand => new Command(Pay);
         public async void Pay()
         {
+            bool success = true;
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
+
             Order order = new Order();
             order.UserId = App.CurrentUser.UserId;
-        //    order.OrderDate = DateTime.Now;
+            order.OrderDate = DateTime.Now;
+            order.TotalPrice = App.TotalPrice;
 
+            int newOrderID = await proxy.PostNewOrder(order);
+
+            if (newOrderID != 0)
+            {
+                foreach (ProductShoppingCart p in ProductsInShoppingCart)
+                {
+                    bool result = await proxy.RemoveProductCount(p.ProductId, p.Count);
+                    if (result)
+                    {
+                        OrderProduct orderProduct = new OrderProduct();
+                        orderProduct.OrderId = newOrderID;
+                        orderProduct.ProductId = p.ProductId;
+                        orderProduct.Quantity = p.Count;
+                        orderProduct.Price = p.ProductTotalPrice;
+
+                        result = await proxy.PostNewOrderProduct(orderProduct);
+                        if (!result)
+                        {
+                            success = false;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        success = false;
+                        break;
+                    }
+                }
+            }
+            else
+                success = false;
+
+            await proxy.StatusOrderOrRemove(success, newOrderID);
+            if (success)
+            {
+                App.ProductsInShoppingCart.Clear();
+                App.UpdateShoppingCartPage();
+                // להעביר לדף אחר ולהגיד שההזמנה התבצעה
+
+            }
+            else
+            {
+                // להראות הודעה שזה לא הצליח
+            }
         }
     }
 }
