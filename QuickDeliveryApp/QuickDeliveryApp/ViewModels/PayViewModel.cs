@@ -173,6 +173,18 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+
+        private string serverStatus;
+        public string ServerStatus
+        {
+            get { return serverStatus; }
+            set
+            {
+                serverStatus = value;
+                OnPropertyChanged("ServerStatus");
+            }
+        }
+
         public App App { get; set; }
 
         public PayViewModel()
@@ -199,6 +211,9 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand PayCommand => new Command(Pay);
         public async void Pay()
         {
+            ServerStatus = "מבצע הזמנה...";
+            await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
+
             bool success = true;
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
 
@@ -244,12 +259,16 @@ namespace QuickDeliveryApp.ViewModels
             {
                 App.ProductsInShoppingCart.Clear();
                 App.UpdateShoppingCartPage();
+                await App.Current.MainPage.Navigation.PopModalAsync();
                 // להעביר לדף אחר ולהגיד שההזמנה התבצעה
+                 
+                
 
             }
             else
             {
-                // להראות הודעה שזה לא הצליח
+                await App.Current.MainPage.Navigation.PopModalAsync();
+                await App.Current.MainPage.DisplayAlert("שגיאה", "ההזמנה נכשלה, אנא נסו שנית", "בסדר");
             }
         }
     }
