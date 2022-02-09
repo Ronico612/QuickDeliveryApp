@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using QuickDeliveryApp.Views;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -260,10 +261,19 @@ namespace QuickDeliveryApp.ViewModels
                 App.ProductsInShoppingCart.Clear();
                 App.UpdateShoppingCartPage();
                 await App.Current.MainPage.Navigation.PopModalAsync();
-                // להעביר לדף אחר ולהגיד שההזמנה התבצעה
-                 
-                
 
+                // להעביר לדף אחר ולהגיד שההזמנה התבצעה
+                NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+               // await tabbed.Navigation.PopToRootAsync();
+                
+                //TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
+                //theTabs.SelectShoppingCartTab();
+                Page p = new InDelivery();
+                p.Title = "מעקב אחר ההזמנה";
+                p.BindingContext = new InDeliveryViewModel();
+                tabbed.Navigation.InsertPageBefore(p, tabbed.Navigation.NavigationStack[1]);
+                await tabbed.Navigation.PopToRootAsync();
+                await tabbed.Navigation.PushAsync(p);
             }
             else
             {
