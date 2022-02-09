@@ -17,16 +17,12 @@ namespace QuickDeliveryApp.Views
         public Shops shopsPage;
         public ShoppingCart shoppingCart;
         public Login login;
+        public PersonalArea personalArea;
 
         public TheMainTabbedPage()
         {
             this.BindingContext = new TheMainTabbedPageViewModel();
             InitializeComponent();
-
-            login = new Login();
-            login.Title = "התחברות";
-            login.IconImageSource = "Login.png";
-            this.Children.Add(login);
 
             shopsPage = new Shops();
             shopsPage.Title = "חנויות";
@@ -37,15 +33,34 @@ namespace QuickDeliveryApp.Views
             shoppingCart.Title = "סל קניות";
             shoppingCart.IconImageSource = "ShoppingBag.png";
             this.Children.Add(shoppingCart);
+
+            login = new Login();
+            login.Title = "התחברות";
+            login.IconImageSource = "Login.png";
+            this.Children.Add(login);
+
+            personalArea = new PersonalArea();
+            personalArea.IconImageSource = "Login.png";
+            personalArea.Title = "אזור אישי";
         }
 
-        public void SelectShoppingCartTab()
+        public void AddTab(Xamarin.Forms.Page p)
         {
-            this.CurrentPage = shoppingCart;
+            if (!this.Children.Contains(p))
+                this.Children.Add(p);
         }
-        public void SelectLoginTab()
+
+        public void RemoveTab(Xamarin.Forms.Page p)
         {
-            this.CurrentPage = login;
+            if (this.Children.Contains(p))
+                this.Children.Remove(p);
         }
+
+        public void CurrentTab(Xamarin.Forms.Page p)
+        {
+            this.CurrentPage = p;
+        }
+
+        
     }
 }

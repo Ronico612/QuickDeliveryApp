@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickDeliveryApp.Views.PersonalArea">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Label Text="!"></Label>
+            <Label Text="{Binding App.CurrentUser.UserFname}"/>
+                <Label Text="שלום"></Label>
+            </StackLayout>
+            <Button Text="התנתקות" Command="{Binding LogoutCommand}"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

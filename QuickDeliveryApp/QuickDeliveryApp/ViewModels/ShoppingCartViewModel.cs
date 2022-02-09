@@ -158,7 +158,7 @@ namespace QuickDeliveryApp.ViewModels
                 {
                     NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                     TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
-                    theTabs.SelectLoginTab();
+                    theTabs.CurrentTab(theTabs.login);
                 }                
             }
             else

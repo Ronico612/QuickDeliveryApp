@@ -13,6 +13,22 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private string statusText;
+        public string StatusText
+        {
+            get { return statusText; }
+            set
+            {
+                statusText = value;
+                OnPropertyChanged("StatusText");
+            }
+        }
+
+        public InDeliveryViewModel()
+        {
+
+        }
+
 
     }
 }

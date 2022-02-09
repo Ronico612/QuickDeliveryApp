@@ -8,6 +8,8 @@ using QuickDeliveryApp.Services;
 using QuickDeliveryApp.Models;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using QuickDeliveryApp.Views;
+using System.Threading;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -56,7 +58,6 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 fName = value;
-                ValidateFName();
                 OnPropertyChanged("FName");
             }
         }
@@ -85,7 +86,10 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateFName()
         {
-            this.ShowFNameError = string.IsNullOrEmpty(this.FName);
+            if (FName == null)
+                this.ShowFNameError = true;
+            else
+                this.ShowFNameError = string.IsNullOrEmpty(this.FName.Trim());
         }
         #endregion
 
@@ -97,7 +101,6 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 lName = value;
-                ValidateLName();
                 OnPropertyChanged("LName");
             }
         }
@@ -126,7 +129,10 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateLName()
         {
-            this.ShowFNameError = string.IsNullOrEmpty(this.LName);
+            if (LName == null)
+                this.ShowLNameError = true;
+            else
+                this.ShowLNameError = string.IsNullOrEmpty(this.LName.Trim());
         }
         #endregion
 
@@ -138,7 +144,6 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 email = value;
-                ValidateEmail();
                 OnPropertyChanged("Email");
             }
         }
@@ -167,7 +172,11 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateEmail()
         {
-            this.ShowEmailError = string.IsNullOrEmpty(Email);
+            if (Email == null)
+                this.ShowEmailError = true;
+            else
+                this.ShowEmailError = string.IsNullOrEmpty(Email.Trim());
+
             if (!this.ShowEmailError)
             {
                 if (!Regex.IsMatch(this.Email, @"^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$"))
@@ -189,7 +198,6 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 password = value;
-                ValidatePassword();
                 OnPropertyChanged("Password");
             }
         }
@@ -218,7 +226,10 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidatePassword()
         {
-            this.ShowPasswordError = string.IsNullOrEmpty(this.Password);
+            if (Password == null)
+                this.ShowPasswordError = true;
+            else
+                this.ShowPasswordError = string.IsNullOrEmpty(this.Password.Trim());
         }
         #endregion
 
@@ -230,7 +241,6 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 phone = value;
-                ValidatePhone();
                 OnPropertyChanged("Phone");
             }
         }
@@ -259,7 +269,10 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidatePhone()
         {
-            this.ShowPhoneError = string.IsNullOrEmpty(Phone);
+            if (Phone == null)
+                this.ShowPhoneError = true;
+            else
+                this.ShowPhoneError = string.IsNullOrEmpty(Phone.Trim());
             if (!this.ShowPhoneError)
             {
                 if (!Regex.IsMatch(this.Phone, @"^[0-9]*$"))
@@ -281,7 +294,6 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 birthDate = value;
-                ValidateBirthDate();
                 OnPropertyChanged("BirthDate");
             }
         }
@@ -325,7 +337,6 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 address = value;
-                ValidateAddress();
                 OnPropertyChanged("Address");
             }
         }
@@ -354,7 +365,10 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateAddress()
         {
-            this.ShowAddressError = string.IsNullOrEmpty(Address);
+            if (Address == null)
+                this.ShowAddressError = true;
+            else
+                this.ShowAddressError = string.IsNullOrEmpty(Address.Trim());
         }
         #endregion
 
@@ -366,7 +380,6 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 city = value;
-                ValidateCity();
                 OnPropertyChanged("City");
             }
         }
@@ -395,7 +408,10 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateCity()
         {
-            this.ShowCityError = string.IsNullOrEmpty(City);
+            if (City == null)
+                this.ShowCityError = true;
+            else
+                this.ShowCityError = string.IsNullOrEmpty(City.Trim());
         }
         #endregion
 
@@ -407,7 +423,6 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 numCreditCard = value;
-                ValidateNumCreditCard();
                 OnPropertyChanged("NumCreditCard");
             }
         }
@@ -436,7 +451,10 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateNumCreditCard()
         {
-            this.ShowNumCreditCardError = string.IsNullOrEmpty(NumCreditCard);
+            if (NumCreditCard == null)
+                this.ShowNumCreditCardError = true;
+            else
+                this.ShowNumCreditCardError = string.IsNullOrEmpty(NumCreditCard.Trim());
             if (!this.ShowNumCreditCardError)
             { 
                 if (!Regex.IsMatch(this.NumCreditCard, @"^[0-9]*$"))
@@ -444,7 +462,7 @@ namespace QuickDeliveryApp.ViewModels
                     this.ShowNumCreditCardError = true;
                     this.NumCreditCardError = ERROR_MESSAGES.BAD_NUMBER;
                 }
-                if (this.NumCreditCard.Length != 16)
+                else if (this.NumCreditCard.Length != 16)
                 {
                     this.ShowNumCreditCardError = true;
                     this.NumCreditCardError = ERROR_MESSAGES.BAD_NUM_CREDIT_CARD;
@@ -463,7 +481,6 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 numCode = value;
-                ValidateNumCode();
                 OnPropertyChanged("NumCode");
             }
         }
@@ -492,7 +509,10 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateNumCode()
         {
-            this.ShowNumCodeError = string.IsNullOrEmpty(NumCode);
+            if (NumCode == null)
+                this.ShowNumCodeError = true;
+            else
+                this.ShowNumCodeError = string.IsNullOrEmpty(NumCode.Trim());
             if (!this.ShowNumCodeError)
             {
                 if (!Regex.IsMatch(this.NumCode, @"^[0-9]*$"))
@@ -514,7 +534,6 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 validityCreditCard = value;
-                ValidateValidityCreditCard();
                 OnPropertyChanged("ValidityCreditCard");
             }
         }
@@ -600,6 +619,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             if (this.IsRegister)
             {
+                ClearFields();
                 this.IsRegister = false;
                 this.TitleText = "התחברות";
                 this.GoToText = "להרשמה";
@@ -656,6 +676,7 @@ namespace QuickDeliveryApp.ViewModels
 
             ServerStatus = "בודק תקינות מייל...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
+            Thread.Sleep(2000);
 
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
             bool isEmailExist = await proxy.IsUserEmailExistAsync(Email);
@@ -667,6 +688,7 @@ namespace QuickDeliveryApp.ViewModels
             }
 
             ServerStatus = "מבצע הרשמה...";
+            Thread.Sleep(2000);
             User user = new User();
             user.UserFname = FName;
             user.UserLname = LName;
@@ -692,10 +714,6 @@ namespace QuickDeliveryApp.ViewModels
             {
                 await App.Current.MainPage.DisplayAlert("שגיאה", "ההרשמה נכשלה", "בסדר", FlowDirection.RightToLeft);
             }
-            //EntryEmail = "";
-            //EntryNickName = "";
-            //EntryPass = "";
-
             return registerSucceed;
         }
 
@@ -703,6 +721,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             ServerStatus = "מתחבר לשרת...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
+            Thread.Sleep(2000);
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
             User user = await proxy.LoginAsync(Email, Password);
             if (user == null)
@@ -713,11 +732,45 @@ namespace QuickDeliveryApp.ViewModels
             else
             {
                 ServerStatus = "קורא נתונים...";
+                Thread.Sleep(4000);
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
                 await App.Current.MainPage.Navigation.PopModalAsync();
-                await App.Current.MainPage.DisplayAlert("היפ הופ הוריי", "התחברת בהצלחה למערכת", "בסדר");
+                //await App.Current.MainPage.DisplayAlert("היפ הופ הוריי", "התחברת בהצלחה למערכת", "בסדר");
+                NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+                TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
+                theTabs.AddTab(theTabs.personalArea);
+                theTabs.CurrentTab(theTabs.personalArea);
+                theTabs.RemoveTab(theTabs.login);
+
+                ClearFields();
             }
+        }
+
+        private void ClearFields()
+        {
+            FName = "";
+            LName = "";
+            Email = "";
+            Password = "";
+            Phone = "";
+            BirthDate = DateTime.Today;
+            Address = "";
+            City = "";
+            NumCreditCard = "";
+            NumCode = "";
+            ValidityCreditCard = DateTime.Today;
+            ShowFNameError = false;
+            ShowLNameError = false;
+            ShowEmailError = false;
+            ShowPasswordError = false;
+            ShowPhoneError = false;
+            ShowBirthDateError = false;
+            ShowAddressError = false;
+            ShowCityError = false;
+            ShowNumCreditCardError = false;
+            ShowNumCodeError = false;
+            ShowValidityCreditCardError = false;
         }
     }
 }

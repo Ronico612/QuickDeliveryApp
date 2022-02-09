@@ -193,7 +193,7 @@ namespace QuickDeliveryApp.ViewModels
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PopToRootAsync();
             TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
-            theTabs.SelectShoppingCartTab();
+            theTabs.CurrentTab(theTabs.shoppingCart);
         }
 
     }

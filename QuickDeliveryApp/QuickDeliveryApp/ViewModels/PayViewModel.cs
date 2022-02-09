@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using QuickDeliveryApp.Views;
+using System.Threading;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -75,7 +76,10 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateAddress()
         {
-            this.ShowAddressError = string.IsNullOrEmpty(Address);
+            if (Address == null)
+                this.ShowAddressError = true;
+            else
+                this.ShowAddressError = string.IsNullOrEmpty(Address.Trim());
         }
         #endregion
 
@@ -117,7 +121,10 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateCity()
         {
-            this.ShowCityError = string.IsNullOrEmpty(City);
+            if (City == null)
+                this.ShowCityError = true;
+            else
+                this.ShowCityError = string.IsNullOrEmpty(City.Trim());
         }
         #endregion
 
@@ -214,6 +221,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             ServerStatus = "מבצע הזמנה...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
+            Thread.Sleep(2000);
 
             bool success = true;
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
@@ -264,15 +272,14 @@ namespace QuickDeliveryApp.ViewModels
 
                 // להעביר לדף אחר ולהגיד שההזמנה התבצעה
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
-               // await tabbed.Navigation.PopToRootAsync();
-                
+                await tabbed.Navigation.PopToRootAsync();
+
                 //TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
-                //theTabs.SelectShoppingCartTab();
+                //theTabs.SelectShoppingCartTab(); //אולי להעביר ישר לאזור אישי 
+
                 Page p = new InDelivery();
                 p.Title = "מעקב אחר ההזמנה";
                 p.BindingContext = new InDeliveryViewModel();
-                tabbed.Navigation.InsertPageBefore(p, tabbed.Navigation.NavigationStack[1]);
-                await tabbed.Navigation.PopToRootAsync();
                 await tabbed.Navigation.PushAsync(p);
             }
             else

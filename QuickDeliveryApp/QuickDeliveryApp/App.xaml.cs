@@ -18,9 +18,23 @@ namespace QuickDeliveryApp
             }
         }
 
+
+        private User currentUser;
         public User CurrentUser
         {
-            get; set;
+            get
+            {
+                return this.currentUser;
+            }
+            set
+            {
+                if (this.currentUser != value)
+                {
+
+                    this.currentUser = value;
+                    OnPropertyChanged("CurrentUser");
+                }
+            }
         }
 
         private ObservableCollection<ProductShoppingCart> productsInShoppingCart;
