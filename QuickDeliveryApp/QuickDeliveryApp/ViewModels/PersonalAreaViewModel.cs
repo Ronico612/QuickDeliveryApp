@@ -24,6 +24,32 @@ namespace QuickDeliveryApp.ViewModels
             this.App = (App)Application.Current;
         }
 
+        public ICommand UpdateUserDetailsCommand => new Command(UpdateUserDetails);
+        public async void UpdateUserDetails()
+        {
+            Page p = new UserDetails();
+            //p.Title = "חשבון";
+            p.BindingContext = new UserDetailsViewModel();
+            NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+            await tabbed.Navigation.PushAsync(p);
+        }
+
+        public ICommand CurrentOrdersCommand => new Command(CurrentOrders);
+        public void CurrentOrders()
+        {
+        }
+
+        public ICommand HistoryOrdersCommand => new Command(HistoryOrders);
+        public async void HistoryOrders()
+        {
+            Page p = new HistoryOrders();
+            //p.Title = "היסטוריית הזמנות";
+            p.BindingContext = new HistoryOrdersViewModel();
+            NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+            await tabbed.Navigation.PushAsync(p);
+        }
+
+
         public ICommand LogoutCommand => new Command(Logout);
         public void Logout()
         {

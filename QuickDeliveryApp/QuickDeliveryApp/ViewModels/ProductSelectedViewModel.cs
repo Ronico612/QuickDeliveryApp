@@ -140,49 +140,58 @@ namespace QuickDeliveryApp.ViewModels
         }
 
         public ICommand AddToShoppingCartCommand => new Command(AddToShoppingCart);
-        public void AddToShoppingCart()
+        public async void AddToShoppingCart()
         {
             App app = (App)Application.Current;
             bool isFound = false;
             bool isError = false;
             int countInList;
 
-            foreach (ProductShoppingCart p in app.ProductsInShoppingCart)
+            if (!(app.ProductsInShoppingCart.Count == 0 || (app.ProductsInShoppingCart.Count > 0 && app.ProductsInShoppingCart.FirstOrDefault().ShopId == this.CurrentProduct.ShopId)))
             {
-                if (p.ProductId == CurrentProduct.ProductId)
-                {
-                    countInList = p.Count;
-                    if (!isFound)
-                    {
-                        if (countInList + 1 <= this.CurrentProduct.CountProductInShop)
-                        {
-                            p.Count++;
-                        }      
-                        else
-                            isError = true;
-                        isFound = true;
-                    }
-                }
-            }
-
-            if (!isFound && this.CurrentProduct.CountProductInShop > 0)
-            {
-                ProductShoppingCart productShoppingCart = new ProductShoppingCart(CurrentProduct);
-                app.ProductsInShoppingCart.Add(productShoppingCart);
-                app.UpdateShoppingCartPage();
-            }
-
-            if (isError)
-            {
-                ErrorProductText = true;
+                await App.Current.MainPage.DisplayAlert("", "לא ניתן להוסיף לסל הקניות מוצרים מחנויות שונותד", "בסדר", FlowDirection.RightToLeft);
                 IconSource = "";
             }
             else
             {
-                IsAddedText = "הפריט נוסף לסל הקניות";
-                IconSource = "Done.png";
-            }
+                foreach (ProductShoppingCart p in app.ProductsInShoppingCart)
+                {
+                    if (p.ProductId == CurrentProduct.ProductId)
+                    {
+                        countInList = p.Count;
+                        if (!isFound)
+                        {
+                            if (countInList + 1 <= this.CurrentProduct.CountProductInShop)
+                            {
+                                p.Count++;
+                            }
+                            else
+                                isError = true;
+                            isFound = true;
+                        }
+                    }
+                }
 
+                if (!isFound && this.CurrentProduct.CountProductInShop > 0)
+                {
+                    ProductShoppingCart productShoppingCart = new ProductShoppingCart(CurrentProduct);
+                    app.ProductsInShoppingCart.Add(productShoppingCart);
+                    app.UpdateShoppingCartPage();
+                }
+
+
+                if (isError)
+                {
+                    ErrorProductText = true;
+                    IconSource = "";
+                }
+                else
+                {
+                    IsAddedText = "הפריט נוסף לסל הקניות";
+                    IconSource = "Done.png";
+                }
+
+            }
             IsEnabledButtonAddProduct = false;
             IsGoToShoppingCart = true;
         }

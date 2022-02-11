@@ -563,9 +563,9 @@ namespace QuickDeliveryApp.ViewModels
         private void ValidateValidityCreditCard()
         {
             if (this.ValidityCreditCard == DateTime.MinValue)
-                this.ShowBirthDateError = true;
+                this.ShowValidityCreditCardError = true;
             else
-                this.ShowBirthDateError = false;
+                this.ShowValidityCreditCardError = false;
         }
         #endregion
 

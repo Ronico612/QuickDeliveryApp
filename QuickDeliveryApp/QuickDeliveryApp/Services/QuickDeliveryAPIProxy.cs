@@ -304,6 +304,62 @@ namespace QuickDeliveryApp.Services
             }
         }
 
+        public async Task<bool> UpdateUser(User currentUser, string phone, string address, string city, string numCreditCard, string numCode, DateTime validityCreditCard)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize<User>(currentUser, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/UpdateUser?phone={phone}&address={address}&city={city}&numCreditCard={numCreditCard}&numCode={numCode}&validityCreditCard={validityCreditCard}", content);
+                if (response.IsSuccessStatusCode)
+                {
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    bool isUpdatedUser = JsonSerializer.Deserialize<bool>(jsonContent, options);
+                    return isUpdatedUser;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
 
+        public async Task<List<Order>> GetUserOrders(int userId)
+        {
+            try
+            {
+
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetUserOrders?userId={userId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    List<Order> oList = JsonSerializer.Deserialize<List<Order>>(content, options);
+                    return oList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }

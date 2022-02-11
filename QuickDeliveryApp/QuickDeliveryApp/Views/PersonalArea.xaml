@@ -4,12 +4,15 @@
              x:Class="QuickDeliveryApp.Views.PersonalArea">
     <ContentPage.Content>
         <StackLayout>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Label Text="!"></Label>
-            <Label Text="{Binding App.CurrentUser.UserFname}"/>
-                <Label Text="שלום"></Label>
+            <StackLayout Margin="0,20,0,20" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Label Text="!" FontAttributes="Bold" FontSize="20"></Label>
+                <Label Text="{Binding App.CurrentUser.UserFname}" FontAttributes="Bold" FontSize="20"/>
+                <Label Text="שלום" FontAttributes="Bold" FontSize="20"></Label>
             </StackLayout>
-            <Button Text="התנתקות" Command="{Binding LogoutCommand}"></Button>
+            <Button Text="חשבון" Command="{Binding UpdateUserDetailsCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
+            <Button Text="הזמנות בתהליך" Command="{Binding CurrentOrdersCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
+            <Button Text="היסטוריית הזמנות" Command="{Binding HistoryOrdersCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
+            <Button Text="התנתקות" CornerRadius="8" Margin="10,40,10,0" FontAttributes="Bold" TextColor="Red" BackgroundColor="LightGray" Command="{Binding LogoutCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickDeliveryApp.Views.UserDetails">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="חשבון" TextColor="Black" FontSize="20" Margin="0,10,0,20" FontAttributes="Bold"></Label>
+
+
+                <!-- טלפון -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Text="{Binding PhoneError}" IsVisible="{Binding ShowPhoneError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                    <Label Text="טלפון" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                </Grid>
+                <Entry Placeholder="הכנס מספר טלפון" Text="{Binding Phone}" Style="{StaticResource entryStyle}" MaxLength="20"/>
+
+                <!-- כתובת -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Text="{Binding AddressError}" IsVisible="{Binding ShowAddressError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                    <Label Text="כתובת" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                </Grid>
+                <Entry Placeholder="הכנס כתובת" Text="{Binding Address}" Style="{StaticResource entryStyle}" MaxLength="30"/>
+
+                <!-- עיר -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                    <Label Text="עיר" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                </Grid>
+                <Entry Placeholder="הכנס עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" MaxLength="30"/>
+
+                <!-- כרטיס אשראי -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Text="{Binding NumCreditCardError}" IsVisible="{Binding ShowNumCreditCardError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                    <Label Text="כרטיס אשראי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                </Grid>
+                <Entry Placeholder="הכנס מספר כרטיס אשראי" Text="{Binding NumCreditCard}" Style="{StaticResource entryStyle}" MaxLength="16"/>
+
+                <!-- מספר סודי -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Text="{Binding NumCodeError}" IsVisible="{Binding ShowNumCodeError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                    <Label Text="מספר סודי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                </Grid>
+                <Entry Placeholder="הכנס מספר סודי" Text="{Binding NumCode}" Style="{StaticResource entryStyle}" MaxLength="3"/>
+
+                <!-- תוקף כרטיס אשראי -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Text="{Binding ValidityCreditCardError}" IsVisible="{Binding ShowValidityCreditCardError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                    <Label Text="תוקף כרטיס אשראי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                </Grid>
+                <DatePicker Date="{Binding ValidityCreditCard}"/>
+
+                <Button Text="עדכון" Command="{Binding UpdateCommand}" BackgroundColor="LightGray" CornerRadius="8"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
