@@ -32,10 +32,28 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private int rowsHeight;
+        public int RowsHeight
+        {
+            get
+            {
+                return this.rowsHeight;
+            }
+            set
+            {
+                if (this.rowsHeight != value)
+                {
+
+                    this.rowsHeight = value;
+                    OnPropertyChanged("RowsHeight");
+                }
+            }
+        }
+
         public OrderDetailsViewModel(UserOrderDetails selectedUserOrderDetails)
         {
-            selectedOrderDetails = selectedUserOrderDetails;
-
+            SelectedOrderDetails = selectedUserOrderDetails;
+            RowsHeight = SelectedOrderDetails.OrderProducts.Count * 50;
         }
     }
 }

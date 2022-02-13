@@ -19,6 +19,7 @@ namespace QuickDeliveryApp.Models
         public int? AgeProductTypeId { get; set; }
         public int CountProductInShop { get; set; }
         public decimal ProductPrice { get; set; }
+        public bool IsDeleted { get; set; }
 
         public virtual AgeProductType AgeProductType { get; set; }
         public virtual ProductType ProductType { get; set; }

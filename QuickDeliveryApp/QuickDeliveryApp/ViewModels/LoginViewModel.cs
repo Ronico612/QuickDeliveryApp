@@ -676,7 +676,7 @@ namespace QuickDeliveryApp.ViewModels
 
             ServerStatus = "בודק תקינות מייל...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
 
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
             bool isEmailExist = await proxy.IsUserEmailExistAsync(Email);
@@ -688,7 +688,7 @@ namespace QuickDeliveryApp.ViewModels
             }
 
             ServerStatus = "מבצע הרשמה...";
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             User user = new User();
             user.UserFname = FName;
             user.UserLname = LName;
@@ -721,7 +721,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             ServerStatus = "מתחבר לשרת...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
             User user = await proxy.LoginAsync(Email, Password);
             if (user == null)
@@ -732,7 +732,7 @@ namespace QuickDeliveryApp.ViewModels
             else
             {
                 ServerStatus = "קורא נתונים...";
-                Thread.Sleep(4000);
+                Thread.Sleep(2000);
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
                 await App.Current.MainPage.Navigation.PopModalAsync();
@@ -742,6 +742,9 @@ namespace QuickDeliveryApp.ViewModels
                 theTabs.AddTab(theTabs.personalArea);
                 theTabs.CurrentTab(theTabs.personalArea);
                 theTabs.RemoveTab(theTabs.login);
+
+                ///////////////////////////////////////////////
+                theTabs.AddTab(theTabs.shopManager);
 
                 ClearFields();
             }

@@ -18,6 +18,8 @@ namespace QuickDeliveryApp.Models
         public int? StatusOrderId { get; set; }
         public DateTime OrderDate { get; set; }
         public decimal? TotalPrice { get; set; }
+        public string OrderAddress { get; set; }
+        public string OrderCity { get; set; }
 
 
         public virtual DeliveryPerson DeliveryPerson { get; set; }

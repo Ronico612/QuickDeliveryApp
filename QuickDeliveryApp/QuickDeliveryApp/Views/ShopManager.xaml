@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickDeliveryApp.Views.ShopManager">
+    <ContentPage.Content>
+        <StackLayout>
+
+            
+            <Button Text="ניהול מוצרים" Command="{Binding ShopProductsManagementCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
+            <Button Text="צפייה בהזמנות" Command="{Binding ShopOrdersCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -230,6 +230,8 @@ namespace QuickDeliveryApp.ViewModels
             order.UserId = App.CurrentUser.UserId;
             order.OrderDate = DateTime.Now;
             order.TotalPrice = App.TotalPrice;
+            order.OrderAddress = Address;
+            order.OrderCity = City;
 
             int newOrderID = await proxy.PostNewOrder(order);
 

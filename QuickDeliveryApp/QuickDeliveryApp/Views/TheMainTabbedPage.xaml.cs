@@ -18,6 +18,7 @@ namespace QuickDeliveryApp.Views
         public ShoppingCart shoppingCart;
         public Login login;
         public PersonalArea personalArea;
+        public ShopManager shopManager;
 
         public TheMainTabbedPage()
         {
@@ -33,6 +34,10 @@ namespace QuickDeliveryApp.Views
             shoppingCart.Title = "סל קניות";
             shoppingCart.IconImageSource = "ShoppingBag.png";
             this.Children.Add(shoppingCart);
+
+            shopManager = new ShopManager();
+            shopManager.Title = "מנהל חנות";
+            shopManager.IconImageSource = "ShoppingBag.png";
 
             login = new Login();
             login.Title = "התחברות";

@@ -9,9 +9,9 @@ using QuickDeliveryApp.Services;
 using QuickDeliveryApp.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using QuickDeliveryApp.ViewModels;
+using QuickDeliveryApp.Views;
 
-namespace QuickDeliveryApp.Views
+namespace QuickDeliveryApp.ViewModels
 {
     class HistoryOrdersViewModel : INotifyPropertyChanged
     {
@@ -81,12 +81,20 @@ namespace QuickDeliveryApp.Views
                 UserOrderDetails userOrderDetails = new UserOrderDetails();
                 userOrderDetails.TotalPrice = o.TotalPrice;
                 userOrderDetails.OrderDate = o.OrderDate.ToString();
+                userOrderDetails.OrderId = o.OrderId;
 
                 if (o.OrderProducts.Count > 0)
+                {
                     userOrderDetails.ShopName = o.OrderProducts.ToList()[0].Product.Shop.ShopName;
-
-                UserOrders.Add(userOrderDetails);
+                    userOrderDetails.ShopCity = o.OrderProducts.ToList()[0].Product.Shop.ShopCity;
+                    userOrderDetails.OrderProducts = new List<OrderProduct>(o.OrderProducts);
+                    userOrderDetails.OrderAddress = o.OrderAddress;
+                    userOrderDetails.OrderCity = o.OrderCity;
+                    UserOrders.Add(userOrderDetails);
+                }
             }
+
+            //this.UserOrders = (ObservableCollection<UserOrderDetails>)UserOrders.OrderByDescending(uo => uo.OrderDate);
         }
 
         public ICommand SelectUserOrderCommand => new Command(SelectUserOrder);
@@ -108,7 +116,12 @@ namespace QuickDeliveryApp.Views
     public class UserOrderDetails
     {
         public string ShopName { get; set; }
+        public string ShopCity { get; set; }
         public decimal? TotalPrice { get; set; }
         public string OrderDate { get; set; }
+        public int OrderId { get; set; }
+        public List<OrderProduct> OrderProducts { get; set; }
+        public string OrderAddress { get; set; }
+        public string OrderCity { get; set; }
     }
 }

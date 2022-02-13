@@ -24,7 +24,11 @@
                             </Grid.ColumnDefinitions>
                             <Image Source="LeftArrow.png" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"/>
                             <Label Text="{Binding TotalPrice}" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"/>
-                            <Label Text="{Binding ShopName}" FontAttributes="Bold" HorizontalOptions="EndAndExpand" Grid.Row="0" Grid.Column="2"/>
+                            <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalOptions="EndAndExpand">
+                                <Label Text="{Binding ShopCity}" FontAttributes="Bold"/>
+                                <Label Text="|" FontAttributes="Bold"/>
+                                <Label Text="{Binding ShopName}" FontAttributes="Bold"/>
+                            </StackLayout>
                             <Label Text="{Binding OrderDate}" HorizontalOptions="EndAndExpand" Grid.Row="1" Grid.Column="2"/>
                         </Grid>
                     </DataTemplate>

@@ -5,6 +5,8 @@ using QuickDeliveryApp.Views;
 using QuickDeliveryApp.Models;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using QuickDeliveryApp.Services;
 
 namespace QuickDeliveryApp
 {
@@ -91,12 +93,17 @@ namespace QuickDeliveryApp
             }
         }
 
+        public List<Shop> allShops;
+
+
         public App()
         {
             InitializeComponent();
             ProductsInShoppingCart = new ObservableCollection<ProductShoppingCart>();
             MainPage = new NavigationPage(new TheMainTabbedPage());
         }
+
+       
 
         public void UpdateShoppingCartPage()
         {
