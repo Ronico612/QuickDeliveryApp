@@ -8,15 +8,11 @@ using System.Threading.Tasks;
 using QuickDeliveryApp.Services;
 using QuickDeliveryApp.Models;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using QuickDeliveryApp.ViewModels;
 
 namespace QuickDeliveryApp.Views
 {
-    public class UserOrderDetails 
-    {
-        public string ShopName { get; set; }
-        public decimal? TotalPrice { get; set; }
-        public string OrderDate { get; set; }
-    }
     class HistoryOrdersViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -43,6 +39,24 @@ namespace QuickDeliveryApp.Views
             }
         }
 
+        private UserOrderDetails selectedUserOrder;
+        public UserOrderDetails SelectedUserOrder
+        {
+            get
+            {
+                return this.selectedUserOrder;
+            }
+            set
+            {
+                if (this.selectedUserOrder != value)
+                {
+
+                    this.selectedUserOrder = value;
+                    OnPropertyChanged("SelectedUserOrder");
+                }
+            }
+        }
+
         public App App { get; set; }
 
         public HistoryOrdersViewModel()
@@ -54,7 +68,7 @@ namespace QuickDeliveryApp.Views
 
         private async void InitOrders()
         {
-            await GetUserOrders(); 
+            await GetUserOrders();
         }
 
         private async Task GetUserOrders()
@@ -75,5 +89,26 @@ namespace QuickDeliveryApp.Views
             }
         }
 
+        public ICommand SelectUserOrderCommand => new Command(SelectUserOrder);
+        public async void SelectUserOrder()
+        {
+            if (SelectedUserOrder != null)
+            {
+                Page p = new OrderDetails();
+               // p.Title = SelectedUserOrder.ShopName;
+                p.BindingContext = new  OrderDetailsViewModel(this.SelectedUserOrder);
+                NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+                await tabbed.Navigation.PushAsync(p);
+                SelectedUserOrder = null;
+            }
+        }
+
+    }
+
+    public class UserOrderDetails
+    {
+        public string ShopName { get; set; }
+        public decimal? TotalPrice { get; set; }
+        public string OrderDate { get; set; }
     }
 }

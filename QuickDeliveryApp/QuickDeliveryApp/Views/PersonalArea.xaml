@@ -12,7 +12,7 @@
             <Button Text="חשבון" Command="{Binding UpdateUserDetailsCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
             <Button Text="הזמנות בתהליך" Command="{Binding CurrentOrdersCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
             <Button Text="היסטוריית הזמנות" Command="{Binding HistoryOrdersCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
-            <Button Text="התנתקות" CornerRadius="8" Margin="10,40,10,0" FontAttributes="Bold" TextColor="Red" BackgroundColor="LightGray" Command="{Binding LogoutCommand}"></Button>
+            <Button Text="התנתקות" CornerRadius="8" Margin="10,40,10,0" FontAttributes="Bold" TextColor="Red" BackgroundColor="#FCEDF3" Command="{Binding LogoutCommand}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

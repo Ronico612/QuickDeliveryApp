@@ -4,6 +4,7 @@
              x:Class="QuickDeliveryApp.Views.HistoryOrders">
     <ContentPage.Content>
         <StackLayout>
+            <Label Text="הזמנות קודמות" FontSize="30"></Label>
             <CollectionView EmptyView="לא קיימות הזמנות קודמות" x:Name="collectionName" ItemsSource="{Binding UserOrders}" SelectionMode="Single"  BackgroundColor="White"
                         SelectedItem="{Binding SelectedUserOrder}" SelectionChangedCommand="{Binding SelectUserOrderCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
@@ -11,20 +12,20 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
+                        <Grid Margin="0,0,0,20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="20"/>
                                 <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="30"/>
+                                <ColumnDefinition Width="100"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Image Source="LeftArrow.png" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"/>
-                            <Label Text="{Binding TotalPrice}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"/>
-                            <Label Text="{Binding ShopName}" Grid.Row="0" Grid.Column="2"/>
-                            <Label Text="{Binding OrderDate}" Grid.Row="1" Grid.Column="2"/>
+                            <Label Text="{Binding TotalPrice}" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"/>
+                            <Label Text="{Binding ShopName}" FontAttributes="Bold" HorizontalOptions="EndAndExpand" Grid.Row="0" Grid.Column="2"/>
+                            <Label Text="{Binding OrderDate}" HorizontalOptions="EndAndExpand" Grid.Row="1" Grid.Column="2"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

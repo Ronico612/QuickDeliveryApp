@@ -12,7 +12,7 @@
                     <Label Text="{Binding CurrentProduct.ProductPrice}"/>
                 </StackLayout>
                 <Label HorizontalOptions="Center" Text="הפריט אזל מהמלאי" IsVisible="{Binding ErrorProductText}" TextColor="Red"></Label>
-        <Button Text="{Binding IsAddedText}" IsEnabled="{Binding IsEnabledButtonAddProduct}" Command="{Binding AddToShoppingCartCommand}" BackgroundColor="LightPink" ImageSource="{Binding IconSource}"/>
+                <Button Text="{Binding IsAddedText}" IsEnabled="{Binding IsEnabledButtonAddProduct}" Command="{Binding AddToShoppingCartCommand}" BackgroundColor="LightPink" ImageSource="{Binding IconSource}"/>
         <Button Text="מעבר לסל הקניות" Command="{Binding GoToShoppingCartCommand}" IsVisible="{Binding IsGoToShoppingCart}" BackgroundColor="Gray" ImageSource="ShoppingBag.png"/>
     </StackLayout>
         </ScrollView>
