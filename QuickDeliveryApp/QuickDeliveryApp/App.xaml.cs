@@ -7,6 +7,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using QuickDeliveryApp.Services;
+using QuickDeliveryApp.ViewModels;
 
 namespace QuickDeliveryApp
 {
@@ -93,20 +94,25 @@ namespace QuickDeliveryApp
             }
         }
 
-        public List<Shop> allShops;
+        public List<Shop> AllShops { get; private set; }
+        
 
 
         public App()
         {
             InitializeComponent();
             ProductsInShoppingCart = new ObservableCollection<ProductShoppingCart>();
-            MainPage = new NavigationPage(new TheMainTabbedPage());
+            
+            ServerStatusViewModel vm = new ServerStatusViewModel();
+            vm.ServerStatus = "טוען נתונים....";
+            MainPage = new ServerStatus(vm);
         }
 
-       
+       public string ServerStatus { get; set; }
 
         public void UpdateShoppingCartPage()
         {
+            this.AllShops = new List<Shop>();
             this.IsProductsInList = this.ProductsInShoppingCart.Count > 0;
             this.TotalPrice = 0;
             foreach (ProductShoppingCart p in ProductsInShoppingCart)
@@ -115,8 +121,10 @@ namespace QuickDeliveryApp
             }
         }
 
-        protected override void OnStart()
+        protected async override void OnStart()
         {
+            await GetAllShops();
+            MainPage = new NavigationPage(new TheMainTabbedPage());
         }
 
         protected override void OnSleep()
@@ -126,5 +134,12 @@ namespace QuickDeliveryApp
         protected override void OnResume()
         {
         }
+
+        public async Task GetAllShops()
+        {
+            QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
+            this.AllShops = await quickDeliveryAPIProxy.GetShopsAsync();
+        }
+
     }
 }

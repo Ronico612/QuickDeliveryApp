@@ -81,22 +81,19 @@ namespace QuickDeliveryApp.ViewModels
         public ShopsViewModel()
         {
             this.SearchTerm = string.Empty;
+            App app = (App)Application.Current;
+            this.allShops = app.AllShops;
             InitShops();
         }
 
-        private async void InitShops()
+        private void InitShops()
         {
-            await GetAllShops(); // לקבל את רשימת החנויות 
             this.FilteredShops = new ObservableCollection<Shop>(this.allShops.OrderBy(s => s.ShopName));
             OnTextChanged(SearchTerm);
             IsRefreshing = false;
         }
 
-        private async Task GetAllShops()
-        {
-            QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
-            this.allShops = await quickDeliveryAPIProxy.GetShopsAsync();
-        }
+        
 
 
 
