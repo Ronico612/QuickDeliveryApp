@@ -25,7 +25,9 @@ namespace QuickDeliveryApp.Views
             base.OnAppearing();
             ShopsViewModel context = (ShopsViewModel)this.BindingContext;
             collectionName.SelectedItem = null;
-
+            context.allShops = ((App)Application.Current).AllShops;
+            context.InitShops();
+          
         }
     }
 

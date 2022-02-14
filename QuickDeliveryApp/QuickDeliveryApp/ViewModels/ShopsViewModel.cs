@@ -21,7 +21,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private List<Shop> allShops;
+        public List<Shop> allShops;
         private ObservableCollection<Shop> filteredShops;
         public ObservableCollection<Shop> FilteredShops
         {
@@ -86,15 +86,12 @@ namespace QuickDeliveryApp.ViewModels
             InitShops();
         }
 
-        private void InitShops()
+        public void InitShops()
         {
             this.FilteredShops = new ObservableCollection<Shop>(this.allShops.OrderBy(s => s.ShopName));
             OnTextChanged(SearchTerm);
             IsRefreshing = false;
         }
-
-        
-
 
 
         public void OnTextChanged(string search)
