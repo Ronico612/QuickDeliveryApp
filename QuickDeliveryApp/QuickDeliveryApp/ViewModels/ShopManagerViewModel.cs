@@ -29,6 +29,7 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand ShopOrdersCommand => new Command(ShopOrders);
         public void ShopOrders()
         {
+
         }
     }
 }

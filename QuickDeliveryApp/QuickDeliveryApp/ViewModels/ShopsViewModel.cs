@@ -79,10 +79,6 @@ namespace QuickDeliveryApp.ViewModels
         public void InitShops()
         {
             App app = (App)Application.Current;
-            if ((app == null) || (app.AllShops == null))
-            {
-                return;
-            }
 
             this.FilteredShops = new ObservableCollection<Shop>(app.AllShops.OrderBy(s => s.ShopName));
             OnTextChanged(SearchTerm);
@@ -92,10 +88,6 @@ namespace QuickDeliveryApp.ViewModels
         public void OnTextChanged(string search)
         {
             App app = (App)Application.Current;
-            if ((app == null) || (app.AllShops == null) || (this.FilteredShops == null))
-            {
-                return;
-            }
 
             //Filter the list of shops based on the search term
             if (String.IsNullOrWhiteSpace(search) || String.IsNullOrEmpty(search))
