@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
-using QuickDeliveryApp.Models;
-using QuickDeliveryApp.Services;
 using Xamarin.Forms;
+using QuickDeliveryApp.Models;
 using QuickDeliveryApp.Views;
+using System.Collections.Generic;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -21,7 +18,6 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public List<Shop> allShops;
         private ObservableCollection<Shop> filteredShops;
         public ObservableCollection<Shop> FilteredShops
         {
@@ -33,28 +29,8 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.filteredShops != value)
                 {
-
                     this.filteredShops = value;
                     OnPropertyChanged("FilteredShops");
-                }
-            }
-        }
-
-        private string searchTerm;
-        public string SearchTerm
-        {
-            get
-            {
-                return this.searchTerm;
-            }
-            set
-            {
-                if (this.searchTerm != value)
-                {
-
-                    this.searchTerm = value;
-                    OnTextChanged(value);
-                    OnPropertyChanged("SearchTerm");
                 }
             }
         }
@@ -70,38 +46,61 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.selectedShop != value)
                 {
-
                     this.selectedShop = value;
                     OnPropertyChanged("SelectedShop");
                 }
             }
         }
 
+        private string searchTerm;
+        public string SearchTerm
+        {
+            get
+            {
+                return this.searchTerm;
+            }
+            set
+            {
+                if (this.searchTerm != value)
+                {
+                    this.searchTerm = value;
+                    OnTextChanged(value);
+                    OnPropertyChanged("SearchTerm");
+                }
+            }
+        }
 
         public ShopsViewModel()
         {
+            this.FilteredShops = new ObservableCollection<Shop>();
             this.SearchTerm = string.Empty;
-            App app = (App)Application.Current;
-            this.allShops = app.AllShops;
-            InitShops();
         }
 
         public void InitShops()
         {
-            this.FilteredShops = new ObservableCollection<Shop>(this.allShops.OrderBy(s => s.ShopName));
+            App app = (App)Application.Current;
+            if ((app == null) || (app.AllShops == null))
+            {
+                return;
+            }
+
+            this.FilteredShops = new ObservableCollection<Shop>(app.AllShops.OrderBy(s => s.ShopName));
             OnTextChanged(SearchTerm);
             IsRefreshing = false;
         }
 
-
         public void OnTextChanged(string search)
         {
-            //Filter the list of shops based on the search term
-            if (this.allShops == null)
+            App app = (App)Application.Current;
+            if ((app == null) || (app.AllShops == null) || (this.FilteredShops == null))
+            {
                 return;
+            }
+
+            //Filter the list of shops based on the search term
             if (String.IsNullOrWhiteSpace(search) || String.IsNullOrEmpty(search))
             {
-                foreach (Shop s in this.allShops)
+                foreach (Shop s in app.AllShops)
                 {
                     if (!this.FilteredShops.Contains(s))
                         this.FilteredShops.Add(s);
@@ -109,15 +108,13 @@ namespace QuickDeliveryApp.ViewModels
             }
             else
             {
-                foreach (Shop s in this.allShops)
+                foreach (Shop s in app.AllShops)
                 {
                     string contactString = $"{s.ShopName.ToLower()}|{s.ShopCity.ToLower()}";
 
-                    if (!this.FilteredShops.Contains(s) &&
-                        contactString.Contains(search.ToLower()))
+                    if (!this.FilteredShops.Contains(s) && contactString.Contains(search.ToLower()))
                         this.FilteredShops.Add(s);
-                    else if (this.FilteredShops.Contains(s) &&
-                        !contactString.Contains(search.ToLower()))
+                    else if (this.FilteredShops.Contains(s) && !contactString.Contains(search.ToLower()))
                         this.FilteredShops.Remove(s);
                 }
             }
@@ -145,21 +142,17 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-
         public ICommand ShowShopProductsCommand => new Command(ShowShopProducts);
         public async void ShowShopProducts()
         {
             if (SelectedShop != null)
             {
-                Page p = new ShopProducts();
-                p.Title = SelectedShop.ShopName;
-                p.BindingContext = new ShopProductsViewModel(this.SelectedShop);
+                Page shopProductsPage = new ShopProducts();
+                shopProductsPage.Title = SelectedShop.ShopName;
+                shopProductsPage.BindingContext = new ShopProductsViewModel(this.SelectedShop);
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
-                await tabbed.Navigation.PushAsync(p);
-
+                await tabbed.Navigation.PushAsync(shopProductsPage);
             }
         }
-
-        
     }
 }

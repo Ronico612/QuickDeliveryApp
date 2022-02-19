@@ -17,7 +17,10 @@ namespace QuickDeliveryApp.ViewModels
     {
         public const string REQUIRED_FIELD = "זהו שדה חובה";
         public const string BAD_EMAIL = "מייל לא תקין";
+        public const string BAD_PHONE = "מספר טלפון לא תקין";
         public const string BAD_NUM_CREDIT_CARD = "מספר כרטיס אשראי לא תקין";
+        public const string BAD_NUM_CODE = "מספר סודי לא תקין";
+        public const string BAD_VALIDITY_CREDIT_CARD = "כרטיס לא בתוקף";
         public const string BAD_NUMBER = "השדה חייב להכיל רק מספרים";
     }
 
@@ -280,6 +283,11 @@ namespace QuickDeliveryApp.ViewModels
                     this.ShowPhoneError = true;
                     this.PhoneError = ERROR_MESSAGES.BAD_NUMBER;
                 }
+                else if (!Regex.IsMatch(this.Phone, @"^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}\d{8})$"))
+                {
+                    this.ShowPhoneError = true;
+                    this.PhoneError = ERROR_MESSAGES.BAD_PHONE;
+                }
             }
             else
                 this.PhoneError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -520,6 +528,11 @@ namespace QuickDeliveryApp.ViewModels
                     this.ShowNumCodeError = true;
                     this.NumCodeError = ERROR_MESSAGES.BAD_NUMBER;
                 }
+                else if (this.NumCode.Length != 3)
+                {
+                    this.ShowNumCodeError = true;
+                    this.NumCodeError = ERROR_MESSAGES.BAD_NUM_CODE;
+                }
             }
             else
                 this.NumCodeError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -563,7 +576,15 @@ namespace QuickDeliveryApp.ViewModels
         private void ValidateValidityCreditCard()
         {
             if (this.ValidityCreditCard == DateTime.MinValue)
+            {
                 this.ShowValidityCreditCardError = true;
+                this.ValidityCreditCardError = ERROR_MESSAGES.REQUIRED_FIELD;
+            }
+            else if (this.ValidityCreditCard < DateTime.Now.Date)
+            {
+                this.ShowValidityCreditCardError = true;
+                this.ValidityCreditCardError = ERROR_MESSAGES.BAD_VALIDITY_CREDIT_CARD;
+            }
             else
                 this.ShowValidityCreditCardError = false;
         }

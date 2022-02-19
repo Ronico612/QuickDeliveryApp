@@ -1,11 +1,4 @@
-﻿using QuickDeliveryApp.Services;
-using QuickDeliveryApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿using QuickDeliveryApp.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -25,11 +18,7 @@ namespace QuickDeliveryApp.Views
             base.OnAppearing();
             ShopsViewModel context = (ShopsViewModel)this.BindingContext;
             collectionName.SelectedItem = null;
-            context.allShops = ((App)Application.Current).AllShops;
             context.InitShops();
-          
         }
     }
-
-    
 }

@@ -7,15 +7,28 @@
             <RefreshView x:Name="refreshView"
              Command="{Binding RefreshCommand}"
              IsRefreshing="{Binding IsRefreshing}">
-                <CollectionView EmptyView="אין מוצרים בסל הקניות" x:Name="collectionName" ItemsSource="{Binding ProductsInShoppingCart}" SelectionMode="Single"  BackgroundColor="White"
+                <CollectionView EmptyView="אין מוצרים בסל הקניות" x:Name="collectionName" ItemsSource="{Binding ProductsInShoppingCart}" SelectionMode="Single"  BackgroundColor="White" Margin="0,20,0,0"
                         SelectedItem="{Binding SelectedProduct}" SelectionChangedCommand="{Binding ShowSelectedProductCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="1" Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-
                             <Grid Margin="7">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup>
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="White" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="#F2F4F4" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="150" />
@@ -28,7 +41,7 @@
                                     <RowDefinition Height="20"/>
                                 </Grid.RowDefinitions>
                                 <Image Source="{Binding ImgSource}" VerticalOptions="FillAndExpand" Grid.Column="1" Grid.RowSpan="4" Grid.Row="0"/>
-                                
+
                                 <!--Text="מחק מוצר"-->
                                 <Button  ImageSource="Delete.png"
                                     Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteProductsCommand}"
@@ -41,13 +54,12 @@
 
                                 <!--Text="בחר כמות"-->
                                 <StackLayout Grid.Row="2" Orientation="Horizontal">
-                                    <Button ImageSource="Remove.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.RemoveCountProductCommand}" CommandParameter="{Binding}" BackgroundColor="White"></Button>
-                                    <Label Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" FontAttributes="Bold"/>
-                                    <Button ImageSource="Plus.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddCountProductCommand}" CommandParameter="{Binding}" BackgroundColor="White"></Button>
+                                    <Button ImageSource="Remove.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.RemoveCountProductCommand}" CommandParameter="{Binding}" WidthRequest="40" HeightRequest="40"></Button>
+                                    <Label Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" FontAttributes="Bold" WidthRequest="60" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+                                    <Button ImageSource="Plus.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddCountProductCommand}" CommandParameter="{Binding}" WidthRequest="40" HeightRequest="40"></Button>
                                 </StackLayout>
                                 <Label Grid.Row="3" Grid.Column="0" Text="{Binding Path=ErrorText, Mode=TwoWay, StringFormat='{0}'}" TextColor="Red" HorizontalTextAlignment="End"></Label>
                             </Grid>
-
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
@@ -57,7 +69,6 @@
                 <Label Text="{Binding App.TotalPrice}"/>
                 <Label Text="סך הכל לתשלום:"></Label>
             </StackLayout>
-
             <Button Text="מעבר לתשלום" Command="{Binding GoToPayCommand}" IsVisible="{Binding App.IsProductsInList}"></Button>
         </StackLayout>
     </ContentPage.Content>

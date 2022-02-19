@@ -35,7 +35,7 @@
                 <Label Grid.Column="3" Text="מוצר" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"></Label>
             </Grid>
             <CollectionView x:Name="collectionName" ItemsSource="{Binding SelectedOrderDetails.OrderProducts}" 
-                            SelectionMode="None"  BackgroundColor="White" HeightRequest="{Binding RowsHeight}">
+                            SelectionMode="None" BackgroundColor="White" HeightRequest="{Binding RowsHeight}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="1" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>

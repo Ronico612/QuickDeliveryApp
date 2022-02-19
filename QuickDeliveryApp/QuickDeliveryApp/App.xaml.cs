@@ -96,8 +96,6 @@ namespace QuickDeliveryApp
         }
 
         public List<Shop> AllShops { get; private set; }
-        
-
 
         public App()
         {
@@ -114,7 +112,6 @@ namespace QuickDeliveryApp
 
         public void UpdateShoppingCartPage()
         {
-            this.AllShops = new List<Shop>();
             this.IsProductsInList = this.ProductsInShoppingCart.Count > 0;
             this.TotalPrice = 0;
             foreach (ProductShoppingCart p in ProductsInShoppingCart)

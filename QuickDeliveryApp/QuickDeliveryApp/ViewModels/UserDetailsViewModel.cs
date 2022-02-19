@@ -67,6 +67,11 @@ namespace QuickDeliveryApp.ViewModels
                     this.ShowPhoneError = true;
                     this.PhoneError = ERROR_MESSAGES.BAD_NUMBER;
                 }
+                else if (!Regex.IsMatch(this.Phone, @"^\+?(972|0)(\-)?0?(([23489]{1}\d{7})|[5]{1}\d{8})$"))
+                {
+                    this.ShowPhoneError = true;
+                    this.PhoneError = ERROR_MESSAGES.BAD_PHONE;
+                }
             }
             else
                 this.PhoneError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -264,6 +269,11 @@ namespace QuickDeliveryApp.ViewModels
                     this.ShowNumCodeError = true;
                     this.NumCodeError = ERROR_MESSAGES.BAD_NUMBER;
                 }
+                else if (this.NumCode.Length != 3)
+                {
+                    this.ShowNumCodeError = true;
+                    this.NumCodeError = ERROR_MESSAGES.BAD_NUM_CODE;
+                }
             }
             else
                 this.NumCodeError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -307,7 +317,15 @@ namespace QuickDeliveryApp.ViewModels
         private void ValidateValidityCreditCard()
         {
             if (this.ValidityCreditCard == DateTime.MinValue)
+            {
                 this.ShowValidityCreditCardError = true;
+                this.ValidityCreditCardError = ERROR_MESSAGES.REQUIRED_FIELD;
+            }
+            else if (this.ValidityCreditCard < DateTime.Now.Date)
+            {
+                this.ShowValidityCreditCardError = true;
+                this.ValidityCreditCardError = ERROR_MESSAGES.BAD_VALIDITY_CREDIT_CARD;
+            }
             else
                 this.ShowValidityCreditCardError = false;
         }

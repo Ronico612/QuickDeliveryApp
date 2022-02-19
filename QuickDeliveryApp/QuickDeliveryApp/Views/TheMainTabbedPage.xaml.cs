@@ -1,13 +1,6 @@
 ﻿using QuickDeliveryApp.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using QuickDeliveryApp.Services;
 
 namespace QuickDeliveryApp.Views
 {
@@ -35,10 +28,6 @@ namespace QuickDeliveryApp.Views
             shoppingCart.IconImageSource = "ShoppingBag.png";
             this.Children.Add(shoppingCart);
 
-            shopManager = new ShopManager();
-            shopManager.Title = "מנהל חנות";
-            shopManager.IconImageSource = "ShoppingBag.png";
-
             login = new Login();
             login.Title = "התחברות";
             login.IconImageSource = "Login.png";
@@ -47,25 +36,27 @@ namespace QuickDeliveryApp.Views
             personalArea = new PersonalArea();
             personalArea.IconImageSource = "Login.png";
             personalArea.Title = "אזור אישי";
+
+            shopManager = new ShopManager();
+            shopManager.Title = "מנהל חנות";
+            shopManager.IconImageSource = "ShoppingBag.png";
         }
 
-        public void AddTab(Xamarin.Forms.Page p)
+        public void AddTab(Page p)
         {
             if (!this.Children.Contains(p))
                 this.Children.Add(p);
         }
 
-        public void RemoveTab(Xamarin.Forms.Page p)
+        public void RemoveTab(Page p)
         {
             if (this.Children.Contains(p))
                 this.Children.Remove(p);
         }
 
-        public void CurrentTab(Xamarin.Forms.Page p)
+        public void CurrentTab(Page p)
         {
             this.CurrentPage = p;
         }
-
-        
     }
 }

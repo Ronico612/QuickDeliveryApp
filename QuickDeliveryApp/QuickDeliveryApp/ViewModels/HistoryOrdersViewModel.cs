@@ -94,7 +94,7 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
 
-            //this.UserOrders = (ObservableCollection<UserOrderDetails>)UserOrders.OrderByDescending(uo => uo.OrderDate);
+            this.UserOrders = new ObservableCollection<UserOrderDetails>(this.UserOrders.OrderByDescending(o => o.OrderDate));
         }
 
         public ICommand SelectUserOrderCommand => new Command(SelectUserOrder);
