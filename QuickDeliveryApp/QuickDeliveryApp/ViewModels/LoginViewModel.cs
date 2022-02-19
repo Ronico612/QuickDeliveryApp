@@ -735,7 +735,6 @@ namespace QuickDeliveryApp.ViewModels
                 Thread.Sleep(2000);
                 App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
-                await App.Current.MainPage.Navigation.PopModalAsync();
                 //await App.Current.MainPage.DisplayAlert("היפ הופ הוריי", "התחברת בהצלחה למערכת", "בסדר");
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
@@ -743,6 +742,7 @@ namespace QuickDeliveryApp.ViewModels
                 theTabs.CurrentTab(theTabs.personalArea);
                 theTabs.RemoveTab(theTabs.login);
 
+                await App.Current.MainPage.Navigation.PopModalAsync();
                 ///////////////////////////////////////////////
                 theTabs.AddTab(theTabs.shopManager);
 

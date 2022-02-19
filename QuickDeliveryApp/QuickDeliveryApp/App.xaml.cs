@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using QuickDeliveryApp.Services;
 using QuickDeliveryApp.ViewModels;
+using System.Threading;
 
 namespace QuickDeliveryApp
 {
@@ -105,6 +106,7 @@ namespace QuickDeliveryApp
             
             ServerStatusViewModel vm = new ServerStatusViewModel();
             vm.ServerStatus = "טוען נתונים....";
+            Thread.Sleep(100);
             MainPage = new ServerStatus(vm);
         }
 

@@ -292,9 +292,6 @@ namespace QuickDeliveryApp.ViewModels
 
                 //TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
                 //theTabs.SelectShoppingCartTab(); //אולי להעביר ישר לאזור אישי 
-
-
-                
             }
             else
             {
