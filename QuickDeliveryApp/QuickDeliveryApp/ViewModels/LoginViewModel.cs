@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using QuickDeliveryApp.Views;
 using System.Threading;
+using System.Linq;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -765,8 +766,11 @@ namespace QuickDeliveryApp.ViewModels
                 theTabs.RemoveTab(theTabs.login);
 
                 await App.Current.MainPage.Navigation.PopModalAsync();
-                ///////////////////////////////////////////////
-                theTabs.AddTab(theTabs.shopManager);
+
+                if (theApp.AllShops.Where(s => s.ShopManagerId == theApp.CurrentUser.UserId).FirstOrDefault() != null)
+                    theTabs.AddTab(theTabs.shopManager);
+                if (user.IsAdmin)
+                    theTabs.AddTab(theTabs.admin);
 
                 ClearFields();
             }

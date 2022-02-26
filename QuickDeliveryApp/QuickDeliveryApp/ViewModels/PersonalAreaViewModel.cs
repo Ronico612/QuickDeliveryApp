@@ -59,6 +59,10 @@ namespace QuickDeliveryApp.ViewModels
             theTabs.AddTab(theTabs.login);
             theTabs.CurrentTab(theTabs.login);
             theTabs.RemoveTab(theTabs.personalArea);
+            if (theTabs.Children.Contains(theTabs.shopManager))
+                theTabs.RemoveTab(theTabs.shopManager);
+            if (theTabs.Children.Contains(theTabs.admin))
+                theTabs.RemoveTab(theTabs.admin);
         }
     }
 }
