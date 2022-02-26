@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
 
-            
+            <Label HorizontalOptions="CenterAndExpand" FontSize="30" Text="מנהל חנות"></Label>
             <Button Text="ניהול מוצרים" Command="{Binding ShopProductsManagementCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
             <Button Text="צפייה בהזמנות" Command="{Binding ShopOrdersCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
 

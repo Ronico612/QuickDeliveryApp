@@ -22,6 +22,7 @@ namespace QuickDeliveryApp.ViewModels
         public const string BAD_NUM_CODE = "מספר סודי לא תקין";
         public const string BAD_VALIDITY_CREDIT_CARD = "כרטיס לא בתוקף";
         public const string BAD_NUMBER = "השדה חייב להכיל רק מספרים";
+        public const string PRODUCT_EXIST = "שם המוצר כבר קיים";
     }
 
     class LoginViewModel : INotifyPropertyChanged

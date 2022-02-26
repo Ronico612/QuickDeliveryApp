@@ -27,9 +27,13 @@ namespace QuickDeliveryApp.ViewModels
         }
 
         public ICommand ShopOrdersCommand => new Command(ShopOrders);
-        public void ShopOrders()
+        public async void ShopOrders()
         {
-
+            Page p = new ShopOrders();
+            p.Title = "הזמנות";
+            p.BindingContext = new ShopOrdersViewModel();
+            NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+            await tabbed.Navigation.PushAsync(p);
         }
     }
 }

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickDeliveryApp.Views.ShopOrders">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="הזמנות" FontSize="30"></Label>
+            <CollectionView EmptyView="לא קיימות הזמנות" x:Name="collectionName" ItemsSource="{Binding ShopOrders}" SelectionMode="Single"  BackgroundColor="White"
+                            SelectedItem="{Binding SelectedShopOrder}" SelectionChangedCommand="{Binding SelectOrderCommand}" SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Span="1" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,20">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup>
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="#F2F4F4" />
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="LeftArrow.png" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"/>
+                            <Label Text="{Binding OrderDate}" HorizontalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"/>
+                            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalOptions="EndAndExpand">
+                                <Label Text="₪"/>
+                                <Label Text="{Binding TotalPrice}"/>
+                            </StackLayout>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

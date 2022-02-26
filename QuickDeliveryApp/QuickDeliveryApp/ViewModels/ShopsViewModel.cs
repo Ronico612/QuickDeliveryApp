@@ -80,7 +80,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             App app = (App)Application.Current;
 
-            this.FilteredShops = new ObservableCollection<Shop>(app.AllShops.OrderBy(s => s.ShopName));
+            this.FilteredShops = new ObservableCollection<Shop>(app.AllShops.Where(s => s.IsDeleted == false).OrderBy(s => s.ShopName));
             OnTextChanged(SearchTerm);
             IsRefreshing = false;
         }

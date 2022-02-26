@@ -14,8 +14,8 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private UserOrderDetails selectedOrderDetails;
-        public UserOrderDetails SelectedOrderDetails
+        private OrderDetails selectedOrderDetails;
+        public OrderDetails SelectedOrderDetails
         {
             get
             {
@@ -50,7 +50,7 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        public OrderDetailsViewModel(UserOrderDetails selectedUserOrderDetails)
+        public OrderDetailsViewModel(OrderDetails selectedUserOrderDetails)
         {
             SelectedOrderDetails = selectedUserOrderDetails;
             RowsHeight = SelectedOrderDetails.OrderProducts.Count * 50;

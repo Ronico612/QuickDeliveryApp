@@ -5,6 +5,52 @@
     <ContentPage.Content>
         <StackLayout>
             <Button Text="הוספת מוצר" Command="{Binding AddProductCommand}"></Button>
+            <CollectionView EmptyView="לא נמצאו מוצרים" x:Name="collectionName" ItemsSource="{Binding ShopProducts}" SelectionMode="None" BackgroundColor="White">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Span="1" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="7,30,7,7" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45"/>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="{Binding ImgSource}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Column="3" Grid.RowSpan="3" Grid.Row="0" Margin="0,0,10,0"/>
+                            <Label Text="{Binding Path=ProductName, StringFormat='{0}'}" LineBreakMode="TailTruncation" HorizontalTextAlignment="Start"  FontSize="Caption" FontAttributes="Bold" Grid.Row="0" Grid.Column="2" Margin="40,0,40,0"/>
+
+                            <Label HorizontalTextAlignment="End"  FontSize="Caption" Grid.Row="1" Grid.Column="2" Margin="0,0,40,0">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0}  |  {1}">
+                                        <Binding Path="AgeProductType.AgeProductTypeName" />
+                                        <Binding Path="ProductType.ProductTypeName" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+
+                            <Label HorizontalTextAlignment="Start"  FontSize="Caption" Grid.Row="2" Grid.Column="2" Margin="0,0,40,0">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{} כמות: {0}    מחיר: ₪{1}">
+                                        <Binding Path="CountProductInShop" />
+                                        <Binding Path="ProductPrice" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+
+                            <Button ImageSource="Delete.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteProductCommand}" CommandParameter="{Binding}" BackgroundColor="White" Margin="0,5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"></Button>
+                            <Button ImageSource="Edit.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.EditProductCommand}" CommandParameter="{Binding}" BackgroundColor="White" Margin="0,5" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"></Button>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

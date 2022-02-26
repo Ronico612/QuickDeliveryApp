@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using QuickDeliveryApp.ViewModels;
 
 namespace QuickDeliveryApp.Views
 {
@@ -15,6 +16,15 @@ namespace QuickDeliveryApp.Views
         public ShopProductsManagement()
         {
             InitializeComponent();
+        }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            App app = (App)Application.Current;
+            await app.GetAllShops();
+            ShopProductsManagementViewModel context = (ShopProductsManagementViewModel)this.BindingContext;
+            context.InitProducts();
         }
     }
 }

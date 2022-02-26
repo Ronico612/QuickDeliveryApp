@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using Xamarin.Forms;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using QuickDeliveryApp.Models;
 using QuickDeliveryApp.Services;
-using QuickDeliveryApp.Models;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using QuickDeliveryApp.Views;
+using Xamarin.Forms;
 
 namespace QuickDeliveryApp.ViewModels
 {
-    class HistoryOrdersViewModel : INotifyPropertyChanged
+    class ShopOrdersViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -21,60 +20,62 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ObservableCollection<OrderDetails> userOrders;
-        public ObservableCollection<OrderDetails> UserOrders
+        private ObservableCollection<OrderDetails> shopOrders;
+        public ObservableCollection<OrderDetails> ShopOrders
         {
             get
             {
-                return this.userOrders;
+                return this.shopOrders;
             }
             set
             {
-                if (this.userOrders != value)
+                if (this.shopOrders != value)
                 {
 
-                    this.userOrders = value;
-                    OnPropertyChanged("UserOrders");
+                    this.shopOrders = value;
+                    OnPropertyChanged("ShopOrders");
                 }
             }
         }
 
-        private OrderDetails selectedUserOrder;
-        public OrderDetails SelectedUserOrder
+        private OrderDetails selectedShopOrder;
+        public OrderDetails SelectedShopOrder
         {
             get
             {
-                return this.selectedUserOrder;
+                return this.selectedShopOrder;
             }
             set
             {
-                if (this.selectedUserOrder != value)
+                if (this.selectedShopOrder != value)
                 {
 
-                    this.selectedUserOrder = value;
-                    OnPropertyChanged("SelectedUserOrder");
+                    this.selectedShopOrder = value;
+                    OnPropertyChanged("SelectedShopOrder");
                 }
             }
         }
 
         public App App { get; set; }
 
-        public HistoryOrdersViewModel()
+        public ShopOrdersViewModel()
         {
             this.App = (App)Application.Current;
-            UserOrders = new ObservableCollection<OrderDetails>();
+            ShopOrders = new ObservableCollection<OrderDetails>();
             InitOrders();
         }
 
         private async void InitOrders()
         {
-            await GetUserOrders();
+            await GetShopOrders();
         }
 
-        private async Task GetUserOrders()
+        private async Task GetShopOrders()
         {
+            Shop currentShop = this.App.AllShops.Where(s => s.ShopManagerId == this.App.CurrentUser.UserId).FirstOrDefault();
+
             QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
-            List<Order> orders = await quickDeliveryAPIProxy.GetUserOrders(App.CurrentUser.UserId);
+            List<Order> orders = await quickDeliveryAPIProxy.GetShopOrders(currentShop.ShopId);
             // לפי ססטוס הזמנה מסויים
             foreach (Order o in orders)
             {
@@ -91,39 +92,25 @@ namespace QuickDeliveryApp.ViewModels
                     userOrderDetails.OrderAddress = o.OrderAddress;
                     userOrderDetails.OrderCity = o.OrderCity;
                     userOrderDetails.User = o.User;
-                    UserOrders.Add(userOrderDetails);
+                    ShopOrders.Add(userOrderDetails);
                 }
             }
-
-            this.UserOrders = new ObservableCollection<OrderDetails>(this.UserOrders.OrderByDescending(o => o.OrderDate));
+             
+            this.ShopOrders = new ObservableCollection<OrderDetails>(this.ShopOrders.OrderByDescending(o => o.OrderDate));
         }
 
-        public ICommand SelectUserOrderCommand => new Command(SelectUserOrder);
-        public async void SelectUserOrder()
+        public ICommand SelectOrderCommand => new Command(SelectOrder);
+        public async void SelectOrder()
         {
-            if (SelectedUserOrder != null)
+            if (SelectedShopOrder != null)
             {
                 Page p = new Views.OrderDetails();
-               // p.Title = SelectedUserOrder.ShopName;
-                p.BindingContext = new  OrderDetailsViewModel(this.SelectedUserOrder);
+                // p.Title = SelectedUserOrder.ShopName;
+                p.BindingContext = new OrderDetailsViewModel(this.SelectedShopOrder);
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 await tabbed.Navigation.PushAsync(p);
-                SelectedUserOrder = null;
+                SelectedShopOrder = null;
             }
         }
-
-    }
-
-    public class OrderDetails
-    {
-        public string ShopName { get; set; }
-        public string ShopCity { get; set; }
-        public decimal? TotalPrice { get; set; }
-        public string OrderDate { get; set; }
-        public int OrderId { get; set; }
-        public List<OrderProduct> OrderProducts { get; set; }
-        public string OrderAddress { get; set; }
-        public string OrderCity { get; set; }
-        public User User { get; set; }
     }
 }
