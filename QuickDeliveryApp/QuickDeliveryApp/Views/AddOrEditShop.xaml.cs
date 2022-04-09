@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using QuickDeliveryApp.ViewModels;
 
 namespace QuickDeliveryApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Admin : ContentPage
+    public partial class AddOrEditShop : ContentPage
     {
-        public Admin()
+        public AddOrEditShop()
         {
             InitializeComponent();
-            this.BindingContext = new AdminViewModel();
         }
     }
 }

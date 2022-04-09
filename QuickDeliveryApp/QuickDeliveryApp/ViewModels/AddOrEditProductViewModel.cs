@@ -446,7 +446,7 @@ namespace QuickDeliveryApp.ViewModels
                 newProduct.ProductName = ProductName;
                 if (int.TryParse(Count, out Int32 result1))
                     newProduct.CountProductInShop = result1;
-                if (Decimal.TryParse(Count, out Decimal result2))
+                if (Decimal.TryParse(Price, out Decimal result2))
                     newProduct.ProductPrice = result2;
                 newProduct.AgeProductTypeId = AgeType.AgeProductTypeId;
                 newProduct.ProductTypeId = Type.ProductTypeId;

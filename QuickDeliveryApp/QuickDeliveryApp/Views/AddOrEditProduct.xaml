@@ -5,7 +5,7 @@
     <ContentPage.Content>
         <StackLayout>
 
-             <!-- תמונה-->
+            <!-- תמונה-->
             <!--<Image HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Source="{Binding ImgSource}"></Image>--> 
             <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" BackgroundColor="LightGray" CornerRadius="8"></Button>
 

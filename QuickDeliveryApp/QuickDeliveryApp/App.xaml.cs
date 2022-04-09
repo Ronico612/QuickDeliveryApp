@@ -140,5 +140,6 @@ namespace QuickDeliveryApp
             this.AllShops = await quickDeliveryAPIProxy.GetShopsAsync();
         }
 
+
     }
 }

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickDeliveryApp.Views.AdminDeliveryPManagement">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Button Text="הוספת שליח" Command="{Binding AddDeliveryPCommand}"></Button>
+            <CollectionView EmptyView="לא נמצאו שליחים" x:Name="collectionName" ItemsSource="{Binding DeliveryPersons}" SelectionMode="None" BackgroundColor="White">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Span="1" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="7,30,7,7" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="45"/>
+                                <ColumnDefinition Width="45" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="50" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+
+                            <Label HorizontalTextAlignment="End"  FontSize="Caption" Grid.Row="1" Grid.Column="2" Margin="0,0,40,0">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0}  |  {1}">
+                                        <Binding Path="UserLname" />
+                                        <Binding Path="UserFname" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+
+                            <Label Text="{Binding Path=UserPhone, StringFormat='{0}'}" LineBreakMode="TailTruncation" HorizontalTextAlignment="Start"  FontSize="Caption" FontAttributes="Bold" Grid.Row="0" Grid.Column="2" Margin="40,0,40,0"/>
+
+                            <Button ImageSource="Delete.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteDeliveryPersonCommand}" CommandParameter="{Binding}" BackgroundColor="White" Margin="0,5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"></Button>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickDeliveryApp.Views.AddOrEditShop">
+    <ContentPage.Content>
+        <StackLayout>
+            <!-- תמונה-->
+            <!--<Image HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Source="{Binding ImgSource}"></Image>-->
+            <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" BackgroundColor="LightGray" CornerRadius="8"></Button>
+
+            <!-- שם חנות -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Text="{Binding ShopNameError}" IsVisible="{Binding ShowShopNameError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                <Label Text="שם חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+            </Grid>
+            <Entry Placeholder="הכנס שם חנות" Text="{Binding ShopName}" Style="{StaticResource entryStyle}" MaxLength="100"/>
+
+            <!-- כתובת חנות -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Text="{Binding ShopAdressError}" IsVisible="{Binding ShowShopAdressError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                <Label Text="כתובת חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+            </Grid>
+            <Entry Placeholder="הכנס כתובת חנות" Text="{Binding ShopAdress}" Style="{StaticResource entryStyle}" MaxLength="100"/>
+
+            <!-- עיר חנות -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Text="{Binding ShopCityError}" IsVisible="{Binding ShowShopCityError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                <Label Text="עיר חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+            </Grid>
+            <Entry Placeholder="הכנס עיר חנות" Text="{Binding ShopCity}" Style="{StaticResource entryStyle}" MaxLength="100"/>
+
+            <!-- טלפון חנות -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Text="{Binding ShopPhoneError}" IsVisible="{Binding ShowShopPhoneError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                <Label Text="טלפון חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+            </Grid>
+            <Entry Placeholder="הכנס טלפון חנות" Text="{Binding ShopPhone}" Style="{StaticResource entryStyle}" MaxLength="100"/>
+
+            <!-- דואר אלקטרוני מנהל חנות -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Text="{Binding ShopManagerEmailError}" IsVisible="{Binding ShowShopManagerEmailError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                <Label Text="דואר אלקטרוני של מנהל חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+            </Grid>
+            <Entry Placeholder="הכנס דואר אלקטרוני של מנהל חנות" Text="{Binding ShopManagerEmail}" Style="{StaticResource entryStyle}" MaxLength="100"/>
+
+            <Button Text="אישור" Command="{Binding AddOrEditCommand}" BackgroundColor="LightGray" CornerRadius="8"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

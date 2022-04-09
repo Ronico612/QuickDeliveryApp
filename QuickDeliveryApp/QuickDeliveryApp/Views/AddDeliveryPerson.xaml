@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickDeliveryApp.Views.AddDeliveryPerson">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <!-- דואר אלקטרוני שליח -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Text="{Binding DeliveryPersonEmailError}" IsVisible="{Binding ShowDeliveryPersonEmailError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                <Label Text="דואר אלקטרוני של שליח" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+            </Grid>
+            <Entry Placeholder="הכנס דואר אלקטרוני של שליח" Text="{Binding DeliveryPersonEmail}" Style="{StaticResource entryStyle}" MaxLength="100"/>
+
+            <Button Text="אישור" Command="{Binding AddCommand}" BackgroundColor="LightGray" CornerRadius="8"></Button>
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

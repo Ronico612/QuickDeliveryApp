@@ -141,7 +141,7 @@ namespace QuickDeliveryApp.ViewModels
             this.FilteredProducts = new ObservableCollection<Product>();
             foreach (Product p in this.CurrentShop.Products)
             {
-                if (p.AgeProductTypeId == SelectedAgeType.AgeProductTypeId && p.ProductTypeId == selectedProductType.ProductTypeId)
+                if (p.AgeProductTypeId == SelectedAgeType.AgeProductTypeId && p.ProductTypeId == selectedProductType.ProductTypeId && p.IsDeleted == false)
                 {
                     if (this.FilteredProducts.Where(a => a.ProductId == p.ProductId).FirstOrDefault() == null)
                         this.FilteredProducts.Add(p);
@@ -166,7 +166,7 @@ namespace QuickDeliveryApp.ViewModels
             this.AgeTypes = new ObservableCollection<AgeProductType>();
             foreach(Product p in this.CurrentShop.Products)
             {
-                if (this.AgeTypes.Where(a => a.AgeProductTypeId == p.AgeProductTypeId).FirstOrDefault() == null)
+                if (this.AgeTypes.Where(a => a.AgeProductTypeId == p.AgeProductTypeId).FirstOrDefault() == null && p.IsDeleted == false)
                     this.AgeTypes.Add(p.AgeProductType);
             }
         }
@@ -177,7 +177,7 @@ namespace QuickDeliveryApp.ViewModels
             this.ProductTypes = new ObservableCollection<ProductType>();
             foreach (Product p in this.CurrentShop.Products)
             {
-                if (p.AgeProductTypeId == SelectedAgeType.AgeProductTypeId)
+                if (p.AgeProductTypeId == SelectedAgeType.AgeProductTypeId && p.IsDeleted == false)
                 {
                     if (this.ProductTypes.Where(a => a.ProductTypeId == p.ProductTypeId).FirstOrDefault() == null)
                         this.ProductTypes.Add(p.ProductType);
