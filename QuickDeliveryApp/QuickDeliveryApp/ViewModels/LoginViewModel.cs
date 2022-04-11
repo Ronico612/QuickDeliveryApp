@@ -640,9 +640,9 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand GotoCommand => new Command(Goto);
         public void Goto()
         {
+            ClearFields();
             if (this.IsRegister)
             {
-                ClearFields();
                 this.IsRegister = false;
                 this.TitleText = "התחברות";
                 this.GoToText = "להרשמה";

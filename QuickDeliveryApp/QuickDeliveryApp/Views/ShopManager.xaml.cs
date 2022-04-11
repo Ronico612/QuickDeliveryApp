@@ -18,5 +18,12 @@ namespace QuickDeliveryApp.Views
             InitializeComponent();
             this.BindingContext = new ShopManagerViewModel();
         }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ShopManagerViewModel context = (ShopManagerViewModel)this.BindingContext;
+            context.InitShopDetails();
+        }
     }
 }

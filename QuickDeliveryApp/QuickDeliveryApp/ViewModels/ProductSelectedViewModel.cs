@@ -149,7 +149,7 @@ namespace QuickDeliveryApp.ViewModels
 
             if (!(app.ProductsInShoppingCart.Count == 0 || (app.ProductsInShoppingCart.Count > 0 && app.ProductsInShoppingCart.FirstOrDefault().ShopId == this.CurrentProduct.ShopId)))
             {
-                await App.Current.MainPage.DisplayAlert("", "לא ניתן להוסיף לסל הקניות מוצרים מחנויות שונותד", "בסדר", FlowDirection.RightToLeft);
+                await App.Current.MainPage.DisplayAlert("", "לא ניתן להוסיף לסל הקניות מוצרים מחנויות שונות", "בסדר", FlowDirection.RightToLeft);
                 IconSource = "";
             }
             else
@@ -172,13 +172,19 @@ namespace QuickDeliveryApp.ViewModels
                     }
                 }
 
-                if (!isFound && this.CurrentProduct.CountProductInShop > 0)
+                if (!isFound)
                 {
-                    ProductShoppingCart productShoppingCart = new ProductShoppingCart(CurrentProduct);
-                    app.ProductsInShoppingCart.Add(productShoppingCart);
-                    app.UpdateShoppingCartPage();
+                    if (this.CurrentProduct.CountProductInShop > 0)
+                    { 
+                        ProductShoppingCart productShoppingCart = new ProductShoppingCart(CurrentProduct);
+                        app.ProductsInShoppingCart.Add(productShoppingCart);
+                        app.UpdateShoppingCartPage();
+                    }
+                    else
+                    {
+                        isError = true;
+                    }
                 }
-
 
                 if (isError)
                 {

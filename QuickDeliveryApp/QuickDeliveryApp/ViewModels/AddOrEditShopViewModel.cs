@@ -331,9 +331,12 @@ namespace QuickDeliveryApp.ViewModels
                 this.ShopPhone = s.ShopPhone;
 
                 QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
-                User user = await proxy.GetUserAsync((int)s.ShopManagerId);
-                if (user != null)
-                    this.ShopManagerEmail = user.UserEmail;
+                if (s.ShopManagerId != null)
+                {
+                    User user = await proxy.GetUserAsync((int)s.ShopManagerId);
+                    if (user != null)
+                        this.ShopManagerEmail = user.UserEmail;
+                }
             }
         }
 

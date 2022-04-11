@@ -6,6 +6,8 @@
         <StackLayout>
 
             <Label HorizontalOptions="CenterAndExpand" FontSize="30" Text="מנהל חנות"></Label>
+            <Label HorizontalOptions="CenterAndExpand" FontSize="15" Text="{Binding ShopName}"></Label>
+            <Label HorizontalOptions="CenterAndExpand" FontSize="15" Text="{Binding ShopCity}"></Label>
             <Button Text="ניהול מוצרים" Command="{Binding ShopProductsManagementCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
             <Button Text="צפייה בהזמנות" Command="{Binding ShopOrdersCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
 

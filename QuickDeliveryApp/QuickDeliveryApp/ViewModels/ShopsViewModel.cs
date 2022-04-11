@@ -89,6 +89,8 @@ namespace QuickDeliveryApp.ViewModels
         {
             App app = (App)Application.Current;
 
+            this.FilteredShops.Clear();
+
             //Filter the list of shops based on the search term
             if (String.IsNullOrWhiteSpace(search) || String.IsNullOrEmpty(search))
             {
