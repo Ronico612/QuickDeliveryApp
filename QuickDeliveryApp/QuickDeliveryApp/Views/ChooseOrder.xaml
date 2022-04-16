@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickDeliveryApp.Views.ChooseOrder">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <CollectionView EmptyView="לא נמצאו הזמנות" x:Name="collectionName" ItemsSource="{Binding Orders}" SelectionMode="None" BackgroundColor="White">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Span="1" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="7,30,7,7" ColumnSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="65"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="150" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            
+                            <Label Text="תאריך הזמנה" LineBreakMode="TailTruncation" HorizontalTextAlignment="Start"  FontSize="Caption" FontAttributes="Bold" Grid.Row="0" Grid.Column="2" Margin="40,0,40,0"/>
+                            <Label Text="{Binding OrderDate}" LineBreakMode="TailTruncation" HorizontalTextAlignment="Start"  FontSize="Caption" Grid.Row="0" Grid.Column="1" Margin="40,0,40,0"/>
+                            <Label Text="כתובת איסוף" LineBreakMode="TailTruncation" HorizontalTextAlignment="Start"  FontSize="Caption" FontAttributes="Bold" Grid.Row="1" Grid.Column="2" Margin="40,0,40,0"/>
+                            <Label HorizontalTextAlignment="Start" FontSize="Caption" Grid.Row="1" Grid.Column="1" Margin="0,0,40,0">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0}  |  {1}">
+                                        <Binding Path="OrderProducts[0].Product.Shop.ShopAdress" />
+                                        <Binding Path="OrderProducts[0].Product.Shop.ShopCity" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            <Label Text="כתובת יעד" LineBreakMode="TailTruncation" HorizontalTextAlignment="Start"  FontSize="Caption" FontAttributes="Bold" Grid.Row="2" Grid.Column="2" Margin="40,0,40,0"/>
+                            <Label HorizontalTextAlignment="End" FontSize="Caption" Grid.Row="2" Grid.Column="1" Margin="0,0,40,0">
+                                <Label.Text>
+                                    <MultiBinding StringFormat="{}{0}  |  {1}">
+                                        <Binding Path="User.UserCity" />
+                                        <Binding Path="User.UserAddress" />
+                                    </MultiBinding>
+                                </Label.Text>
+                            </Label>
+                            
+                            <Button Text="איסוף" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.ToDeliveryCommand}" CommandParameter="{Binding}" FontAttributes="Bold" CornerRadius="8" BackgroundColor="#FFE8F8" Margin="0,5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"></Button>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

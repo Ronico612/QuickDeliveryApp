@@ -75,22 +75,11 @@ namespace QuickDeliveryApp.ViewModels
         {
             QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
             List<Order> orders = await quickDeliveryAPIProxy.GetUserOrders(App.CurrentUser.UserId);
-            // לפי ססטוס הזמנה מסויים
             foreach (Order o in orders)
             {
-                OrderDetails userOrderDetails = new OrderDetails();
-                userOrderDetails.TotalPrice = o.TotalPrice;
-                userOrderDetails.OrderDate = o.OrderDate.ToString();
-                userOrderDetails.OrderId = o.OrderId;
-
-                if (o.OrderProducts.Count > 0)
+                if (o.StatusOrderId == 4) // brought
                 {
-                    userOrderDetails.ShopName = o.OrderProducts.ToList()[0].Product.Shop.ShopName;
-                    userOrderDetails.ShopCity = o.OrderProducts.ToList()[0].Product.Shop.ShopCity;
-                    userOrderDetails.OrderProducts = new List<OrderProduct>(o.OrderProducts);
-                    userOrderDetails.OrderAddress = o.OrderAddress;
-                    userOrderDetails.OrderCity = o.OrderCity;
-                    userOrderDetails.User = o.User;
+                    OrderDetails userOrderDetails = new OrderDetails(o);
                     UserOrders.Add(userOrderDetails);
                 }
             }
@@ -104,8 +93,7 @@ namespace QuickDeliveryApp.ViewModels
             if (SelectedUserOrder != null)
             {
                 Page p = new Views.OrderDetails();
-               // p.Title = SelectedUserOrder.ShopName;
-                p.BindingContext = new  OrderDetailsViewModel(this.SelectedUserOrder);
+                p.BindingContext = new  OrderDetailsViewModel(this.SelectedUserOrder, false);
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 await tabbed.Navigation.PushAsync(p);
                 SelectedUserOrder = null;
@@ -118,12 +106,35 @@ namespace QuickDeliveryApp.ViewModels
     {
         public string ShopName { get; set; }
         public string ShopCity { get; set; }
+        public string ShopAddress { get; set; }
+        public string ShopPhone { get; set; }
         public decimal? TotalPrice { get; set; }
         public string OrderDate { get; set; }
         public int OrderId { get; set; }
+        public int? OrderStatusId { get; set; }
         public List<OrderProduct> OrderProducts { get; set; }
         public string OrderAddress { get; set; }
         public string OrderCity { get; set; }
         public User User { get; set; }
+
+        public OrderDetails(Order o)
+        {
+            this.TotalPrice = o.TotalPrice;
+            this.OrderDate = o.OrderDate.ToString();
+            this.OrderId = o.OrderId;
+            this.OrderStatusId = o.StatusOrderId;
+
+            if (o.OrderProducts.Count > 0)
+            {
+                this.ShopName = o.OrderProducts.ToList()[0].Product.Shop.ShopName;
+                this.ShopCity = o.OrderProducts.ToList()[0].Product.Shop.ShopCity;
+                this.ShopAddress = o.OrderProducts.ToList()[0].Product.Shop.ShopAdress;
+                this.ShopPhone = o.OrderProducts.ToList()[0].Product.Shop.ShopPhone;
+                this.OrderProducts = new List<OrderProduct>(o.OrderProducts);
+                this.OrderAddress = o.OrderAddress;
+                this.OrderCity = o.OrderCity;
+                this.User = o.User;
+            }
+        }
     }
 }

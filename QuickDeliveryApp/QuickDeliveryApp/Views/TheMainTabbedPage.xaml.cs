@@ -13,6 +13,7 @@ namespace QuickDeliveryApp.Views
         public PersonalArea personalArea;
         public ShopManager shopManager;
         public Admin admin;
+        public DeliveryPerson deliveryPerson;
 
         public TheMainTabbedPage()
         {
@@ -45,6 +46,10 @@ namespace QuickDeliveryApp.Views
             admin = new Admin();
             admin.Title = "מנהל אתר";
             admin.IconImageSource = "ShoppingBag.png";
+
+            deliveryPerson = new DeliveryPerson();
+            deliveryPerson.Title = "שליח";
+            deliveryPerson.IconImageSource = "ShoppingBag.png";
         }
 
         public void AddTab(Page p)

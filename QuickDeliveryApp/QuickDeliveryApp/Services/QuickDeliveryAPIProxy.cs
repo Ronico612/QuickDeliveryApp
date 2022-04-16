@@ -793,5 +793,147 @@ namespace QuickDeliveryApp.Services
             }
         }
 
+        public async Task<bool> IsDeliveyPerson(int userId)
+        {
+            try
+            {
+
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/IsDeliveyPerson?userId={userId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    bool b = JsonSerializer.Deserialize<bool>(content, options);
+                    return b;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public async Task<List<Order>> GetWaitingOrdersAsync()
+        {
+            try
+            {
+
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetWaitingOrders");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    List<Order> eList = JsonSerializer.Deserialize<List<Order>>(content, options);
+                    return eList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public async Task<List<Order>> GetApprovedOrTakenOrders(int deliveryPersonId)
+        {
+            try
+            {
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetApprovedOrTakenOrders?deliveryPersonId={deliveryPersonId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    List<Order> eList = JsonSerializer.Deserialize<List<Order>>(content, options);
+                    return eList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        public async Task<bool> UpdateStatusOrder(int orderId, int userId, int statusId)
+        {
+            try
+            {
+
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/UpdateStatusOrder?orderId={orderId}&userId={userId}&statusId={statusId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    bool b = JsonSerializer.Deserialize<bool>(content, options);
+                    return b;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
+        public async Task<List<Order>> GetHistoryDeliveryPersonOrders(int deliveryPersonId)
+        {
+            try
+            {
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetHistoryDeliveryPersonOrders?deliveryPersonId={deliveryPersonId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    List<Order> eList = JsonSerializer.Deserialize<List<Order>>(content, options);
+                    return eList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }

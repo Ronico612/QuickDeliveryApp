@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="QuickDeliveryApp.Views.DeliveryPerson">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Label HorizontalOptions="CenterAndExpand" FontSize="30" Text="שליח"></Label>
+            <Button Text="בחר הזמנה למשלוח" Command="{Binding ChooseOrderCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
+            <Button Text="משלוחים בתהליך" Command="{Binding OrdersInProcessCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
+            <Button Text="צפייה בכל המשלוחים שבוצעו" Command="{Binding HistoryDeliverysCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

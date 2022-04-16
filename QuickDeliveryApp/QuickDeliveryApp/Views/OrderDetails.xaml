@@ -4,14 +4,20 @@
              x:Class="QuickDeliveryApp.Views.OrderDetails">
     <ContentPage.Content>
         <StackLayout>
+            <Button Text="נאסף מהחנות" IsVisible="{Binding IsApproved}" Command="{Binding TakenFromShopCommand}"/>
+            <Button Text="נמסר ללקוח" IsVisible="{Binding IsTakenFromShop}" Command="{Binding BroughtToClientCommand}"/>
             <Label Text="פרטי הזמנה" FontSize="30"></Label>
-            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,10,0,0">
-                <Label Text="{Binding SelectedOrderDetails.ShopCity}" FontSize="20" FontAttributes="Bold"/>
-                <Label Text="|" FontSize="20" FontAttributes="Bold"/>
-                <Label Text="{Binding SelectedOrderDetails.ShopName}" FontSize="20" FontAttributes="Bold"/>
-            </StackLayout>
-            <Label Text="{Binding SelectedOrderDetails.OrderDate}" HorizontalOptions="EndAndExpand" Margin="0,0,0,30"></Label>
 
+            <Label Text="{Binding SelectedOrderDetails.OrderDate}" HorizontalOptions="EndAndExpand" FontAttributes="Bold" FontSize="20" Margin="0,5,0,30"></Label>
+            
+            <Label Text="{Binding SelectedOrderDetails.ShopName}" FontAttributes="Bold" FontSize="20" HorizontalOptions="EndAndExpand" Margin="0,0,0,0"></Label>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0">
+                <Label Text="{Binding SelectedOrderDetails.ShopCity}"/>
+                <Label Text="|"/>
+                <Label Text="{Binding SelectedOrderDetails.ShopAddress}"/>
+            </StackLayout>
+            <Label Text="{Binding SelectedOrderDetails.ShopPhone}" HorizontalOptions="EndAndExpand"></Label>
+            
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,10,0,0">
                 <Label Text="{Binding SelectedOrderDetails.User.UserLname}" FontSize="20"/>
                 <Label Text="{Binding SelectedOrderDetails.User.UserFname}" FontSize="20"/>

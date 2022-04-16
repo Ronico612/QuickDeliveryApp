@@ -76,22 +76,11 @@ namespace QuickDeliveryApp.ViewModels
 
             QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
             List<Order> orders = await quickDeliveryAPIProxy.GetShopOrders(currentShop.ShopId);
-            // לפי ססטוס הזמנה מסויים
             foreach (Order o in orders)
             {
-                OrderDetails userOrderDetails = new OrderDetails();
-                userOrderDetails.TotalPrice = o.TotalPrice;
-                userOrderDetails.OrderDate = o.OrderDate.ToString();
-                userOrderDetails.OrderId = o.OrderId;
-
-                if (o.OrderProducts.Count > 0)
+                if (o.StatusOrderId == 4) // brought
                 {
-                    userOrderDetails.ShopName = o.OrderProducts.ToList()[0].Product.Shop.ShopName;
-                    userOrderDetails.ShopCity = o.OrderProducts.ToList()[0].Product.Shop.ShopCity;
-                    userOrderDetails.OrderProducts = new List<OrderProduct>(o.OrderProducts);
-                    userOrderDetails.OrderAddress = o.OrderAddress;
-                    userOrderDetails.OrderCity = o.OrderCity;
-                    userOrderDetails.User = o.User;
+                    OrderDetails userOrderDetails = new OrderDetails(o);
                     ShopOrders.Add(userOrderDetails);
                 }
             }
@@ -106,7 +95,7 @@ namespace QuickDeliveryApp.ViewModels
             {
                 Page p = new Views.OrderDetails();
                 // p.Title = SelectedUserOrder.ShopName;
-                p.BindingContext = new OrderDetailsViewModel(this.SelectedShopOrder);
+                p.BindingContext = new OrderDetailsViewModel(this.SelectedShopOrder, false);
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 await tabbed.Navigation.PushAsync(p);
                 SelectedShopOrder = null;
