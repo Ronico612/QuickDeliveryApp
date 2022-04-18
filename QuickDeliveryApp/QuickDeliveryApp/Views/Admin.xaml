@@ -8,7 +8,7 @@
             <Label HorizontalOptions="CenterAndExpand" FontSize="30" Text="מנהל אתר"></Label>
             <Button Text="ניהול חנויות ומנהלים" Command="{Binding AdminShopsManagementCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
             <Button Text="ניהול שליחים" Command="{Binding AdminDeliveryPManagementCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
-            <Button Text="צפייה בכל ההזמנות שנעשו" Command="{Binding AdminOrdersCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
+            <Button Text="צפייה במשתמשים" Command="{Binding AdminShowUsersCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
 
 
         </StackLayout>

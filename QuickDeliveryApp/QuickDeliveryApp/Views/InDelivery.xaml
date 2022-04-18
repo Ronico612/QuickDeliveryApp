@@ -6,8 +6,9 @@
         <StackLayout>
             <Label Text="{Binding StatusText}"></Label> <!--לעשות בטקסט סטטוס הזמנה ולהראות מפת שליח-->
             <!--אולי צריך איוונט או משהו כשהשליח מודיע על סטטוס הזמנה-->
-            
-            
+
+            <Label Text="*ניתן לצפות בדף מעקב אחר הזמנה דרך אזור אישי -> הזמנות בתהליך -> למעקב אחר ההזמנה"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

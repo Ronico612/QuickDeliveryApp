@@ -95,7 +95,7 @@ namespace QuickDeliveryApp.ViewModels
             {
                 Page p = new Views.OrderDetails();
                 // p.Title = SelectedUserOrder.ShopName;
-                p.BindingContext = new OrderDetailsViewModel(this.SelectedShopOrder, false);
+                p.BindingContext = new OrderDetailsViewModel(this.SelectedShopOrder, false, false, false);
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 await tabbed.Navigation.PushAsync(p);
                 SelectedShopOrder = null;

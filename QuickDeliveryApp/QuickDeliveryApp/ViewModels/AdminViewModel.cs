@@ -36,12 +36,12 @@ namespace QuickDeliveryApp.ViewModels
             await tabbed.Navigation.PushAsync(p);
         }
 
-        public ICommand AdminOrdersCommand => new Command(AdminOrders);
-        public async void AdminOrders()
+        public ICommand AdminShowUsersCommand => new Command(AdminShowUsers);
+        public async void AdminShowUsers()
         {
-            Page p = new AdminOrders();
-            p.Title = "הזמנות";
-            p.BindingContext = new AdminOrdersViewModel();
+            Page p = new AdminShowUsers();
+            p.Title = "משתמשי האפליקציה";
+            p.BindingContext = new AdminShowUsersViewModel();
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);
         }

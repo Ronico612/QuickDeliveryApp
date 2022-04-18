@@ -4,12 +4,30 @@
              x:Class="QuickDeliveryApp.Views.OrderDetails">
     <ContentPage.Content>
         <StackLayout>
+
+            <Button Text="למעקב אחר ההזמנה" IsVisible="{Binding ShowInDelivery}" Command="{Binding ToInDeliveryCommand}" FontAttributes="Bold" Margin="15, 15, 15, 15" CornerRadius="20" BackgroundColor="LightPink"/>
+
             <Button Text="נאסף מהחנות" IsVisible="{Binding IsApproved}" Command="{Binding TakenFromShopCommand}"/>
             <Button Text="נמסר ללקוח" IsVisible="{Binding IsTakenFromShop}" Command="{Binding BroughtToClientCommand}"/>
             <Label Text="פרטי הזמנה" FontSize="30"></Label>
 
-            <Label Text="{Binding SelectedOrderDetails.OrderDate}" HorizontalOptions="EndAndExpand" FontAttributes="Bold" FontSize="20" Margin="0,5,0,30"></Label>
-            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand">
+                <Label Text="{Binding SelectedOrderDetails.OrderDate}" HorizontalOptions="EndAndExpand" Margin="0,0,0,30"></Label>
+                <Label Text="זמן ביצוע הזמנה: " HorizontalOptions="EndAndExpand" Margin="0,0,0,30"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsShowApprovedByDeliveryPersonDate}">
+                <Label Text="{Binding ApprovedByDeliveryPersonDate}" HorizontalOptions="EndAndExpand" Margin="0,0,0,30"></Label>
+                <Label Text="זמן העברת הזמנה לשליח: " HorizontalOptions="EndAndExpand" Margin="0,0,0,30"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsShowTakenFromShopDate}">
+                <Label Text="{Binding TakenFromShopDate}" HorizontalOptions="EndAndExpand" Margin="0,0,0,30"></Label>
+                <Label Text="זמן איסוף מהחנות: " HorizontalOptions="EndAndExpand" Margin="0,0,0,30"></Label>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsShowBroughtToUserDate}">
+                <Label Text="{Binding BroughtToUserDate}" HorizontalOptions="EndAndExpand" Margin="0,0,0,30"></Label>
+                <Label Text="זמן מסירה ללקוח: " HorizontalOptions="EndAndExpand" Margin="0,0,0,30"></Label>
+            </StackLayout>
+
             <Label Text="{Binding SelectedOrderDetails.ShopName}" FontAttributes="Bold" FontSize="20" HorizontalOptions="EndAndExpand" Margin="0,0,0,0"></Label>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0">
                 <Label Text="{Binding SelectedOrderDetails.ShopCity}"/>

@@ -935,5 +935,62 @@ namespace QuickDeliveryApp.Services
                 return null;
             }
         }
+
+        public async Task<DateTime> GetStatusOrderDate(int orderId, int statusId)
+        {
+            try
+            {
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetStatusOrderDate?orderId={orderId}&statusId={statusId}");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    DateTime d = JsonSerializer.Deserialize<DateTime>(content, options);
+                    return d;
+                }
+                else
+                {
+                    return DateTime.MinValue;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return DateTime.MinValue; ;
+            }
+        }
+
+        public async Task<List<User>> GetUsersAsync()
+        {
+            try
+            {
+
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetUsers");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        ReferenceHandler = ReferenceHandler.Preserve,
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+                    List<User> eList = JsonSerializer.Deserialize<List<User>>(content, options);
+                    return eList;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
     }
 }

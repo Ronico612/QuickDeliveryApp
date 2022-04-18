@@ -6,7 +6,7 @@
         <StackLayout>
 
             <CollectionView EmptyView="לא נמצאו הזמנות" x:Name="collectionName" ItemsSource="{Binding Orders}" SelectionMode="Single" BackgroundColor="White"
-                             SelectedItem="{Binding SelectedOrder}" SelectionChangedCommand="{Binding ToOrderDetailsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
+                            SelectedItem="{Binding SelectedOrder}" SelectionChangedCommand="{Binding ToOrderDetailsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="1" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>

@@ -1,9 +1,7 @@
 ﻿using QuickDeliveryApp.Services;
 using QuickDeliveryApp.Views;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -89,15 +87,160 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        private bool isCalledFromDeliveryPerson;
+        private DateTime approvedByDeliveryPersonDate;
+        public DateTime ApprovedByDeliveryPersonDate
+        {
+            get
+            {
+                return this.approvedByDeliveryPersonDate;
+            }
+            set
+            {
+                if (this.approvedByDeliveryPersonDate != value)
+                {
 
-        public OrderDetailsViewModel(OrderDetails selectedUserOrderDetails, bool isCalledFromDeliveryPerson)
+                    this.approvedByDeliveryPersonDate = value;
+                    OnPropertyChanged("ApprovedByDeliveryPersonDate");
+                }
+            }
+        }
+
+        private bool isShowApprovedByDeliveryPersonDate;
+        public bool IsShowApprovedByDeliveryPersonDate
+        {
+            get
+            {
+                return this.isShowApprovedByDeliveryPersonDate;
+            }
+            set
+            {
+                if (this.isShowApprovedByDeliveryPersonDate != value)
+                {
+
+                    this.isShowApprovedByDeliveryPersonDate = value;
+                    OnPropertyChanged("IsShowApprovedByDeliveryPersonDate");
+                }
+            }
+        }
+
+        private DateTime takenFromShopDate;
+        public DateTime TakenFromShopDate
+        {
+            get
+            {
+                return this.takenFromShopDate;
+            }
+            set
+            {
+                if (this.takenFromShopDate != value)
+                {
+
+                    this.takenFromShopDate = value;
+                    OnPropertyChanged("TakenFromShopDate");
+                }
+            }
+        }
+
+        private bool isShowTakenFromShopDate;
+        public bool IsShowTakenFromShopDate
+        {
+            get
+            {
+                return this.isShowTakenFromShopDate;
+            }
+            set
+            {
+                if (this.isShowTakenFromShopDate != value)
+                {
+
+                    this.isShowTakenFromShopDate = value;
+                    OnPropertyChanged("IsShowTakenFromShopDate");
+                }
+            }
+        }
+
+        private DateTime broughtToUserDate;
+        public DateTime BroughtToUserDate
+        {
+            get
+            {
+                return this.broughtToUserDate;
+            }
+            set
+            {
+                if (this.broughtToUserDate != value)
+                {
+
+                    this.broughtToUserDate = value;
+                    OnPropertyChanged("BroughtToUserDate");
+                }
+            }
+        }
+
+        private bool isShowBroughtToUserDate;
+        public bool IsShowBroughtToUserDate
+        {
+            get
+            {
+                return this.isShowBroughtToUserDate;
+            }
+            set
+            {
+                if (this.isShowBroughtToUserDate != value)
+                {
+
+                    this.isShowBroughtToUserDate = value;
+                    OnPropertyChanged("IsShowBroughtToUserDate");
+                }
+            }
+        }
+
+        private bool showInDelivery;
+        public bool ShowInDelivery
+        {
+            get
+            {
+                return this.showInDelivery;
+            }
+            set
+            {
+                if (this.showInDelivery != value)
+                {
+
+                    this.showInDelivery = value;
+                    OnPropertyChanged("ShowInDelivery");
+                }
+            }
+        }
+
+        private bool isCalledFromDeliveryPerson;
+        private bool isShowOrderStatus; 
+
+        public OrderDetailsViewModel(OrderDetails selectedUserOrderDetails, bool showOrderStatus, bool isCalledFromDeliveryPerson, bool isCalledFromUserCurrentOrders)
         {
             SelectedOrderDetails = selectedUserOrderDetails;
+            this.isShowOrderStatus = showOrderStatus;
             this.isCalledFromDeliveryPerson = isCalledFromDeliveryPerson;
             RowsHeight = SelectedOrderDetails.OrderProducts.Count * 50;
             this.IsApproved = this.isCalledFromDeliveryPerson && SelectedOrderDetails.OrderStatusId == 2; // approved
             this.IsTakenFromShop = this.isCalledFromDeliveryPerson && SelectedOrderDetails.OrderStatusId == 3; // taken
+            this.InitStatusOrderDetails();
+            this.ShowInDelivery = isCalledFromUserCurrentOrders;
+
+        }
+
+        private async void InitStatusOrderDetails()
+        {
+            QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
+            if (this.isShowOrderStatus)
+            {
+                this.ApprovedByDeliveryPersonDate = await proxy.GetStatusOrderDate(SelectedOrderDetails.OrderId, 2); // approved
+                this.IsShowApprovedByDeliveryPersonDate = ApprovedByDeliveryPersonDate != DateTime.MinValue;
+            }
+            this.TakenFromShopDate = await proxy.GetStatusOrderDate(SelectedOrderDetails.OrderId, 3); // taken
+            this.IsShowTakenFromShopDate = TakenFromShopDate != DateTime.MinValue;
+            this.BroughtToUserDate = await proxy.GetStatusOrderDate(SelectedOrderDetails.OrderId, 4); // brought
+            this.IsShowBroughtToUserDate = BroughtToUserDate != DateTime.MinValue;
         }
 
         public ICommand TakenFromShopCommand => new Command(TakenFromShop);
@@ -109,6 +252,7 @@ namespace QuickDeliveryApp.ViewModels
             {
                 this.IsApproved = false;
                 this.IsTakenFromShop = true;
+                this.InitStatusOrderDetails();
             }
             else
                 await App.Current.MainPage.DisplayAlert("שגיאה", "עדכון סטטוס הזמנה נכשל", "בסדר");
@@ -128,6 +272,16 @@ namespace QuickDeliveryApp.ViewModels
             }
             else
                 await App.Current.MainPage.DisplayAlert("שגיאה", "עדכון סטטוס הזמנה נכשל", "בסדר");
+        }
+
+        public ICommand ToInDeliveryCommand => new Command(ToInDelivery);
+        public async void ToInDelivery()
+        {
+            Page p = new InDelivery();
+            p.Title = "מעקב אחר ההזמנה";
+            p.BindingContext = new InDeliveryViewModel();
+            NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+            await tabbed.Navigation.PushAsync(p);
         }
     }
 }

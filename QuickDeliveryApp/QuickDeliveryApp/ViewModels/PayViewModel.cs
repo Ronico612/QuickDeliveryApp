@@ -276,22 +276,18 @@ namespace QuickDeliveryApp.ViewModels
                 App app = (App)Application.Current;
                 await app.GetAllShops();
                 
-
-                
                 // להעביר לדף אחר ולהגיד שההזמנה התבצעה
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 await tabbed.Navigation.PopToRootAsync();
-
+                TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
+                theTabs.CurrentTab(theTabs.shopsPage);
 
                 Page p = new InDelivery();
                 p.Title = "מעקב אחר ההזמנה";
                 p.BindingContext = new InDeliveryViewModel();
                 await tabbed.Navigation.PushAsync(p);
 
-                await App.Current.MainPage.Navigation.PopModalAsync();
-
-                //TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
-                //theTabs.SelectShoppingCartTab(); //אולי להעביר ישר לאזור אישי 
+                await App.Current.MainPage.Navigation.PopModalAsync();   
             }
             else
             {

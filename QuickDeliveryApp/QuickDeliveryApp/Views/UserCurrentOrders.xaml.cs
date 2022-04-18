@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace QuickDeliveryApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AdminOrders : ContentPage
+    public partial class UserCurrentOrders : ContentPage
     {
-        public AdminOrders()
+        public UserCurrentOrders()
         {
             InitializeComponent();
         }

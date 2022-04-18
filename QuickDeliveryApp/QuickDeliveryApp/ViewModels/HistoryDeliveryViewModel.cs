@@ -53,7 +53,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             Page p = new Views.OrderDetails();
             OrderDetails orderDetails = new OrderDetails(orderToDeliver);
-            p.BindingContext = new OrderDetailsViewModel(orderDetails, true);
+            p.BindingContext = new OrderDetailsViewModel(orderDetails, true, true, false);
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);
         }

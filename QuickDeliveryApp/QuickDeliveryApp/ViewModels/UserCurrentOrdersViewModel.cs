@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using Xamarin.Forms;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using QuickDeliveryApp.Models;
 using QuickDeliveryApp.Services;
-using QuickDeliveryApp.Models;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
-using QuickDeliveryApp.Views;
+using Xamarin.Forms;
 
 namespace QuickDeliveryApp.ViewModels
 {
-    class HistoryOrdersViewModel : INotifyPropertyChanged
+    class UserCurrentOrdersViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
@@ -59,7 +58,7 @@ namespace QuickDeliveryApp.ViewModels
 
         public App App { get; set; }
 
-        public HistoryOrdersViewModel()
+        public UserCurrentOrdersViewModel()
         {
             this.App = (App)Application.Current;
             UserOrders = new ObservableCollection<OrderDetails>();
@@ -77,14 +76,14 @@ namespace QuickDeliveryApp.ViewModels
             List<Order> orders = await quickDeliveryAPIProxy.GetUserOrders(App.CurrentUser.UserId);
             foreach (Order o in orders)
             {
-                if (o.StatusOrderId == 4) // brought
+                if (o.StatusOrderId == 1 || o.StatusOrderId == 2 || o.StatusOrderId == 3) // waiting, approved, taken
                 {
                     OrderDetails userOrderDetails = new OrderDetails(o);
                     UserOrders.Add(userOrderDetails);
                 }
             }
 
-            this.UserOrders = new ObservableCollection<OrderDetails>(this.UserOrders.OrderByDescending(o => o.OrderId));
+            this.UserOrders = new ObservableCollection<OrderDetails>(this.UserOrders);
         }
 
         public ICommand SelectUserOrderCommand => new Command(SelectUserOrder);
@@ -93,47 +92,10 @@ namespace QuickDeliveryApp.ViewModels
             if (SelectedUserOrder != null)
             {
                 Page p = new Views.OrderDetails();
-                p.BindingContext = new  OrderDetailsViewModel(this.SelectedUserOrder, false, false, false);
+                p.BindingContext = new OrderDetailsViewModel(this.SelectedUserOrder, true, false, true);
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 await tabbed.Navigation.PushAsync(p);
                 SelectedUserOrder = null;
-            }
-        }
-
-    }
-
-    public class OrderDetails
-    {
-        public string ShopName { get; set; }
-        public string ShopCity { get; set; }
-        public string ShopAddress { get; set; }
-        public string ShopPhone { get; set; }
-        public decimal? TotalPrice { get; set; }
-        public string OrderDate { get; set; }
-        public int OrderId { get; set; }
-        public int? OrderStatusId { get; set; }
-        public List<OrderProduct> OrderProducts { get; set; }
-        public string OrderAddress { get; set; }
-        public string OrderCity { get; set; }
-        public User User { get; set; }
-
-        public OrderDetails(Order o)
-        {
-            this.TotalPrice = o.TotalPrice;
-            this.OrderDate = o.OrderDate.ToString();
-            this.OrderId = o.OrderId;
-            this.OrderStatusId = o.StatusOrderId;
-
-            if (o.OrderProducts.Count > 0)
-            {
-                this.ShopName = o.OrderProducts.ToList()[0].Product.Shop.ShopName;
-                this.ShopCity = o.OrderProducts.ToList()[0].Product.Shop.ShopCity;
-                this.ShopAddress = o.OrderProducts.ToList()[0].Product.Shop.ShopAdress;
-                this.ShopPhone = o.OrderProducts.ToList()[0].Product.Shop.ShopPhone;
-                this.OrderProducts = new List<OrderProduct>(o.OrderProducts);
-                this.OrderAddress = o.OrderAddress;
-                this.OrderCity = o.OrderCity;
-                this.User = o.User;
             }
         }
     }

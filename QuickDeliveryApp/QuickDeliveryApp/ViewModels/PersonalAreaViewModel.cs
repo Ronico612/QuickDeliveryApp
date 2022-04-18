@@ -35,8 +35,13 @@ namespace QuickDeliveryApp.ViewModels
         }
 
         public ICommand CurrentOrdersCommand => new Command(CurrentOrders);
-        public void CurrentOrders()
+        public async void CurrentOrders()
         {
+            Page p = new UserCurrentOrders();
+            p.Title = "ההזמנות בתהליך";
+            p.BindingContext = new UserCurrentOrdersViewModel();
+            NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+            await tabbed.Navigation.PushAsync(p);
         }
 
         public ICommand HistoryOrdersCommand => new Command(HistoryOrders);
