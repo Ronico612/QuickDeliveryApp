@@ -65,7 +65,7 @@ namespace QuickDeliveryApp.ViewModels
             InitOrders();
         }
 
-        private async void InitOrders()
+        public async void InitOrders()
         {
             await GetShopOrders();
         }

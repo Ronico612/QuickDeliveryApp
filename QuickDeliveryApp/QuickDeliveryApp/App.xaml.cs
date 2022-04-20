@@ -22,6 +22,8 @@ namespace QuickDeliveryApp
             }
         }
 
+        public delegate void OrderStatusEventHandler(Object sender, int orderId, int statusId);
+        public event OrderStatusEventHandler OnOrderStatusUpdate;
 
         private User currentUser;
         public User CurrentUser
@@ -103,8 +105,8 @@ namespace QuickDeliveryApp
             ProductsInShoppingCart = new ObservableCollection<ProductShoppingCart>();
             
             ServerStatusViewModel vm = new ServerStatusViewModel();
-            vm.ServerStatus = "טוען נתונים....";
-            Thread.Sleep(100);
+            vm.IsShowLogo = true;
+            Thread.Sleep(10000);
             MainPage = new ServerStatus(vm);
         }
 
@@ -140,6 +142,10 @@ namespace QuickDeliveryApp
             this.AllShops = await quickDeliveryAPIProxy.GetShopsAsync();
         }
 
-
+        public void CallOrderStatusUpdate(int orderId, int statusId)
+        {
+            if (OnOrderStatusUpdate != null)
+                OnOrderStatusUpdate(this, orderId, statusId);
+        }
     }
 }

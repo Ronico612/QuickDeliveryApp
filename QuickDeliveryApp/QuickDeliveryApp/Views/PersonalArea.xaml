@@ -5,14 +5,14 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Margin="0,20,0,20" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Label Text="!" FontAttributes="Bold" FontSize="20"></Label>
-                <Label Text="{Binding App.CurrentUser.UserFname}" FontAttributes="Bold" FontSize="20"/>
-                <Label Text="שלום" FontAttributes="Bold" FontSize="20"></Label>
+                <Label Text="!" Style="{StaticResource labelStyle4}" Padding="0,5"></Label>
+                <Label Text="{Binding App.CurrentUser.UserFname}" Style="{StaticResource labelStyle4}" Padding="0,5"/>
+                <Label Text="שלום" Style="{StaticResource labelStyle4}" Padding="0,5"></Label>
             </StackLayout>
-            <Button Text="חשבון" Command="{Binding UpdateUserDetailsCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
-            <Button Text="הזמנות בתהליך" Command="{Binding CurrentOrdersCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
-            <Button Text="היסטוריית הזמנות" Command="{Binding HistoryOrdersCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
-            <Button Text="התנתקות" CornerRadius="8" Margin="10,40,10,0" FontAttributes="Bold" TextColor="Red" BackgroundColor="#FCEDF3" Command="{Binding LogoutCommand}"></Button>
+            <Button Text="חשבון" Command="{Binding UpdateUserDetailsCommand}" Style="{StaticResource arrowButtonStyle}"/>
+            <Button Text="הזמנות בתהליך" Command="{Binding CurrentOrdersCommand}" Style="{StaticResource arrowButtonStyle}"/>
+            <Button Text="היסטוריית הזמנות" Command="{Binding HistoryOrdersCommand}" Style="{StaticResource arrowButtonStyle}"/>
+            <Button Text="התנתקות" CornerRadius="8" Margin="10,5,10,0" FontAttributes="Bold" TextColor="Red" BackgroundColor="#FCEDF3" Command="{Binding LogoutCommand}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

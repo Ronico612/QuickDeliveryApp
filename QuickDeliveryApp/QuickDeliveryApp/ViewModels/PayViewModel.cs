@@ -284,7 +284,7 @@ namespace QuickDeliveryApp.ViewModels
 
                 Page p = new InDelivery();
                 p.Title = "מעקב אחר ההזמנה";
-                p.BindingContext = new InDeliveryViewModel();
+                p.BindingContext = new InDeliveryViewModel(newOrderID, 1); //waiting
                 await tabbed.Navigation.PushAsync(p);
 
                 await App.Current.MainPage.Navigation.PopModalAsync();   

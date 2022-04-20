@@ -6,7 +6,7 @@
             windows:TabbedPage.HeaderIconsEnabled="true"
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             android:TabbedPage.ToolbarPlacement="Bottom"
-            
+
             SelectedTabColor="HotPink"
             UnselectedTabColor="Black"
             BarBackgroundColor="White"

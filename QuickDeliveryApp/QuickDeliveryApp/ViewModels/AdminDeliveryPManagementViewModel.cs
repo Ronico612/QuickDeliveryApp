@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Windows.Input;
 using QuickDeliveryApp.Models;
@@ -44,7 +45,9 @@ namespace QuickDeliveryApp.ViewModels
         public async void InitDeliveryPersons()
         {
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
-            this.DeliveryPersons = new ObservableCollection<User>(await proxy.GetDeliveryPersons());
+            List<User> deliveryPersons = await proxy.GetDeliveryPersons();
+            deliveryPersons = deliveryPersons.OrderBy(u => u.UserFname).ThenBy(u => u.UserLname).ToList();
+            this.DeliveryPersons = new ObservableCollection<User>(deliveryPersons);
         }
 
 
@@ -58,6 +61,8 @@ namespace QuickDeliveryApp.ViewModels
                 bool isDeleted = await quickDeliveryAPIProxy.DeleteDeliveryPerson(delPToDelete.UserId);
                 if (isDeleted)
                     InitDeliveryPersons();
+                else
+                    await App.Current.MainPage.DisplayAlert("שגיאה", "מחיקת שליח נכשלה", "בסדר", FlowDirection.RightToLeft);
             }
         }
 

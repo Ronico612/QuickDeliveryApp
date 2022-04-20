@@ -3,10 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.ServerStatus">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="White">
+            
             <Label Text="{Binding ServerStatus}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                   FontSize="20"
+                   FontAttributes="Bold"
+                   VerticalOptions="CenterAndExpand" 
+                   HorizontalOptions="CenterAndExpand" Margin="0,50,0,0"/>
+            <Image Source="Logo2.jpg" IsVisible="{Binding IsShowLogo, FallbackValue=False}" Margin="0,0,0,150"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

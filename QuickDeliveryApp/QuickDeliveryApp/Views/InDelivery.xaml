@@ -4,11 +4,12 @@
              x:Class="QuickDeliveryApp.Views.InDelivery">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="{Binding StatusText}"></Label> <!--לעשות בטקסט סטטוס הזמנה ולהראות מפת שליח-->
-            <!--אולי צריך איוונט או משהו כשהשליח מודיע על סטטוס הזמנה-->
+            <Label Text="ההזמנה אושרה בהצלחה! וממתינה לאישור השליח" IsVisible="{Binding IsWaiting}"/>
+            <Label Text="ההזמנה אושרה על ידי השליח וכבר בדרך אליך!" IsVisible="{Binding IsApproved}"/>
+            <Label Text="ההזמנה נאספה מהחנות ובדרך אליך!" IsVisible="{Binding IsTakenFromShop}"/>
+            <Label Text="ההזמנה נמסרה לך! אנו מודים לך על הזמנתך" IsVisible="{Binding IsBrought}"/>
 
             <Label Text="*ניתן לצפות בדף מעקב אחר הזמנה דרך אזור אישי -> הזמנות בתהליך -> למעקב אחר ההזמנה"/>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

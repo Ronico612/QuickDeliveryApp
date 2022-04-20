@@ -13,6 +13,17 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private bool isShowLogo;
+        public bool IsShowLogo
+        {
+            get { return isShowLogo; }
+            set
+            {
+                isShowLogo = value;
+                OnPropertyChanged("IsShowLogo");
+            }
+        }
+
         private string serverStatus;
         public string ServerStatus
         {

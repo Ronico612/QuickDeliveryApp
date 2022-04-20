@@ -4,12 +4,10 @@
              x:Class="QuickDeliveryApp.Views.DeliveryPerson">
     <ContentPage.Content>
         <StackLayout>
-
-            <Label HorizontalOptions="CenterAndExpand" FontSize="30" Text="שליח"></Label>
-            <Button Text="בחר הזמנה למשלוח" Command="{Binding ChooseOrderCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
-            <Button Text="משלוחים בתהליך" Command="{Binding OrdersInProcessCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
-            <Button Text="צפייה בכל המשלוחים שבוצעו" Command="{Binding HistoryDeliverysCommand}" FontAttributes="Bold" BackgroundColor="White" ImageSource="LeftArrow.png"></Button>
-
+            <Label HorizontalOptions="CenterAndExpand" Text="שליח" Style="{StaticResource labelStyle4}"/>
+            <Button Text="בחר הזמנה למשלוח" Command="{Binding ChooseOrderCommand}" Style="{StaticResource arrowButtonStyle}"/>
+            <Button Text="משלוחים בתהליך" Command="{Binding OrdersInProcessCommand}" Style="{StaticResource arrowButtonStyle}"/>
+            <Button Text="צפייה בכל המשלוחים שבוצעו" Command="{Binding HistoryDeliverysCommand}" Style="{StaticResource arrowButtonStyle}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

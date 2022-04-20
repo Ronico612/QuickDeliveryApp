@@ -46,7 +46,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             App app = (App)Application.Current;
             List<Shop> shops = app.AllShops;
-            this.AdminShops = new ObservableCollection<Shop>(shops.Where(s => s.IsDeleted == false));
+            this.AdminShops = new ObservableCollection<Shop>(shops.Where(s => s.IsDeleted == false).OrderBy(s => s.ShopName).ThenBy(s => s.ShopCity).ThenBy(s => s.ShopAdress));
         }
 
         public ICommand DeleteShopCommand => new Command<Shop>(DeleteShop);

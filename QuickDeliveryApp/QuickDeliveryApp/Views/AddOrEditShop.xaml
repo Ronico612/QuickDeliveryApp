@@ -6,13 +6,12 @@
         <StackLayout>
             <!-- תמונה-->
             <!--<Image HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Source="{Binding ImgSource}"></Image>-->
-            <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" BackgroundColor="LightGray" CornerRadius="8"></Button>
-
+            <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" Style="{StaticResource basicButtonStyle}" Margin="10,10,10,10"/>
             <!-- שם חנות -->
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -21,12 +20,11 @@
                 <Label Text="שם חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Entry Placeholder="הכנס שם חנות" Text="{Binding ShopName}" Style="{StaticResource entryStyle}" MaxLength="100"/>
-
             <!-- כתובת חנות -->
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -35,12 +33,11 @@
                 <Label Text="כתובת חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Entry Placeholder="הכנס כתובת חנות" Text="{Binding ShopAdress}" Style="{StaticResource entryStyle}" MaxLength="100"/>
-
             <!-- עיר חנות -->
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -49,12 +46,11 @@
                 <Label Text="עיר חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Entry Placeholder="הכנס עיר חנות" Text="{Binding ShopCity}" Style="{StaticResource entryStyle}" MaxLength="100"/>
-
             <!-- טלפון חנות -->
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -63,12 +59,11 @@
                 <Label Text="טלפון חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Entry Placeholder="הכנס טלפון חנות" Text="{Binding ShopPhone}" Style="{StaticResource entryStyle}" MaxLength="100"/>
-
             <!-- דואר אלקטרוני מנהל חנות -->
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="6*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
@@ -77,8 +72,7 @@
                 <Label Text="דואר אלקטרוני של מנהל חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Entry Placeholder="הכנס דואר אלקטרוני של מנהל חנות" Text="{Binding ShopManagerEmail}" Style="{StaticResource entryStyle}" MaxLength="100"/>
-
-            <Button Text="אישור" Command="{Binding AddOrEditCommand}" BackgroundColor="LightGray" CornerRadius="8"></Button>
+            <Button Text="אישור" Command="{Binding AddOrEditCommand}" Style="{StaticResource basicButtonStyle}" Margin="10,10,10,10"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

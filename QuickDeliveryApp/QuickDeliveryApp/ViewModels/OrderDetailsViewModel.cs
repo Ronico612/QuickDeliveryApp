@@ -250,6 +250,7 @@ namespace QuickDeliveryApp.ViewModels
             App app = (App)Application.Current;
             if (await proxy.UpdateStatusOrder(SelectedOrderDetails.OrderId, app.CurrentUser.UserId, 3)) // taken
             {
+                app.CallOrderStatusUpdate(SelectedOrderDetails.OrderId, 3); // מודיע למשתמש שההזמנה נלקחה מהחנות
                 this.IsApproved = false;
                 this.IsTakenFromShop = true;
                 this.InitStatusOrderDetails();
@@ -265,6 +266,7 @@ namespace QuickDeliveryApp.ViewModels
             App app = (App)Application.Current;
             if (await proxy.UpdateStatusOrder(SelectedOrderDetails.OrderId, app.CurrentUser.UserId, 4)) // brought
             {
+                app.CallOrderStatusUpdate(SelectedOrderDetails.OrderId, 4); // מודיע למשתמש שההזמנה נמסרה ללקוח
                 await App.Current.MainPage.DisplayAlert("", "הזמנה טופלה בהצלחה, תודה!", "בסדר");
                 await app.MainPage.Navigation.PopAsync();
                 this.IsApproved = false;
@@ -279,7 +281,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             Page p = new InDelivery();
             p.Title = "מעקב אחר ההזמנה";
-            p.BindingContext = new InDeliveryViewModel();
+            p.BindingContext = new InDeliveryViewModel(selectedOrderDetails.OrderId, (int)selectedOrderDetails.OrderStatusId);
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);
         }
