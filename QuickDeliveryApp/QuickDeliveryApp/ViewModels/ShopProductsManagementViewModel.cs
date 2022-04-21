@@ -71,9 +71,11 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand EditProductCommand => new Command<Product>(EditProduct);
         public async void EditProduct(Product productToEdit)
         {
-            Page p = new AddOrEditProduct();
+            AddOrEditProduct p = new AddOrEditProduct();
             p.Title = "עדכון מוצר קיים";
-            p.BindingContext = new AddOrEditProductViewModel(productToEdit);
+            AddOrEditProductViewModel vm = new AddOrEditProductViewModel(productToEdit);
+            vm.SetImageSourceEvent += p.SetImageSourceEvent;
+            p.BindingContext = vm;
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);
         }
@@ -82,9 +84,12 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand AddProductCommand => new Command(AddProduct);
         public async void AddProduct()
         {
-            Page p = new AddOrEditProduct();
+            AddOrEditProduct p = new AddOrEditProduct();
             p.Title = "הוספת מוצר חדש";
-            p.BindingContext = new AddOrEditProductViewModel(null);
+            AddOrEditProductViewModel vm = new AddOrEditProductViewModel(null);
+            vm.SetImageSourceEvent += p.SetImageSourceEvent;
+            p.BindingContext = vm;
+
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);
         }

@@ -32,7 +32,8 @@ namespace QuickDeliveryApp.Models
             get
             {
                 QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
-                string url = $"{proxy.GetBasePhotoUri()}ProductPhotos/{ProductId}.jpg";
+                Random r = new Random();
+                string url = $"{proxy.GetBasePhotoUri()}ProductPhotos/{ProductId}.jpg?{r.Next()}";
                 return url;
             }
         }

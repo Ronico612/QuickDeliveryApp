@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace QuickDeliveryApp.ViewModels
@@ -366,11 +367,14 @@ namespace QuickDeliveryApp.ViewModels
         public AddOrEditProductViewModel(Product p)
         {
             Init(p);
+            this.imageFileResult = null;
             this.ProductNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.CountError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.PriceError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.AgeTypeError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.TypeError = ERROR_MESSAGES.REQUIRED_FIELD;
+            
+                
         }
 
         private async void Init(Product p)
@@ -381,11 +385,13 @@ namespace QuickDeliveryApp.ViewModels
             {
                 isAddded = true;
                 this.Product = new Product();
+
             }
 
             else
             {
                 this.Product = p;
+                this.ImgSource = this.Product.ImgSource;
                 this.ProductName = Product.ProductName;
                 this.Count = Product.CountProductInShop.ToString();
                 this.Price = Product.ProductPrice.ToString();
@@ -422,11 +428,44 @@ namespace QuickDeliveryApp.ViewModels
             return true;
         }
 
+        #region Upload Image Code
+        FileResult imageFileResult;
+        public event Action<ImageSource> SetImageSourceEvent;
+
         public ICommand ChooseImageCommand => new Command(ChooseImage);
         public async void ChooseImage()
         {
-            
+            FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+            {
+                Title = "בחר תמונה"
+            });
+
+            if (result != null)
+            {
+                this.imageFileResult = result;
+
+                var stream = await result.OpenReadAsync();
+                ImageSource imgSource = ImageSource.FromStream(() => stream);
+                if (SetImageSourceEvent != null)
+                    SetImageSourceEvent(imgSource);
+            }
         }
+        #endregion
+
+        #region ImgSource
+        private string imgSource;
+
+        public string ImgSource
+        {
+            get => imgSource;
+            set
+            {
+                imgSource = value;
+                OnPropertyChanged("ImgSource");
+            }
+        }
+
+        #endregion
 
         public ICommand AddOrEditCommand => new Command(AddOrEdit);
         public async void AddOrEdit()
@@ -457,7 +496,19 @@ namespace QuickDeliveryApp.ViewModels
                 await App.Current.MainPage.Navigation.PopModalAsync();
 
                 if (newProductId >= 0)
-                { 
+                {
+                    if (this.imageFileResult != null)
+                    {
+                        ServerStatus = "מעלה תמונה...";
+
+                        bool success = await proxy.UploadProductImage(new FileInfo()
+                        {
+                            Name = this.imageFileResult.FullPath
+                        }, $"{newProductId}.jpg");
+                    }
+                    ServerStatus = "שומר נתונים...";
+
+
                     await App.Current.MainPage.DisplayAlert("", "המוצר נוסף בהצלחה", "אישור", FlowDirection.RightToLeft);
                     await App.Current.MainPage.Navigation.PopAsync();
                 }
@@ -474,6 +525,17 @@ namespace QuickDeliveryApp.ViewModels
 
                 QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
                 bool isUpdatedProduct = await proxy.UpdateProduct(this.Product.ProductId, ProductName, Count, Price, AgeType.AgeProductTypeId, Type.ProductTypeId);
+
+                if (isUpdatedProduct && this.imageFileResult != null)
+                {
+                    ServerStatus = "מעלה תמונה...";
+
+                    bool success = await proxy.UploadProductImage(new FileInfo()
+                    {
+                        Name = this.imageFileResult.FullPath
+                    }, $"{Product.ProductId}.jpg");
+                }
+
                 await App.Current.MainPage.Navigation.PopModalAsync();
 
                 if (isUpdatedProduct)
