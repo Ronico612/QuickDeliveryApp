@@ -127,7 +127,11 @@ namespace QuickDeliveryApp
         protected async override void OnStart()
         {
             await GetAllShops();
-            MainPage = new NavigationPage(new TheMainTabbedPage());
+            MainPage = new NavigationPage(new TheMainTabbedPage())
+            {
+                BarBackgroundColor = Color.White,
+                BarTextColor = Color.Black
+            };
         }
 
         protected override void OnSleep()

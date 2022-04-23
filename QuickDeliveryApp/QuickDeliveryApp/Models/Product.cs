@@ -37,5 +37,16 @@ namespace QuickDeliveryApp.Models
                 return url;
             }
         }
+
+        public string EmptyImgSource
+        {
+            get
+            {
+                QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
+                Random r = new Random();
+                string url = $"{proxy.GetBasePhotoUri()}ProductPhotos/EmptyImg.png?{r.Next()}";
+                return url;
+            }
+        }
     }
 }

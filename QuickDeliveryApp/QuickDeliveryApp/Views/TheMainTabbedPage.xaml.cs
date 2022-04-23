@@ -11,8 +11,8 @@ namespace QuickDeliveryApp.Views
         public ShoppingCart shoppingCart;
         public Login login;
         public PersonalArea personalArea;
-        public ShopManager shopManager;
         public Admin admin;
+        public ShopManager shopManager;
         public DeliveryPerson deliveryPerson;
 
         public TheMainTabbedPage()
@@ -27,7 +27,7 @@ namespace QuickDeliveryApp.Views
 
             shoppingCart = new ShoppingCart();
             shoppingCart.Title = "סל קניות";
-            shoppingCart.IconImageSource = "ShoppingBag.png";
+            shoppingCart.IconImageSource = "ShoppingCart.png";
             this.Children.Add(shoppingCart);
 
             login = new Login();
@@ -39,17 +39,17 @@ namespace QuickDeliveryApp.Views
             personalArea.IconImageSource = "Login.png";
             personalArea.Title = "אזור אישי";
 
-            shopManager = new ShopManager();
-            shopManager.Title = "מנהל חנות";
-            shopManager.IconImageSource = "ShoppingBag.png";
-
             admin = new Admin();
             admin.Title = "מנהל אתר";
-            admin.IconImageSource = "ShoppingBag.png";
+            admin.IconImageSource = "admin.png";
+
+            shopManager = new ShopManager();
+            shopManager.Title = "מנהל חנות";
+            shopManager.IconImageSource = "manager.png";
 
             deliveryPerson = new DeliveryPerson();
             deliveryPerson.Title = "שליח";
-            deliveryPerson.IconImageSource = "ShoppingBag.png";
+            deliveryPerson.IconImageSource = "delivery.png";
         }
 
         public void AddTab(Page p)

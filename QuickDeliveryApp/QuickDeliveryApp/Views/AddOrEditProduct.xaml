@@ -16,6 +16,7 @@
                 <Frame CornerRadius="4" BorderColor="DarkGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1" Padding="2" Margin="10">
                     <Image x:Name="theImage" Source="{Binding ImgSource}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                 </Frame>
+                <Label Text="{Binding ImgSourceError}" IsVisible="{Binding ShowImgSourceError}" Style="{StaticResource labelErrorStyle}" Grid.Row="0" Grid.Column="0" VerticalTextAlignment="Center" Margin="0,0,20,0"/>
                 <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" Style="{StaticResource basicButtonStyle}" Margin="20,40,10,40" Grid.Row="0" Grid.Column="2"/>
             </Grid>
             <!-- שם מוצר -->

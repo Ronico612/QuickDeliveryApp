@@ -71,6 +71,38 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private bool showImgSourceError;
+        public bool ShowImgSourceError
+        {
+            get => showImgSourceError;
+            set
+            {
+                showImgSourceError = value;
+                OnPropertyChanged("ShowImgSourceError");
+            }
+        }
+
+        private string imgSourceError;
+        public string ImgSourceError
+        {
+            get => imgSourceError;
+            set
+            {
+                imgSourceError = value;
+                OnPropertyChanged("ImgSourceError");
+            }
+        }
+
+        private void ValidateImgSource()
+        {
+            if (((!string.IsNullOrEmpty(ImgSource)) && (ImgSource.Contains("EmptyImg")) && (this.imageFileResult == null)) || ((this.imageFileResult != null) && (this.imageFileResult.FullPath.Contains("EmptyImg")))) 
+                this.ShowImgSourceError = true;
+            else
+                this.ShowImgSourceError = false;
+
+            this.ImgSourceError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
+
         #endregion
 
         #region ProductName
@@ -127,7 +159,7 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
             else
-                this.PriceError = ERROR_MESSAGES.REQUIRED_FIELD;
+                this.ProductNameError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -378,8 +410,7 @@ namespace QuickDeliveryApp.ViewModels
             this.PriceError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.AgeTypeError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.TypeError = ERROR_MESSAGES.REQUIRED_FIELD;
-            
-                
+            this.ImgSourceError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
 
         private async void Init(Product p)
@@ -390,6 +421,7 @@ namespace QuickDeliveryApp.ViewModels
             {
                 isAddded = true;
                 this.Product = new Product();
+                this.ImgSource = this.Product.EmptyImgSource;
             }
 
             else
@@ -424,10 +456,11 @@ namespace QuickDeliveryApp.ViewModels
             ValidatePrice();
             ValidateAgeType();
             ValidateType();
+            ValidateImgSource();
 
             //Check if any validation failed
             if (ShowProductNameError || ShowCountError || ShowPriceError || ShowAgeTypeError ||
-                ShowTypeError)
+                ShowTypeError || ShowImgSourceError)
                 return false;
             return true;
         }
@@ -463,6 +496,7 @@ namespace QuickDeliveryApp.ViewModels
             if (!ValidateForm())
                 return;
 
+            bool successImg = true;
             if (IsAdded)
             {
                 QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
@@ -491,15 +525,17 @@ namespace QuickDeliveryApp.ViewModels
                     {
                         ServerStatus = "מעלה תמונה...";
 
-                        bool success = await proxy.UploadProductImage(new FileInfo()
+                        successImg = await proxy.UploadProductImage(new FileInfo()
                         {
                             Name = this.imageFileResult.FullPath
                         }, $"{newProductId}.jpg");
                     }
                     ServerStatus = "שומר נתונים...";
 
-
-                    await App.Current.MainPage.DisplayAlert("", "המוצר נוסף בהצלחה", "אישור", FlowDirection.RightToLeft);
+                    if (successImg)
+                        await App.Current.MainPage.DisplayAlert("", "המוצר נוסף בהצלחה", "אישור", FlowDirection.RightToLeft);
+                    else
+                        await App.Current.MainPage.DisplayAlert("", "המוצר נוסף, אך לא ניתן היה להוסיף תמונה, נא להוסיף תמונה", "אישור", FlowDirection.RightToLeft);
                     await App.Current.MainPage.Navigation.PopAsync();
                 }
                 else
@@ -507,7 +543,7 @@ namespace QuickDeliveryApp.ViewModels
                     await App.Current.MainPage.DisplayAlert("שגיאה", "הוספת מוצר נכשלה", "בסדר", FlowDirection.RightToLeft);
                 }
             }
-            else
+            else // Update
             {
                 ServerStatus = "מעדכן פרטי מוצר...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
@@ -520,7 +556,7 @@ namespace QuickDeliveryApp.ViewModels
                 {
                     ServerStatus = "מעלה תמונה...";
 
-                    bool success = await proxy.UploadProductImage(new FileInfo()
+                    successImg = await proxy.UploadProductImage(new FileInfo()
                     {
                         Name = this.imageFileResult.FullPath
                     }, $"{Product.ProductId}.jpg");
@@ -529,7 +565,12 @@ namespace QuickDeliveryApp.ViewModels
                 await App.Current.MainPage.Navigation.PopModalAsync();
 
                 if (isUpdatedProduct)
-                    await App.Current.MainPage.DisplayAlert("המוצר התעדכן בהצלחה", "", "אישור", FlowDirection.RightToLeft);
+                {
+                    if (successImg)
+                        await App.Current.MainPage.DisplayAlert("המוצר התעדכן בהצלחה", "", "אישור", FlowDirection.RightToLeft);
+                    else
+                        await App.Current.MainPage.DisplayAlert("המוצר התעדכן, אך לא ניתן היה לשנות תמונה", "", "אישור", FlowDirection.RightToLeft);
+                }
                 else
                 {
                     await App.Current.MainPage.DisplayAlert("שגיאה", "לא ניתן היה לעדכן פרטים", "בסדר", FlowDirection.RightToLeft);

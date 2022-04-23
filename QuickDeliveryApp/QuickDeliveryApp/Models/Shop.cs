@@ -30,7 +30,18 @@ namespace QuickDeliveryApp.Models
             {
                 QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
                 Random r = new Random();
-                string url = $"{proxy.GetBasePhotoUri()}ShopsPhotos/{ShopId}.png?{r.Next()}";
+                string url = url = $"{proxy.GetBasePhotoUri()}ShopsPhotos/{ShopId}.png?{r.Next()}";
+                return url;
+            }
+        }
+
+        public string EmptyImgSource
+        {
+            get
+            {
+                QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
+                Random r = new Random();
+                string url = $"{proxy.GetBasePhotoUri()}ShopsPhotos/EmptyImg.png?{r.Next()}";
                 return url;
             }
         }

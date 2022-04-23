@@ -67,6 +67,38 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private bool showImgSourceError;
+        public bool ShowImgSourceError
+        {
+            get => showImgSourceError;
+            set
+            {
+                showImgSourceError = value;
+                OnPropertyChanged("ShowImgSourceError");
+            }
+        }
+
+        private string imgSourceError;
+        public string ImgSourceError
+        {
+            get => imgSourceError;
+            set
+            {
+                imgSourceError = value;
+                OnPropertyChanged("ImgSourceError");
+            }
+        }
+
+        private void ValidateImgSource()
+        {
+            if (((!string.IsNullOrEmpty(ImgSource)) && (ImgSource.Contains("EmptyImg")) && (this.imageFileResult == null)) || ((this.imageFileResult != null) && (this.imageFileResult.FullPath.Contains("EmptyImg"))))
+                this.ShowImgSourceError = true;
+            else
+                this.ShowImgSourceError = false;
+
+            this.ImgSourceError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
+
         #endregion
 
         #region ShopName
@@ -331,6 +363,7 @@ namespace QuickDeliveryApp.ViewModels
             this.ShopCityError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ShopPhoneError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ShopManagerEmailError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.ImgSourceError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
 
         private async void Init(Shop s)
@@ -339,6 +372,7 @@ namespace QuickDeliveryApp.ViewModels
             {
                 isAdded = true;
                 this.Shop = new Shop();
+                this.ImgSource = this.Shop.EmptyImgSource;
             }
             else
             {
@@ -367,9 +401,10 @@ namespace QuickDeliveryApp.ViewModels
             ValidateShopCity();
             ValidateShopPhone();
             ValidateShopManagerEmail();
+            ValidateImgSource();
 
             //Check if any validation failed
-            if (ShowShopNameError || showShopAdressError || ShowShopCityError || ShowShopPhoneError || showShopManagerEmailError)
+            if (ShowShopNameError || ShowShopAdressError || ShowShopCityError || ShowShopPhoneError || ShowShopManagerEmailError || ShowImgSourceError)
                 return false;
             return true;
         }
@@ -414,6 +449,7 @@ namespace QuickDeliveryApp.ViewModels
                 return;
             }
 
+            bool successImg = true;
             if (IsAdded)
             {
                 ServerStatus = "מוסיף חנות...";
@@ -445,14 +481,17 @@ namespace QuickDeliveryApp.ViewModels
                         {
                             ServerStatus = "מעלה תמונה...";
 
-                            bool success = await proxy.UploadProductImage(new FileInfo()
+                            successImg = await proxy.UploadShopImage(new FileInfo()
                             {
                                 Name = this.imageFileResult.FullPath
                             }, $"{newShopId}.png");
                         }
                         ServerStatus = "שומר נתונים...";
 
-                        await App.Current.MainPage.DisplayAlert("", "החנות נוספה בהצלחה", "אישור", FlowDirection.RightToLeft);
+                        if (successImg)
+                            await App.Current.MainPage.DisplayAlert("", "החנות נוספה בהצלחה", "אישור", FlowDirection.RightToLeft);
+                        else
+                            await App.Current.MainPage.DisplayAlert("", "החנות נוספה, אך לא ניתן היה להוסיף תמונה, נא להוסיף תמונה", "אישור", FlowDirection.RightToLeft);
                         await App.Current.MainPage.Navigation.PopAsync();
                     }
                     else
@@ -467,13 +506,18 @@ namespace QuickDeliveryApp.ViewModels
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
                 Thread.Sleep(2000);
 
-                int shopManagerId = (int)Shop.ShopManagerId;
-                User user = await proxy.GetUserAsync(shopManagerId);
                 string originalShopManagerEmail = "";
-                if (user != null)
-                    originalShopManagerEmail = user.UserEmail;
+                int shopManagerId = 0;
+                if (Shop.ShopManagerId != null)
+                {
+                    shopManagerId = (int)Shop.ShopManagerId;
+                    User user = await proxy.GetUserAsync(shopManagerId);
 
-                if (originalShopManagerEmail != shopManagerEmail)
+                    if (user != null)
+                        originalShopManagerEmail = user.UserEmail;
+                }
+
+                if (originalShopManagerEmail != ShopManagerEmail)
                 {
                     int smId = await proxy.AddShopManagerAsync(ShopManagerEmail);
                     if (smId == -1)
@@ -491,7 +535,7 @@ namespace QuickDeliveryApp.ViewModels
                 {
                     ServerStatus = "מעלה תמונה...";
 
-                    bool success = await proxy.UploadProductImage(new FileInfo()
+                    successImg = await proxy.UploadShopImage(new FileInfo()
                     {
                         Name = this.imageFileResult.FullPath
                     }, $"{Shop.ShopId}.png");
@@ -500,9 +544,12 @@ namespace QuickDeliveryApp.ViewModels
 
                 if (isUpdatedShop)
                 {
-                    if (originalShopManagerEmail != shopManagerEmail)
+                    if ((Shop.ShopManagerId != null) && (originalShopManagerEmail != shopManagerEmail))
                         await proxy.DeleteShopManager((int)Shop.ShopManagerId);
-                    await App.Current.MainPage.DisplayAlert("החנות התעדכנה בהצלחה", "", "אישור", FlowDirection.RightToLeft);
+                    if(successImg)
+                        await App.Current.MainPage.DisplayAlert("החנות התעדכנה בהצלחה", "", "אישור", FlowDirection.RightToLeft);
+                    else
+                        await App.Current.MainPage.DisplayAlert("החנות התעדכנה אך לא ניתן היה לשנות את התמונה", "", "אישור", FlowDirection.RightToLeft);
                     await App.Current.MainPage.Navigation.PopAsync();
                 }
                 else

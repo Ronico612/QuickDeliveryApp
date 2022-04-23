@@ -24,7 +24,7 @@
                                         </VisualState>
                                         <VisualState Name="Selected">
                                             <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="LightPink" />
+                                                <Setter Property="BackgroundColor" Value="#FFF2F1" />
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>
@@ -32,13 +32,16 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
+                                <!--<Frame CornerRadius="8" Grid.Row="0" Padding="20,0,20,0">
+                                    <Label Text="{Binding Path=AgeProductTypeName, StringFormat='{0}'}" Style="{StaticResource labelStyle3}"/>
+                                </Frame>-->
                                 <Label Grid.Row="0" Text="{Binding Path=AgeProductTypeName, StringFormat='{0}'}" Style="{StaticResource labelStyle3}" Margin="20,0,20,0"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
                 <CollectionView x:Name="collectionProductTypes" HeightRequest="30" ItemsSource="{Binding ProductTypes}" SelectionMode="Single" BackgroundColor="White" Margin="0,0,0,10"
-                                SelectedItem="{Binding SelectedProductType}" SelectionChangedCommand="{Binding ShowProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionProductTypes}, Path=SelectedItem}">
+                               SelectedItem="{Binding SelectedProductType}" SelectionChangedCommand="{Binding ShowProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionProductTypes}, Path=SelectedItem}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout HorizontalItemSpacing="20" Orientation="Horizontal"/>
                     </CollectionView.ItemsLayout>
@@ -54,7 +57,7 @@
                                         </VisualState>
                                         <VisualState Name="Selected">
                                             <VisualState.Setters>
-                                                <Setter Property="BackgroundColor" Value="LightPink" />
+                                                <Setter Property="BackgroundColor" Value="#FFF2F1" />
                                             </VisualState.Setters>
                                         </VisualState>
                                     </VisualStateGroup>
