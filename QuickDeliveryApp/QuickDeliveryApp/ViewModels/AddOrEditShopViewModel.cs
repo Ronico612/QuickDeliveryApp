@@ -6,6 +6,8 @@ using System.Threading;
 using System.Windows.Input;
 using Xamarin.Forms;
 using System.Linq;
+using Xamarin.Essentials;
+using System;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -51,6 +53,21 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+
+        #region ImgSource
+        private string imgSource;
+
+        public string ImgSource
+        {
+            get => imgSource;
+            set
+            {
+                imgSource = value;
+                OnPropertyChanged("ImgSource");
+            }
+        }
+
+        #endregion
 
         #region ShopName
         private string shopName;
@@ -308,6 +325,7 @@ namespace QuickDeliveryApp.ViewModels
         public AddOrEditShopViewModel(Shop s)
         {
             Init(s);
+            this.imageFileResult = null;
             this.ShopNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ShopAdressError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ShopCityError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -325,6 +343,7 @@ namespace QuickDeliveryApp.ViewModels
             else
             {
                 this.Shop = s;
+                this.ImgSource = s.ImgSource;
                 this.ShopName = s.ShopName;
                 this.ShopAdress = s.ShopAdress;
                 this.ShopCity = s.ShopCity;
@@ -355,11 +374,31 @@ namespace QuickDeliveryApp.ViewModels
             return true;
         }
 
+        #region Upload Image Code
+        FileResult imageFileResult;
+        public event Action<ImageSource> SetImageSourceEvent;
+
         public ICommand ChooseImageCommand => new Command(ChooseImage);
         public async void ChooseImage()
         {
+            FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+            {
+                Title = "בחר תמונה"
+            });
 
+            if (result != null)
+            {
+                this.imageFileResult = result;
+
+                var stream = await result.OpenReadAsync();
+                ImageSource imgSource = ImageSource.FromStream(() => stream);
+                if (SetImageSourceEvent != null)
+                    SetImageSourceEvent(imgSource);
+            }
         }
+        #endregion
+
+        
 
         public ICommand AddOrEditCommand => new Command(AddOrEdit);
         public async void AddOrEdit()
@@ -402,6 +441,17 @@ namespace QuickDeliveryApp.ViewModels
 
                     if (newShopId >= 0)
                     {
+                        if (this.imageFileResult != null)
+                        {
+                            ServerStatus = "מעלה תמונה...";
+
+                            bool success = await proxy.UploadProductImage(new FileInfo()
+                            {
+                                Name = this.imageFileResult.FullPath
+                            }, $"{newShopId}.png");
+                        }
+                        ServerStatus = "שומר נתונים...";
+
                         await App.Current.MainPage.DisplayAlert("", "החנות נוספה בהצלחה", "אישור", FlowDirection.RightToLeft);
                         await App.Current.MainPage.Navigation.PopAsync();
                     }
@@ -437,6 +487,15 @@ namespace QuickDeliveryApp.ViewModels
                 }
 
                 bool isUpdatedShop = await proxy.UpdateShop(this.Shop.ShopId, ShopName, ShopAdress, ShopCity, ShopPhone, shopManagerId);
+                if (isUpdatedShop && this.imageFileResult != null)
+                {
+                    ServerStatus = "מעלה תמונה...";
+
+                    bool success = await proxy.UploadProductImage(new FileInfo()
+                    {
+                        Name = this.imageFileResult.FullPath
+                    }, $"{Shop.ShopId}.png");
+                }
                 await App.Current.MainPage.Navigation.PopModalAsync();
 
                 if (isUpdatedShop)

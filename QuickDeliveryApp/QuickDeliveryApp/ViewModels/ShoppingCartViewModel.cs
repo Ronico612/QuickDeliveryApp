@@ -159,6 +159,7 @@ namespace QuickDeliveryApp.ViewModels
                     NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                     TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
                     theTabs.CurrentTab(theTabs.login);
+                    theApp.goToPaymentAfterLogin = true;
                 }                
             }
             else

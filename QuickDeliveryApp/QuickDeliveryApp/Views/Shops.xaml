@@ -1,8 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="QuickDeliveryApp.Views.Shops"
-             >
+             x:Class="QuickDeliveryApp.Views.Shops">
     <ContentPage.Content>
         <StackLayout BackgroundColor="White">
             <SearchBar x:Name="searchBar" 
@@ -12,14 +11,14 @@
             <RefreshView x:Name="refreshView"
                          Command="{Binding RefreshCommand}"
                          IsRefreshing="{Binding IsRefreshing}">
-                <CollectionView EmptyView="לא נמצאו חנויות התואמות לחיפושך" x:Name="collectionName" ItemsSource="{Binding FilteredShops}" SelectionMode="Single" BackgroundColor="White" Margin="0,20,0,0"
+                <CollectionView EmptyView="לא נמצאו חנויות התואמות את החיפוש" x:Name="collectionName" ItemsSource="{Binding FilteredShops}" SelectionMode="Single" BackgroundColor="White" Margin="0,20,0,0"
                         SelectedItem="{Binding SelectedShop}"   SelectionChangedCommand="{Binding ShowShopProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="1" Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="7">
+                            <Grid RowSpacing="0" ColumnSpacing="0">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup>
                                         <VisualState Name="Selected">
@@ -31,17 +30,20 @@
                                 </VisualStateManager.VisualStateGroups>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="100" />
+                                    <ColumnDefinition Width="70" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20"/>
                                     <RowDefinition Height="20"/>
-                                    <RowDefinition Height="60"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
-                                <Image Source="{Binding ImgSource}" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Column="1" Grid.RowSpan="3" Grid.Row="0" Margin="0,0,20,0"/>
-                                <Label Text="{Binding Path=ShopName, StringFormat='{0}'}" HorizontalTextAlignment="End"  FontSize="Caption" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Margin="0,0,40,0"/>
-                                <Label Text="{Binding Path=ShopAdress, StringFormat='{0}'}"  HorizontalTextAlignment="Start" FontSize="Caption"  Grid.Row="1" Grid.Column="0" Margin="0,0,40,0"/>
-                                <Label Text="{Binding Path=ShopCity, StringFormat='{0}'}"  HorizontalTextAlignment="Start" FontSize="Caption"  Grid.Row="2" Grid.Column="0" Margin="0,0,40,0"/>
+                                <Frame CornerRadius="4" BorderColor="DarkGray" Grid.Column="1" Grid.RowSpan="3" Grid.Row="0" Margin="0,0,12,0" Padding="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                    <Image Source="{Binding ImgSource}"/>
+                                </Frame>
+                                <Label Text="{Binding Path=ShopName, StringFormat='{0}'}" HorizontalTextAlignment="End" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.Column="0" Margin="0,0,20,0"/>
+                                <Label Text="{Binding Path=ShopAdress, StringFormat='{0}'}"  HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}"  Grid.Row="1" Grid.Column="0" Margin="0,0,20,0"/>
+                                <Label Text="{Binding Path=ShopCity, StringFormat='{0}'}"  HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}" Grid.Row="2" Grid.Column="0" Margin="0,0,20,0"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

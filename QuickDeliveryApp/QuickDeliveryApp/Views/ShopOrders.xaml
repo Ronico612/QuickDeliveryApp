@@ -3,8 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.ShopOrders">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="הזמנות" FontSize="30"></Label>
+        <StackLayout Margin="0,25,0,0" BackgroundColor="White">
             <CollectionView EmptyView="לא קיימות הזמנות" x:Name="collectionName" ItemsSource="{Binding ShopOrders}" SelectionMode="Single"  BackgroundColor="White"
                             SelectedItem="{Binding SelectedShopOrder}" SelectionChangedCommand="{Binding SelectOrderCommand}" SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
@@ -12,7 +11,7 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,0,0,20">
+                        <Grid Margin="0,0,0,20" RowSpacing="0">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup>
                                     <VisualState x:Name="Normal">
@@ -35,11 +34,11 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Image Source="LeftArrow.png" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"/>
-                            <Label Text="{Binding OrderDate}" HorizontalOptions="EndAndExpand" Grid.Row="0" Grid.Column="1"/>
-                            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalOptions="EndAndExpand">
-                                <Label Text="₪"/>
-                                <Label Text="{Binding TotalPrice}"/>
+                            <Image Source="LeftArrow.png" Margin="0,5" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"/>
+                            <Label Text="{Binding OrderDate}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle1}" Margin="0,0,15,0" Grid.Row="0" Grid.Column="1"/>
+                            <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" HorizontalOptions="EndAndExpand" Margin="0,0,15,0" >
+                                <Label Text="₪" Style="{StaticResource labelStyleNonBold1}"/>
+                                <Label Text="{Binding TotalPrice}" Style="{StaticResource labelStyleNonBold1}"/>
                             </StackLayout>
                         </Grid>
                     </DataTemplate>

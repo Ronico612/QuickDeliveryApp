@@ -40,7 +40,7 @@ namespace QuickDeliveryApp.ViewModels
         public async void HistoryDelivery()
         {
             Page p = new HistoryDelivery();
-            p.Title = "הזמנות";
+            p.Title = "משלוחים שבוצעו";
             p.BindingContext = new HistoryDeliveryViewModel();
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);

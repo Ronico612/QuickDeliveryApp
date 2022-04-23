@@ -743,9 +743,12 @@ namespace QuickDeliveryApp.ViewModels
         public async void Login()
         {
             ServerStatus = "מתחבר לשרת...";
+            App theApp = (App)App.Current;
+            bool goToPaymentAfterLogin = theApp.goToPaymentAfterLogin;
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
             Thread.Sleep(1000);
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
+            theApp.goToPaymentAfterLogin = goToPaymentAfterLogin;
             User user = await proxy.LoginAsync(Email, Password);
             if (user == null)
             {
@@ -756,13 +759,24 @@ namespace QuickDeliveryApp.ViewModels
             {
                 ServerStatus = "קורא נתונים...";
                 Thread.Sleep(2000);
-                App theApp = (App)App.Current;
                 theApp.CurrentUser = user;
                 //await App.Current.MainPage.DisplayAlert("היפ הופ הוריי", "התחברת בהצלחה למערכת", "בסדר");
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
                 theTabs.AddTab(theTabs.personalArea);
-                theTabs.CurrentTab(theTabs.personalArea);
+                if (theApp.goToPaymentAfterLogin)
+                {
+                    Page p = new Pay();
+                    p.Title = "ביצוע הזמנה";
+                    p.BindingContext = new PayViewModel();
+                    await tabbed.Navigation.PushAsync(p);
+                    theTabs.CurrentTab(theTabs.shoppingCart);
+                    theApp.goToPaymentAfterLogin = false;
+                }
+                else
+                {
+                    theTabs.CurrentTab(theTabs.personalArea);
+                }
                 theTabs.RemoveTab(theTabs.login);
 
                 await App.Current.MainPage.Navigation.PopModalAsync();

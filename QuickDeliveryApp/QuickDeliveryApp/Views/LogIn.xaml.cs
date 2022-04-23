@@ -19,6 +19,13 @@ namespace QuickDeliveryApp.Views
             InitializeComponent();
         }
 
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            App theApp = (App)App.Current;
+            theApp.goToPaymentAfterLogin = false;
+        }
+
         private void Password_Focused(object sender, FocusEventArgs e)
         {
             Entry entry = (Entry)sender;

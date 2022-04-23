@@ -3,9 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.UserCurrentOrders">
     <ContentPage.Content>
-        <StackLayout>
-
-            <Label Text="הזמנות בתהליך" FontSize="30"></Label>
+        <StackLayout BackgroundColor="White" Margin="0,15,15,15">
             <CollectionView EmptyView="לא קיימות הזמנות בתהליך" x:Name="collectionName" ItemsSource="{Binding UserOrders}" SelectionMode="Single"  BackgroundColor="White"
                         SelectedItem="{Binding SelectedUserOrder}" SelectionChangedCommand="{Binding SelectUserOrderCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
@@ -13,7 +11,7 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,0,0,20">
+                        <Grid Margin="0,0,0,20" RowSpacing="0">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup>
                                     <VisualState x:Name="Normal">
@@ -38,18 +36,17 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Image Source="LeftArrow.png" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"/>
-                            <Label Text="{Binding TotalPrice}" VerticalOptions="CenterAndExpand" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"/>
+                            <Label Text="{Binding TotalPrice}" VerticalOptions="CenterAndExpand" Style="{StaticResource labelStyleNonBold2}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"/>
                             <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalOptions="EndAndExpand">
-                                <Label Text="{Binding ShopCity}" FontAttributes="Bold"/>
+                                <Label Text="{Binding ShopCity}" Style="{StaticResource labelStyle2}"/>
                                 <Label Text="|" FontAttributes="Bold"/>
-                                <Label Text="{Binding ShopName}" FontAttributes="Bold"/>
+                                <Label Text="{Binding ShopName}" Style="{StaticResource labelStyle2}"/>
                             </StackLayout>
-                            <Label Text="{Binding OrderDate}" HorizontalOptions="EndAndExpand" Grid.Row="1" Grid.Column="2"/>
+                            <Label Text="{Binding OrderDate}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Grid.Row="1" Grid.Column="2"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

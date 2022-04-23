@@ -52,6 +52,7 @@ namespace QuickDeliveryApp.ViewModels
         public async void ToOrderDetails(Order orderToDeliver)
         {
             Page p = new Views.OrderDetails();
+            p.Title = "פרטי הזמנה";
             OrderDetails orderDetails = new OrderDetails(orderToDeliver);
             p.BindingContext = new OrderDetailsViewModel(orderDetails, true, true, false);
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;

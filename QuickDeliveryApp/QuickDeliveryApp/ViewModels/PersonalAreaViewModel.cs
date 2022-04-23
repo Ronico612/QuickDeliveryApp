@@ -28,7 +28,7 @@ namespace QuickDeliveryApp.ViewModels
         public async void UpdateUserDetails()
         {
             Page p = new UserDetails();
-            //p.Title = "חשבון";
+            p.Title = "חשבון";
             p.BindingContext = new UserDetailsViewModel();
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);
@@ -38,7 +38,7 @@ namespace QuickDeliveryApp.ViewModels
         public async void CurrentOrders()
         {
             Page p = new UserCurrentOrders();
-            p.Title = "ההזמנות בתהליך";
+            p.Title = "הזמנות בתהליך";
             p.BindingContext = new UserCurrentOrdersViewModel();
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);

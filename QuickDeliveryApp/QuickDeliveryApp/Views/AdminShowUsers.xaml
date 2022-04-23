@@ -3,22 +3,26 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.AdminShowUsers">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="0,15,0,0" BackgroundColor="White">
             <CollectionView EmptyView="לא נמצאו משתמשים" x:Name="collectionName" ItemsSource="{Binding Users}" SelectionMode="None" BackgroundColor="White" Margin="0,5,0,0">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="1" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnSpacing="5" RowSpacing="5">
+                        <Grid ColumnSpacing="10" RowSpacing="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="4*"/>
                                 <ColumnDefinition Width="100"/>
-                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Text="{Binding Path=UserEmail, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle1}" Grid.Column="0" Margin="15,5,10,5"/>
-                            <Label Text="{Binding Path=UserPhone, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle1}" Grid.Column="1" Margin="10,5,10,5"/>
-                            <Label HorizontalTextAlignment="End" Style="{StaticResource labelStyle2}" Grid.Column="2" Margin="10,2,15,5">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Label Text="{Binding Path=UserPhone, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold1}" Grid.Row="0" Grid.Column="0" Margin="15,0,0,0"/>
+                            <Label Text="{Binding Path=UserEmail, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold1}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,0,0,0"/>
+                            <Label HorizontalTextAlignment="End" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.Column="1" Margin="0,0,15,0">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="UserLname" />

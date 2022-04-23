@@ -58,15 +58,20 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        /*public string ImgSource
+        #region ImgSource
+        private string imgSource;
+
+        public string ImgSource
         {
-            get
+            get => imgSource;
+            set
             {
-                QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
-                string url = $"{proxy.GetBasePhotoUri()}ProductPhotos/{Product.ProductId}.jpg";
-                return url;
+                imgSource = value;
+                OnPropertyChanged("ImgSource");
             }
-        }*/
+        }
+
+        #endregion
 
         #region ProductName
         private string productName;
@@ -385,7 +390,6 @@ namespace QuickDeliveryApp.ViewModels
             {
                 isAddded = true;
                 this.Product = new Product();
-
             }
 
             else
@@ -452,21 +456,7 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-        #region ImgSource
-        private string imgSource;
-
-        public string ImgSource
-        {
-            get => imgSource;
-            set
-            {
-                imgSource = value;
-                OnPropertyChanged("ImgSource");
-            }
-        }
-
-        #endregion
-
+      
         public ICommand AddOrEditCommand => new Command(AddOrEdit);
         public async void AddOrEdit()
         {

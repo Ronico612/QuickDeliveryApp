@@ -16,5 +16,10 @@ namespace QuickDeliveryApp.Views
         {
             InitializeComponent();
         }
+
+        public void SetImageSourceEvent(ImageSource obj)
+        {
+            theImage.Source = obj;
+        }
     }
 }

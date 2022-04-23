@@ -22,7 +22,7 @@
                                 <RowDefinition Height="34"/>
                             </Grid.RowDefinitions>
                             <Button ImageSource="Delete.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteDeliveryPersonCommand}" CommandParameter="{Binding}" BackgroundColor="White" Grid.Row="0" Grid.Column="0" Margin="5,20,10,10"/>
-                            <Label Text="{Binding Path=UserPhone, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle1}" Grid.Row="0" Grid.Column="1" Margin="10"/>
+                            <Label Text="{Binding Path=UserPhone, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold1}" Grid.Row="0" Grid.Column="1" Margin="10"/>
                             <Label HorizontalTextAlignment="End" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Margin="10,10,15,10">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
@@ -31,7 +31,7 @@
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>
-                            <Label Text="{Binding Path=UserEmail, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle1}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,10,20"/>
+                            <Label Text="{Binding Path=UserEmail, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold1}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,10,20"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

@@ -3,12 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.AddOrEditProduct">
     <ContentPage.Content>
-        <StackLayout>
-
-            <!-- תמונה-->
-            <Image x:Name="theImage" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Source="{Binding ImgSource}" WidthRequest="100"></Image>
-            <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" BackgroundColor="LightGray" CornerRadius="8"></Button>
-
+        <StackLayout Margin="0,10,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="120"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Frame CornerRadius="4" BorderColor="DarkGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="1" Padding="2" Margin="10">
+                    <Image x:Name="theImage" Source="{Binding ImgSource}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
+                </Frame>
+                <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" Style="{StaticResource basicButtonStyle}" Margin="20,40,10,40" Grid.Row="0" Grid.Column="2"/>
+            </Grid>
             <!-- שם מוצר -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -22,7 +31,6 @@
                 <Label Text="שם מוצר" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Entry Placeholder="הכנס שם מוצר" Text="{Binding ProductName}" Style="{StaticResource entryStyle}" MaxLength="100"/>
-
             <!-- כמות מוצרים בחנות -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -36,7 +44,6 @@
                 <Label Text="כמות מוצרים בחנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Entry Placeholder="הכנס כמות מוצרים בחנות" Text="{Binding Count}" Style="{StaticResource entryStyle}" MaxLength="9"/>
-
             <!-- מחיר מוצר -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -50,7 +57,6 @@
                 <Label Text="מחיר מוצר" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Entry Placeholder="הכנס מחיר מוצר" Text="{Binding Price}" Style="{StaticResource entryStyle}" MaxLength="9"/>
-
             <!-- לבחור גיל של מוצר -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -63,8 +69,7 @@
                 <Label Text="{Binding AgeTypeError}" IsVisible="{Binding ShowAgeTypeError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
                 <Label Text="קבוצת גיל" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
-            <Picker Title="בחר קבוצת גיל" ItemsSource="{Binding AgeProductTypes}" SelectedItem="{Binding AgeType, Mode=TwoWay}" ItemDisplayBinding="{Binding AgeProductTypeName}"/>
-
+            <Picker Title="בחר קבוצת גיל" ItemsSource="{Binding AgeProductTypes}" SelectedItem="{Binding AgeType, Mode=TwoWay}" Style="{StaticResource entryStyle}" ItemDisplayBinding="{Binding AgeProductTypeName}"/>
             <!-- לבחור סוג של מוצר -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -77,11 +82,8 @@
                 <Label Text="{Binding TypeError}" IsVisible="{Binding ShowTypeError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
                 <Label Text="קטגוריית מוצר" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
-            <Picker Title="בחר קטגוריה" ItemsSource="{Binding ProductTypes}" SelectedItem="{Binding Type, Mode=TwoWay}" ItemDisplayBinding="{Binding ProductTypeName}"/>
-
-
-
-            <Button Text="אישור" Command="{Binding AddOrEditCommand}" BackgroundColor="LightGray" CornerRadius="8"></Button>
+            <Picker Title="בחר קטגוריה" ItemsSource="{Binding ProductTypes}" Style="{StaticResource entryStyle}" SelectedItem="{Binding Type, Mode=TwoWay}" ItemDisplayBinding="{Binding ProductTypeName}"/>
+            <Button Text="אישור" Command="{Binding AddOrEditCommand}" Style="{StaticResource basicButtonStyle}" Margin="10,0,10,10"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

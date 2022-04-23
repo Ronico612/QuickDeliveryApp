@@ -23,9 +23,9 @@
                             </Grid.RowDefinitions>
                             <Button Text="איסוף" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.ToDeliveryCommand}" CommandParameter="{Binding}" Style="{StaticResource basicButtonStyle}" Margin="15,13,0,13" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"/>
                             <Label Text="תאריך הזמנה" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle1}" Grid.Row="0" Grid.Column="2" Margin="0,0,15,0"/>
-                            <Label Text="{Binding OrderDate}" HorizontalTextAlignment="End" Style="{StaticResource labelStyle1}" Grid.Row="0" Grid.Column="1"/>
+                            <Label Text="{Binding OrderDate}" HorizontalTextAlignment="End" Style="{StaticResource labelStyleNonBold1}" Grid.Row="0" Grid.Column="1"/>
                             <Label Text="כתובת איסוף" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle1}" Grid.Row="1" Grid.Column="2" Margin="0,0,15,0"/>
-                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyle1}" Grid.Row="1" Grid.Column="1">
+                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold1}" Grid.Row="1" Grid.Column="1">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0}  |  {1}">
                                         <Binding Path="OrderProducts[0].Product.Shop.ShopAdress" />
@@ -34,7 +34,7 @@
                                 </Label.Text>
                             </Label>
                             <Label Text="כתובת יעד" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle1}" Grid.Row="2" Grid.Column="2" Margin="0,0,15,0"/>
-                            <Label HorizontalTextAlignment="End" Style="{StaticResource labelStyle1}" Grid.Row="2" Grid.Column="1">
+                            <Label HorizontalTextAlignment="End" Style="{StaticResource labelStyleNonBold1}" Grid.Row="2" Grid.Column="1">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0}  |  {1}">
                                         <Binding Path="User.UserCity" />

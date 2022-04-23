@@ -199,7 +199,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             this.App = (App)Application.Current;
             ProductsInShoppingCart = App.ProductsInShoppingCart;
-            RowsHeight = ProductsInShoppingCart.Count * 50;
+            RowsHeight = ProductsInShoppingCart.Count * 65;
             this.AddressError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
             Address = App.CurrentUser.UserAddress;

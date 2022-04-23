@@ -4,17 +4,17 @@
              x:Class="QuickDeliveryApp.Views.ProductSelected">
     <ContentPage.Content>
         <ScrollView>
-    <StackLayout>
-        <Label HorizontalOptions="Center" Text="{Binding CurrentProduct.ProductName}"></Label>
-        <Image HeightRequest="400" Source="{Binding CurrentProduct.ImgSource}"/>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-                    <Label Text="₪"/>
-                    <Label Text="{Binding CurrentProduct.ProductPrice}"/>
+            <StackLayout Margin="20">
+                <Label HorizontalOptions="Center" Text="{Binding CurrentProduct.ProductName}" Style="{StaticResource labelStyle2}" Margin="0,0,0,10"/>
+                <Image HeightRequest="300" Source="{Binding CurrentProduct.ImgSource}"/>
+                <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Margin="0,10">
+                    <Label Text="₪" Style="{StaticResource labelStyle2}"/>
+                    <Label Text="{Binding CurrentProduct.ProductPrice}" Style="{StaticResource labelStyle2}"/>
                 </StackLayout>
-                <Label HorizontalOptions="Center" Text="הפריט אזל מהמלאי" IsVisible="{Binding ErrorProductText}" TextColor="Red"></Label>
-                <Button Text="{Binding IsAddedText}" IsEnabled="{Binding IsEnabledButtonAddProduct}" Command="{Binding AddToShoppingCartCommand}" BackgroundColor="LightPink" ImageSource="{Binding IconSource}"/>
-        <Button Text="מעבר לסל הקניות" Command="{Binding GoToShoppingCartCommand}" IsVisible="{Binding IsGoToShoppingCart}" BackgroundColor="Gray" ImageSource="ShoppingBag.png"/>
-    </StackLayout>
+                <Label HorizontalOptions="Center" Text="הפריט אזל מהמלאי" IsVisible="{Binding ErrorProductText}" Style="{StaticResource labelStyle2}" TextColor="Red"/>
+                <Button Text="{Binding IsAddedText}" IsEnabled="{Binding IsEnabledButtonAddProduct}" Command="{Binding AddToShoppingCartCommand}" Style="{StaticResource basicButtonStyle}" ImageSource="{Binding IconSource}"/>
+                <Button Text="מעבר לסל הקניות" Command="{Binding GoToShoppingCartCommand}" IsVisible="{Binding IsGoToShoppingCart}" Style="{StaticResource basicButtonStyle}" BackgroundColor="Gray" ImageSource="ShoppingBag.png"/>
+            </StackLayout>
         </ScrollView>
     </ContentPage.Content>
 </ContentPage>

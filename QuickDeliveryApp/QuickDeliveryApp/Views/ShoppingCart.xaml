@@ -14,7 +14,7 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid Margin="7">
+                            <Grid RowSpacing="0">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup>
                                         <VisualState x:Name="Normal">
@@ -31,7 +31,7 @@
                                 </VisualStateManager.VisualStateGroups>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="100" />
                                     <ColumnDefinition Width="50" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
@@ -39,37 +39,40 @@
                                     <RowDefinition Height="20"/>
                                     <RowDefinition Height="20"/>
                                     <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="40"/>
                                 </Grid.RowDefinitions>
-                                <Image Source="{Binding ImgSource}" VerticalOptions="FillAndExpand" Grid.Column="1" Grid.RowSpan="4" Grid.Row="0"/>
-
-                                <!--Text="מחק מוצר"-->
-                                <Button  ImageSource="Delete.png"
+                                <!--שם מוצר-->
+                                <Label Text="{Binding ProductName, StringFormat='{0}'}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.Column="0" Margin="15,0,0,0"/>
+                                <!--מחיר מוצר-->
+                                <StackLayout Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Margin="15,0,0,0">
+                                    <Label Text="₪" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}"/>
+                                    <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}"/>
+                                </StackLayout>
+                                <!--בחר כמות-->
+                                <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,0">
+                                    <Button ImageSource="Remove.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.RemoveCountProductCommand}" CommandParameter="{Binding}" WidthRequest="40" HeightRequest="40" Margin="15,0,0,0"/>
+                                    <Label Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBold2}" WidthRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+                                    <Button ImageSource="Plus.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddCountProductCommand}" CommandParameter="{Binding}" WidthRequest="40" HeightRequest="40"/>
+                                </StackLayout>
+                                <Label Grid.Row="3" Grid.Column="0" Text="{Binding Path=ErrorText, Mode=TwoWay, StringFormat='{0}'}" TextColor="Red" HorizontalTextAlignment="Center" Style="{StaticResource labelStyle1}" Margin="15,0,0,0"/>
+                                <!--תמונת מוצר-->
+                                <Image Source="{Binding ImgSource}" VerticalOptions="FillAndExpand" Grid.RowSpan="5" Grid.Row="0" Grid.Column="1"/>
+                                <!--מחק מוצר-->
+                                <Button ImageSource="Delete.png"
                                     Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteProductsCommand}"
-                                    CommandParameter="{Binding}" VerticalOptions="FillAndExpand" Grid.Column="2" Grid.RowSpan="4" Grid.Row="0"></Button>
-                                <Label Text="{Binding ProductName, StringFormat='{0}'}" HorizontalTextAlignment="End"  FontSize="Caption" FontAttributes="Bold" Grid.Row="0" Grid.Column="0" Margin="0,0,20,0"/>
-                                <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Margin="0,0,20,0">
-                                    <Label Text="₪"/>
-                                    <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="Caption"/>
-                                </StackLayout>
-
-                                <!--Text="בחר כמות"-->
-                                <StackLayout Grid.Row="2" Orientation="Horizontal">
-                                    <Button ImageSource="Remove.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.RemoveCountProductCommand}" CommandParameter="{Binding}" WidthRequest="40" HeightRequest="40"></Button>
-                                    <Label Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" FontAttributes="Bold" WidthRequest="60" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
-                                    <Button ImageSource="Plus.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddCountProductCommand}" CommandParameter="{Binding}" WidthRequest="40" HeightRequest="40"></Button>
-                                </StackLayout>
-                                <Label Grid.Row="3" Grid.Column="0" Text="{Binding Path=ErrorText, Mode=TwoWay, StringFormat='{0}'}" TextColor="Red" HorizontalTextAlignment="End"></Label>
+                                    CommandParameter="{Binding}" VerticalOptions="FillAndExpand" BackgroundColor="White" Grid.Column="2" Grid.Row="2"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </RefreshView>
             <StackLayout Orientation="Horizontal" IsVisible="{Binding App.IsProductsInList}">
-                <Label Text="₪"/>
-                <Label Text="{Binding App.TotalPrice}"/>
-                <Label Text="סך הכל לתשלום:"></Label>
+                <Label Text="₪" Style="{StaticResource labelStyleNonBold2}" Margin="15,0,0,0"/>
+                <Label Text="{Binding App.TotalPrice}" Style="{StaticResource labelStyleNonBold2}"/>
+                <Label Text="סך הכל לתשלום:" Style="{StaticResource labelStyle2}"/>
             </StackLayout>
-            <Button Text="מעבר לתשלום" Command="{Binding GoToPayCommand}" IsVisible="{Binding App.IsProductsInList}"></Button>
+            <Button Text="מעבר לתשלום" Command="{Binding GoToPayCommand}" IsVisible="{Binding App.IsProductsInList}" Style="{StaticResource basicButtonStyle}" Margin="15"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

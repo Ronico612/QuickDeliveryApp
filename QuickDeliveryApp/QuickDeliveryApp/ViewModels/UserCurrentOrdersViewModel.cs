@@ -92,6 +92,7 @@ namespace QuickDeliveryApp.ViewModels
             if (SelectedUserOrder != null)
             {
                 Page p = new Views.OrderDetails();
+                p.Title = "פרטי הזמנה";
                 p.BindingContext = new OrderDetailsViewModel(this.SelectedUserOrder, true, false, true);
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 await tabbed.Navigation.PushAsync(p);

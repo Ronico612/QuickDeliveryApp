@@ -4,10 +4,7 @@
              x:Class="QuickDeliveryApp.Views.UserDetails">
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout>
-                <Label Text="חשבון" TextColor="Black" FontSize="20" Margin="0,10,0,20" FontAttributes="Bold"></Label>
-
-
+            <StackLayout Margin="0,10,0,0">
                 <!-- טלפון -->
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -21,7 +18,6 @@
                     <Label Text="טלפון" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                 </Grid>
                 <Entry Placeholder="הכנס מספר טלפון" Text="{Binding Phone}" Style="{StaticResource entryStyle}" MaxLength="20"/>
-
                 <!-- כתובת -->
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -35,7 +31,6 @@
                     <Label Text="כתובת" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                 </Grid>
                 <Entry Placeholder="הכנס כתובת" Text="{Binding Address}" Style="{StaticResource entryStyle}" MaxLength="30"/>
-
                 <!-- עיר -->
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -49,7 +44,6 @@
                     <Label Text="עיר" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                 </Grid>
                 <Entry Placeholder="הכנס עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" MaxLength="30"/>
-
                 <!-- כרטיס אשראי -->
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -63,7 +57,6 @@
                     <Label Text="כרטיס אשראי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                 </Grid>
                 <Entry Placeholder="הכנס מספר כרטיס אשראי" Text="{Binding NumCreditCard}" Style="{StaticResource entryStyle}" MaxLength="16"/>
-
                 <!-- מספר סודי -->
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -77,7 +70,6 @@
                     <Label Text="מספר סודי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                 </Grid>
                 <Entry Placeholder="הכנס מספר סודי" Text="{Binding NumCode}" Style="{StaticResource entryStyle}" MaxLength="3"/>
-
                 <!-- תוקף כרטיס אשראי -->
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -91,8 +83,7 @@
                     <Label Text="תוקף כרטיס אשראי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                 </Grid>
                 <DatePicker Date="{Binding ValidityCreditCard}"/>
-
-                <Button Text="עדכון" Command="{Binding UpdateCommand}" BackgroundColor="LightGray" CornerRadius="8"></Button>
+                <Button Text="עדכון" Command="{Binding UpdateCommand}" Style="{StaticResource basicButtonStyle}" Margin="10,0,10,10"></Button>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

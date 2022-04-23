@@ -99,15 +99,17 @@ namespace QuickDeliveryApp
 
         public List<Shop> AllShops { get; private set; }
 
+        public bool goToPaymentAfterLogin;
+
         public App()
         {
             InitializeComponent();
             ProductsInShoppingCart = new ObservableCollection<ProductShoppingCart>();
-            
             ServerStatusViewModel vm = new ServerStatusViewModel();
             vm.IsShowLogo = true;
             Thread.Sleep(10000);
             MainPage = new ServerStatus(vm);
+            this.goToPaymentAfterLogin = false;
         }
 
        public string ServerStatus { get; set; }
