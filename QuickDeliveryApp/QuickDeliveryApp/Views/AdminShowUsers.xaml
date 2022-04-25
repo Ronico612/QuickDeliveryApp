@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.AdminShowUsers">
     <ContentPage.Content>
-        <StackLayout Margin="0,15,0,0" BackgroundColor="White">
-            <CollectionView EmptyView="לא נמצאו משתמשים" x:Name="collectionName" ItemsSource="{Binding Users}" SelectionMode="None" BackgroundColor="White" Margin="0,5,0,0">
+        <StackLayout BackgroundColor="White">
+            <CollectionView EmptyView="לא נמצאו משתמשים" x:Name="collectionName" ItemsSource="{Binding Users}" SelectionMode="None" BackgroundColor="White" Margin="0,20,0,0">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="1" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>

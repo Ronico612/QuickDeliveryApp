@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.UserDetails">
     <ContentPage.Content>
-        <ScrollView>
+        <ScrollView BackgroundColor="White">
             <StackLayout Margin="0,10,0,0">
                 <!-- טלפון -->
                 <Grid>

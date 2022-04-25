@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.AddDeliveryPerson">
     <ContentPage.Content>
-        <StackLayout Margin="0,10,0,0">
+        <StackLayout BackgroundColor="White">
             <!-- דואר אלקטרוני שליח -->
-            <Grid>
+            <Grid Margin="0,10,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>

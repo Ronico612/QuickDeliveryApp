@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.OrderDetails">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="White">
             <Button Text="למעקב אחר ההזמנה" IsVisible="{Binding ShowInDelivery}" Command="{Binding ToInDeliveryCommand}" Style="{StaticResource basicButtonStyle}" Margin="15,15,15,0"/>
             <Button Text="נאסף מהחנות" IsVisible="{Binding IsApproved}" Command="{Binding TakenFromShopCommand}" Style="{StaticResource basicButtonStyle}" Margin="15,15,15,0"/>
             <Button Text="נמסר ללקוח" IsVisible="{Binding IsTakenFromShop}" Command="{Binding BroughtToClientCommand}" Style="{StaticResource basicButtonStyle}" Margin="15,15,15,0"/>

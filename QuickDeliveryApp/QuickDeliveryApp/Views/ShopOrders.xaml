@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.ShopOrders">
     <ContentPage.Content>
-        <StackLayout Margin="0,25,0,0" BackgroundColor="White">
-            <CollectionView EmptyView="לא קיימות הזמנות" x:Name="collectionName" ItemsSource="{Binding ShopOrders}" SelectionMode="Single"  BackgroundColor="White"
+        <StackLayout BackgroundColor="White">
+            <CollectionView EmptyView="לא קיימות הזמנות" x:Name="collectionName" ItemsSource="{Binding ShopOrders}" SelectionMode="Single"  BackgroundColor="White" Margin="0,25,0,0"
                             SelectedItem="{Binding SelectedShopOrder}" SelectionChangedCommand="{Binding SelectOrderCommand}" SelectionChangedCommandParameter="{Binding Source={x:Reference collectionName}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="1" Orientation="Vertical" />

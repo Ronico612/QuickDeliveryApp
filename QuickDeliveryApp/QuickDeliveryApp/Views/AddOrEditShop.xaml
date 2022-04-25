@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.AddOrEditShop">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout BackgroundColor="White">
             <!-- תמונה-->
             <Frame CornerRadius="50" BorderColor="DarkGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="2" Margin="150,15,150,0">
                 <Image x:Name="theImage" Source="{Binding ImgSource}" Aspect="AspectFill" WidthRequest="120" HeightRequest="80"/>

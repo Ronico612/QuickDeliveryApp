@@ -12,13 +12,13 @@
                          Command="{Binding RefreshCommand}"
                          IsRefreshing="{Binding IsRefreshing}">
                 <CollectionView EmptyView="לא נמצאו חנויות התואמות את החיפוש" x:Name="collectionName" ItemsSource="{Binding FilteredShops}" SelectionMode="Single" BackgroundColor="White" Margin="0,20,0,0"
-                        SelectedItem="{Binding SelectedShop}"   SelectionChangedCommand="{Binding ShowShopProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
+                        SelectedItem="{Binding SelectedShop}" SelectionChangedCommand="{Binding ShowShopProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="1" Orientation="Vertical" />
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid RowSpacing="0" ColumnSpacing="0">
+                            <Grid RowSpacing="0" ColumnSpacing="0" Margin="0,15,0,15">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup>
                                         <VisualState Name="Selected">
@@ -36,7 +36,6 @@
                                     <RowDefinition Height="20"/>
                                     <RowDefinition Height="20"/>
                                     <RowDefinition Height="20"/>
-                                    <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
                                 <Frame CornerRadius="4" BorderColor="DarkGray" Grid.Column="1" Grid.RowSpan="3" Grid.Row="0" Margin="0,0,12,0" Padding="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                     <Image Source="{Binding ImgSource}"/>
