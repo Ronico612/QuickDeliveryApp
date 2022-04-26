@@ -50,10 +50,10 @@
                                     <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}"/>
                                 </StackLayout>
                                 <!--בחר כמות-->
-                                <StackLayout Grid.Row="2" Orientation="Horizontal" Margin="0,0,0,0">
-                                    <Button ImageSource="Remove.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.RemoveCountProductCommand}" CommandParameter="{Binding}" WidthRequest="40" HeightRequest="40" Margin="15,0,0,0"/>
+                                <StackLayout Grid.Row="1" Grid.RowSpan="3" Orientation="Horizontal" Margin="0,0,0,0">
+                                    <Button ImageSource="Remove.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.RemoveCountProductCommand}" CommandParameter="{Binding}" WidthRequest="42" HeightRequest="40" Margin="20,7,0,7" BackgroundColor="White" CornerRadius="4"/>
                                     <Label Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBold2}" WidthRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
-                                    <Button ImageSource="Plus.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddCountProductCommand}" CommandParameter="{Binding}" WidthRequest="40" HeightRequest="40"/>
+                                    <Button ImageSource="Plus.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddCountProductCommand}" CommandParameter="{Binding}" WidthRequest="42" HeightRequest="40" BackgroundColor="White" CornerRadius="4" Margin="12,7,0,7"/> 
                                 </StackLayout>
                                 <Label Grid.Row="3" Grid.Column="0" Text="{Binding Path=ErrorText, Mode=TwoWay, StringFormat='{0}'}" TextColor="Red" HorizontalTextAlignment="Center" Style="{StaticResource labelStyle1}" Margin="15,0,0,0"/>
                                 <!--תמונת מוצר-->
@@ -61,7 +61,7 @@
                                 <!--מחק מוצר-->
                                 <Button ImageSource="Delete.png"
                                     Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteProductsCommand}"
-                                    CommandParameter="{Binding}" VerticalOptions="FillAndExpand" BackgroundColor="White" Grid.Column="2" Grid.Row="2"/>
+                                    CommandParameter="{Binding}" VerticalOptions="FillAndExpand" BackgroundColor="White" Grid.Column="2" Grid.Row="1" Grid.RowSpan="3" CornerRadius="4" Margin="0,5,10,5"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

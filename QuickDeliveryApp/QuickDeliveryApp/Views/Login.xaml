@@ -162,7 +162,7 @@
                     <DatePicker Date="{Binding ValidityCreditCard}" IsVisible="{Binding IsRegister}"/>
                 </StackLayout>
             </ScrollView>
-            <Grid BackgroundColor="LightCyan">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -170,8 +170,8 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Grid.Row="0" Grid.Column="0" Command="{Binding SubmitCommand}" Text="אישור"/>
-                <Button Grid.Row="0" Grid.Column="1" Command="{Binding GotoCommand}" Text="{Binding GoToText}"/>
+                <Button Grid.Row="0" Grid.Column="0" Command="{Binding SubmitCommand}" Text="אישור" Style="{StaticResource basicButtonStyle}" Margin="10,5,5,0"/>
+                <Button Grid.Row="0" Grid.Column="1" Command="{Binding GotoCommand}" Text="{Binding GoToText}" Style="{StaticResource basicButtonStyle}" Margin="5,5,10,0"/>
             </Grid>
             
         </StackLayout>

@@ -731,7 +731,7 @@ namespace QuickDeliveryApp.ViewModels
             
             if (registerSucceed)
             {
-
+                this.IsRegister = false;
             }
             else
             {

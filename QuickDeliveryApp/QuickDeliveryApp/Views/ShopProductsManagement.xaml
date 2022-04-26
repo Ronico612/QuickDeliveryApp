@@ -44,8 +44,8 @@
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>
-                            <Button ImageSource="Delete.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteProductCommand}" CommandParameter="{Binding}" BackgroundColor="White" Margin="0,5" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3"/>
-                            <Button ImageSource="Edit.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.EditProductCommand}" CommandParameter="{Binding}" BackgroundColor="White" Margin="0,5" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3"/>
+                            <Button ImageSource="Delete.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteProductCommand}" CommandParameter="{Binding}" BackgroundColor="White" Margin="5,10" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" CornerRadius="4"/>
+                            <Button ImageSource="Edit.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.EditProductCommand}" CommandParameter="{Binding}" BackgroundColor="White" Margin="5,10" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" CornerRadius="4"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
