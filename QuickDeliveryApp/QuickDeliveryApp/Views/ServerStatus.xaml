@@ -4,13 +4,14 @@
              x:Class="QuickDeliveryApp.Views.ServerStatus">
     <ContentPage.Content>
         <StackLayout BackgroundColor="White">
-            
+            <Image Source="Logo2.jpg" IsVisible="{Binding IsShowLogo, FallbackValue=False}" Margin="0,100,0,0"/>
             <Label Text="{Binding ServerStatus}"
                    FontSize="20"
                    FontAttributes="Bold"
-                   VerticalOptions="CenterAndExpand" 
-                   HorizontalOptions="CenterAndExpand" Margin="0,50,0,0"/>
-            <Image Source="Logo2.jpg" IsVisible="{Binding IsShowLogo, FallbackValue=False}" Margin="0,0,0,150"/>
+                   HorizontalOptions="CenterAndExpand" 
+                   Margin="0,250,0,0"
+                   Style="{StaticResource labelStyle3}"/>
+            <ActivityIndicator IsRunning="true" Color="Pink" WidthRequest="80" HeightRequest="80" Margin="30,50,30,30"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

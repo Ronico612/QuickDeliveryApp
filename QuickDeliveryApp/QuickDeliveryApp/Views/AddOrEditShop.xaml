@@ -5,10 +5,10 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="White">
             <!-- תמונה-->
-            <Frame CornerRadius="50" BorderColor="DarkGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="2" Margin="150,15,150,0">
-                <Image x:Name="theImage" Source="{Binding ImgSource}" Aspect="AspectFill" WidthRequest="120" HeightRequest="80"/>
+            <Frame CornerRadius="8" BorderColor="DarkGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="2" Margin="120,0,120,0">
+                <Image x:Name="theImage" Source="{Binding ImgSource}" WidthRequest="120" HeightRequest="90"/>
             </Frame>
-            <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" Style="{StaticResource basicButtonStyle}" HorizontalOptions="Center" HeightRequest="40"/>
+            <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" Style="{StaticResource basicButtonStyle}" HorizontalOptions="Center" HeightRequest="40" WidthRequest="170"/>
             <Label Text="{Binding ImgSourceError}" IsVisible="{Binding ShowImgSourceError}" Style="{StaticResource labelErrorStyle}" HorizontalOptions="Center" Margin="0,0,0,10"/>
             <!-- שם חנות -->
             <Grid>

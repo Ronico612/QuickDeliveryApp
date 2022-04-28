@@ -42,7 +42,7 @@
                 <Label Text="|" Style="{StaticResource labelStyleNonBold2}"/>
                 <Label Text="{Binding SelectedOrderDetails.OrderAddress}" Style="{StaticResource labelStyleNonBold2}"/>
             </StackLayout>
-            <Grid Margin="0,20,0,0">
+            <Grid Margin="0,30,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="60"/>
@@ -56,8 +56,9 @@
                 <Label Grid.Column="1" Text="כמות" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
                 <Label Grid.Column="3" Text="מוצר" FontAttributes="Bold" HorizontalOptions="CenterAndExpand"/>
             </Grid>
-            <CollectionView x:Name="collectionName" ItemsSource="{Binding SelectedOrderDetails.OrderProducts}" 
-                            SelectionMode="None" BackgroundColor="White" HeightRequest="{Binding RowsHeight}">
+            <ScrollView>
+                <CollectionView x:Name="collectionName" ItemsSource="{Binding SelectedOrderDetails.OrderProducts}" 
+                                SelectionMode="None" BackgroundColor="White" HeightRequest="{Binding RowsHeight}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="1" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
@@ -72,22 +73,24 @@
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="50"/>
+                                <RowDefinition Height="10"/>
                             </Grid.RowDefinitions>
-                            <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Grid.Column="0">
-                                <Label Text="₪" VerticalOptions="Center"/>
-                                <Label Text="{Binding Price, StringFormat='{0}'}" HorizontalTextAlignment="Start" FontSize="Caption" VerticalOptions="Center"/>
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Grid.Column="0" Margin="10,0,0,0">
+                                <Label Text="₪" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Style="{StaticResource labelStyleNonBold2}"/>
+                                <Label Text="{Binding Price, StringFormat='{0}'}" HorizontalOptions="StartAndExpand" Style="{StaticResource labelStyleNonBold2}" HorizontalTextAlignment="End" VerticalOptions="Center"/>
                             </StackLayout>
-                            <Label Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Text="{Binding Path=Quantity, Mode=TwoWay, StringFormat='{0}'}" FontAttributes="Bold"/>
+                            <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"  Text="{Binding Path=Quantity, Mode=TwoWay, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBold2}"/>
                             <Image Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Source="{Binding Product.ImgSource}"/>
-                            <Label Grid.Column="3" VerticalOptions="Center" LineBreakMode="TailTruncation" Text="{Binding Product.ProductName, StringFormat='{0}'}"/>
+                            <Label Grid.Column="3" VerticalOptions="Center" Text="{Binding Product.ProductName, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,15,0"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
+            </ScrollView>
             <StackLayout Orientation="Horizontal">
-                <Label Text="₪"/>
-                <Label Text="{Binding SelectedOrderDetails.TotalPrice}"/>
-                <Label Text="סך הכל"/>
+                <Label Text="₪" Style="{StaticResource labelStyle2}" Margin="10,0,0,0"/>
+                <Label Text="{Binding SelectedOrderDetails.TotalPrice}" Style="{StaticResource labelStyle2}"/>
+                <Label Text="סך הכל:" Style="{StaticResource labelStyle2}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>
