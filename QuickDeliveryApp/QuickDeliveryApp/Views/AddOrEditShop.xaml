@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.AddOrEditShop">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
+      <ScrollView Margin="0" Padding="0">
+        <StackLayout BackgroundColor="White" Padding="0">
             <!-- תמונה-->
             <Frame CornerRadius="8" BorderColor="DarkGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="2" Margin="120,0,120,0">
                 <Image x:Name="theImage" Source="{Binding ImgSource}" WidthRequest="120" HeightRequest="90"/>
@@ -48,8 +49,29 @@
                 <Label Text="{Binding ShopCityError}" IsVisible="{Binding ShowShopCityError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
                 <Label Text="עיר חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
+                <Entry Placeholder="חפש עיר" Text="{Binding ShopCity}" Style="{StaticResource entryStyle}" Margin="5,1,5,0"/>
+            <Frame BorderColor="DarkGray" IsVisible="{Binding ShowCities}" Margin="9,-14,9,0">
+                <CollectionView EmptyView="לא נמצאו ערים"  x:Name="cities" ItemsSource="{Binding FilteredCities}" SelectedItem="{Binding SelectedCityItem}" SelectionMode="Single"
+                                SelectionChangedCommand="{Binding Source={x:Reference cities}, Path=BindingContext.SelectedCity}"
+                                SelectionChangedCommandParameter="{Binding Source={x:Reference cities}, Path=SelectedItem}"
+                                HeightRequest="70">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Span="1" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnSpacing="0" RowSpacing="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding .}" Style="{StaticResource entryStyle}" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="0" Margin="0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
             <!--<Entry Placeholder="הכנס עיר חנות" Text="{Binding ShopCity}" Style="{StaticResource entryStyle}" MaxLength="100"/>-->
-            <Picker Title="הכנס עיר חנות" ItemsSource="{Binding Cities}" SelectedItem="{Binding ShopCity, Mode=TwoWay}" Style="{StaticResource entryStyle}"/>
+            <!--<Picker Title="הכנס עיר חנות" ItemsSource="{Binding Cities}" SelectedItem="{Binding ShopCity, Mode=TwoWay}" Style="{StaticResource entryStyle}"/>-->
             <!-- טלפון חנות -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -76,7 +98,8 @@
                 <Label Text="דואר אלקטרוני של מנהל חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Entry Placeholder="הכנס דואר אלקטרוני של מנהל חנות" Text="{Binding ShopManagerEmail}" Style="{StaticResource entryStyle}" MaxLength="100"/>
-            <Button Text="אישור" Command="{Binding AddOrEditCommand}" Style="{StaticResource basicButtonStyle}" Margin="10,10,10,10"/>
+            <Button Text="אישור" Command="{Binding AddOrEditCommand}" Style="{StaticResource basicButtonStyle}" Margin="10,10,10,20"/>
         </StackLayout>
+      </ScrollView>
     </ContentPage.Content>
 </ContentPage>

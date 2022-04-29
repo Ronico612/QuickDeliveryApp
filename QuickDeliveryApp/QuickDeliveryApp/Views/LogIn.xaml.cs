@@ -19,6 +19,13 @@ namespace QuickDeliveryApp.Views
             InitializeComponent();
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            LoginViewModel context = (LoginViewModel)this.BindingContext;
+            context.ShowCities = false;
+        }
+
         protected override void OnDisappearing()
         {
             base.OnDisappearing();

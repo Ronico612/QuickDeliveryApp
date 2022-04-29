@@ -2,7 +2,9 @@
 using QuickDeliveryApp.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -19,14 +21,23 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private List<string> cities;
-        public List<string> Cities
+        private List<string> allCities;
+
+        private ObservableCollection<string> filteredCities;
+        public ObservableCollection<string> FilteredCities
         {
-            get { return cities; }
+            get
+            {
+                return this.filteredCities;
+            }
             set
             {
-                cities = value;
-                OnPropertyChanged("Cities");
+                if (this.filteredCities != value)
+                {
+
+                    this.filteredCities = value;
+                    OnPropertyChanged("FilteredCities");
+                }
             }
         }
 
@@ -39,6 +50,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 phone = value;
+                ValidatePhone();
                 OnPropertyChanged("Phone");
             }
         }
@@ -97,6 +109,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 address = value;
+                ValidateAddress();
                 OnPropertyChanged("Address");
             }
         }
@@ -140,7 +153,70 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 city = value;
+                ValidateCity();
+                OnCityChanged(value);
+                ValidateCity();
                 OnPropertyChanged("City");
+            }
+        }
+
+        private string selectedCityItem;
+        public string SelectedCityItem
+        {
+            get => selectedCityItem;
+            set
+            {
+                selectedCityItem = value;
+                OnPropertyChanged("SelectedCityItem");
+            }
+        }
+
+        public ICommand SelectedCity => new Command<string>(OnSelectedCity);
+        public void OnSelectedCity(string city)
+        {
+            if (city != null)
+            {
+                this.ShowCities = false;
+                this.City = city;
+            }
+        }
+
+        private bool showCities;
+        public bool ShowCities
+        {
+            get => showCities;
+            set
+            {
+                showCities = value;
+                OnPropertyChanged("ShowCities");
+            }
+        }
+
+        public void OnCityChanged(string search)
+        {
+            if (this.City != this.SelectedCityItem)
+            {
+                this.ShowCities = true;
+                this.SelectedCityItem = null;
+            }
+            //Filter the list of cities based on the search term
+            if (this.allCities == null)
+                return;
+
+            if (String.IsNullOrWhiteSpace(search))
+            {
+                this.ShowCities = false;
+                this.FilteredCities.Clear();
+            }
+            else
+            {
+                foreach (string city in this.allCities)
+                {
+                    if (!this.FilteredCities.Contains(city) && city.Contains(search))
+                        this.FilteredCities.Add(city);
+                    else if (this.FilteredCities.Contains(city) && !city.Contains(search))
+                        this.FilteredCities.Remove(city);
+                }
             }
         }
 
@@ -168,11 +244,20 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateCity()
         {
-            if (City == null)
-                this.ShowCityError = true;
+            this.ShowCityError = string.IsNullOrEmpty(this.City);
+            if (!this.ShowCityError)
+            {
+                string city = this.allCities.Where(c => c == this.City).FirstOrDefault();
+                if (string.IsNullOrEmpty(city))
+                {
+                    this.ShowCityError = true;
+                    this.CityError = ERROR_MESSAGES.BAD_CITY;
+                }
+            }
             else
-                this.ShowCityError = string.IsNullOrEmpty(City.Trim());
+                this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
+
         #endregion
 
         #region NumCreditCard
@@ -183,6 +268,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 numCreditCard = value;
+                ValidateNumCreditCard();
                 OnPropertyChanged("NumCreditCard");
             }
         }
@@ -241,6 +327,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 numCode = value;
+                ValidateNumCode();
                 OnPropertyChanged("NumCode");
             }
         }
@@ -299,6 +386,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 validityCreditCard = value;
+                ValidateValidityCreditCard();
                 OnPropertyChanged("ValidityCreditCard");
             }
         }
@@ -359,7 +447,8 @@ namespace QuickDeliveryApp.ViewModels
         public UserDetailsViewModel()
         {
             this.App = (App)Application.Current;
-            this.Cities = new List<string>(App.Cities);
+            allCities = App.Cities;
+            this.FilteredCities = new ObservableCollection<string>();
 
             this.PhoneError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.AddressError = ERROR_MESSAGES.REQUIRED_FIELD;

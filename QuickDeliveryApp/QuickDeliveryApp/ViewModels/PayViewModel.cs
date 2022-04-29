@@ -4,11 +4,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 using QuickDeliveryApp.Views;
-using System.Threading;
+using System.Linq;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -38,14 +37,23 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        private List<string> cities;
-        public List<string> Cities
+        private List<string> allCities;
+
+        private ObservableCollection<string> filteredCities;
+        public ObservableCollection<string> FilteredCities
         {
-            get { return cities; }
+            get
+            {
+                return this.filteredCities;
+            }
             set
             {
-                cities = value;
-                OnPropertyChanged("Cities");
+                if (this.filteredCities != value)
+                {
+
+                    this.filteredCities = value;
+                    OnPropertyChanged("FilteredCities");
+                }
             }
         }
 
@@ -102,9 +110,70 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 city = value;
+                OnCityChanged(value);
                 ValidateCity();
                 this.UpdateIsFormValid();
                 OnPropertyChanged("City");
+            }
+        }
+
+        private string selectedCityItem;
+        public string SelectedCityItem
+        {
+            get => selectedCityItem;
+            set
+            {
+                selectedCityItem = value;
+                OnPropertyChanged("SelectedCityItem");
+            }
+        }
+
+        public ICommand SelectedCity => new Command<string>(OnSelectedCity);
+        public void OnSelectedCity(string city)
+        {
+            if (city != null)
+            {
+                this.ShowCities = false;
+                this.City = city;
+            }
+        }
+
+        private bool showCities;
+        public bool ShowCities
+        {
+            get => showCities;
+            set
+            {
+                showCities = value;
+                OnPropertyChanged("ShowCities");
+            }
+        }
+
+        public void OnCityChanged(string search)
+        {
+            if (this.City != this.SelectedCityItem)
+            {
+                this.ShowCities = true;
+                this.SelectedCityItem = null;
+            }
+            //Filter the list of cities based on the search term
+            if (this.allCities == null)
+                return;
+
+            if (String.IsNullOrWhiteSpace(search))
+            {
+                this.ShowCities = false;
+                this.FilteredCities.Clear();
+            }
+            else
+            {
+                foreach (string city in this.allCities)
+                {
+                    if (!this.FilteredCities.Contains(city) && city.Contains(search))
+                        this.FilteredCities.Add(city);
+                    else if (this.FilteredCities.Contains(city) && !city.Contains(search))
+                        this.FilteredCities.Remove(city);
+                }
             }
         }
 
@@ -132,10 +201,18 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateCity()
         {
-            if (City == null)
-                this.ShowCityError = true;
+            this.ShowCityError = string.IsNullOrEmpty(this.City);
+            if (!this.ShowCityError)
+            {
+                string city = this.allCities.Where(c => c == this.City).FirstOrDefault();
+                if (string.IsNullOrEmpty(city))
+                {
+                    this.ShowCityError = true;
+                    this.CityError = ERROR_MESSAGES.BAD_CITY;
+                }
+            }
             else
-                this.ShowCityError = string.IsNullOrEmpty(City.Trim());
+                this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -209,7 +286,8 @@ namespace QuickDeliveryApp.ViewModels
         public PayViewModel()
         {
             this.App = (App)Application.Current;
-            this.Cities = new List<string>(App.Cities);
+            allCities = App.Cities;
+            this.FilteredCities = new ObservableCollection<string>();
             ProductsInShoppingCart = App.ProductsInShoppingCart;
             RowsHeight = ProductsInShoppingCart.Count * 65;
             this.AddressError = ERROR_MESSAGES.REQUIRED_FIELD;

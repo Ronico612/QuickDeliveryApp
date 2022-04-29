@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuickDeliveryApp.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,13 @@ namespace QuickDeliveryApp.Views
         public Pay()
         {
             InitializeComponent();
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            PayViewModel context = (PayViewModel)this.BindingContext;
+            context.ShowCities = false;
         }
     }
 }

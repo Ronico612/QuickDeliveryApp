@@ -11,7 +11,28 @@
               <Entry Text="{Binding Address}" Style="{StaticResource entryStyle}" Margin="10,0"/>
               <Label Text="עיר להזמנה (ניתן לשנות)" Style="{StaticResource labelNameStyle}" Margin="5,0"/>
               <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" TextColor="Red" Margin="15,0"/>
-              <Picker Title="הכנס עיר להזמנה" ItemsSource="{Binding Cities}" SelectedItem="{Binding City, Mode=TwoWay}" Style="{StaticResource entryStyle}" Margin="10,0"/>
+              <Entry Placeholder="חפש עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" Margin="10,0"/>
+              <Frame BorderColor="DarkGray" IsVisible="{Binding ShowCities}" Margin="14,-14,14,0">
+                 <CollectionView EmptyView="לא נמצאו ערים"  x:Name="cities" ItemsSource="{Binding FilteredCities}" SelectedItem="{Binding SelectedCityItem}" SelectionMode="Single"
+                            SelectionChangedCommand="{Binding Source={x:Reference cities}, Path=BindingContext.SelectedCity}"
+                            SelectionChangedCommandParameter="{Binding Source={x:Reference cities}, Path=SelectedItem}"
+                            HeightRequest="70">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Span="1" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnSpacing="0" RowSpacing="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Text="{Binding .}" Style="{StaticResource entryStyle}" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="0" Margin="0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+              </Frame>
+              <!--<Picker Title="הכנס עיר להזמנה" ItemsSource="{Binding Cities}" SelectedItem="{Binding City, Mode=TwoWay}" Style="{StaticResource entryStyle}" Margin="10,0"/>-->
               <!--<Entry Text="{Binding City}" Style="{StaticResource entryStyle}" Margin="10,0"/>-->
               <Label Text="כרטיס אשראי" Style="{StaticResource labelNameStyle}" Margin="5,0"/>
               <Label Text="{Binding UserNumCard}" Style="{StaticResource entryStyle}" Margin="15,0"/>

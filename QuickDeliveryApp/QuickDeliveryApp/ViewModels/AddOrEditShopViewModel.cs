@@ -9,6 +9,7 @@ using System.Linq;
 using Xamarin.Essentials;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -37,14 +38,23 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        private List<string> cities;
-        public List<string> Cities
+        private List<string> allCities;
+
+        private ObservableCollection<string> filteredCities;
+        public ObservableCollection<string> FilteredCities
         {
-            get { return cities; }
+            get
+            {
+                return this.filteredCities;
+            }
             set
             {
-                cities = value;
-                OnPropertyChanged("Cities");
+                if (this.filteredCities != value)
+                {
+
+                    this.filteredCities = value;
+                    OnPropertyChanged("FilteredCities");
+                }
             }
         }
 
@@ -75,6 +85,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 imgSource = value;
+                ValidateImgSource();
                 OnPropertyChanged("ImgSource");
             }
         }
@@ -121,6 +132,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 shopName = value;
+                ValidateShopName();
                 OnPropertyChanged("ShopName");
             }
         }
@@ -164,6 +176,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 shopAdress = value;
+                ValidateShopAdress();
                 OnPropertyChanged("ShopAdress");
             }
         }
@@ -207,7 +220,69 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 shopCity = value;
+                OnCityChanged(value);
+                ValidateShopCity();
                 OnPropertyChanged("ShopCity");
+            }
+        }
+
+        private string selectedCityItem;
+        public string SelectedCityItem
+        {
+            get => selectedCityItem;
+            set
+            {
+                selectedCityItem = value;
+                OnPropertyChanged("SelectedCityItem");
+            }
+        }
+
+        public ICommand SelectedCity => new Command<string>(OnSelectedCity);
+        public void OnSelectedCity(string city)
+        {
+            if (city != null)
+            {
+                this.ShowCities = false;
+                this.ShopCity = city;
+            }
+        }
+
+        private bool showCities;
+        public bool ShowCities
+        {
+            get => showCities;
+            set
+            {
+                showCities = value;
+                OnPropertyChanged("ShowCities");
+            }
+        }
+
+        public void OnCityChanged(string search)
+        {
+            if (this.ShopCity != this.SelectedCityItem)
+            {
+                this.ShowCities = true;
+                this.SelectedCityItem = null;
+            }
+            //Filter the list of cities based on the search term
+            if (this.allCities == null)
+                return;
+
+            if (String.IsNullOrWhiteSpace(search))
+            {
+                this.ShowCities = false;
+                this.FilteredCities.Clear();
+            }
+            else
+            {
+                foreach (string city in this.allCities)
+                {
+                    if (!this.FilteredCities.Contains(city) && city.Contains(search))
+                        this.FilteredCities.Add(city);
+                    else if (this.FilteredCities.Contains(city) && !city.Contains(search))
+                        this.FilteredCities.Remove(city);
+                }
             }
         }
 
@@ -235,10 +310,18 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateShopCity()
         {
-            if (ShopCity == null)
-                this.ShowShopCityError = true;
+            this.ShowShopCityError = string.IsNullOrEmpty(this.ShopCity);
+            if (!this.ShowShopCityError)
+            {
+                string city = this.allCities.Where(c => c == this.ShopCity).FirstOrDefault();
+                if (string.IsNullOrEmpty(city))
+                {
+                    this.ShowShopCityError = true;
+                    this.ShopCityError = ERROR_MESSAGES.BAD_CITY;
+                }
+            }
             else
-                this.ShowShopCityError = string.IsNullOrEmpty(ShopCity.Trim());
+                this.ShopCityError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -250,6 +333,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 shopPhone = value;
+                ValidateShopPhone();
                 OnPropertyChanged("ShopPhone");
             }
         }
@@ -309,6 +393,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 shopManagerEmail = value;
+                ValidateShopManagerEmail();
                 OnPropertyChanged("ShopManagerEmail");
             }
         }
@@ -369,7 +454,8 @@ namespace QuickDeliveryApp.ViewModels
         public AddOrEditShopViewModel(Shop s)
         {
             App app = (App)Application.Current;
-            this.Cities = new List<string>(app.Cities);
+            allCities = app.Cities;
+            this.FilteredCities = new ObservableCollection<string>();
             Init(s);
             this.imageFileResult = null;
             this.ShopNameError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -387,6 +473,7 @@ namespace QuickDeliveryApp.ViewModels
                 isAdded = true;
                 this.Shop = new Shop();
                 this.ImgSource = this.Shop.EmptyImgSource;
+                this.ShowImgSourceError = false;
             }
             else
             {
@@ -441,13 +528,13 @@ namespace QuickDeliveryApp.ViewModels
 
                 var stream = await result.OpenReadAsync();
                 ImageSource imgSource = ImageSource.FromStream(() => stream);
+                if (imgSource != null)
+                    ShowImgSourceError = false;
                 if (SetImageSourceEvent != null)
                     SetImageSourceEvent(imgSource);
             }
         }
         #endregion
-
-        
 
         public ICommand AddOrEditCommand => new Command(AddOrEdit);
         public async void AddOrEdit()

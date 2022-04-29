@@ -23,6 +23,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 deliveryPersonEmail = value;
+                ValidateDeliveryPersonEmail();
                 OnPropertyChanged("DeliveryPersonEmail");
             }
         }

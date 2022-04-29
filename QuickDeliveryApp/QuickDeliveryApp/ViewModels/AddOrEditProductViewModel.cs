@@ -67,6 +67,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 imgSource = value;
+                ValidateImgSource();
                 OnPropertyChanged("ImgSource");
             }
         }
@@ -113,6 +114,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 productName = value;
+                ValidateProductName();
                 OnPropertyChanged("ProductName");
             }
         }
@@ -171,6 +173,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 count = value;
+                ValidateCount();
                 OnPropertyChanged("Count");
             }
         }
@@ -224,6 +227,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 price = value;
+                ValidatePrice();
                 OnPropertyChanged("Price");
             }
         }
@@ -303,6 +307,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 ageType = value;
+                ValidateAgeType();
                 OnPropertyChanged("AgeType");
             }
         }
@@ -351,6 +356,7 @@ namespace QuickDeliveryApp.ViewModels
             set
             {
                 type = value;
+                ValidateType();
                 OnPropertyChanged("Type");
             }
         }
@@ -422,8 +428,8 @@ namespace QuickDeliveryApp.ViewModels
                 isAddded = true;
                 this.Product = new Product();
                 this.ImgSource = this.Product.EmptyImgSource;
+                this.ShowImgSourceError = false;
             }
-
             else
             {
                 this.Product = p;
@@ -483,6 +489,8 @@ namespace QuickDeliveryApp.ViewModels
 
                 var stream = await result.OpenReadAsync();
                 ImageSource imgSource = ImageSource.FromStream(() => stream);
+                if (imgSource != null)
+                    ShowImgSourceError = false;
                 if (SetImageSourceEvent != null)
                     SetImageSourceEvent(imgSource);
             }

@@ -43,11 +43,29 @@
                     <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
                     <Label Text="עיר" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                 </Grid>
-                <!--<Entry Placeholder="הכנס עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" MaxLength="30"/>-->
+                <Entry Placeholder="חפש עיר" Text="{Binding City}" Style="{StaticResource entryStyle}"/>
+                <Frame BorderColor="DarkGray" IsVisible="{Binding ShowCities}" Margin="9,-14,9,0">
+                    <CollectionView EmptyView="לא נמצאו ערים"  x:Name="cities" ItemsSource="{Binding FilteredCities}" SelectedItem="{Binding SelectedCityItem}" SelectionMode="Single"
+                                SelectionChangedCommand="{Binding Source={x:Reference cities}, Path=BindingContext.SelectedCity}"
+                                SelectionChangedCommandParameter="{Binding Source={x:Reference cities}, Path=SelectedItem}"
+                                HeightRequest="70">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Span="1" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnSpacing="0" RowSpacing="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding .}" Style="{StaticResource entryStyle}" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="0" Margin="0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Frame>
                 <!--<Picker Title="הכנס עיר" ItemsSource="{Binding Cities}" SelectedItem="{Binding City, Mode=TwoWay}" Style="{StaticResource entryStyle}"/>-->
-                <!--<SearchBar Placeholder="חפש עיר" Text="{Binding City}" Style="{StaticResource entry}"/>
-                <CollectionView EmptyView="לא נמצאו ערים"  x:Name="cities" ItemsSource="{Binding FilteredCities}" SelectedItem="{Binding SelectedCityItem}" SelectionMode="Single"
-                                IsVisible="{Binding ShowCities}" SelectionChangedCommand="{Binding Source={x:Reference cities}, Path=BindingContext.SelectedCity}" SelectionChangedCommandParameter="{Binding Source={x:Reference cities}, Path=SelectedItem}"/>-->
+                <!--<SearchBar Placeholder="חפש עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" Margin="0,-10,-5,0"/>-->
                 <!-- כרטיס אשראי -->
                 <Grid>
                     <Grid.ColumnDefinitions>
