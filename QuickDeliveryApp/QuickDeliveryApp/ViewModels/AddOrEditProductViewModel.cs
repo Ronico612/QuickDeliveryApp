@@ -504,7 +504,7 @@ namespace QuickDeliveryApp.ViewModels
                 ServerStatus = "מוסיף מוצר...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
 
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
                 Product newProduct = new Product();
                 newProduct.ProductName = ProductName;
                 if (int.TryParse(Count, out Int32 result1))
@@ -547,7 +547,7 @@ namespace QuickDeliveryApp.ViewModels
             {
                 ServerStatus = "מעדכן פרטי מוצר...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
-                Thread.Sleep(2000);
+                Thread.Sleep(500);
 
                 QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
                 bool isUpdatedProduct = await proxy.UpdateProduct(this.Product.ProductId, ProductName, Count, Price, AgeType.AgeProductTypeId, Type.ProductTypeId);

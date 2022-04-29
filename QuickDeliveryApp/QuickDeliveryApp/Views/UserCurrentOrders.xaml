@@ -4,14 +4,14 @@
              x:Class="QuickDeliveryApp.Views.UserCurrentOrders">
     <ContentPage.Content>
         <StackLayout BackgroundColor="White">
-            <CollectionView EmptyView="לא קיימות הזמנות בתהליך" x:Name="collectionName" ItemsSource="{Binding UserOrders}" SelectionMode="Single" Margin="0,15,15,15"
+            <CollectionView EmptyView="לא קיימות הזמנות בתהליך" x:Name="collectionName" ItemsSource="{Binding UserOrders}" SelectionMode="Single" Margin="0,15,0,15"
                         SelectedItem="{Binding SelectedUserOrder}" SelectionChangedCommand="{Binding SelectUserOrderCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Span="1" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="0,8,0,8" Padding="0,16,0,0" RowSpacing="0">
+                        <Grid Margin="0,8,0,8" Padding="0,16,15,0" RowSpacing="0">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup>
                                     <VisualState x:Name="Normal">

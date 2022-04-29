@@ -8,6 +8,7 @@ using Xamarin.Forms;
 using System.Linq;
 using Xamarin.Essentials;
 using System;
+using System.Collections.Generic;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -33,6 +34,17 @@ namespace QuickDeliveryApp.ViewModels
                     this.shop = value;
                     OnPropertyChanged("Shop");
                 }
+            }
+        }
+
+        private List<string> cities;
+        public List<string> Cities
+        {
+            get { return cities; }
+            set
+            {
+                cities = value;
+                OnPropertyChanged("Cities");
             }
         }
 
@@ -356,6 +368,8 @@ namespace QuickDeliveryApp.ViewModels
 
         public AddOrEditShopViewModel(Shop s)
         {
+            App app = (App)Application.Current;
+            this.Cities = new List<string>(app.Cities);
             Init(s);
             this.imageFileResult = null;
             this.ShopNameError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -455,7 +469,7 @@ namespace QuickDeliveryApp.ViewModels
                 ServerStatus = "מוסיף חנות...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
 
-                Thread.Sleep(1000);
+                Thread.Sleep(500);
                 Shop newShop = new Shop();
                 newShop.ShopName = ShopName;
                 newShop.ShopAdress = ShopAdress;
@@ -504,7 +518,7 @@ namespace QuickDeliveryApp.ViewModels
             {
                 ServerStatus = "מעדכן פרטי חנות...";
                 await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
-                Thread.Sleep(2000);
+                Thread.Sleep(500);
 
                 string originalShopManagerEmail = "";
                 int shopManagerId = 0;

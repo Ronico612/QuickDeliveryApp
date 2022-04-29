@@ -3,13 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="QuickDeliveryApp.Views.InDelivery">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="ההזמנה אושרה בהצלחה! וממתינה לאישור השליח" IsVisible="{Binding IsWaiting}"/>
-            <Label Text="ההזמנה אושרה על ידי השליח וכבר בדרך אליך!" IsVisible="{Binding IsApproved}"/>
-            <Label Text="ההזמנה נאספה מהחנות ובדרך אליך!" IsVisible="{Binding IsTakenFromShop}"/>
-            <Label Text="ההזמנה נמסרה לך! אנו מודים לך על הזמנתך" IsVisible="{Binding IsBrought}"/>
+        <StackLayout BackgroundColor="White" Padding="0,20,0,0">
+            <Label Text="ההזמנה אושרה בהצלחה וממתינה לאישור השליח" Style="{StaticResource labelStyle3}" IsVisible="{Binding IsWaiting}" LineBreakMode="NoWrap" Margin="70,0" MaxLines="2" HorizontalTextAlignment="Center"/>
+            <Label Text="ההזמנה אושרה על ידי השליח וכבר בדרך אליך" Style="{StaticResource labelStyle3}" IsVisible="{Binding IsApproved}" LineBreakMode="NoWrap" Margin="70,0" MaxLines="2" HorizontalTextAlignment="Center"/>
+            <Label Text="ההזמנה נאספה מהחנות ובדרך אליך" Style="{StaticResource labelStyle3}" IsVisible="{Binding IsTakenFromShop}" LineBreakMode="NoWrap" Margin="30,0" MaxLines="2" HorizontalTextAlignment="Center"/>
+            <Label Text="ההזמנה נמסרה לך, אנו מודים לך על הזמנתך" Style="{StaticResource labelStyle3}" IsVisible="{Binding IsBrought}" LineBreakMode="NoWrap" Margin="70,0" MaxLines="2" HorizontalTextAlignment="Center"/>
 
-            <Label Text="*ניתן לצפות בדף מעקב אחר הזמנה דרך אזור אישי -> הזמנות בתהליך -> למעקב אחר ההזמנה"/>
+            <Label HeightRequest="420"/>
+
+            <Frame CornerRadius="4" BorderColor="White" Margin="15,0,15,10" BackgroundColor="#F2F4F4">
+                <Label Text="*ניתן לצפות בדף מעקב אחר הזמנה דרך אזור אישי -> הזמנות בתהליך -> למעקב אחר ההזמנה" Style="{StaticResource labelStyle2}" LineBreakMode="NoWrap" Margin="15,0" MaxLines="3"/>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

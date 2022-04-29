@@ -48,7 +48,8 @@
                 <Label Text="{Binding ShopCityError}" IsVisible="{Binding ShowShopCityError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
                 <Label Text="עיר חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
-            <Entry Placeholder="הכנס עיר חנות" Text="{Binding ShopCity}" Style="{StaticResource entryStyle}" MaxLength="100"/>
+            <!--<Entry Placeholder="הכנס עיר חנות" Text="{Binding ShopCity}" Style="{StaticResource entryStyle}" MaxLength="100"/>-->
+            <Picker Title="הכנס עיר חנות" ItemsSource="{Binding Cities}" SelectedItem="{Binding ShopCity, Mode=TwoWay}" Style="{StaticResource entryStyle}"/>
             <!-- טלפון חנות -->
             <Grid>
                 <Grid.ColumnDefinitions>

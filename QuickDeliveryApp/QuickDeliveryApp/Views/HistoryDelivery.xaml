@@ -49,7 +49,7 @@
                                 </Label.Text>
                             </Label>
                             <Label Text="כתובת יעד" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle1}" Grid.Row="2" Grid.Column="2" Margin="0,0,15,0"/>
-                            <Label HorizontalTextAlignment="End" Style="{StaticResource labelStyleNonBold1}" Grid.Row="2" Grid.Column="1">
+                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold1}" Grid.Row="2" Grid.Column="1">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0}  |  {1}">
                                         <Binding Path="User.UserCity" />

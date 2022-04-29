@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Linq;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using QuickDeliveryApp.Views;
 using QuickDeliveryApp.Models;
 using System.Collections.ObjectModel;
@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using QuickDeliveryApp.Services;
 using QuickDeliveryApp.ViewModels;
 using System.Threading;
+using QuickDeliveryApp.DTO;
 
 namespace QuickDeliveryApp
 {
@@ -24,6 +25,8 @@ namespace QuickDeliveryApp
 
         public delegate void OrderStatusEventHandler(Object sender, int orderId, int statusId);
         public event OrderStatusEventHandler OnOrderStatusUpdate;
+
+        public List<string> Cities { get; set; }
 
         private User currentUser;
         public User CurrentUser
@@ -104,10 +107,10 @@ namespace QuickDeliveryApp
         public App()
         {
             InitializeComponent();
+            Cities = new List<string>();
             ProductsInShoppingCart = new ObservableCollection<ProductShoppingCart>();
             ServerStatusViewModel vm = new ServerStatusViewModel();
             vm.IsShowLogo = true;
-            Thread.Sleep(10000);
             MainPage = new ServerStatus(vm);
             this.goToPaymentAfterLogin = false;
         }
@@ -126,6 +129,9 @@ namespace QuickDeliveryApp
 
         protected async override void OnStart()
         {
+            QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
+            List<City> cities = await quickDeliveryAPIProxy.GetCitiesAsync();
+            this.Cities = cities.OrderBy(c => c.name).Select(c => c.name).ToList();
             await GetAllShops();
             MainPage = new NavigationPage(new TheMainTabbedPage())
             {

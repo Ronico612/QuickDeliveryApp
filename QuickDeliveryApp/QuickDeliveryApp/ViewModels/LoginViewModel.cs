@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using QuickDeliveryApp.Views;
 using System.Threading;
 using System.Linq;
+using QuickDeliveryApp.DTO;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -592,6 +593,17 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
+        private List<string> cities;
+        public List<string> Cities
+        {
+            get { return cities; }
+            set
+            {
+                cities = value;
+                OnPropertyChanged("Cities");
+            }
+        }
+
         private bool isRegister;
         public bool IsRegister
         {
@@ -607,6 +619,8 @@ namespace QuickDeliveryApp.ViewModels
 
         public LoginViewModel()
         {
+            App app = (App)Application.Current;
+
             IsRegister = false;
             this.TitleText = "התחברות";
             this.GoToText = "להרשמה";
@@ -622,6 +636,7 @@ namespace QuickDeliveryApp.ViewModels
             this.NumCreditCardError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.NumCodeError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ValidityCreditCardError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.Cities = new List<string>(app.Cities);
 
             SubmitCommand = new Command(OnSubmit);
         }
@@ -693,13 +708,11 @@ namespace QuickDeliveryApp.ViewModels
         {
             if (!ValidateForm())
             {
-                await App.Current.MainPage.DisplayAlert("שמירת נתונים", " יש בעיה עם הנתונים בדוק ונסה שוב", "אישור", FlowDirection.RightToLeft);
                 return false;
             }
 
             ServerStatus = "בודק תקינות מייל...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
-            Thread.Sleep(1000);
 
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
             bool isEmailExist = await proxy.IsUserEmailExistAsync(Email);
@@ -711,7 +724,6 @@ namespace QuickDeliveryApp.ViewModels
             }
 
             ServerStatus = "מבצע הרשמה...";
-            Thread.Sleep(1000);
             User user = new User();
             user.UserFname = FName;
             user.UserLname = LName;
@@ -746,7 +758,6 @@ namespace QuickDeliveryApp.ViewModels
             App theApp = (App)App.Current;
             bool goToPaymentAfterLogin = theApp.goToPaymentAfterLogin;
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
-            Thread.Sleep(1000);
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
             theApp.goToPaymentAfterLogin = goToPaymentAfterLogin;
             User user = await proxy.LoginAsync(Email, Password);
@@ -758,7 +769,6 @@ namespace QuickDeliveryApp.ViewModels
             else
             {
                 ServerStatus = "קורא נתונים...";
-                Thread.Sleep(2000);
                 theApp.CurrentUser = user;
                 //await App.Current.MainPage.DisplayAlert("היפ הופ הוריי", "התחברת בהצלחה למערכת", "בסדר");
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;

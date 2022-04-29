@@ -5,12 +5,12 @@
     <ContentPage.Content>
         <StackLayout BackgroundColor="White">
             <Frame Padding="3,3,3,3" Margin="10,15,10,0" HasShadow="False" BorderColor="White" CornerRadius="8" HeightRequest="40">
-                <SearchBar x:Name="searchBar" Text="{Binding SearchTerm}" Placeholder="חיפוש חנות" BackgroundColor="#f0f5f5"/>
+                <SearchBar x:Name="searchBar" Text="{Binding SearchTerm}" Placeholder="חיפוש חנות" BackgroundColor="#F2F4F4"/>
             </Frame>
             <RefreshView x:Name="refreshView"
                          Command="{Binding RefreshCommand}"
                          IsRefreshing="{Binding IsRefreshing}">
-                <CollectionView EmptyView="לא נמצאו חנויות התואמות את החיפוש" x:Name="collectionName" ItemsSource="{Binding FilteredShops}" SelectionMode="Single" BackgroundColor="White" Margin="0,10,0,0"
+                <CollectionView EmptyView="לא נמצאו חנויות התואמות את החיפוש" x:Name="collectionName" ItemsSource="{Binding FilteredShops}" SelectionMode="Single" BackgroundColor="White" Margin="0"
                                 SelectedItem="{Binding SelectedShop}" SelectionChangedCommand="{Binding ShowShopProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionName}, Path=SelectedItem}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout Span="1" Orientation="Vertical" />

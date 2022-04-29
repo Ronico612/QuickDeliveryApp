@@ -117,7 +117,8 @@
                         <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
                         <Label Text="עיר" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                     </Grid>
-                    <Entry Placeholder="הכנס עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" IsVisible="{Binding IsRegister}" MaxLength="30"/>
+                    <!--<Entry Placeholder="הכנס עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" IsVisible="{Binding IsRegister}" MaxLength="30"/>-->
+                    <Picker Title="הכנס עיר" ItemsSource="{Binding Cities}" SelectedItem="{Binding City, Mode=TwoWay}" Style="{StaticResource entryStyle}" IsVisible="{Binding IsRegister}"/>
 
                     <!-- כרטיס אשראי -->
                     <Grid IsVisible="{Binding IsRegister}">

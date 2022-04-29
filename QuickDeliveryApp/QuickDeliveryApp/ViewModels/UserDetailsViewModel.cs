@@ -19,6 +19,17 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private List<string> cities;
+        public List<string> Cities
+        {
+            get { return cities; }
+            set
+            {
+                cities = value;
+                OnPropertyChanged("Cities");
+            }
+        }
+
 
         #region Phone
         private string phone;
@@ -348,6 +359,8 @@ namespace QuickDeliveryApp.ViewModels
         public UserDetailsViewModel()
         {
             this.App = (App)Application.Current;
+            this.Cities = new List<string>(App.Cities);
+
             this.PhoneError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.AddressError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -388,7 +401,7 @@ namespace QuickDeliveryApp.ViewModels
 
             ServerStatus = "מעדכן פרטים אישיים...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
-            Thread.Sleep(2000);
+            //Thread.Sleep(2000);
 
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
             bool isUpdatedUser = await proxy.UpdateUser(App.CurrentUser, Phone, Address, City, NumCreditCard, NumCode, ValidityCreditCard);

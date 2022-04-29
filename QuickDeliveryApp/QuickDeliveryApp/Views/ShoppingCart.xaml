@@ -45,7 +45,7 @@
                                 <!--שם מוצר-->
                                 <Label Text="{Binding ProductName, StringFormat='{0}'}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.Column="0" Margin="15,0,0,0"/>
                                 <!--מחיר מוצר-->
-                                <StackLayout Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Margin="15,0,0,0">
+                                <StackLayout Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,0,0,0">
                                     <Label Text="₪" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}"/>
                                     <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}"/>
                                 </StackLayout>

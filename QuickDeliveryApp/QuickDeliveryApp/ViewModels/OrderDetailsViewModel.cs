@@ -221,7 +221,7 @@ namespace QuickDeliveryApp.ViewModels
             SelectedOrderDetails = selectedUserOrderDetails;
             this.isShowOrderStatus = showOrderStatus;
             this.isCalledFromDeliveryPerson = isCalledFromDeliveryPerson;
-            RowsHeight = SelectedOrderDetails.OrderProducts.Count * 50;
+            RowsHeight = SelectedOrderDetails.OrderProducts.Count * 65;
             this.IsApproved = this.isCalledFromDeliveryPerson && SelectedOrderDetails.OrderStatusId == 2; // approved
             this.IsTakenFromShop = this.isCalledFromDeliveryPerson && SelectedOrderDetails.OrderStatusId == 3; // taken
             this.InitStatusOrderDetails();

@@ -43,7 +43,11 @@
                     <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
                     <Label Text="עיר" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                 </Grid>
-                <Entry Placeholder="הכנס עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" MaxLength="30"/>
+                <!--<Entry Placeholder="הכנס עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" MaxLength="30"/>-->
+                <!--<Picker Title="הכנס עיר" ItemsSource="{Binding Cities}" SelectedItem="{Binding City, Mode=TwoWay}" Style="{StaticResource entryStyle}"/>-->
+                <!--<SearchBar Placeholder="חפש עיר" Text="{Binding City}" Style="{StaticResource entry}"/>
+                <CollectionView EmptyView="לא נמצאו ערים"  x:Name="cities" ItemsSource="{Binding FilteredCities}" SelectedItem="{Binding SelectedCityItem}" SelectionMode="Single"
+                                IsVisible="{Binding ShowCities}" SelectionChangedCommand="{Binding Source={x:Reference cities}, Path=BindingContext.SelectedCity}" SelectionChangedCommandParameter="{Binding Source={x:Reference cities}, Path=SelectedItem}"/>-->
                 <!-- כרטיס אשראי -->
                 <Grid>
                     <Grid.ColumnDefinitions>

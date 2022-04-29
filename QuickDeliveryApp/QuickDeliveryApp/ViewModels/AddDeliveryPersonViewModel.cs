@@ -112,7 +112,7 @@ namespace QuickDeliveryApp.ViewModels
             ServerStatus = "מוסיף שליח...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
 
-            Thread.Sleep(1000);
+            Thread.Sleep(500);
           
             int dpId = await proxy.AddDeliveryPersonAsync(DeliveryPersonEmail);
             await App.Current.MainPage.Navigation.PopModalAsync();

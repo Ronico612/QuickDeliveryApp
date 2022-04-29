@@ -38,6 +38,17 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private List<string> cities;
+        public List<string> Cities
+        {
+            get { return cities; }
+            set
+            {
+                cities = value;
+                OnPropertyChanged("Cities");
+            }
+        }
+
         #region Address
         private string address;
         public string Address
@@ -198,6 +209,7 @@ namespace QuickDeliveryApp.ViewModels
         public PayViewModel()
         {
             this.App = (App)Application.Current;
+            this.Cities = new List<string>(App.Cities);
             ProductsInShoppingCart = App.ProductsInShoppingCart;
             RowsHeight = ProductsInShoppingCart.Count * 65;
             this.AddressError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -221,7 +233,6 @@ namespace QuickDeliveryApp.ViewModels
         {
             ServerStatus = "מבצע הזמנה...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
-            Thread.Sleep(2000);
 
             bool success = true;
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
