@@ -89,7 +89,9 @@
                         <Label Text="{Binding BirthDateError}" IsVisible="{Binding ShowBirthDateError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
                         <Label Text="תאריך לידה" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                     </Grid>
-                    <DatePicker Date="{Binding BirthDate}" IsVisible="{Binding IsRegister}"/>
+                    <DatePicker Date="{Binding BirthDate}" IsVisible="{Binding IsRegister}" Margin="5,0">
+                        <DatePicker.Format>dd/MM/yyyy</DatePicker.Format>
+                    </DatePicker>
 
                     <!-- עיר -->
                     <Grid IsVisible="{Binding IsRegister}">
@@ -213,10 +215,13 @@
                         <Label Text="{Binding ValidityCreditCardError}" IsVisible="{Binding ShowValidityCreditCardError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
                         <Label Text="תוקף כרטיס אשראי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                     </Grid>
-                    <DatePicker Date="{Binding ValidityCreditCard}" IsVisible="{Binding IsRegister}"/>
+                    <DatePicker Date="{Binding ValidityCreditCard}" IsVisible="{Binding IsRegister}" Margin="5,0">
+                        <DatePicker.Format>dd/MM/yyyy</DatePicker.Format>
+                    </DatePicker>
+                    
                 </StackLayout>
             </ScrollView>
-            <Grid>
+            <Grid Margin="0,0,0,10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -227,7 +232,6 @@
                 <Button Grid.Row="0" Grid.Column="0" Command="{Binding SubmitCommand}" Text="אישור" Style="{StaticResource basicButtonStyle}" Margin="10,5,5,0"/>
                 <Button Grid.Row="0" Grid.Column="1" Command="{Binding GotoCommand}" Text="{Binding GoToText}" Style="{StaticResource basicButtonStyle}" Margin="5,5,10,0"/>
             </Grid>
-            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

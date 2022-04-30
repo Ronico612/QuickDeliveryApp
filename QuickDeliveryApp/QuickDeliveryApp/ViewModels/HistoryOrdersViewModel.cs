@@ -121,7 +121,7 @@ namespace QuickDeliveryApp.ViewModels
         public OrderDetails(Order o)
         {
             this.TotalPrice = o.TotalPrice;
-            this.OrderDate = o.OrderDate.ToString();
+            this.OrderDate = o.OrderDate.ToString("dd/MM/yyyy HH:mm");
             this.OrderId = o.OrderId;
             this.OrderStatusId = o.StatusOrderId;
 

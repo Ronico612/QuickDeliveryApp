@@ -135,7 +135,9 @@
                     <Label Text="{Binding ValidityCreditCardError}" IsVisible="{Binding ShowValidityCreditCardError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
                     <Label Text="תוקף כרטיס אשראי" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                 </Grid>
-                <DatePicker Date="{Binding ValidityCreditCard}"/>
+                <DatePicker Date="{Binding ValidityCreditCard}" Margin="5,0">
+                    <DatePicker.Format>dd/MM/yyyy</DatePicker.Format>
+                </DatePicker>
                 <Button Text="עדכון" Command="{Binding UpdateCommand}" Style="{StaticResource basicButtonStyle}" Margin="10,0,10,10"></Button>
             </StackLayout>
         </ScrollView>

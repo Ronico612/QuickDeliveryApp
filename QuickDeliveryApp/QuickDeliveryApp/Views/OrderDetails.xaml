@@ -13,15 +13,15 @@
                 <Label Text="זמן ביצוע הזמנה: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,0,15,5"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsShowApprovedByDeliveryPersonDate}">
-                <Label Text="{Binding ApprovedByDeliveryPersonDate}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,0,5"/>
+                <Label Text="{Binding ApprovedByDeliveryPersonDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,0,5"/>
                 <Label Text="זמן העברת הזמנה לשליח: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,0,15,5"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsShowTakenFromShopDate}">
-                <Label Text="{Binding TakenFromShopDate}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,0,5"/>
+                <Label Text="{Binding TakenFromShopDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,0,5"/>
                 <Label Text="זמן איסוף מהחנות: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,0,15,5"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsShowBroughtToUserDate}">
-                <Label Text="{Binding BroughtToUserDate}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,0,5"/>
+                <Label Text="{Binding BroughtToUserDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,0,5"/>
                 <Label Text="זמן מסירה ללקוח: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,0,15,5"/>
             </StackLayout>
             <Label Text="{Binding SelectedOrderDetails.ShopName}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,20,15,0"/>

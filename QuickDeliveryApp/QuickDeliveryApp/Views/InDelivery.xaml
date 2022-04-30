@@ -11,7 +11,7 @@
 
             <Label HeightRequest="420"/>
 
-            <Frame CornerRadius="4" BorderColor="White" Margin="15,0,15,10" BackgroundColor="#F2F4F4">
+            <Frame CornerRadius="4" BorderColor="DarkGray" Margin="15,0,15,10" BackgroundColor="#F2F4F4">
                 <Label Text="*ניתן לצפות בדף מעקב אחר הזמנה דרך אזור אישי -> הזמנות בתהליך -> למעקב אחר ההזמנה" Style="{StaticResource labelStyle2}" LineBreakMode="NoWrap" Margin="15,0" MaxLines="3"/>
             </Frame>
         </StackLayout>

@@ -42,7 +42,7 @@
                                 <Label Text="|" FontAttributes="Bold"/>
                                 <Label Text="{Binding ShopName}" Style="{StaticResource labelStyle2}"/>
                             </StackLayout>
-                            <Label Text="{Binding OrderDate}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Grid.Row="1" Grid.Column="2"/>
+                            <Label Text="{Binding OrderDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Grid.Row="1" Grid.Column="2"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

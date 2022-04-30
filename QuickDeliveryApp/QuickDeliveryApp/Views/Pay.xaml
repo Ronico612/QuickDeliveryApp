@@ -54,7 +54,7 @@
                     </Frame>
               <Label Text="מספר רחוב להזמנה (ניתן לשנות)" Style="{StaticResource labelNameStyle}" Margin="5,0"/>
               <Label Text="{Binding StreetNumError}" IsVisible="{Binding ShowStreetNumError}" Style="{StaticResource labelErrorStyle}" Margin="15,0"/>
-              <Entry Placeholder="הכנס מספר רחוב" Text="{Binding StreetNum}" Style="{StaticResource entryStyle}" MaxLength="5"/>
+              <Entry Placeholder="הכנס מספר רחוב" Text="{Binding StreetNum}" Style="{StaticResource entryStyle}" MaxLength="5" Margin="10,0"/>
               <Label Text="כרטיס אשראי" Style="{StaticResource labelNameStyle}" Margin="5,0"/>
               <Label Text="{Binding UserNumCard}" Style="{StaticResource entryStyle}" Margin="15,0"/>
               <Label Text="סיכום פרטי הזמנה" Style="{StaticResource labelStyle3}" HorizontalOptions="End" Margin="0,30,15,20"/>
