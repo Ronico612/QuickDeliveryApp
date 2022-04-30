@@ -22,7 +22,8 @@ namespace QuickDeliveryApp.Views
         {
             base.OnAppearing();
             AddOrEditShopViewModel context = (AddOrEditShopViewModel)this.BindingContext;
-            context.ShowCities = false;
+            context.ShowShopCities = false;
+            context.ShowShopStreets = false;
         }
 
         public void SetImageSourceEvent(ImageSource obj)

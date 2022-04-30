@@ -415,7 +415,7 @@ namespace QuickDeliveryApp.ViewModels
               if (this.StreetNum.StartsWith("0") || !int.TryParse(this.StreetNum, out num) || num <= 0)
                 {
                     this.ShowStreetNumError = true;
-                    this.StreetNumError = ERROR_MESSAGES.BAD_HOUSE_NUM;
+                    this.StreetNumError = ERROR_MESSAGES.BAD_STREET_NUM;
                 }
             }
             else
@@ -578,15 +578,9 @@ namespace QuickDeliveryApp.ViewModels
 
         private void ValidateValidityCreditCard()
         {
-            if (this.ValidityCreditCard == DateTime.MinValue)
+            if (this.ValidityCreditCard.Date <= DateTime.Now.Date)
             {
                 this.ShowValidityCreditCardError = true;
-                this.ValidityCreditCardError = ERROR_MESSAGES.REQUIRED_FIELD;
-            }
-            else if (this.ValidityCreditCard < DateTime.Now.Date)
-            {
-                this.ShowValidityCreditCardError = true;
-                this.ValidityCreditCardError = ERROR_MESSAGES.BAD_VALIDITY_CREDIT_CARD;
             }
             else
                 this.ShowValidityCreditCardError = false;
@@ -606,10 +600,10 @@ namespace QuickDeliveryApp.ViewModels
             this.PhoneError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.StreetError = ERROR_MESSAGES.BAD_STREET;
-            this.StreetNumError = ERROR_MESSAGES.BAD_HOUSE_NUM;
+            this.StreetNumError = ERROR_MESSAGES.BAD_STREET_NUM;
             this.NumCreditCardError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.NumCodeError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.ValidityCreditCardError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.ValidityCreditCardError = ERROR_MESSAGES.BAD_VALIDITY_CREDIT_CARD;
 
             this.Phone = App.CurrentUser.UserPhone;
             this.City = App.CurrentUser.UserCity;

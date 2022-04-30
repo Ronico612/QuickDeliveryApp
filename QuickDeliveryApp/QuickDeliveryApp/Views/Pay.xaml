@@ -6,10 +6,7 @@
        <StackLayout BackgroundColor="White">
          <ScrollView>
             <StackLayout>
-              <Label Text="כתובת הזמנה (ניתן לשנות)" Style="{StaticResource labelNameStyle}" Margin="5,15,5,0"/>
-              <Label Text="{Binding AddressError}" IsVisible="{Binding ShowAddressError}" TextColor="Red" Margin="15,0"/>
-              <Entry Text="{Binding Address}" Style="{StaticResource entryStyle}" Margin="10,0"/>
-              <Label Text="עיר להזמנה (ניתן לשנות)" Style="{StaticResource labelNameStyle}" Margin="5,0"/>
+              <Label Text="עיר להזמנה (ניתן לשנות)" Style="{StaticResource labelNameStyle}" Margin="5,15,5,0"/>
               <Label Text="{Binding CityError}" IsVisible="{Binding ShowCityError}" TextColor="Red" Margin="15,0"/>
               <Entry Placeholder="חפש עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" Margin="10,0"/>
               <Frame BorderColor="DarkGray" IsVisible="{Binding ShowCities}" Margin="14,-14,14,0">
@@ -32,8 +29,32 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
               </Frame>
-              <!--<Picker Title="הכנס עיר להזמנה" ItemsSource="{Binding Cities}" SelectedItem="{Binding City, Mode=TwoWay}" Style="{StaticResource entryStyle}" Margin="10,0"/>-->
-              <!--<Entry Text="{Binding City}" Style="{StaticResource entryStyle}" Margin="10,0"/>-->
+              <Label Text="רחוב להזמנה (ניתן לשנות)" Style="{StaticResource labelNameStyle}" Margin="5,0"/>
+              <Label Text="{Binding StreetError}" IsVisible="{Binding ShowStreetError}" TextColor="Red" Margin="15,0"/>
+              <Entry Placeholder="חפש רחוב" Text="{Binding Street}" Style="{StaticResource entryStyle}" IsEnabled="{Binding IsStreetEnabled}" Margin="10,0"/>
+              <Frame BorderColor="DarkGray" IsVisible="{Binding ShowStreets}" Margin="14,-14,14,0">
+                        <CollectionView EmptyView="לא נמצאו רחובות"  x:Name="streets" ItemsSource="{Binding FilteredStreets}" SelectedItem="{Binding SelectedStreetItem}" SelectionMode="Single"
+                            SelectionChangedCommand="{Binding Source={x:Reference streets}, Path=BindingContext.SelectedStreet}"
+                            SelectionChangedCommandParameter="{Binding Source={x:Reference streets}, Path=SelectedItem}"
+                            HeightRequest="70">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Span="1" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnSpacing="0" RowSpacing="2">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+                                        <Label Text="{Binding .}" Style="{StaticResource entryStyle}" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="0" Margin="0"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Frame>
+              <Label Text="מספר רחוב להזמנה (ניתן לשנות)" Style="{StaticResource labelNameStyle}" Margin="5,0"/>
+              <Label Text="{Binding StreetNumError}" IsVisible="{Binding ShowStreetNumError}" Style="{StaticResource labelErrorStyle}" Margin="15,0"/>
+              <Entry Placeholder="הכנס מספר רחוב" Text="{Binding StreetNum}" Style="{StaticResource entryStyle}" MaxLength="5"/>
               <Label Text="כרטיס אשראי" Style="{StaticResource labelNameStyle}" Margin="5,0"/>
               <Label Text="{Binding UserNumCard}" Style="{StaticResource entryStyle}" Margin="15,0"/>
               <Label Text="סיכום פרטי הזמנה" Style="{StaticResource labelStyle3}" HorizontalOptions="End" Margin="0,30,15,20"/>
@@ -87,7 +108,7 @@
             </StackLayout>
           </StackLayout>
          </ScrollView>
-         <Button Text="בצע הזמנה" IsEnabled="{Binding IsFormValid}" Command="{Binding PayCommand}" Style="{StaticResource basicButtonStyle}" Margin="15"/>
+         <Button Text="בצע הזמנה" Command="{Binding PayCommand}" Style="{StaticResource basicButtonStyle}" Margin="15"/>
        </StackLayout>
     </ContentPage.Content>
 </ContentPage>

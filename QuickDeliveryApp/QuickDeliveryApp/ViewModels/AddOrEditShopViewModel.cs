@@ -10,6 +10,7 @@ using Xamarin.Essentials;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using QuickDeliveryApp.DTO;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -19,6 +20,17 @@ namespace QuickDeliveryApp.ViewModels
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        private string serverStatus;
+        public string ServerStatus
+        {
+            get { return serverStatus; }
+            set
+            {
+                serverStatus = value;
+                OnPropertyChanged("ServerStatus");
+            }
         }
 
         private Shop shop;
@@ -54,6 +66,26 @@ namespace QuickDeliveryApp.ViewModels
 
                     this.filteredCities = value;
                     OnPropertyChanged("FilteredCities");
+                }
+            }
+        }
+
+        private List<Street> allStreets;
+
+        private ObservableCollection<string> filteredStreets;
+        public ObservableCollection<string> FilteredStreets
+        {
+            get
+            {
+                return this.filteredStreets;
+            }
+            set
+            {
+                if (this.filteredStreets != value)
+                {
+
+                    this.filteredStreets = value;
+                    OnPropertyChanged("FilteredStreets");
                 }
             }
         }
@@ -168,50 +200,6 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-        #region ShopAdress
-        private string shopAdress;
-        public string ShopAdress
-        {
-            get { return shopAdress; }
-            set
-            {
-                shopAdress = value;
-                ValidateShopAdress();
-                OnPropertyChanged("ShopAdress");
-            }
-        }
-
-        private bool showShopAdressError;
-        public bool ShowShopAdressError
-        {
-            get => showShopAdressError;
-            set
-            {
-                showShopAdressError = value;
-                OnPropertyChanged("ShowShopAdressError");
-            }
-        }
-
-        private string shopAdressError;
-        public string ShopAdressError
-        {
-            get => shopAdressError;
-            set
-            {
-                shopAdressError = value;
-                OnPropertyChanged("ShopAdressError");
-            }
-        }
-
-        private void ValidateShopAdress()
-        {
-            if (ShopAdress == null)
-                this.ShowShopAdressError = true;
-            else
-                this.ShowShopAdressError = string.IsNullOrEmpty(ShopAdress.Trim());
-        }
-        #endregion
-
         #region ShopCity
         private string shopCity;
         public string ShopCity
@@ -219,70 +207,75 @@ namespace QuickDeliveryApp.ViewModels
             get { return shopCity; }
             set
             {
-                shopCity = value;
-                OnCityChanged(value);
-                ValidateShopCity();
-                OnPropertyChanged("ShopCity");
+                if (shopCity != value)
+                {
+                    shopCity = value;
+                    ValidateShopCity();
+                    OnCityChanged(value);
+                    OnPropertyChanged("ShopCity");
+                }
             }
         }
 
-        private string selectedCityItem;
-        public string SelectedCityItem
+        private string selectedShopCityItem;
+        public string SelectedShopCityItem
         {
-            get => selectedCityItem;
+            get => selectedShopCityItem;
             set
             {
-                selectedCityItem = value;
-                OnPropertyChanged("SelectedCityItem");
+                selectedShopCityItem = value;
+                OnPropertyChanged("SelectedShopCityItem");
             }
         }
 
         public ICommand SelectedCity => new Command<string>(OnSelectedCity);
         public void OnSelectedCity(string city)
         {
-            if (city != null)
+            if (!string.IsNullOrEmpty(city))
             {
-                this.ShowCities = false;
                 this.ShopCity = city;
+                this.IsShopStreetEnabled = true;
+                this.ShowShopCities = false;
             }
         }
 
-        private bool showCities;
-        public bool ShowCities
+        private bool showShopCities;
+        public bool ShowShopCities
         {
-            get => showCities;
+            get => showShopCities;
             set
             {
-                showCities = value;
-                OnPropertyChanged("ShowCities");
+                showShopCities = value;
+                OnPropertyChanged("ShowShopCities");
             }
         }
 
         public void OnCityChanged(string search)
         {
-            if (this.ShopCity != this.SelectedCityItem)
+            this.ShopStreet = "";
+            this.ShowShopStreets = false;
+            this.FilteredStreets.Clear();
+            this.IsShopStreetEnabled = false;
+
+            if (this.ShopCity != this.SelectedShopCityItem)
             {
-                this.ShowCities = true;
-                this.SelectedCityItem = null;
+                this.ShowShopCities = true;
+                this.SelectedShopCityItem = null;
             }
-            //Filter the list of cities based on the search term
+
             if (this.allCities == null)
                 return;
 
+            //Filter the list of cities based on the search term
             if (String.IsNullOrWhiteSpace(search))
             {
-                this.ShowCities = false;
+                this.ShowShopCities = false;
                 this.FilteredCities.Clear();
             }
             else
             {
-                foreach (string city in this.allCities)
-                {
-                    if (!this.FilteredCities.Contains(city) && city.Contains(search))
-                        this.FilteredCities.Add(city);
-                    else if (this.FilteredCities.Contains(city) && !city.Contains(search))
-                        this.FilteredCities.Remove(city);
-                }
+                List<string> cityList = this.allCities.Where(c => c.Contains(search)).OrderBy(c => c).ToList();
+                this.FilteredCities = new ObservableCollection<string>(cityList);
             }
         }
 
@@ -322,6 +315,180 @@ namespace QuickDeliveryApp.ViewModels
             }
             else
                 this.ShopCityError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
+
+        #endregion
+
+        #region ShopStreet
+
+        private string shopStreet;
+        public string ShopStreet
+        {
+            get => shopStreet;
+            set
+            {
+                shopStreet = value;
+                OnStreetChanged(value);
+                ValidateShopStreet();
+                OnPropertyChanged("ShopStreet");
+            }
+        }
+
+        private bool showShopStreets;
+        public bool ShowShopStreets
+        {
+            get => showShopStreets;
+            set
+            {
+                showShopStreets = value;
+                OnPropertyChanged("ShowShopStreets");
+            }
+        }
+
+        private string selectedStreetItem;
+        public string SelectedStreetItem
+        {
+            get => selectedStreetItem;
+            set
+            {
+                selectedStreetItem = value;
+                OnPropertyChanged("SelectedStreetItem");
+            }
+        }
+
+        public ICommand SelectedStreet => new Command<string>(OnSelectedStreet);
+        public void OnSelectedStreet(string street)
+        {
+            if (!string.IsNullOrEmpty(street))
+            {
+                this.ShowShopStreets = false;
+                this.ShopStreet = street;
+            }
+        }
+
+        private bool showShopStreetError;
+        public bool ShowShopStreetError
+        {
+            get => showShopStreetError;
+            set
+            {
+                showShopStreetError = value;
+                OnPropertyChanged("ShowShopStreetError");
+            }
+        }
+
+        private string shopStreetError;
+        public string ShopStreetError
+        {
+            get => shopStreetError;
+            set
+            {
+                shopStreetError = value;
+                OnPropertyChanged("ShopStreetError");
+            }
+        }
+
+        private bool isShopStreetEnabled;
+        public bool IsShopStreetEnabled
+        {
+            get => isShopStreetEnabled;
+            set
+            {
+                isShopStreetEnabled = value;
+                OnPropertyChanged("IsShopStreetEnabled");
+            }
+        }
+
+        private void ValidateShopStreet()
+        {
+            this.ShowShopStreetError = string.IsNullOrEmpty(this.ShopStreet);
+            if (!this.ShowShopStreetError)
+            {
+                Street street = this.allStreets.Where(s => s.street_name == this.ShopStreet).FirstOrDefault();
+                if (street == null)
+                {
+                    this.ShowShopStreetError = true;
+                    this.ShopStreetError = ERROR_MESSAGES.BAD_STREET;
+                }
+            }
+            else
+                this.ShopStreetError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
+
+        public void OnStreetChanged(string search)
+        {
+            if (this.ShopStreet != this.SelectedStreetItem)
+            {
+                this.ShowShopStreets = true;
+                this.SelectedStreetItem = null;
+            }
+
+            if (this.allStreets == null)
+                return;
+
+            //Filter the list of streets based on the search term
+            if (String.IsNullOrWhiteSpace(search))
+            {
+                this.ShowShopStreets = false;
+                this.FilteredStreets.Clear();
+            }
+            else
+            {
+                List<Street> streetList = this.allStreets.Where(s => s.street_name.Contains(search) && s.city_name == this.ShopCity).OrderBy(s => s.street_name).ToList();
+                this.FilteredStreets = new ObservableCollection<string>(streetList.Select(s => s.street_name));
+            }
+        }
+        #endregion
+
+        #region ShopStreetNum
+        private bool showShopStreetNumError;
+        public bool ShowShopStreetNumError
+        {
+            get => showShopStreetNumError;
+            set
+            {
+                showShopStreetNumError = value;
+                OnPropertyChanged("ShowShopStreetNumError");
+            }
+        }
+
+        private string shopStreetNum;
+        public string ShopStreetNum
+        {
+            get => shopStreetNum;
+            set
+            {
+                shopStreetNum = value;
+                ValidateShopStreetNum();
+                OnPropertyChanged("ShopStreetNum");
+            }
+        }
+
+        private string shopStreetNumError;
+        public string ShopStreetNumError
+        {
+            get => shopStreetNumError;
+            set
+            {
+                shopStreetNumError = value;
+                OnPropertyChanged("ShopStreetNumError");
+            }
+        }
+
+        private void ValidateShopStreetNum()
+        {
+            this.ShowShopStreetNumError = string.IsNullOrEmpty(this.ShopStreetNum);
+            int num;
+            if (!this.ShowShopStreetNumError)
+            {
+                if (this.ShopStreetNum.StartsWith("0") || !int.TryParse(this.ShopStreetNum, out num) || num <= 0)
+                {
+                    this.ShowShopStreetNumError = true;
+                    this.ShopStreetNumError = ERROR_MESSAGES.BAD_STREET_NUM;
+                }
+            }
+            else
+                this.ShopStreetNumError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -440,27 +607,24 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-        private string serverStatus;
-        public string ServerStatus
-        {
-            get { return serverStatus; }
-            set
-            {
-                serverStatus = value;
-                OnPropertyChanged("ServerStatus");
-            }
-        }
+        public ICommand AddOrEditCommand => new Command(AddOrEdit);
 
         public AddOrEditShopViewModel(Shop s)
         {
             App app = (App)Application.Current;
+
             allCities = app.Cities;
             this.FilteredCities = new ObservableCollection<string>();
+
+            this.allStreets = app.Streets;
+            this.FilteredStreets = new ObservableCollection<string>();
+
             Init(s);
             this.imageFileResult = null;
             this.ShopNameError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.ShopAdressError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ShopCityError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.ShopStreetError = ERROR_MESSAGES.BAD_STREET;
+            this.ShopStreetNumError = ERROR_MESSAGES.BAD_STREET_NUM;
             this.ShopPhoneError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ShopManagerEmailError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ImgSourceError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -480,8 +644,9 @@ namespace QuickDeliveryApp.ViewModels
                 this.Shop = s;
                 this.ImgSource = s.ImgSource;
                 this.ShopName = s.ShopName;
-                this.ShopAdress = s.ShopAdress;
                 this.ShopCity = s.ShopCity;
+                this.ShopStreet = s.ShopAdress;
+                //this.ShopStreetNum = s.ShopStreetNum;
                 this.ShopPhone = s.ShopPhone;
 
                 QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
@@ -498,45 +663,19 @@ namespace QuickDeliveryApp.ViewModels
         {
             //Validate all fields first
             ValidateShopName();
-            ValidateShopAdress();
             ValidateShopCity();
+            ValidateShopStreet();
+            ValidateShopStreetNum();
             ValidateShopPhone();
             ValidateShopManagerEmail();
             ValidateImgSource();
 
             //Check if any validation failed
-            if (ShowShopNameError || ShowShopAdressError || ShowShopCityError || ShowShopPhoneError || ShowShopManagerEmailError || ShowImgSourceError)
+            if (ShowShopNameError || ShowShopCityError || ShowShopStreetError || ShowShopStreetNumError || ShowShopPhoneError || ShowShopManagerEmailError || ShowImgSourceError)
                 return false;
             return true;
         }
 
-        #region Upload Image Code
-        FileResult imageFileResult;
-        public event Action<ImageSource> SetImageSourceEvent;
-
-        public ICommand ChooseImageCommand => new Command(ChooseImage);
-        public async void ChooseImage()
-        {
-            FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
-            {
-                Title = "בחר תמונה"
-            });
-
-            if (result != null)
-            {
-                this.imageFileResult = result;
-
-                var stream = await result.OpenReadAsync();
-                ImageSource imgSource = ImageSource.FromStream(() => stream);
-                if (imgSource != null)
-                    ShowImgSourceError = false;
-                if (SetImageSourceEvent != null)
-                    SetImageSourceEvent(imgSource);
-            }
-        }
-        #endregion
-
-        public ICommand AddOrEditCommand => new Command(AddOrEdit);
         public async void AddOrEdit()
         {
             if (!ValidateForm())
@@ -559,10 +698,10 @@ namespace QuickDeliveryApp.ViewModels
                 Thread.Sleep(500);
                 Shop newShop = new Shop();
                 newShop.ShopName = ShopName;
-                newShop.ShopAdress = ShopAdress;
                 newShop.ShopCity = ShopCity;
+                newShop.ShopAdress = ShopStreet;
+                //newShop.ShopStreetNum = ShopStreetNum;
                 newShop.ShopPhone = shopPhone;
-                App app = (App)Application.Current;
 
                 int smId = await proxy.AddShopManagerAsync(ShopManagerEmail);
                 if (smId == -1)
@@ -631,7 +770,7 @@ namespace QuickDeliveryApp.ViewModels
                         shopManagerId = smId;
                 }
 
-                bool isUpdatedShop = await proxy.UpdateShop(this.Shop.ShopId, ShopName, ShopAdress, ShopCity, ShopPhone, shopManagerId);
+                bool isUpdatedShop = await proxy.UpdateShop(this.Shop.ShopId, ShopName, ShopStreet, ShopCity, ShopPhone, shopManagerId);
                 if (isUpdatedShop && this.imageFileResult != null)
                 {
                     ServerStatus = "מעלה תמונה...";
@@ -661,5 +800,31 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+
+        #region Upload Image Code
+        FileResult imageFileResult;
+        public event Action<ImageSource> SetImageSourceEvent;
+
+        public ICommand ChooseImageCommand => new Command(ChooseImage);
+        public async void ChooseImage()
+        {
+            FileResult result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
+            {
+                Title = "בחר תמונה"
+            });
+
+            if (result != null)
+            {
+                this.imageFileResult = result;
+
+                var stream = await result.OpenReadAsync();
+                ImageSource imgSource = ImageSource.FromStream(() => stream);
+                if (imgSource != null)
+                    ShowImgSourceError = false;
+                if (SetImageSourceEvent != null)
+                    SetImageSourceEvent(imgSource);
+            }
+        }
+        #endregion
     }
 }

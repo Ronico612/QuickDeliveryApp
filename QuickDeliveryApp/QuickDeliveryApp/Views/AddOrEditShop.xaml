@@ -24,19 +24,6 @@
                 <Label Text="שם חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Entry Placeholder="הכנס שם חנות" Text="{Binding ShopName}" Style="{StaticResource entryStyle}" MaxLength="100"/>
-            <!-- כתובת חנות -->
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="5*"/>
-                    <ColumnDefinition Width="6*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Label Text="{Binding ShopAdressError}" IsVisible="{Binding ShowShopAdressError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
-                <Label Text="כתובת חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
-            </Grid>
-            <Entry Placeholder="הכנס כתובת חנות" Text="{Binding ShopAdress}" Style="{StaticResource entryStyle}" MaxLength="100"/>
             <!-- עיר חנות -->
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -49,9 +36,9 @@
                 <Label Text="{Binding ShopCityError}" IsVisible="{Binding ShowShopCityError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
                 <Label Text="עיר חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
-                <Entry Placeholder="חפש עיר" Text="{Binding ShopCity}" Style="{StaticResource entryStyle}" Margin="5,1,5,0"/>
-            <Frame BorderColor="DarkGray" IsVisible="{Binding ShowCities}" Margin="9,-14,9,0">
-                <CollectionView EmptyView="לא נמצאו ערים"  x:Name="cities" ItemsSource="{Binding FilteredCities}" SelectedItem="{Binding SelectedCityItem}" SelectionMode="Single"
+            <Entry Placeholder="חפש עיר" Text="{Binding ShopCity}" Style="{StaticResource entryStyle}" Margin="5,1,5,0"/>
+            <Frame BorderColor="DarkGray" IsVisible="{Binding ShowShopCities}" Margin="9,-14,9,0">
+                    <CollectionView EmptyView="לא נמצאו ערים"  x:Name="cities" ItemsSource="{Binding FilteredCities}" SelectedItem="{Binding SelectedShopCityItem}" SelectionMode="Single"
                                 SelectionChangedCommand="{Binding Source={x:Reference cities}, Path=BindingContext.SelectedCity}"
                                 SelectionChangedCommandParameter="{Binding Source={x:Reference cities}, Path=SelectedItem}"
                                 HeightRequest="70">
@@ -70,8 +57,52 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Frame>
-            <!--<Entry Placeholder="הכנס עיר חנות" Text="{Binding ShopCity}" Style="{StaticResource entryStyle}" MaxLength="100"/>-->
-            <!--<Picker Title="הכנס עיר חנות" ItemsSource="{Binding Cities}" SelectedItem="{Binding ShopCity, Mode=TwoWay}" Style="{StaticResource entryStyle}"/>-->
+            <!-- רחוב חנות -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Label Text="{Binding ShopStreetError}" IsVisible="{Binding ShowShopStreetError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                <Label Text="רחוב חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+            </Grid>
+            <Entry Placeholder="חפש רחוב" Text="{Binding ShopStreet}" Style="{StaticResource entryStyle}" IsEnabled="{Binding IsShopStreetEnabled}"  Margin="5,1,5,0"/>
+            <Frame BorderColor="DarkGray" IsVisible="{Binding ShowShopStreets}" Margin="9,-14,9,0">
+                <CollectionView EmptyView="לא נמצאו רחובות"  x:Name="streets" ItemsSource="{Binding FilteredStreets}" SelectedItem="{Binding SelectedStreetItem}" SelectionMode="Single"
+                        SelectionChangedCommand="{Binding Source={x:Reference streets}, Path=BindingContext.SelectedStreet}"
+                        SelectionChangedCommandParameter="{Binding Source={x:Reference streets}, Path=SelectedItem}"
+                        HeightRequest="70">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Span="1" Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnSpacing="0" RowSpacing="2">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding .}" Style="{StaticResource entryStyle}" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="0" Margin="0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+            <!-- מספר רחוב חנות -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="6*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+               <Label Text="{Binding ShopStreetNumError}" IsVisible="{Binding ShowShopStreetNumError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+               <Label Text="מספר רחוב חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+            </Grid>
+            <Entry Placeholder="הכנס מספר רחוב חנות" Text="{Binding ShopStreetNum}" Style="{StaticResource entryStyle}" MaxLength="5"/>
             <!-- טלפון חנות -->
             <Grid>
                 <Grid.ColumnDefinitions>

@@ -23,6 +23,7 @@ namespace QuickDeliveryApp.Views
             base.OnAppearing();
             PayViewModel context = (PayViewModel)this.BindingContext;
             context.ShowCities = false;
+            context.ShowStreets = false;
         }
     }
 }
