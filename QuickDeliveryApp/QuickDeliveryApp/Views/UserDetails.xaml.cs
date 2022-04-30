@@ -23,6 +23,7 @@ namespace QuickDeliveryApp.Views
             base.OnAppearing();
             UserDetailsViewModel context = (UserDetailsViewModel)this.BindingContext;
             context.ShowCities = false;
+            context.ShowStreets = false;
         }
     }
 }

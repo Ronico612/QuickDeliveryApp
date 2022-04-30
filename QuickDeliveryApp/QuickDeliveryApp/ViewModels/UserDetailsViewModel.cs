@@ -1,13 +1,11 @@
-﻿using QuickDeliveryApp.Models;
+﻿using QuickDeliveryApp.DTO;
 using QuickDeliveryApp.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -19,6 +17,19 @@ namespace QuickDeliveryApp.ViewModels
         protected void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        public App App { get; set; }
+
+        private string serverStatus;
+        public string ServerStatus
+        {
+            get { return serverStatus; }
+            set
+            {
+                serverStatus = value;
+                OnPropertyChanged("ServerStatus");
+            }
         }
 
         private List<string> allCities;
@@ -41,6 +52,25 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private List<Street> allStreets;
+
+        private ObservableCollection<string> filteredStreets;
+        public ObservableCollection<string> FilteredStreets
+        {
+            get
+            {
+                return this.filteredStreets;
+            }
+            set
+            {
+                if (this.filteredStreets != value)
+                {
+
+                    this.filteredStreets = value;
+                    OnPropertyChanged("FilteredStreets");
+                }
+            }
+        }
 
         #region Phone
         private string phone;
@@ -101,50 +131,6 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-        #region Address
-        private string address;
-        public string Address
-        {
-            get { return address; }
-            set
-            {
-                address = value;
-                ValidateAddress();
-                OnPropertyChanged("Address");
-            }
-        }
-
-        private bool showAddressError;
-        public bool ShowAddressError
-        {
-            get => showAddressError;
-            set
-            {
-                showAddressError = value;
-                OnPropertyChanged("ShowAddressError");
-            }
-        }
-
-        private string addressError;
-        public string AddressError
-        {
-            get => addressError;
-            set
-            {
-                addressError = value;
-                OnPropertyChanged("AddressError");
-            }
-        }
-
-        private void ValidateAddress()
-        {
-            if (Address == null)
-                this.ShowAddressError = true;
-            else
-                this.ShowAddressError = string.IsNullOrEmpty(Address.Trim());
-        }
-        #endregion
-
         #region City
         private string city;
         public string City
@@ -152,11 +138,13 @@ namespace QuickDeliveryApp.ViewModels
             get { return city; }
             set
             {
-                city = value;
-                ValidateCity();
-                OnCityChanged(value);
-                ValidateCity();
-                OnPropertyChanged("City");
+                if (city != value)
+                {
+                    city = value;
+                    ValidateCity();
+                    OnCityChanged(value);
+                    OnPropertyChanged("City");
+                }
             }
         }
 
@@ -174,10 +162,11 @@ namespace QuickDeliveryApp.ViewModels
         public ICommand SelectedCity => new Command<string>(OnSelectedCity);
         public void OnSelectedCity(string city)
         {
-            if (city != null)
+            if (!string.IsNullOrEmpty(city))
             {
-                this.ShowCities = false;
                 this.City = city;
+                this.IsStreetEnabled = true;
+                this.ShowCities = false;
             }
         }
 
@@ -194,15 +183,21 @@ namespace QuickDeliveryApp.ViewModels
 
         public void OnCityChanged(string search)
         {
+            this.Street = "";
+            this.ShowStreets = false;
+            this.FilteredStreets.Clear();
+            this.IsStreetEnabled = false;
+
             if (this.City != this.SelectedCityItem)
             {
                 this.ShowCities = true;
                 this.SelectedCityItem = null;
             }
-            //Filter the list of cities based on the search term
+
             if (this.allCities == null)
                 return;
 
+            //Filter the list of cities based on the search term
             if (String.IsNullOrWhiteSpace(search))
             {
                 this.ShowCities = false;
@@ -210,13 +205,8 @@ namespace QuickDeliveryApp.ViewModels
             }
             else
             {
-                foreach (string city in this.allCities)
-                {
-                    if (!this.FilteredCities.Contains(city) && city.Contains(search))
-                        this.FilteredCities.Add(city);
-                    else if (this.FilteredCities.Contains(city) && !city.Contains(search))
-                        this.FilteredCities.Remove(city);
-                }
+                List<string> cityList = this.allCities.Where(c => c.Contains(search)).OrderBy(c => c).ToList();
+                this.FilteredCities = new ObservableCollection<string>(cityList);
             }
         }
 
@@ -246,7 +236,7 @@ namespace QuickDeliveryApp.ViewModels
         {
             this.ShowCityError = string.IsNullOrEmpty(this.City);
             if (!this.ShowCityError)
-            {
+           {
                 string city = this.allCities.Where(c => c == this.City).FirstOrDefault();
                 if (string.IsNullOrEmpty(city))
                 {
@@ -258,6 +248,179 @@ namespace QuickDeliveryApp.ViewModels
                 this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
 
+        #endregion
+
+        #region Street
+
+        private string street;
+        public string Street
+        {
+            get => street;
+            set
+            {
+                street = value;
+                OnStreetChanged(value);
+                ValidateStreet();
+                OnPropertyChanged("Street");
+            }
+        }
+
+        private bool showStreets;
+        public bool ShowStreets
+        {
+            get => showStreets;
+            set
+            {
+                showStreets = value;
+                OnPropertyChanged("ShowStreets");
+            }
+        }
+
+        private string selectedStreetItem;
+        public string SelectedStreetItem
+        {
+            get => selectedStreetItem;
+            set
+            {
+                selectedStreetItem = value;
+                OnPropertyChanged("SelectedStreetItem");
+            }
+        }
+
+        public ICommand SelectedStreet => new Command<string>(OnSelectedStreet);
+        public void OnSelectedStreet(string street)
+        {
+            if (!string.IsNullOrEmpty(street))
+            {
+                this.ShowStreets = false;
+                this.Street = street;
+            }
+        }
+
+        private bool showStreetError;
+        public bool ShowStreetError
+        {
+            get => showStreetError;
+            set
+            {
+                showStreetError = value;
+                OnPropertyChanged("ShowStreetError");
+            }
+        }
+
+        private string streetError;
+        public string StreetError
+        {
+            get => streetError;
+            set
+            {
+                streetError = value;
+                OnPropertyChanged("StreetError");
+            }
+        }
+
+        private bool isStreetEnabled;
+        public bool IsStreetEnabled
+        {
+            get => isStreetEnabled;
+            set
+            {
+                isStreetEnabled = value;
+                OnPropertyChanged("IsStreetEnabled");
+            }
+        }
+
+        private void ValidateStreet()
+        {
+            this.ShowStreetError = string.IsNullOrEmpty(this.Street);
+            if (!this.ShowStreetError)
+            {
+                Street street = this.allStreets.Where(s => s.street_name == this.Street).FirstOrDefault();
+                if (street == null)
+                {
+                    this.ShowStreetError = true;
+                    this.StreetError = ERROR_MESSAGES.BAD_STREET;
+                }
+            }
+            else
+                this.StreetError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
+
+        public void OnStreetChanged(string search)
+        {
+            if (this.Street != this.SelectedStreetItem)
+            {
+                this.ShowStreets = true;
+                this.SelectedStreetItem = null;
+            }
+            
+            if (this.allStreets == null)
+                return;
+
+            //Filter the list of streets based on the search term
+            if (String.IsNullOrWhiteSpace(search))
+            {
+                this.ShowStreets = false;
+                this.FilteredStreets.Clear();
+            }
+            else
+            {
+                List<Street> streetList = this.allStreets.Where(s => s.street_name.Contains(search) && s.city_name == this.City).OrderBy(s => s.street_name).ToList();
+                this.FilteredStreets = new ObservableCollection<string>(streetList.Select(s => s.street_name));
+            }
+        }
+        #endregion
+
+        #region StreetNum
+        private bool showStreetNumError;
+        public bool ShowStreetNumError
+        {
+            get => showStreetNumError;
+            set
+            {
+                showStreetNumError = value;
+                OnPropertyChanged("ShowStreetNumError");
+            }
+        }
+
+        private string streetNum;
+        public string StreetNum
+        {
+            get => streetNum;
+            set
+            {
+                streetNum = value;
+                ValidateStreetNum();
+                OnPropertyChanged("StreetNum");
+            }
+        }
+
+        private string streetNumError;
+        public string StreetNumError
+        {
+            get => streetNumError;
+            set
+            {
+                streetNumError = value;
+                OnPropertyChanged("StreetNumError");
+            }
+        }
+
+        private void ValidateStreetNum()
+        {
+            this.ShowStreetNumError = string.IsNullOrEmpty(this.StreetNum);
+            int num;
+            if (!this.ShowStreetNumError)
+            {
+              if (this.StreetNum.StartsWith("0") || !int.TryParse(this.StreetNum, out num) || num <= 0)
+                {
+                    this.ShowStreetNumError = true;
+                    this.StreetNumError = ERROR_MESSAGES.BAD_HOUSE_NUM;
+                }
+            }
+            else
+                this.StreetNumError = ERROR_MESSAGES.REQUIRED_FIELD;
+        }
         #endregion
 
         #region NumCreditCard
@@ -430,54 +593,49 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-        private string serverStatus;
-        public string ServerStatus
-        {
-            get { return serverStatus; }
-            set
-            {
-                serverStatus = value;
-                OnPropertyChanged("ServerStatus");
-            }
-        }
-
-
-        public App App { get; set; }
-
         public UserDetailsViewModel()
         {
             this.App = (App)Application.Current;
+
             allCities = App.Cities;
             this.FilteredCities = new ObservableCollection<string>();
 
+            this.allStreets = this.App.Streets;
+            this.FilteredStreets = new ObservableCollection<string>();
+
             this.PhoneError = ERROR_MESSAGES.REQUIRED_FIELD;
-            this.AddressError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
+            this.StreetError = ERROR_MESSAGES.BAD_STREET;
+            this.StreetNumError = ERROR_MESSAGES.BAD_HOUSE_NUM;
             this.NumCreditCardError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.NumCodeError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ValidityCreditCardError = ERROR_MESSAGES.REQUIRED_FIELD;
 
             this.Phone = App.CurrentUser.UserPhone;
-            this.Address = App.CurrentUser.UserAddress;
             this.City = App.CurrentUser.UserCity;
+            this.Street = App.CurrentUser.UserAddress;
+            //this.StreetNum = App.CurrentUser.StreetNum;
             this.NumCreditCard = App.CurrentUser.NumCreditCard;
             this.NumCode = App.CurrentUser.NumCode;
             this.ValidityCreditCard = App.CurrentUser.ValidityCreditCard.Value;
+
+            this.IsStreetEnabled = !string.IsNullOrEmpty(City);
         }
 
         private bool ValidateForm()
         {
             //Validate all fields first
             ValidatePhone();
-            ValidateAddress();
             ValidateCity();
+            ValidateStreet();
+            ValidateStreetNum();
             ValidateNumCreditCard();
             ValidateNumCode();
             ValidateValidityCreditCard();
 
             //Check if any validation failed
-            if (ShowPhoneError || ShowAddressError || ShowCityError || ShowNumCreditCardError ||
-                ShowNumCodeError || ShowValidityCreditCardError)
+            if (ShowPhoneError || ShowCityError || ShowStreetError || ShowStreetNumError ||
+                ShowNumCreditCardError || ShowNumCodeError || ShowValidityCreditCardError)
                 return false;
             return true;
         }
@@ -490,17 +648,17 @@ namespace QuickDeliveryApp.ViewModels
 
             ServerStatus = "מעדכן פרטים אישיים...";
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
-            //Thread.Sleep(2000);
 
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
-            bool isUpdatedUser = await proxy.UpdateUser(App.CurrentUser, Phone, Address, City, NumCreditCard, NumCode, ValidityCreditCard);
+            bool isUpdatedUser = await proxy.UpdateUser(App.CurrentUser, Phone, Street, City, NumCreditCard, NumCode, ValidityCreditCard);
             await App.Current.MainPage.Navigation.PopModalAsync();
 
             if (isUpdatedUser)
             {
                 App.CurrentUser.UserPhone = Phone;
-                App.CurrentUser.UserAddress = Address;
                 App.CurrentUser.UserCity = City;
+                App.CurrentUser.UserAddress = Street;
+                //App.CurrentUser.UserStreetNum = StreetNum;
                 App.CurrentUser.NumCreditCard = NumCreditCard;
                 App.CurrentUser.NumCode = NumCode;
                 App.CurrentUser.ValidityCreditCard = ValidityCreditCard;
@@ -511,6 +669,5 @@ namespace QuickDeliveryApp.ViewModels
                 await App.Current.MainPage.DisplayAlert("שגיאה", "לא ניתן היה לעדכן פרטים", "בסדר", FlowDirection.RightToLeft);
             }
         }
-
     }
 }

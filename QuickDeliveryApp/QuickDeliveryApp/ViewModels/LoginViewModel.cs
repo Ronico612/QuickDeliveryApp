@@ -21,6 +21,8 @@ namespace QuickDeliveryApp.ViewModels
         public const string REQUIRED_FIELD = "זהו שדה חובה";
         public const string BAD_EMAIL = "מייל לא תקין";
         public const string BAD_CITY = "שם העיר לא תקין";
+        public const string BAD_STREET = "רחוב לא תקין";
+        public const string BAD_HOUSE_NUM = "מספר בית לא תקין";
         public const string BAD_PHONE = "מספר טלפון לא תקין";
         public const string BAD_NUM_CREDIT_CARD = "מספר כרטיס אשראי לא תקין";
         public const string BAD_NUM_CODE = "מספר סודי לא תקין";

@@ -18,8 +18,8 @@ namespace QuickDeliveryApp.Services
     class QuickDeliveryAPIProxy
     {
         private const string CLOUD_URL = "TBD"; //API url when going on the cloud
-        private const string CLOUD_PHOTOS_URL = "TBD";
-        private const string CLOUD_DATA_URL = "TBD";
+        private const string CLOUD_PHOTOS_URL = "TBD"; //API url when going on the cloud
+        private const string CLOUD_DATA_URL = "TBD"; //API url when going on the cloud
         private const string DEV_ANDROID_EMULATOR_URL = "http://10.0.2.2:38367/api"; //API url when using emulator on android
         private const string DEV_ANDROID_PHYSICAL_URL = "http://192.168.1.14:38367/api"; //API url when using physucal device on android
         private const string DEV_WINDOWS_URL = "http://localhost:38367/api"; //API url when using windoes on development
@@ -190,6 +190,47 @@ namespace QuickDeliveryApp.Services
             citiesName.Remove(citiesName[0]);
 
             return citiesName;
+        }
+
+        public async Task<List<Street>> GetStreetsAsync()
+        {
+            try
+            {
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseDataUri}/streets.json?7");
+                if (response.IsSuccessStatusCode)
+                {
+                    JsonSerializerOptions options = new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    };
+                    string content = await response.Content.ReadAsStringAsync();
+
+                    List<Street> streets = JsonSerializer.Deserialize<List<Street>>(content, options);
+                    return GetStreetsNameList(streets); ;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return null;
+            }
+        }
+
+        private List<Street> GetStreetsNameList(List<Street> streets)
+        {
+            List<Street> streetsName = new List<Street>();
+
+            foreach (Street street in streets)
+            {
+                streetsName.Add(street);
+            }
+            streetsName.Remove(streetsName[0]);
+
+            return streetsName;
         }
 
         public async Task<List<Shop>> GetShopsAsync()

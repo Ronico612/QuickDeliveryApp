@@ -27,6 +27,7 @@ namespace QuickDeliveryApp
         public event OrderStatusEventHandler OnOrderStatusUpdate;
 
         public List<string> Cities { get; set; }
+        public List<Street> Streets { get; set; }
 
         private User currentUser;
         public User CurrentUser
@@ -108,6 +109,7 @@ namespace QuickDeliveryApp
         {
             InitializeComponent();
             Cities = new List<string>();
+            Streets = new List<Street>();
             ProductsInShoppingCart = new ObservableCollection<ProductShoppingCart>();
             ServerStatusViewModel vm = new ServerStatusViewModel();
             vm.IsShowLogo = true;
@@ -132,6 +134,7 @@ namespace QuickDeliveryApp
             QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
             List<City> cities = await quickDeliveryAPIProxy.GetCitiesAsync();
             this.Cities = cities.OrderBy(c => c.name).Select(c => c.name).ToList();
+            this.Streets = await quickDeliveryAPIProxy.GetStreetsAsync();
             await GetAllShops();
             MainPage = new NavigationPage(new TheMainTabbedPage())
             {

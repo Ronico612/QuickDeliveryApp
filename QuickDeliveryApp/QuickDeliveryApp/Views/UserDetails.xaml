@@ -18,19 +18,6 @@
                     <Label Text="טלפון" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                 </Grid>
                 <Entry Placeholder="הכנס מספר טלפון" Text="{Binding Phone}" Style="{StaticResource entryStyle}" MaxLength="20"/>
-                <!-- כתובת -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                    <Label Text="{Binding AddressError}" IsVisible="{Binding ShowAddressError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
-                    <Label Text="כתובת" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
-                </Grid>
-                <Entry Placeholder="הכנס כתובת" Text="{Binding Address}" Style="{StaticResource entryStyle}" MaxLength="30"/>
                 <!-- עיר -->
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -64,8 +51,52 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </Frame>
-                <!--<Picker Title="הכנס עיר" ItemsSource="{Binding Cities}" SelectedItem="{Binding City, Mode=TwoWay}" Style="{StaticResource entryStyle}"/>-->
-                <!--<SearchBar Placeholder="חפש עיר" Text="{Binding City}" Style="{StaticResource entryStyle}" Margin="0,-10,-5,0"/>-->
+                <!-- רחוב -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Text="{Binding StreetError}" IsVisible="{Binding ShowStreetError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                    <Label Text="רחוב" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                </Grid>
+                <Entry Placeholder="חפש רחוב" Text="{Binding Street}" Style="{StaticResource entryStyle}" IsEnabled="{Binding IsStreetEnabled}"/>
+                <Frame BorderColor="DarkGray" IsVisible="{Binding ShowStreets}" Margin="9,-14,9,0">
+                    <CollectionView EmptyView="לא נמצאו רחובות" x:Name="streets" ItemsSource="{Binding FilteredStreets}" SelectedItem="{Binding SelectedStreetItem}" SelectionMode="Single"
+                                SelectionChangedCommand="{Binding Source={x:Reference streets}, Path=BindingContext.SelectedStreet}"
+                                SelectionChangedCommandParameter="{Binding Source={x:Reference streets}, Path=SelectedItem}"
+                                HeightRequest="70">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Span="1" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnSpacing="0" RowSpacing="2">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Text="{Binding .}" Style="{StaticResource entryStyle}" HorizontalTextAlignment="Start" Grid.Row="0" Grid.Column="0" Margin="0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Frame>
+                <!-- מספר רחוב -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Label Text="{Binding StreetNumError}" IsVisible="{Binding ShowStreetNumError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                    <Label Text="מספר רחוב" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                </Grid>
+                <Entry Placeholder="הכנס מספר רחוב" Text="{Binding StreetNum}" Style="{StaticResource entryStyle}" MaxLength="5"/>
                 <!-- כרטיס אשראי -->
                 <Grid>
                     <Grid.ColumnDefinitions>

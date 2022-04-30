@@ -28,7 +28,7 @@ namespace QuickDeliveryApp.ViewModels
         public async void UpdateUserDetails()
         {
             Page p = new UserDetails();
-            p.Title = "חשבון";
+            p.Title = "פרטי חשבון";
             p.BindingContext = new UserDetailsViewModel();
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);
