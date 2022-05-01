@@ -90,27 +90,27 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        //private string origin;
-        //public string Origin
-        //{
-        //    get => this.origin;
-        //    set
-        //    {
-        //        this.origin = value;
-        //        OnPropertyChanged("Origin");
-        //    }
-        //}
+        private string origin;
+        public string Origin
+        {
+            get => this.origin;
+            set
+            {
+                this.origin = value;
+                OnPropertyChanged("Origin");
+            }
+        }
 
-        //private string destination;
-        //public string Destination
-        //{
-        //    get => this.destination;
-        //    set
-        //    {
-        //        this.destination = value;
-        //        OnPropertyChanged("Destination");
-        //    }
-        //}
+        private string destination;
+        public string Destination
+        {
+            get => this.destination;
+            set
+            {
+                this.destination = value;
+                OnPropertyChanged("Destination");
+            }
+        }
 
         public GooglePlace RouteOrigin { get; private set; }
         public GooglePlace RouteDestination { get; private set; }
@@ -121,7 +121,7 @@ namespace QuickDeliveryApp.ViewModels
         private int currentOrderId;
         private int currentStatusId;
 
-        public InDeliveryViewModel(int orderId, int statusId)
+        public InDeliveryViewModel(int orderId, string originAddress, string destinationAddress, int statusId)
         {
             this.currentOrderId = orderId;
             this.currentStatusId = statusId;
@@ -133,9 +133,11 @@ namespace QuickDeliveryApp.ViewModels
             this.IsApproved = statusId == 2;
             this.IsTakenFromShop = statusId == 3;
             this.IsBrought = statusId == 4;
+
+            this.Origin = originAddress;
+            this.Destination = destinationAddress;
         }
 
-        public ICommand Go => new Command(OnGo);
         public async void OnGo()
         {
             try

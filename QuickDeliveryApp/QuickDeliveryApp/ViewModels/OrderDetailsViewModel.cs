@@ -281,7 +281,9 @@ namespace QuickDeliveryApp.ViewModels
         {
             Page p = new InDelivery();
             p.Title = "מעקב אחר ההזמנה";
-            p.BindingContext = new InDeliveryViewModel(selectedOrderDetails.OrderId, (int)selectedOrderDetails.OrderStatusId);
+            string originAddress = SelectedOrderDetails.ShopAddress + " " + SelectedOrderDetails.ShopCity;
+            string destinationAddress = SelectedOrderDetails.OrderAddress + " " + SelectedOrderDetails.OrderCity;
+            p.BindingContext = new InDeliveryViewModel(SelectedOrderDetails.OrderId, originAddress, destinationAddress, (int)SelectedOrderDetails.OrderStatusId);
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);
         }

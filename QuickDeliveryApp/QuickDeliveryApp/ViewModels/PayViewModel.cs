@@ -515,6 +515,9 @@ namespace QuickDeliveryApp.ViewModels
             await proxy.StatusOrderOrRemove(success, newOrderID);
             if (success)
             {
+                string originAddress = ProductsInShoppingCart[0].Shop.ShopAdress + " " + ProductsInShoppingCart[0].Shop.ShopCity;
+                string destinationAddress = Street + " " + StreetNum + " " + City;
+
                 App.ProductsInShoppingCart.Clear();
                 App.UpdateShoppingCartPage();
 
@@ -531,7 +534,8 @@ namespace QuickDeliveryApp.ViewModels
 
                 Page p = new InDelivery();
                 p.Title = "מעקב אחר ההזמנה";
-                p.BindingContext = new InDeliveryViewModel(newOrderID, 1); //waiting
+   
+                p.BindingContext = new InDeliveryViewModel(newOrderID, originAddress, destinationAddress, 1); //waiting
                 await tabbed.Navigation.PushAsync(p);
 
                 await App.Current.MainPage.Navigation.PopModalAsync();   

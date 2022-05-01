@@ -26,6 +26,7 @@ namespace QuickDeliveryApp.Views
             base.OnAppearing();
             InDeliveryViewModel context = (InDeliveryViewModel)this.BindingContext;
             context.OnUpdateMapEvent += OnUpdateMap;
+            context.OnGo();
         }
 
         protected override void OnDisappearing()
