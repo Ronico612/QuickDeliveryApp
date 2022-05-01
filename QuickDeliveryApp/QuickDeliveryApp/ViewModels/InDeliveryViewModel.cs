@@ -1,8 +1,11 @@
-﻿using QuickDeliveryApp.Models;
+﻿using QuickDeliveryApp.DTO;
+using QuickDeliveryApp.Models;
+using QuickDeliveryApp.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace QuickDeliveryApp.ViewModels
@@ -87,27 +90,27 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
-        private string origin;
-        public string Origin
-        {
-            get => this.origin;
-            set
-            {
-                this.origin = value;
-                OnPropertyChanged("Origin");
-            }
-        }
+        //private string origin;
+        //public string Origin
+        //{
+        //    get => this.origin;
+        //    set
+        //    {
+        //        this.origin = value;
+        //        OnPropertyChanged("Origin");
+        //    }
+        //}
 
-        private string destination;
-        public string Destination
-        {
-            get => this.destination;
-            set
-            {
-                this.destination = value;
-                OnPropertyChanged("Destination");
-            }
-        }
+        //private string destination;
+        //public string Destination
+        //{
+        //    get => this.destination;
+        //    set
+        //    {
+        //        this.destination = value;
+        //        OnPropertyChanged("Destination");
+        //    }
+        //}
 
         public GooglePlace RouteOrigin { get; private set; }
         public GooglePlace RouteDestination { get; private set; }
