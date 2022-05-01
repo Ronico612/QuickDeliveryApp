@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              x:Class="QuickDeliveryApp.Views.InDelivery">
     <ContentPage.Content>
         <StackLayout BackgroundColor="White" Padding="0,20,0,0">
@@ -10,6 +11,13 @@
             <Label Text="ההזמנה נמסרה לך, אנו מודים לך על הזמנתך" Style="{StaticResource labelStyle3}" IsVisible="{Binding IsBrought}" LineBreakMode="NoWrap" Margin="70,0" MaxLines="2" HorizontalTextAlignment="Center"/>
 
             <Label HeightRequest="420"/>
+
+            <Entry Text="{Binding Origin}" Placeholder="Origin"></Entry>
+            <Entry Text="{Binding Destination}" Placeholder="Destination"></Entry>
+            <Button Text="Go" Command="{Binding Go}"></Button>
+            <maps:Map x:Name="map" IsShowingUser="False" 
+                              HorizontalOptions="FillAndExpand"
+                     />
 
             <Frame CornerRadius="4" BorderColor="DarkGray" Margin="15,0,15,10" BackgroundColor="#F2F4F4">
                 <Label Text="*ניתן לצפות בדף מעקב אחר הזמנה דרך אזור אישי -> הזמנות בתהליך -> למעקב אחר ההזמנה" Style="{StaticResource labelStyle2}" LineBreakMode="NoWrap" Margin="15,0" MaxLines="3"/>

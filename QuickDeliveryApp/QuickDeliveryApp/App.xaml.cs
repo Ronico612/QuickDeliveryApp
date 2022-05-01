@@ -13,6 +13,14 @@ using QuickDeliveryApp.DTO;
 
 namespace QuickDeliveryApp
 {
+    public class Constants
+    {
+        //Generate Google Api Key at: https://console.cloud.google.com/ for Places API, Directions API, Maps SDK For android!
+        //Generate Bing Api Key at: https://www.bingmapsportal.com/
+        public const string GoogleApiKey = "AIzaSyBazYrt5w8SKmDfkNzcw3Q_ajWL2SZsN4Y";
+        public const string BingApiKey = "YOUR BING API KEY";
+    }
+
     public partial class App : Application
     {
         public static bool IsDevEnv 
@@ -108,6 +116,8 @@ namespace QuickDeliveryApp
         public App()
         {
             InitializeComponent();
+            //Set up google map api key
+            GoogleMapsApiService.Initialize(Constants.GoogleApiKey);
             Cities = new List<string>();
             Streets = new List<Street>();
             ProductsInShoppingCart = new ObservableCollection<ProductShoppingCart>();

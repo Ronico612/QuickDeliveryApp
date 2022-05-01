@@ -1131,7 +1131,6 @@ namespace QuickDeliveryApp.Services
                 Console.WriteLine(e.Message);
                 return false;
             }
-        }
-
+        } 
     }
 }
