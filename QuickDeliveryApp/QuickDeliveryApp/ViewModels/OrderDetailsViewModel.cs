@@ -254,6 +254,10 @@ namespace QuickDeliveryApp.ViewModels
                 this.IsApproved = false;
                 this.IsTakenFromShop = true;
                 this.InitStatusOrderDetails();
+                if (app.DeliveryPerson != null)
+                {
+                    app.DeliveryPerson.UpdateOrderStatus(SelectedOrderDetails.OrderId, 3);
+                }
             }
             else
                 await App.Current.MainPage.DisplayAlert("שגיאה", "עדכון סטטוס הזמנה נכשל", "בסדר");
@@ -271,6 +275,10 @@ namespace QuickDeliveryApp.ViewModels
                 await app.MainPage.Navigation.PopAsync();
                 this.IsApproved = false;
                 this.IsTakenFromShop = false;
+                if (app.DeliveryPerson != null)
+                {
+                    app.DeliveryPerson.UpdateOrderStatus(SelectedOrderDetails.OrderId, 4);
+                }
             }
             else
                 await App.Current.MainPage.DisplayAlert("שגיאה", "עדכון סטטוס הזמנה נכשל", "בסדר");

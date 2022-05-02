@@ -26,7 +26,9 @@ namespace QuickDeliveryApp.Views
             base.OnAppearing();
             InDeliveryViewModel context = (InDeliveryViewModel)this.BindingContext;
             context.OnUpdateMapEvent += OnUpdateMap;
+            context.OnDeliveryLocation += OnUpdateDeliveryPosition;
             context.OnGo();
+            deliveryElement = null;
         }
 
         protected override void OnDisappearing()
@@ -34,6 +36,26 @@ namespace QuickDeliveryApp.Views
             base.OnDisappearing();
             InDeliveryViewModel context = (InDeliveryViewModel)this.BindingContext;
             context.OnUpdateMapEvent -= OnUpdateMap;
+        }
+
+        private Circle deliveryElement;
+
+        public void OnUpdateDeliveryPosition(double lat, double longi)
+        {
+            Position pos = new Position(lat, longi);
+            if (deliveryElement == null)
+            {
+                this.deliveryElement = new Circle()
+                {
+                    FillColor = Color.Red,
+                    Center = pos,
+                    Radius = Distance.FromMeters(500)
+                };
+
+                map.MapElements.Add(this.deliveryElement);
+            }
+            else
+                this.deliveryElement.Center = pos;
         }
 
         public void OnUpdateMap()
@@ -64,6 +86,7 @@ namespace QuickDeliveryApp.Views
             //Move the map to show the environment of the origin place! with radius of 5 KM... should be changed
             //according to the specific needs
             MapSpan span = MapSpan.FromCenterAndRadius(pin1.Position, Distance.FromKilometers(5));
+            
             map.MoveToRegion(span);
 
             //Create the polyline between origin and destination

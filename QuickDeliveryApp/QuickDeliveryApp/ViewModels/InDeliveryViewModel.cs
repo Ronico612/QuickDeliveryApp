@@ -117,9 +117,13 @@ namespace QuickDeliveryApp.ViewModels
         public GoogleDirection RouteDirections { get; private set; }
 
         public event Action OnUpdateMapEvent;
+        public event Action<double, double> OnDeliveryLocation;
 
         private int currentOrderId;
         private int currentStatusId;
+
+        //connection to hub
+        private DeliveryProxy deliveryProxy;
 
         public InDeliveryViewModel(int orderId, string originAddress, string destinationAddress, int statusId)
         {
@@ -136,8 +140,34 @@ namespace QuickDeliveryApp.ViewModels
 
             this.Origin = originAddress;
             this.Destination = destinationAddress;
+
+            //Open connection to delivery proxy
+            this.deliveryProxy = new DeliveryProxy();
+            this.deliveryProxy.RegisterToUpdateDeliveryLocation(UpdateDeliveryLocation);
+            this.deliveryProxy.RegisterToUpdateOrderStatus(UpdateStatusByServer);
+            ConnectToDeliveryProxy(orderId);
+            
+
         }
 
+        private async void ConnectToDeliveryProxy(int orderId)
+        {
+            string[] orders = { orderId.ToString() };
+            await this.deliveryProxy.Connect(orders);
+        }
+        //this method will be called by delivery proxy when the order status is changing
+        public void UpdateStatusByServer(string orderId, string statusId)
+        {
+
+        }
+
+        //This method update the delivery guy location
+        public void UpdateDeliveryLocation(string latitude, string longitude)
+        {
+            double lat = double.Parse(latitude), longi = double.Parse(longitude);
+            if (OnDeliveryLocation != null)
+                OnDeliveryLocation(lat, longi);
+        }
         public async void OnGo()
         {
             try

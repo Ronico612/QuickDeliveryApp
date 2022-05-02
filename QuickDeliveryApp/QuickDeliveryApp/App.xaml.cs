@@ -31,6 +31,8 @@ namespace QuickDeliveryApp
             }
         }
 
+        //Define connected delivery object for cases where the user is a delivery person
+        public ConnectedDeliveryPerson DeliveryPerson { get; set; }
         public delegate void OrderStatusEventHandler(Object sender, int orderId, int statusId);
         public event OrderStatusEventHandler OnOrderStatusUpdate;
 
@@ -125,6 +127,7 @@ namespace QuickDeliveryApp
             vm.IsShowLogo = true;
             MainPage = new ServerStatus(vm);
             this.goToPaymentAfterLogin = false;
+            this.DeliveryPerson = null;
         }
 
        public string ServerStatus { get; set; }

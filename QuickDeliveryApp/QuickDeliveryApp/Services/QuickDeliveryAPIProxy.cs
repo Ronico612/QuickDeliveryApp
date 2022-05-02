@@ -888,7 +888,7 @@ namespace QuickDeliveryApp.Services
             }
         }
 
-        public async Task<bool> IsDeliveyPerson(int userId)
+        public async Task<ConnectedDeliveryPerson> IsDeliveyPerson(int userId)
         {
             try
             {
@@ -902,18 +902,26 @@ namespace QuickDeliveryApp.Services
                         PropertyNameCaseInsensitive = true
                     };
                     string content = await response.Content.ReadAsStringAsync();
-                    bool b = JsonSerializer.Deserialize<bool>(content, options);
-                    return b;
+                    DeliveryPerson person = JsonSerializer.Deserialize<DeliveryPerson>(content, options);
+                    if (person == null)
+                        return null;
+                    ConnectedDeliveryPerson connected = new ConnectedDeliveryPerson()
+                    {
+                        DeliveryPersonId = person.DeliveryPersonId,
+                        Orders = person.Orders,
+                        DeliveryPersonNavigation = person.DeliveryPersonNavigation
+                    };
+                    return connected;
                 }
                 else
                 {
-                    return false;
+                    return null;
                 }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-                return false;
+                return null;
             }
         }
 

@@ -1045,8 +1045,12 @@ namespace QuickDeliveryApp.ViewModels
                 if (theApp.AllShops.Where(s => s.ShopManagerId == theApp.CurrentUser.UserId).FirstOrDefault() != null)
                     theTabs.AddTab(theTabs.shopManager);
 
-                if (await proxy.IsDeliveyPerson(theApp.CurrentUser.UserId))
+                theApp.DeliveryPerson = await proxy.IsDeliveyPerson(theApp.CurrentUser.UserId);
+                if (theApp.DeliveryPerson != null)
+                {
                     theTabs.AddTab(theTabs.deliveryPerson);
+                }
+                    
 
                 ClearFields();
             }

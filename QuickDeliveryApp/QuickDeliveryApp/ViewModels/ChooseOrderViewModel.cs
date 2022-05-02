@@ -57,7 +57,10 @@ namespace QuickDeliveryApp.ViewModels
             if (await proxy.UpdateStatusOrder(orderToDeliver.OrderId, app.CurrentUser.UserId, 2)) // approved
             {
                 app.CallOrderStatusUpdate(orderToDeliver.OrderId, 2); // מודיע למשתמש שההזמנה אושרה
-
+                if (app.DeliveryPerson != null)
+                {
+                    app.DeliveryPerson.UpdateOrderStatus(orderToDeliver.OrderId, 2);
+                }
                 await App.Current.MainPage.DisplayAlert("", "איסוף הזמנה עודכן בהצלחה, אנא פנה למשלוחים בתהליך", "בסדר");
                 await app.MainPage.Navigation.PopAsync();
             }
