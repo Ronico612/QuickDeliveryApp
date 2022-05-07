@@ -371,55 +371,54 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-        #region StreetNum
-        private bool showStreetNumError;
-        public bool ShowStreetNumError
+        #region HouseNum
+        private bool showHouseNumError;
+        public bool ShowHouseNumError
         {
-            get => showStreetNumError;
+            get => showHouseNumError;
             set
             {
-                showStreetNumError = value;
-                OnPropertyChanged("ShowStreetNumError");
+                showHouseNumError = value;
+                OnPropertyChanged("ShowHouseNumError");
             }
         }
 
-        private string streetNum;
-        public string StreetNum
+        private string houseNum;
+        public string HouseNum
         {
-            get => streetNum;
+            get => houseNum;
             set
             {
-                streetNum = value;
-                ValidateStreetNum();
-                OnPropertyChanged("StreetNum");
+                houseNum = value;
+                ValidateHouseNum();
+                OnPropertyChanged("HouseNum");
             }
         }
 
-        private string streetNumError;
-        public string StreetNumError
+        private string houseNumError;
+        public string HouseNumError
         {
-            get => streetNumError;
+            get => houseNumError;
             set
             {
-                streetNumError = value;
-                OnPropertyChanged("StreetNumError");
+                houseNumError = value;
+                OnPropertyChanged("HouseNumError");
             }
         }
 
-        private void ValidateStreetNum()
+        private void ValidateHouseNum()
         {
-            this.ShowStreetNumError = string.IsNullOrEmpty(this.StreetNum);
-            int num;
-            if (!this.ShowStreetNumError)
+            this.ShowHouseNumError = string.IsNullOrEmpty(HouseNum);
+            if (!this.ShowHouseNumError)
             {
-              if (this.StreetNum.StartsWith("0") || !int.TryParse(this.StreetNum, out num) || num <= 0)
+                if ((!int.TryParse(HouseNum, out int houseNumVal)) || (houseNumVal <= 0))
                 {
-                    this.ShowStreetNumError = true;
-                    this.StreetNumError = ERROR_MESSAGES.BAD_STREET_NUM;
+                    this.ShowHouseNumError = true;
+                    this.HouseNumError = ERROR_MESSAGES.BAD_HOUSE_NUM;
                 }
             }
             else
-                this.StreetNumError = ERROR_MESSAGES.REQUIRED_FIELD;
+                this.HouseNumError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -600,15 +599,15 @@ namespace QuickDeliveryApp.ViewModels
             this.PhoneError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.StreetError = ERROR_MESSAGES.BAD_STREET;
-            this.StreetNumError = ERROR_MESSAGES.BAD_STREET_NUM;
+            this.HouseNumError = ERROR_MESSAGES.BAD_HOUSE_NUM;
             this.NumCreditCardError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.NumCodeError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ValidityCreditCardError = ERROR_MESSAGES.BAD_VALIDITY_CREDIT_CARD;
 
             this.Phone = App.CurrentUser.UserPhone;
             this.City = App.CurrentUser.UserCity;
-            this.Street = App.CurrentUser.UserAddress;
-            //this.StreetNum = App.CurrentUser.StreetNum;
+            this.Street = App.CurrentUser.UserStreet;
+            this.HouseNum = App.CurrentUser.UserHouseNum.ToString();
             this.NumCreditCard = App.CurrentUser.NumCreditCard;
             this.NumCode = App.CurrentUser.NumCode;
             this.ValidityCreditCard = App.CurrentUser.ValidityCreditCard.Value;
@@ -622,13 +621,13 @@ namespace QuickDeliveryApp.ViewModels
             ValidatePhone();
             ValidateCity();
             ValidateStreet();
-            ValidateStreetNum();
+            ValidateHouseNum();
             ValidateNumCreditCard();
             ValidateNumCode();
             ValidateValidityCreditCard();
 
             //Check if any validation failed
-            if (ShowPhoneError || ShowCityError || ShowStreetError || ShowStreetNumError ||
+            if (ShowPhoneError || ShowCityError || ShowStreetError || ShowHouseNumError ||
                 ShowNumCreditCardError || ShowNumCodeError || ShowValidityCreditCardError)
                 return false;
             return true;
@@ -644,15 +643,15 @@ namespace QuickDeliveryApp.ViewModels
             await App.Current.MainPage.Navigation.PushModalAsync(new Views.ServerStatus(this));
 
             QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
-            bool isUpdatedUser = await proxy.UpdateUser(App.CurrentUser, Phone, Street, City, NumCreditCard, NumCode, ValidityCreditCard);
+            bool isUpdatedUser = await proxy.UpdateUser(App.CurrentUser, Phone, Street, int.Parse(HouseNum), City, NumCreditCard, NumCode, ValidityCreditCard);
             await App.Current.MainPage.Navigation.PopModalAsync();
 
             if (isUpdatedUser)
             {
                 App.CurrentUser.UserPhone = Phone;
                 App.CurrentUser.UserCity = City;
-                App.CurrentUser.UserAddress = Street;
-                //App.CurrentUser.UserStreetNum = StreetNum;
+                App.CurrentUser.UserStreet = Street;
+                App.CurrentUser.UserHouseNum = int.Parse(HouseNum);
                 App.CurrentUser.NumCreditCard = NumCreditCard;
                 App.CurrentUser.NumCode = NumCode;
                 App.CurrentUser.ValidityCreditCard = ValidityCreditCard;

@@ -84,7 +84,7 @@
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </Frame>
-                <!-- מספר רחוב -->
+                <!-- מספר בית -->
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
@@ -93,10 +93,10 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
-                    <Label Text="{Binding StreetNumError}" IsVisible="{Binding ShowStreetNumError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
-                    <Label Text="מספר רחוב" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+                    <Label Text="{Binding HouseNumError}" IsVisible="{Binding ShowHouseNumError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+                    <Label Text="מספר בית" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
                 </Grid>
-                <Entry Placeholder="הכנס מספר רחוב" Text="{Binding StreetNum}" Style="{StaticResource entryStyle}" MaxLength="5"/>
+                <Entry Placeholder="הכנס מספר בית" Text="{Binding HouseNum}" Style="{StaticResource entryStyle}" MaxLength="5"/>
                 <!-- כרטיס אשראי -->
                 <Grid>
                     <Grid.ColumnDefinitions>

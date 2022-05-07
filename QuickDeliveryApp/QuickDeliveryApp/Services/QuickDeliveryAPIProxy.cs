@@ -399,7 +399,7 @@ namespace QuickDeliveryApp.Services
             }
         }
 
-        public async Task<bool> UpdateUser(User currentUser, string phone, string address, string city, string numCreditCard, string numCode, DateTime validityCreditCard)
+        public async Task<bool> UpdateUser(User currentUser, string phone, string street, int houseNum, string city, string numCreditCard, string numCode, DateTime validityCreditCard)
         {
             try
             {
@@ -409,7 +409,7 @@ namespace QuickDeliveryApp.Services
                 };
                 string json = JsonSerializer.Serialize<User>(currentUser, options);
                 StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/UpdateUser?phone={phone}&address={address}&city={city}&numCreditCard={numCreditCard}&numCode={numCode}&validityCreditCard={validityCreditCard}", content);
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/UpdateUser?phone={phone}&street={street}&houseNum={houseNum}&city={city}&numCreditCard={numCreditCard}&numCode={numCode}&validityCreditCard={validityCreditCard}", content);
                 if (response.IsSuccessStatusCode)
                 {
                     string jsonContent = await response.Content.ReadAsStringAsync();
@@ -717,12 +717,12 @@ namespace QuickDeliveryApp.Services
             }
         }
 
-        public async Task<bool> UpdateShop(int shopId, string shopName, string shopAdress, string shopCity, string shopPhone, int shopManagerId)
+        public async Task<bool> UpdateShop(int shopId, string shopName, string shopStreet, int shopHouseNum, string shopCity, string shopPhone, int shopManagerId)
         {
             try
             {
 
-                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/UpdateShop?shopId={shopId}&shopName={shopName}&shopAdress={shopAdress}&shopCity={shopCity}&shopPhone={shopPhone}&shopManagerId={shopManagerId}");
+                HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/UpdateShop?shopId={shopId}&shopName={shopName}&shopStreet={shopStreet}&shopHouseNum={shopHouseNum}&shopCity={shopCity}&shopPhone={shopPhone}&shopManagerId={shopManagerId}");
                 if (response.IsSuccessStatusCode)
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions

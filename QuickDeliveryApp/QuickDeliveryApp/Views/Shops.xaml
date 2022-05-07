@@ -39,8 +39,11 @@
                                 <Frame CornerRadius="4" BorderColor="DarkGray" Grid.Column="1" Grid.RowSpan="3" Grid.Row="0" Margin="0,0,12,0" Padding="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                     <Image Source="{Binding ImgSource}"/>
                                 </Frame>
-                                <Label Text="{Binding Path=ShopName, StringFormat='{0}'}" HorizontalTextAlignment="End" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.Column="0" Margin="0,0,20,0"/>
-                                <Label Text="{Binding Path=ShopAdress, StringFormat='{0}'}"  HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}"  Grid.Row="1" Grid.Column="0" Margin="0,0,20,0"/>
+                                <Label Text="{Binding Path=ShopName, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.Column="0" Margin="0,0,20,0"/>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="End" Grid.Row="1" Grid.Column="0" Margin="0,0,20,0">
+                                    <Label Text="{Binding Path=ShopHouseNum, StringFormat='{0}'}" HorizontalTextAlignment="End" Style="{StaticResource labelStyleNonBold2}"/>
+                                    <Label Text="{Binding Path=ShopStreet, StringFormat='{0}'}" HorizontalTextAlignment="End" Style="{StaticResource labelStyleNonBold2}"/>
+                                </StackLayout>
                                 <Label Text="{Binding Path=ShopCity, StringFormat='{0}'}"  HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}" Grid.Row="2" Grid.Column="0" Margin="0,0,20,0"/>
                             </Grid>
                         </DataTemplate>

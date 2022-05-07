@@ -90,7 +90,7 @@
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             </Frame>
-            <!-- מספר רחוב חנות -->
+            <!-- מספר בית חנות -->
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
@@ -99,10 +99,10 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-               <Label Text="{Binding ShopStreetNumError}" IsVisible="{Binding ShowShopStreetNumError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
-               <Label Text="מספר רחוב חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
+               <Label Text="{Binding ShopHouseNumError}" IsVisible="{Binding ShowShopHouseNumError}" Grid.Column="0" Style="{StaticResource labelErrorStyle}"/>
+               <Label Text="מספר בית חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
-            <Entry Placeholder="הכנס מספר רחוב חנות" Text="{Binding ShopStreetNum}" Style="{StaticResource entryStyle}" MaxLength="5"/>
+                <Entry Placeholder="הכנס מספר בית חנות" Text="{Binding ShopHouseNum}" Style="{StaticResource entryStyle}" MaxLength="5"/>
             <!-- טלפון חנות -->
             <Grid>
                 <Grid.ColumnDefinitions>

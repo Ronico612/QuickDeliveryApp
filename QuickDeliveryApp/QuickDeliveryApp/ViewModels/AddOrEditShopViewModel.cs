@@ -440,55 +440,54 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-        #region ShopStreetNum
-        private bool showShopStreetNumError;
-        public bool ShowShopStreetNumError
+        #region ShopHouseNum
+        private bool showShopHouseNumError;
+        public bool ShowShopHouseNumError
         {
-            get => showShopStreetNumError;
+            get => showShopHouseNumError;
             set
             {
-                showShopStreetNumError = value;
-                OnPropertyChanged("ShowShopStreetNumError");
+                showShopHouseNumError = value;
+                OnPropertyChanged("ShowShopHouseNumError");
             }
         }
 
-        private string shopStreetNum;
-        public string ShopStreetNum
+        private string shopHouseNum;
+        public string ShopHouseNum
         {
-            get => shopStreetNum;
+            get => shopHouseNum;
             set
             {
-                shopStreetNum = value;
-                ValidateShopStreetNum();
-                OnPropertyChanged("ShopStreetNum");
+                shopHouseNum = value;
+                ValidateShopHouseNum();
+                OnPropertyChanged("ShopHouseNum");
             }
         }
 
-        private string shopStreetNumError;
-        public string ShopStreetNumError
+        private string shopHouseNumError;
+        public string ShopHouseNumError
         {
-            get => shopStreetNumError;
+            get => shopHouseNumError;
             set
             {
-                shopStreetNumError = value;
-                OnPropertyChanged("ShopStreetNumError");
+                shopHouseNumError = value;
+                OnPropertyChanged("ShopHouseNumError");
             }
         }
 
-        private void ValidateShopStreetNum()
+        private void ValidateShopHouseNum()
         {
-            this.ShowShopStreetNumError = string.IsNullOrEmpty(this.ShopStreetNum);
-            int num;
-            if (!this.ShowShopStreetNumError)
+            this.ShowShopHouseNumError = string.IsNullOrEmpty(ShopHouseNum);
+            if (!this.ShowShopHouseNumError)
             {
-                if (this.ShopStreetNum.StartsWith("0") || !int.TryParse(this.ShopStreetNum, out num) || num <= 0)
+                if ((!int.TryParse(ShopHouseNum, out int houseNumVal)) || (houseNumVal <= 0))
                 {
-                    this.ShowShopStreetNumError = true;
-                    this.ShopStreetNumError = ERROR_MESSAGES.BAD_STREET_NUM;
+                    this.ShowShopHouseNumError = true;
+                    this.ShopHouseNumError = ERROR_MESSAGES.BAD_HOUSE_NUM;
                 }
             }
             else
-                this.ShopStreetNumError = ERROR_MESSAGES.REQUIRED_FIELD;
+                this.ShopHouseNumError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -624,7 +623,7 @@ namespace QuickDeliveryApp.ViewModels
             this.ShopNameError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ShopCityError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ShopStreetError = ERROR_MESSAGES.BAD_STREET;
-            this.ShopStreetNumError = ERROR_MESSAGES.BAD_STREET_NUM;
+            this.ShopHouseNumError = ERROR_MESSAGES.BAD_HOUSE_NUM;
             this.ShopPhoneError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ShopManagerEmailError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ImgSourceError = ERROR_MESSAGES.REQUIRED_FIELD;
@@ -645,8 +644,8 @@ namespace QuickDeliveryApp.ViewModels
                 this.ImgSource = s.ImgSource;
                 this.ShopName = s.ShopName;
                 this.ShopCity = s.ShopCity;
-                this.ShopStreet = s.ShopAdress;
-                //this.ShopStreetNum = s.ShopStreetNum;
+                this.ShopStreet = s.ShopStreet;
+                this.ShopHouseNum = s.ShopHouseNum.ToString();
                 this.ShopPhone = s.ShopPhone;
 
                 QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
@@ -665,13 +664,13 @@ namespace QuickDeliveryApp.ViewModels
             ValidateShopName();
             ValidateShopCity();
             ValidateShopStreet();
-            ValidateShopStreetNum();
+            ValidateShopHouseNum();
             ValidateShopPhone();
             ValidateShopManagerEmail();
             ValidateImgSource();
 
             //Check if any validation failed
-            if (ShowShopNameError || ShowShopCityError || ShowShopStreetError || ShowShopStreetNumError || ShowShopPhoneError || ShowShopManagerEmailError || ShowImgSourceError)
+            if (ShowShopNameError || ShowShopCityError || ShowShopStreetError || ShowShopHouseNumError || ShowShopPhoneError || ShowShopManagerEmailError || ShowImgSourceError)
                 return false;
             return true;
         }
@@ -699,8 +698,11 @@ namespace QuickDeliveryApp.ViewModels
                 Shop newShop = new Shop();
                 newShop.ShopName = ShopName;
                 newShop.ShopCity = ShopCity;
-                newShop.ShopAdress = ShopStreet;
-                //newShop.ShopStreetNum = ShopStreetNum;
+                newShop.ShopStreet = ShopStreet;
+                if (int.TryParse(ShopHouseNum, out int shopHouseNumVal))
+                    newShop.ShopHouseNum = shopHouseNumVal;
+                else
+                    newShop.ShopHouseNum = 10;
                 newShop.ShopPhone = shopPhone;
 
                 int smId = await proxy.AddShopManagerAsync(ShopManagerEmail);
@@ -770,7 +772,7 @@ namespace QuickDeliveryApp.ViewModels
                         shopManagerId = smId;
                 }
 
-                bool isUpdatedShop = await proxy.UpdateShop(this.Shop.ShopId, ShopName, ShopStreet, ShopCity, ShopPhone, shopManagerId);
+                bool isUpdatedShop = await proxy.UpdateShop(this.Shop.ShopId, ShopName, ShopStreet, int.Parse(ShopHouseNum), ShopCity, ShopPhone, shopManagerId);
                 if (isUpdatedShop && this.imageFileResult != null)
                 {
                     ServerStatus = "מעלה תמונה...";

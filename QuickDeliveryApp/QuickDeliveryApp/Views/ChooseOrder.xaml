@@ -27,8 +27,9 @@
                             <Label Text="כתובת איסוף" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle1}" Grid.Row="1" Grid.Column="2" Margin="0,0,15,0"/>
                             <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold1}" Grid.Row="1" Grid.Column="1">
                                 <Label.Text>
-                                    <MultiBinding StringFormat="{}{0}  |  {1}">
-                                        <Binding Path="OrderProducts[0].Product.Shop.ShopAdress" />
+                                    <MultiBinding StringFormat="{}{0}  |  {1} {2}">
+                                        <Binding Path="OrderProducts[0].Product.Shop.ShopStreet" />
+                                        <Binding Path="OrderProducts[0].Product.Shop.ShopHouseNum" />
                                         <Binding Path="OrderProducts[0].Product.Shop.ShopCity" />
                                     </MultiBinding>
                                 </Label.Text>
@@ -36,9 +37,10 @@
                             <Label Text="כתובת יעד" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle1}" Grid.Row="2" Grid.Column="2" Margin="0,0,15,0"/>
                             <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold1}" Grid.Row="2" Grid.Column="1">
                                 <Label.Text>
-                                    <MultiBinding StringFormat="{}{0}  |  {1}">
+                                    <MultiBinding StringFormat="{}{0}  |  {1} {2}">
                                         <Binding Path="User.UserCity" />
-                                        <Binding Path="User.UserAddress" />
+                                        <Binding Path="User.UserHouseNum" />
+                                        <Binding Path="User.UserStreet" />
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>

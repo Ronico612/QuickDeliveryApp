@@ -20,7 +20,7 @@ namespace QuickDeliveryApp.ViewModels
         public const string BAD_EMAIL = "מייל לא תקין";
         public const string BAD_CITY = "שם העיר לא תקין";
         public const string BAD_STREET = "רחוב לא תקין";
-        public const string BAD_STREET_NUM = "מספר בית לא תקין";
+        public const string BAD_HOUSE_NUM = "מספר בית לא תקין";
         public const string BAD_PHONE = "מספר טלפון לא תקין";
         public const string BAD_NUM_CREDIT_CARD = "מספר כרטיס אשראי לא תקין";
         public const string BAD_NUM_CODE = "מספר סודי לא תקין";
@@ -610,55 +610,54 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-        #region StreetNum
-        private bool showStreetNumError;
-        public bool ShowStreetNumError
+        #region HouseNum
+        private bool showHouseNumError;
+        public bool ShowHouseNumError
         {
-            get => showStreetNumError;
+            get => showHouseNumError;
             set
             {
-                showStreetNumError = value;
-                OnPropertyChanged("ShowStreetNumError");
+                showHouseNumError = value;
+                OnPropertyChanged("ShowHouseNumError");
             }
         }
 
-        private string streetNum;
-        public string StreetNum
+        private string houseNum;
+        public string HouseNum
         {
-            get => streetNum;
+            get => houseNum;
             set
             {
-                streetNum = value;
-                ValidateStreetNum();
-                OnPropertyChanged("StreetNum");
+                houseNum = value;
+                ValidateHouseNum();
+                OnPropertyChanged("HouseNum");
             }
         }
 
-        private string streetNumError;
-        public string StreetNumError
+        private string houseNumError;
+        public string HouseNumError
         {
-            get => streetNumError;
+            get => houseNumError;
             set
             {
-                streetNumError = value;
-                OnPropertyChanged("StreetNumError");
+                houseNumError = value;
+                OnPropertyChanged("HouseNumError");
             }
         }
 
-        private void ValidateStreetNum()
+        private void ValidateHouseNum()
         {
-            this.ShowStreetNumError = string.IsNullOrEmpty(this.StreetNum);
-            int num;
-            if (!this.ShowStreetNumError)
+            this.ShowHouseNumError = string.IsNullOrEmpty(HouseNum);
+            if (!this.ShowHouseNumError)
             {
-                if (this.StreetNum.StartsWith("0") || !int.TryParse(this.StreetNum, out num) || num <= 0)
+                if ((!int.TryParse(HouseNum, out int houseNumVal)) || (houseNumVal <= 0))
                 {
-                    this.ShowStreetNumError = true;
-                    this.StreetNumError = ERROR_MESSAGES.BAD_STREET_NUM;
+                    this.ShowHouseNumError = true;
+                    this.HouseNumError = ERROR_MESSAGES.BAD_HOUSE_NUM;
                 }
             }
             else
-                this.StreetNumError = ERROR_MESSAGES.REQUIRED_FIELD;
+                this.HouseNumError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
         #endregion
 
@@ -892,7 +891,7 @@ namespace QuickDeliveryApp.ViewModels
             this.BirthDateError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.StreetError = ERROR_MESSAGES.BAD_STREET;
-            this.StreetNumError = ERROR_MESSAGES.BAD_STREET_NUM;
+            this.HouseNumError = ERROR_MESSAGES.BAD_HOUSE_NUM;
             this.NumCreditCardError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.NumCodeError = ERROR_MESSAGES.REQUIRED_FIELD;
             this.ValidityCreditCardError = ERROR_MESSAGES.BAD_VALIDITY_CREDIT_CARD;
@@ -928,7 +927,7 @@ namespace QuickDeliveryApp.ViewModels
             ValidateBirthDate();
             ValidateCity();
             ValidateStreet();
-            ValidateStreetNum();
+            ValidateHouseNum();
             ValidateNumCreditCard();
             ValidateNumCode();
             ValidateValidityCreditCard();
@@ -936,7 +935,7 @@ namespace QuickDeliveryApp.ViewModels
             //Check if any validation failed
             if (showFNameError || ShowLNameError || ShowEmailError ||
                 ShowPasswordError || ShowPhoneError || ShowBirthDateError ||
-                ShowCityError || ShowStreetError || ShowStreetNumError || ShowNumCreditCardError || 
+                ShowCityError || ShowStreetError || ShowHouseNumError || ShowNumCreditCardError || 
                 ShowNumCodeError || ShowValidityCreditCardError)
                 return false;
             return true;
@@ -978,10 +977,10 @@ namespace QuickDeliveryApp.ViewModels
             user.UserEmail = Email;
             user.UserPassword = Password;
             user.UserPhone = Phone;
-            user.UserBirthDate = birthDate;
+            user.UserBirthDate = BirthDate;
             user.UserCity = City;
-            user.UserAddress = Street;
-            //user.UserStreetNum = StreetNum;
+            user.UserStreet = Street;
+            user.UserHouseNum = int.Parse(HouseNum);
             user.NumCreditCard = NumCreditCard;
             user.NumCode = NumCode;
             user.ValidityCreditCard = ValidityCreditCard;
@@ -1066,7 +1065,7 @@ namespace QuickDeliveryApp.ViewModels
             BirthDate = DateTime.Today;
             City = "";
             Street = "";
-            StreetNum = "";
+            HouseNum = "";
             NumCreditCard = "";
             NumCode = "";
             ValidityCreditCard = DateTime.Today;
@@ -1078,7 +1077,7 @@ namespace QuickDeliveryApp.ViewModels
             ShowBirthDateError = false;
             ShowCityError = false;
             ShowStreetError = false;
-            ShowStreetNumError = false;
+            ShowHouseNumError = false;
             ShowNumCreditCardError = false;
             ShowNumCodeError = false;
             ShowValidityCreditCardError = false;

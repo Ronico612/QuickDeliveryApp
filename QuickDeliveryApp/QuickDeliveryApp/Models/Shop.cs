@@ -14,7 +14,8 @@ namespace QuickDeliveryApp.Models
 
         public int ShopId { get; set; }
         public string ShopName { get; set; }
-        public string ShopAdress { get; set; }
+        public string ShopStreet { get; set; }
+        public int ShopHouseNum { get; set; }
         public string ShopCity { get; set; }
         public string ShopPhone { get; set; }
         public int? ShopManagerId { get; set; }

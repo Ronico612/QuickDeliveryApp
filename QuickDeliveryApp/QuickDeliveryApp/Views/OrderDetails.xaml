@@ -28,7 +28,8 @@
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,0,15,0">
                 <Label Text="{Binding SelectedOrderDetails.ShopCity}" Style="{StaticResource labelStyleNonBold2}"/>
                 <Label Text="|" Style="{StaticResource labelStyle2}"/>
-                <Label Text="{Binding SelectedOrderDetails.ShopAddress}" Style="{StaticResource labelStyleNonBold2}"/>
+                    <Label Text="{Binding SelectedOrderDetails.ShopHouseNum}" Style="{StaticResource labelStyleNonBold2}"/>
+                    <Label Text="{Binding SelectedOrderDetails.ShopStreet}" Style="{StaticResource labelStyleNonBold2}"/>
             </StackLayout>
             <Label Text="{Binding SelectedOrderDetails.ShopPhone}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,15,0"/>
             <Label Text="מבצע ההזמנה" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,20,15,0"/>
@@ -41,7 +42,8 @@
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,0,15,0">
                 <Label Text="{Binding SelectedOrderDetails.OrderCity}" Style="{StaticResource labelStyleNonBold2}"/>
                 <Label Text="|" Style="{StaticResource labelStyleNonBold2}"/>
-                <Label Text="{Binding SelectedOrderDetails.OrderAddress}" Style="{StaticResource labelStyleNonBold2}"/>
+                    <Label Text="{Binding SelectedOrderDetails.OrderHouseNum}" Style="{StaticResource labelStyleNonBold2}"/>
+                    <Label Text="{Binding SelectedOrderDetails.OrderStreet}" Style="{StaticResource labelStyleNonBold2}"/>
             </StackLayout>
             <Grid Margin="0,30,0,0">
                 <Grid.ColumnDefinitions>
