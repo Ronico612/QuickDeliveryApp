@@ -10,7 +10,7 @@
                    FontAttributes="Bold"
                    HorizontalOptions="CenterAndExpand" 
                    Margin="0,250,0,0"
-                   Style="{StaticResource labelStyle3}"/>
+                   Style="{StaticResource labelStyleLarge}"/>
             <ActivityIndicator IsRunning="true" Color="Pink" WidthRequest="80" HeightRequest="80" Margin="30,50,30,30"/>
         </StackLayout>
     </ContentPage.Content>

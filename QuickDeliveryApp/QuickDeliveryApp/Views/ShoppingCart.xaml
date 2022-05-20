@@ -43,19 +43,19 @@
                                     <RowDefinition Height="40"/>
                                 </Grid.RowDefinitions>
                                 <!--שם מוצר-->
-                                <Label Text="{Binding ProductName, StringFormat='{0}'}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.Column="0" Margin="15,0,0,0"/>
+                                <Label Text="{Binding ProductName, StringFormat='{0}'}" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" Style="{StaticResource labelStyleMedium}" Grid.Row="0" Grid.Column="0" Margin="15,0,0,0"/>
                                 <!--מחיר מוצר-->
                                 <StackLayout Orientation="Horizontal" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="15,0,0,0">
-                                    <Label Text="₪" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}"/>
-                                    <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}"/>
+                                    <Label Text="₪" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBoldMedium}"/>
+                                    <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBoldMedium}"/>
                                 </StackLayout>
                                 <!--בחר כמות-->
                                 <StackLayout Grid.Row="1" Grid.RowSpan="3" Orientation="Horizontal" Margin="0,0,0,0">
                                     <Button ImageSource="Remove.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.RemoveCountProductCommand}" CommandParameter="{Binding}" WidthRequest="42" HeightRequest="40" Margin="20,7,0,7" BackgroundColor="White" CornerRadius="4"/>
-                                    <Label Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBold2}" WidthRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+                                    <Label Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBoldMedium}" WidthRequest="60" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
                                     <Button ImageSource="Plus.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.AddCountProductCommand}" CommandParameter="{Binding}" WidthRequest="42" HeightRequest="40" BackgroundColor="White" CornerRadius="4" Margin="12,7,0,7"/> 
                                 </StackLayout>
-                                <Label Grid.Row="3" Grid.Column="0" Text="{Binding Path=ErrorText, Mode=TwoWay, StringFormat='{0}'}" TextColor="Red" HorizontalTextAlignment="Center" Style="{StaticResource labelStyle1}" Margin="15,0,0,0"/>
+                                <Label Grid.Row="3" Grid.Column="0" Text="{Binding Path=ErrorText, Mode=TwoWay, StringFormat='{0}'}" TextColor="Red" HorizontalTextAlignment="Center" Style="{StaticResource labelStyleSmall}" Margin="15,0,0,0"/>
                                 <!--תמונת מוצר-->
                                 <Image Source="{Binding ImgSource}" VerticalOptions="FillAndExpand" Grid.RowSpan="5" Grid.Row="0" Grid.Column="1"/>
                                 <!--מחק מוצר-->
@@ -68,9 +68,9 @@
                 </CollectionView>
             </RefreshView>
             <StackLayout Orientation="Horizontal" IsVisible="{Binding App.IsProductsInList}">
-                <Label Text="₪" Style="{StaticResource labelStyleNonBold2}" Margin="15,0,0,0"/>
-                <Label Text="{Binding App.TotalPrice}" Style="{StaticResource labelStyleNonBold2}"/>
-                <Label Text="סך הכל לתשלום:" Style="{StaticResource labelStyle2}"/>
+                <Label Text="₪" Style="{StaticResource labelStyleNonBoldMedium}" Margin="15,0,0,0"/>
+                <Label Text="{Binding App.TotalPrice}" Style="{StaticResource labelStyleNonBoldMedium}"/>
+                <Label Text="סך הכל לתשלום:" Style="{StaticResource labelStyleMedium}"/>
             </StackLayout>
             <Button Text="מעבר לתשלום" Command="{Binding GoToPayCommand}" IsVisible="{Binding App.IsProductsInList}" Style="{StaticResource basicButtonStyle}" Margin="15"></Button>
         </StackLayout>

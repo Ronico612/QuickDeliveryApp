@@ -57,7 +57,7 @@
               <Entry Placeholder="הכנס מספר בית" Text="{Binding HouseNum}" Style="{StaticResource entryStyle}" MaxLength="5" Margin="10,0"/>
               <Label Text="כרטיס אשראי" Style="{StaticResource labelNameStyle}" Margin="5,0"/>
               <Label Text="{Binding UserNumCard}" Style="{StaticResource entryStyle}" Margin="15,0"/>
-              <Label Text="סיכום פרטי הזמנה" Style="{StaticResource labelStyle3}" HorizontalOptions="End" Margin="0,30,15,20"/>
+              <Label Text="סיכום פרטי הזמנה" Style="{StaticResource labelStyleLarge}" HorizontalOptions="End" Margin="0,30,15,20"/>
             <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="100"/>
@@ -68,9 +68,9 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
-                <Label Grid.Column="0" Text="סהכ" Style="{StaticResource labelStyleNonBold2}" HorizontalOptions="CenterAndExpand"></Label>
-                <Label Grid.Column="1" Text="כמות" Style="{StaticResource labelStyleNonBold2}" HorizontalOptions="CenterAndExpand"></Label>
-                <Label Grid.Column="3" Text="מוצר" Style="{StaticResource labelStyleNonBold2}" HorizontalOptions="CenterAndExpand"></Label>
+                <Label Grid.Column="0" Text="סהכ" Style="{StaticResource labelStyleNonBoldMedium}" HorizontalOptions="CenterAndExpand"></Label>
+                <Label Grid.Column="1" Text="כמות" Style="{StaticResource labelStyleNonBoldMedium}" HorizontalOptions="CenterAndExpand"></Label>
+                <Label Grid.Column="3" Text="מוצר" Style="{StaticResource labelStyleNonBoldMedium}" HorizontalOptions="CenterAndExpand"></Label>
             </Grid>
               <CollectionView x:Name="collectionName" ItemsSource="{Binding ProductsInShoppingCart}" 
                             SelectionMode="None" BackgroundColor="White" HeightRequest="{Binding RowsHeight}">
@@ -91,20 +91,20 @@
                                 <RowDefinition Height="15"/>
                             </Grid.RowDefinitions>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" VerticalOptions="Center" Grid.Column="0" Margin="15,0,0,0">
-                                <Label Text="₪" VerticalOptions="Center" Style="{StaticResource labelStyleNonBold2}"/>
-                                <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}"/>
+                                <Label Text="₪" VerticalOptions="Center" Style="{StaticResource labelStyleNonBoldMedium}"/>
+                                <Label Text="{Binding ProductTotalPrice, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBoldMedium}"/>
                             </StackLayout>
-                            <Label Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBold2}"/>
+                            <Label Grid.Column="1" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Text="{Binding Path=Count, Mode=TwoWay, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBoldMedium}"/>
                             <Image Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Source="{Binding ImgSource}"/>
-                            <Label Grid.Column="3" VerticalOptions="Center" Text="{Binding ProductName, StringFormat='{0}'}" Style="{StaticResource labelStyle2}" Margin="0,0,15,0"/>
+                            <Label Grid.Column="3" VerticalOptions="Center" Text="{Binding ProductName, StringFormat='{0}'}" Style="{StaticResource labelStyleMedium}" Margin="0,0,15,0"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
             <StackLayout Orientation="Horizontal">
-               <Label Text="₪" Margin="15,0,0,0" Style="{StaticResource labelStyleNonBold2}"/>
-               <Label Text="{Binding App.TotalPrice}" Style="{StaticResource labelStyleNonBold2}"/>
-               <Label Text="סך הכל" Style="{StaticResource labelStyleNonBold2}"/>
+               <Label Text="₪" Margin="15,0,0,0" Style="{StaticResource labelStyleNonBoldMedium}"/>
+               <Label Text="{Binding App.TotalPrice}" Style="{StaticResource labelStyleNonBoldMedium}"/>
+               <Label Text="סך הכל" Style="{StaticResource labelStyleNonBoldMedium}"/>
             </StackLayout>
           </StackLayout>
          </ScrollView>

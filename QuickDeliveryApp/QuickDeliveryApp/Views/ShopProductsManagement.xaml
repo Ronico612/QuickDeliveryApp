@@ -27,8 +27,8 @@
                             <Frame CornerRadius="4" BorderColor="DarkGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Grid.Row="0" Grid.Column="3" Grid.RowSpan="3" Margin="0,15,15,0" Padding="2">
                                 <Image Source="{Binding ImgSource}" Aspect="AspectFill"/>
                             </Frame>
-                            <Label Text="{Binding Path=ProductName, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.Column="2" Margin="40,10,20,0"/>
-                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}" Grid.Row="1" Grid.Column="2" Margin="0,0,20,0">
+                            <Label Text="{Binding Path=ProductName, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleMedium}" Grid.Row="0" Grid.Column="2" Margin="40,10,20,0"/>
+                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBoldMedium}" Grid.Row="1" Grid.Column="2" Margin="0,0,20,0">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0}  |  {1}">
                                         <Binding Path="AgeProductType.AgeProductTypeName" />
@@ -36,7 +36,7 @@
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>
-                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}" Grid.Row="2" Grid.Column="2" Margin="0,0,20,0">
+                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBoldMedium}" Grid.Row="2" Grid.Column="2" Margin="0,0,20,0">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}כמות: {0}    מחיר: ₪{1}">
                                         <Binding Path="CountProductInShop" />

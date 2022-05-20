@@ -9,41 +9,41 @@
                 <Button Text="נאסף מהחנות" IsVisible="{Binding IsApproved}" Command="{Binding TakenFromShopCommand}" Style="{StaticResource basicButtonStyle}" Margin="15,15,15,0"/>
             <Button Text="נמסר ללקוח" IsVisible="{Binding IsTakenFromShop}" Command="{Binding BroughtToClientCommand}" Style="{StaticResource basicButtonStyle}" Margin="15,15,15,0"/>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,20,0,0">
-                <Label Text="{Binding SelectedOrderDetails.OrderDate}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,0,5"/>
-                <Label Text="זמן ביצוע הזמנה: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,0,15,5"/>
+                <Label Text="{Binding SelectedOrderDetails.OrderDate}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBoldMedium}" Margin="0,0,0,5"/>
+                <Label Text="זמן ביצוע הזמנה: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleMedium}" Margin="0,0,15,5"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsShowApprovedByDeliveryPersonDate}">
-                <Label Text="{Binding ApprovedByDeliveryPersonDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,0,5"/>
-                <Label Text="זמן העברת הזמנה לשליח: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,0,15,5"/>
+                <Label Text="{Binding ApprovedByDeliveryPersonDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBoldMedium}" Margin="0,0,0,5"/>
+                <Label Text="זמן העברת הזמנה לשליח: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleMedium}" Margin="0,0,15,5"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsShowTakenFromShopDate}">
-                <Label Text="{Binding TakenFromShopDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,0,5"/>
-                <Label Text="זמן איסוף מהחנות: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,0,15,5"/>
+                <Label Text="{Binding TakenFromShopDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBoldMedium}" Margin="0,0,0,5"/>
+                <Label Text="זמן איסוף מהחנות: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleMedium}" Margin="0,0,15,5"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsShowBroughtToUserDate}">
-                <Label Text="{Binding BroughtToUserDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,0,5"/>
-                <Label Text="זמן מסירה ללקוח: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,0,15,5"/>
+                <Label Text="{Binding BroughtToUserDate, StringFormat='{0:dd/MM/yyyy HH:mm}'}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBoldMedium}" Margin="0,0,0,5"/>
+                <Label Text="זמן מסירה ללקוח: " HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleMedium}" Margin="0,0,15,5"/>
             </StackLayout>
-            <Label Text="{Binding SelectedOrderDetails.ShopName}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,20,15,0"/>
+            <Label Text="{Binding SelectedOrderDetails.ShopName}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleMedium}" Margin="0,20,15,0"/>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,0,15,0">
-                <Label Text="{Binding SelectedOrderDetails.ShopCity}" Style="{StaticResource labelStyleNonBold2}"/>
-                <Label Text="|" Style="{StaticResource labelStyle2}"/>
-                    <Label Text="{Binding SelectedOrderDetails.ShopHouseNum}" Style="{StaticResource labelStyleNonBold2}"/>
-                    <Label Text="{Binding SelectedOrderDetails.ShopStreet}" Style="{StaticResource labelStyleNonBold2}"/>
+                <Label Text="{Binding SelectedOrderDetails.ShopCity}" Style="{StaticResource labelStyleNonBoldMedium}"/>
+                <Label Text="|" Style="{StaticResource labelStyleMedium}"/>
+                    <Label Text="{Binding SelectedOrderDetails.ShopHouseNum}" Style="{StaticResource labelStyleNonBoldMedium}"/>
+                    <Label Text="{Binding SelectedOrderDetails.ShopStreet}" Style="{StaticResource labelStyleNonBoldMedium}"/>
             </StackLayout>
-            <Label Text="{Binding SelectedOrderDetails.ShopPhone}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,15,0"/>
-            <Label Text="מבצע ההזמנה" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,20,15,0"/>
+            <Label Text="{Binding SelectedOrderDetails.ShopPhone}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBoldMedium}" Margin="0,0,15,0"/>
+            <Label Text="מבצע ההזמנה" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleMedium}" Margin="0,20,15,0"/>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,0,15,0">
-                <Label Text="{Binding SelectedOrderDetails.User.UserLname}" Style="{StaticResource labelStyleNonBold2}"/>
-                <Label Text="{Binding SelectedOrderDetails.User.UserFname}" Style="{StaticResource labelStyleNonBold2}"/>
+                <Label Text="{Binding SelectedOrderDetails.User.UserLname}" Style="{StaticResource labelStyleNonBoldMedium}"/>
+                <Label Text="{Binding SelectedOrderDetails.User.UserFname}" Style="{StaticResource labelStyleNonBoldMedium}"/>
             </StackLayout>
-            <Label Text="{Binding SelectedOrderDetails.User.UserPhone}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,15,0"/>
-            <Label Text="כתובת למשלוח" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyle2}" Margin="0,20,15,0"/>
+            <Label Text="{Binding SelectedOrderDetails.User.UserPhone}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBoldMedium}" Margin="0,0,15,0"/>
+            <Label Text="כתובת למשלוח" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleMedium}" Margin="0,20,15,0"/>
             <StackLayout Orientation="Horizontal" HorizontalOptions="EndAndExpand" Margin="0,0,15,0">
-                <Label Text="{Binding SelectedOrderDetails.OrderCity}" Style="{StaticResource labelStyleNonBold2}"/>
-                <Label Text="|" Style="{StaticResource labelStyleNonBold2}"/>
-                    <Label Text="{Binding SelectedOrderDetails.OrderHouseNum}" Style="{StaticResource labelStyleNonBold2}"/>
-                    <Label Text="{Binding SelectedOrderDetails.OrderStreet}" Style="{StaticResource labelStyleNonBold2}"/>
+                <Label Text="{Binding SelectedOrderDetails.OrderCity}" Style="{StaticResource labelStyleNonBoldMedium}"/>
+                <Label Text="|" Style="{StaticResource labelStyleNonBoldMedium}"/>
+                    <Label Text="{Binding SelectedOrderDetails.OrderHouseNum}" Style="{StaticResource labelStyleNonBoldMedium}"/>
+                    <Label Text="{Binding SelectedOrderDetails.OrderStreet}" Style="{StaticResource labelStyleNonBoldMedium}"/>
             </StackLayout>
             <Grid Margin="0,30,0,0">
                 <Grid.ColumnDefinitions>
@@ -78,20 +78,20 @@
                                     <RowDefinition Height="10"/>
                                 </Grid.RowDefinitions>
                                 <StackLayout Orientation="Horizontal" VerticalOptions="Center" Grid.Column="0" Margin="10,0,0,0">
-                                    <Label Text="₪" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Style="{StaticResource labelStyleNonBold2}"/>
-                                    <Label Text="{Binding Price, StringFormat='{0}'}" HorizontalOptions="StartAndExpand" Style="{StaticResource labelStyleNonBold2}" HorizontalTextAlignment="End" VerticalOptions="Center"/>
+                                    <Label Text="₪" VerticalOptions="Center" HorizontalOptions="StartAndExpand" Style="{StaticResource labelStyleNonBoldMedium}"/>
+                                    <Label Text="{Binding Price, StringFormat='{0}'}" HorizontalOptions="StartAndExpand" Style="{StaticResource labelStyleNonBoldMedium}" HorizontalTextAlignment="End" VerticalOptions="Center"/>
                                 </StackLayout>
-                                <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"  Text="{Binding Path=Quantity, Mode=TwoWay, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBold2}"/>
+                                <Label Grid.Column="1" VerticalOptions="Center" HorizontalOptions="CenterAndExpand"  Text="{Binding Path=Quantity, Mode=TwoWay, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBoldMedium}"/>
                                 <Image Grid.Column="2" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" Source="{Binding Product.ImgSource}"/>
-                                <Label Grid.Column="3" VerticalOptions="Center" Text="{Binding Product.ProductName, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBold2}" Margin="0,0,15,0"/>
+                                <Label Grid.Column="3" VerticalOptions="Center" Text="{Binding Product.ProductName, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBoldMedium}" Margin="0,0,15,0"/>
                             </Grid>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
             <StackLayout Orientation="Horizontal" Margin="0,0,0,20">
-                <Label Text="₪" Style="{StaticResource labelStyle2}" Margin="10,0,0,0"/>
-                <Label Text="{Binding SelectedOrderDetails.TotalPrice}" Style="{StaticResource labelStyle2}"/>
-                <Label Text="סך הכל:" Style="{StaticResource labelStyle2}"/>
+                <Label Text="₪" Style="{StaticResource labelStyleMedium}" Margin="10,0,0,0"/>
+                <Label Text="{Binding SelectedOrderDetails.TotalPrice}" Style="{StaticResource labelStyleMedium}"/>
+                <Label Text="סך הכל:" Style="{StaticResource labelStyleMedium}"/>
             </StackLayout>
         </StackLayout>
       </ScrollView>

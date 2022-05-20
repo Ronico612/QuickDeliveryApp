@@ -36,13 +36,13 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Image Source="LeftArrow.png" Grid.Row="0" Grid.RowSpan="2" Grid.Column="0"/>
-                            <Label Text="{Binding TotalPrice}" VerticalOptions="CenterAndExpand" Style="{StaticResource labelStyleNonBold2}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"/>
+                            <Label Text="{Binding TotalPrice}" VerticalOptions="CenterAndExpand" Style="{StaticResource labelStyleNonBoldMedium}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="1"/>
                             <StackLayout Orientation="Horizontal" Grid.Row="0" Grid.Column="2" HorizontalOptions="EndAndExpand">
-                                <Label Text="{Binding ShopCity}" Style="{StaticResource labelStyle2}"/>
+                                <Label Text="{Binding ShopCity}" Style="{StaticResource labelStyleMedium}"/>
                                 <Label Text="|" FontAttributes="Bold"/>
-                                <Label Text="{Binding ShopName}" Style="{StaticResource labelStyle2}"/>
+                                <Label Text="{Binding ShopName}" Style="{StaticResource labelStyleMedium}"/>
                             </StackLayout>
-                            <Label Text="{Binding OrderDate}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBold2}" Grid.Row="1" Grid.Column="2"/>
+                            <Label Text="{Binding OrderDate}" HorizontalOptions="EndAndExpand" Style="{StaticResource labelStyleNonBoldMedium}" Grid.Row="1" Grid.Column="2"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

@@ -5,9 +5,9 @@
     <ContentPage.Content>
         <StackLayout>
             <StackLayout Margin="0,20,0,20" Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Label Text="!" Style="{StaticResource labelStyle4}" Padding="0,5"></Label>
-                <Label Text="{Binding App.CurrentUser.UserFname}" Style="{StaticResource labelStyle4}" Padding="0,5"/>
-                <Label Text="שלום" Style="{StaticResource labelStyle4}" Padding="0,5"></Label>
+                <Label Text="!" Style="{StaticResource labelStyleExtraLarge}" Padding="0,5"></Label>
+                <Label Text="{Binding App.CurrentUser.UserFname}" Style="{StaticResource labelStyleExtraLarge}" Padding="0,5"/>
+                <Label Text="שלום" Style="{StaticResource labelStyleExtraLarge}" Padding="0,5"></Label>
             </StackLayout>
             <Button Text="חשבון" Command="{Binding UpdateUserDetailsCommand}" Style="{StaticResource arrowButtonStyle}"/>
             <Button Text="הזמנות בתהליך" Command="{Binding CurrentOrdersCommand}" Style="{StaticResource arrowButtonStyle}"/>

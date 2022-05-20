@@ -4,7 +4,7 @@
              x:Class="QuickDeliveryApp.Views.Admin">
     <ContentPage.Content>
         <StackLayout>
-            <Label HorizontalOptions="CenterAndExpand" Text="מנהל אתר" Style="{StaticResource labelStyle4}"/>
+            <Label HorizontalOptions="CenterAndExpand" Text="מנהל אתר" Style="{StaticResource labelStyleExtraLarge}"/>
             <Button Text="ניהול חנויות ומנהלים" Command="{Binding AdminShopsManagementCommand}" Style="{StaticResource arrowButtonStyle}"/>
             <Button Text="ניהול שליחים" Command="{Binding AdminDeliveryPManagementCommand}" Style="{StaticResource arrowButtonStyle}"/>
             <Button Text="צפייה במשתמשים" Command="{Binding AdminShowUsersCommand}" Style="{StaticResource arrowButtonStyle}"/>

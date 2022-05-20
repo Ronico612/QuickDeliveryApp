@@ -22,8 +22,8 @@
                                 <RowDefinition Height="36"/>
                             </Grid.RowDefinitions>
                             <Button ImageSource="Delete.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteDeliveryPersonCommand}" CommandParameter="{Binding}" BackgroundColor="White" Grid.Row="0" Grid.Column="0" Padding="5,10,5,10" Margin="9,10,9,-5" CornerRadius="4"/>
-                            <Label Text="{Binding Path=UserPhone, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}" Grid.Row="0" Grid.Column="1" Margin="10,10,10,8"/>
-                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Margin="10,10,15,10">
+                            <Label Text="{Binding Path=UserPhone, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBoldMedium}" Grid.Row="0" Grid.Column="1" Margin="10,10,10,8"/>
+                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleMedium}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Margin="10,10,15,10">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="UserLname" />
@@ -31,7 +31,7 @@
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>
-                            <Label Text="{Binding Path=UserEmail, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,10,16"/>
+                            <Label Text="{Binding Path=UserEmail, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBoldMedium}" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="10,0,10,16"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

@@ -4,9 +4,9 @@
              x:Class="QuickDeliveryApp.Views.ShopManager">
     <ContentPage.Content>
         <StackLayout>
-            <Label HorizontalOptions="CenterAndExpand" Text="מנהל חנות" Style="{StaticResource labelStyle4}" Padding="20,20,20,0"/>
-            <Label HorizontalOptions="CenterAndExpand" Text="{Binding ShopName}" Style="{StaticResource labelStyle2}"/>
-            <Label HorizontalOptions="CenterAndExpand" Text="{Binding ShopCity}" Style="{StaticResource labelStyle2}" Margin="0,0,0,20"/>
+            <Label HorizontalOptions="CenterAndExpand" Text="מנהל חנות" Style="{StaticResource labelStyleExtraLarge}" Padding="20,20,20,0"/>
+            <Label HorizontalOptions="CenterAndExpand" Text="{Binding ShopName}" Style="{StaticResource labelStyleMedium}"/>
+            <Label HorizontalOptions="CenterAndExpand" Text="{Binding ShopCity}" Style="{StaticResource labelStyleMedium}" Margin="0,0,0,20"/>
             <Button Text="ניהול מוצרים" Command="{Binding ShopProductsManagementCommand}" Style="{StaticResource arrowButtonStyle}"/>
             <Button Text="צפייה בהזמנות" Command="{Binding ShopOrdersCommand}" Style="{StaticResource arrowButtonStyle}"/>
         </StackLayout>

@@ -26,8 +26,8 @@
                             </Grid.RowDefinitions>
                             <Button ImageSource="Delete.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteShopCommand}" CommandParameter="{Binding}" BackgroundColor="White" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" CornerRadius="4" Margin="5,10"/>
                             <Button ImageSource="Edit.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.EditShopCommand}" CommandParameter="{Binding}" BackgroundColor="White" Grid.Column="1" Grid.Row="0" Grid.RowSpan="3" CornerRadius="4" Margin="5,10"/>
-                            <Label Text="{Binding Path=ShopName, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.Column="2" Margin="40,10,20,0"/>
-                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold1}" Grid.Row="1" Grid.Column="2" Margin="0,0,20,0">
+                            <Label Text="{Binding Path=ShopName, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleMedium}" Grid.Row="0" Grid.Column="2" Margin="40,10,20,0"/>
+                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBoldSmall}" Grid.Row="1" Grid.Column="2" Margin="0,0,20,0">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0}  |  {1} {2}">
                                         <Binding Path="ShopCity" />
@@ -36,7 +36,7 @@
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>
-                            <Label Text="{Binding Path=ShopPhone, StringFormat='{0}'}" HorizontalTextAlignment="End" Style="{StaticResource labelStyleNonBold1}" Grid.Row="2" Grid.Column="2" Margin="0,0,20,0"/>
+                            <Label Text="{Binding Path=ShopPhone, StringFormat='{0}'}" HorizontalTextAlignment="End" Style="{StaticResource labelStyleNonBoldSmall}" Grid.Row="2" Grid.Column="2" Margin="0,0,20,0"/>
                             <Frame CornerRadius="4" BorderColor="DarkGray" Grid.Column="3" Grid.RowSpan="3" Grid.Row="0" Margin="0,10,12,0" Padding="2" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
                                 <Image Source="{Binding ImgSource}"/>
                             </Frame>

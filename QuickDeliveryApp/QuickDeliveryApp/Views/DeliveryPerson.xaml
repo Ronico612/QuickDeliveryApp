@@ -4,7 +4,7 @@
              x:Class="QuickDeliveryApp.Views.DeliveryPerson">
     <ContentPage.Content>
         <StackLayout>
-            <Label HorizontalOptions="CenterAndExpand" Text="שליח" Style="{StaticResource labelStyle4}"/>
+            <Label HorizontalOptions="CenterAndExpand" Text="שליח" Style="{StaticResource labelStyleExtraLarge}"/>
             <Button Text="בחר הזמנה למשלוח" Command="{Binding ChooseOrderCommand}" Style="{StaticResource arrowButtonStyle}"/>
             <Button Text="משלוחים בתהליך" Command="{Binding OrdersInProcessCommand}" Style="{StaticResource arrowButtonStyle}"/>
             <Button Text="צפייה בכל המשלוחים שבוצעו" Command="{Binding HistoryDeliverysCommand}" Style="{StaticResource arrowButtonStyle}"/>

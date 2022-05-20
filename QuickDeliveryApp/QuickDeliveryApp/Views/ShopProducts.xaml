@@ -35,7 +35,7 @@
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
                                 <Frame x:Name="ageProductTypeFrame" Grid.Row="0" Padding="20,0,20,0" Margin="10,0,0,0" HasShadow="False">
-                                    <Label x:Name="ageProductTypeLabel" Text="{Binding Path=AgeProductTypeName, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBold3}"/>
+                                    <Label x:Name="ageProductTypeLabel" Text="{Binding Path=AgeProductTypeName, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBoldLarge}"/>
                                 </Frame>
                             </Grid>
                         </DataTemplate>
@@ -69,7 +69,7 @@
                                     <RowDefinition Height="30"/>
                                 </Grid.RowDefinitions>
                                 <Frame x:Name="productTypeNameFrame" Grid.Row="0" Padding="20,0,20,0" Margin="10,0,0,0" HasShadow="False">
-                                    <Label x:Name="productTypeNameLabel" Text="{Binding Path=ProductTypeName, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBold3}"/>
+                                    <Label x:Name="productTypeNameLabel" Text="{Binding Path=ProductTypeName, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBoldLarge}"/>
                                 </Frame>
                             </Grid>
                         </DataTemplate>
@@ -104,10 +104,10 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <Image Source="{Binding ImgSource}" Grid.Row="0"/>
-                                <Label HorizontalTextAlignment="Center" Grid.Row="1" Text="{Binding Path=ProductName, StringFormat='{0}'}" Style="{StaticResource labelStyle1}" Margin="0,10,0,0"/>
+                                <Label HorizontalTextAlignment="Center" Grid.Row="1" Text="{Binding Path=ProductName, StringFormat='{0}'}" Style="{StaticResource labelStyleSmall}" Margin="0,10,0,0"/>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="Center" Grid.Row="2">
-                                    <Label Text="₪" Style="{StaticResource labelStyleNonBold1}"/>
-                                    <Label Text="{Binding Path=ProductPrice, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBold1}"/>
+                                    <Label Text="₪" Style="{StaticResource labelStyleNonBoldSmall}"/>
+                                    <Label Text="{Binding Path=ProductPrice, StringFormat='{0}'}" Style="{StaticResource labelStyleNonBoldSmall}"/>
                                 </StackLayout>
                             </Grid>
                         </DataTemplate>
