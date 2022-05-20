@@ -38,9 +38,9 @@
                             <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold1}" Grid.Row="2" Grid.Column="1">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0}  |  {1} {2}">
-                                        <Binding Path="User.UserCity" />
-                                        <Binding Path="User.UserHouseNum" />
-                                        <Binding Path="User.UserStreet" />
+                                        <Binding Path="OrderCity" />
+                                        <Binding Path="OrderStreet" />
+                                        <Binding Path="OrderHouseNum" />
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>

@@ -76,6 +76,7 @@ namespace QuickDeliveryApp.ViewModels
 
             QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
             List<Order> orders = await quickDeliveryAPIProxy.GetShopOrders(currentShop.ShopId);
+            ShopOrders.Clear();
             foreach (Order o in orders)
             {
                 if (o.StatusOrderId == 4) // brought

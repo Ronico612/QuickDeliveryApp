@@ -5,14 +5,16 @@
     <ContentPage.Content>
       <ScrollView Margin="0" Padding="0">
         <StackLayout BackgroundColor="White" Padding="0">
-            <!-- תמונה-->
-            <Frame CornerRadius="8" BorderColor="DarkGray" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="2" Margin="120,0,120,0">
-                <Image x:Name="theImage" Source="{Binding ImgSource}" WidthRequest="120" HeightRequest="90"/>
-            </Frame>
-            <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" Style="{StaticResource basicButtonStyle}" HorizontalOptions="Center" HeightRequest="40" WidthRequest="170"/>
-            <Label Text="{Binding ImgSourceError}" IsVisible="{Binding ShowImgSourceError}" Style="{StaticResource labelErrorStyle}" HorizontalOptions="Center" Margin="0,0,0,10"/>
+            <StackLayout BackgroundColor="White" Padding="0" Margin="0" Orientation="Horizontal" HorizontalOptions="End">
+                <!-- תמונה-->
+                <Label Text="{Binding ImgSourceError}" IsVisible="{Binding ShowImgSourceError}" Style="{StaticResource labelErrorStyle}" HorizontalOptions="Start" Margin="0,30,0,10"/>
+                <Frame CornerRadius="8" BorderColor="DarkGray" VerticalOptions="FillAndExpand" Padding="2" Margin="10,0,10,0">
+                  <Image x:Name="theImage" Source="{Binding ImgSource}" WidthRequest="120" HeightRequest="80"/>
+                </Frame>
+                <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" Style="{StaticResource basicButtonStyle}" HorizontalOptions="Center" HeightRequest="30" WidthRequest="80" Margin="0,25,40,25" Padding="0"/>
+            </StackLayout>
             <!-- שם חנות -->
-            <Grid>
+            <Grid Margin="0,20,0,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="6*"/>
@@ -129,7 +131,7 @@
                 <Label Text="דואר אלקטרוני של מנהל חנות" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Entry Placeholder="הכנס דואר אלקטרוני של מנהל חנות" Text="{Binding ShopManagerEmail}" Style="{StaticResource entryStyle}" MaxLength="100"/>
-            <Button Text="אישור" Command="{Binding AddOrEditCommand}" Style="{StaticResource basicButtonStyle}" Margin="10,10,10,20"/>
+            <Button Text="אישור" Command="{Binding AddOrEditCommand}" Style="{StaticResource basicButtonStyle}" Margin="10,0,10,10" HeightRequest="40"/>
         </StackLayout>
       </ScrollView>
     </ContentPage.Content>

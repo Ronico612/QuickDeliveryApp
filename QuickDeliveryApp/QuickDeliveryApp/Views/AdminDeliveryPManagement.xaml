@@ -14,7 +14,7 @@
                         <Grid ColumnSpacing="5" RowSpacing="0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50"/>
-                                <ColumnDefinition Width="100" />
+                                <ColumnDefinition Width="120" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
@@ -23,7 +23,7 @@
                             </Grid.RowDefinitions>
                             <Button ImageSource="Delete.png" Command="{Binding Source={x:Reference collectionName}, Path=BindingContext.DeleteDeliveryPersonCommand}" CommandParameter="{Binding}" BackgroundColor="White" Grid.Row="0" Grid.Column="0" Padding="5,10,5,10" Margin="9,10,9,-5" CornerRadius="4"/>
                             <Label Text="{Binding Path=UserPhone, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}" Grid.Row="0" Grid.Column="1" Margin="10,10,10,8"/>
-                            <Label HorizontalTextAlignment="End" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Margin="10,10,15,10">
+                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Margin="10,10,15,10">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0} {1}">
                                         <Binding Path="UserLname" />

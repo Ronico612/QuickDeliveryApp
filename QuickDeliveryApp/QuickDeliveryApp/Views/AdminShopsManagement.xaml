@@ -31,8 +31,8 @@
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0}  |  {1} {2}">
                                         <Binding Path="ShopCity" />
-                                        <Binding Path="ShopHouseNum" />
                                         <Binding Path="ShopStreet" />
+                                        <Binding Path="ShopHouseNum" />
                                     </MultiBinding>
                                 </Label.Text>
                             </Label>

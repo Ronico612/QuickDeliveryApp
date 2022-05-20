@@ -88,7 +88,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" Margin="0,0,0,20">
                 <Label Text="₪" Style="{StaticResource labelStyle2}" Margin="10,0,0,0"/>
                 <Label Text="{Binding SelectedOrderDetails.TotalPrice}" Style="{StaticResource labelStyle2}"/>
                 <Label Text="סך הכל:" Style="{StaticResource labelStyle2}"/>

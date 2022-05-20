@@ -4,7 +4,7 @@
              x:Class="QuickDeliveryApp.Views.Shops">
     <ContentPage.Content>
         <StackLayout BackgroundColor="White">
-            <Frame Padding="3,3,3,3" Margin="10,15,10,0" HasShadow="False" BorderColor="White" CornerRadius="8" HeightRequest="40">
+            <Frame Padding="3,3,3,3" Margin="10,15,10,0" HasShadow="False" BorderColor="DarkGray" CornerRadius="8" HeightRequest="40">
                 <SearchBar x:Name="searchBar" Text="{Binding SearchTerm}" Placeholder="חיפוש חנות" BackgroundColor="#F2F4F4"/>
             </Frame>
             <RefreshView x:Name="refreshView"

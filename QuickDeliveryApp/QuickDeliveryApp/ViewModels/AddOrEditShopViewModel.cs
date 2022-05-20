@@ -647,6 +647,7 @@ namespace QuickDeliveryApp.ViewModels
                 this.ShopStreet = s.ShopStreet;
                 this.ShopHouseNum = s.ShopHouseNum.ToString();
                 this.ShopPhone = s.ShopPhone;
+                this.IsShopStreetEnabled = true;
 
                 QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
                 if (s.ShopManagerId != null)

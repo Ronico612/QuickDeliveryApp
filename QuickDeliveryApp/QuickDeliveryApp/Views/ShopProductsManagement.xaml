@@ -28,7 +28,7 @@
                                 <Image Source="{Binding ImgSource}" Aspect="AspectFill"/>
                             </Frame>
                             <Label Text="{Binding Path=ProductName, StringFormat='{0}'}" HorizontalTextAlignment="Start" Style="{StaticResource labelStyle2}" Grid.Row="0" Grid.Column="2" Margin="40,10,20,0"/>
-                            <Label HorizontalTextAlignment="End" Style="{StaticResource labelStyleNonBold2}" Grid.Row="1" Grid.Column="2" Margin="0,0,20,0">
+                            <Label HorizontalTextAlignment="Start" Style="{StaticResource labelStyleNonBold2}" Grid.Row="1" Grid.Column="2" Margin="0,0,20,0">
                                 <Label.Text>
                                     <MultiBinding StringFormat="{}{0}  |  {1}">
                                         <Binding Path="AgeProductType.AgeProductTypeName" />

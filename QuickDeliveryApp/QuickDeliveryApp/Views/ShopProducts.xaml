@@ -6,8 +6,8 @@
         <RefreshView x:Name="refreshView"
              Command="{Binding RefreshCommand}"
              IsRefreshing="{Binding IsRefreshing}">
-            <StackLayout BackgroundColor="White">
-                <CollectionView x:Name="collectionAge" HeightRequest="30" ItemsSource="{Binding AgeTypes}" SelectionMode="Single" BackgroundColor="White" Margin="0,10,0,0"
+            <StackLayout BackgroundColor="White" FlowDirection="RightToLeft">
+                <CollectionView x:Name="collectionAge" HeightRequest="30" ItemsSource="{Binding AgeTypes}" SelectionMode="Single" BackgroundColor="White" Margin="0,10,0,0" FlowDirection="RightToLeft"
                                 SelectedItem="{Binding SelectedAgeType}" SelectionChangedCommand="{Binding ShowProductTypesCommand}" SelectionChangedCommandParameter="{Binding Source={x:Reference collectionAge}, Path=SelectedItem}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout HorizontalItemSpacing="10" Orientation="Horizontal"/>
@@ -41,7 +41,7 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
-                <CollectionView x:Name="collectionProductTypes" HeightRequest="30" ItemsSource="{Binding ProductTypes}" SelectionMode="Single" BackgroundColor="White" Margin="0,0,0,10"
+                <CollectionView x:Name="collectionProductTypes" HeightRequest="30" ItemsSource="{Binding ProductTypes}" SelectionMode="Single" BackgroundColor="White" Margin="0,0,0,10" 
                                SelectedItem="{Binding SelectedProductType}" SelectionChangedCommand="{Binding ShowProductsCommand}" SelectionChangedCommandParameter="{Binding  Source={x:Reference collectionProductTypes}, Path=SelectedItem}">
                     <CollectionView.ItemsLayout>
                         <GridItemsLayout HorizontalItemSpacing="20" Orientation="Horizontal"/>
@@ -83,7 +83,7 @@
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid RowSpacing="0">
+                            <Grid RowSpacing="0" Margin="0,0,0,10">
                                 <VisualStateManager.VisualStateGroups>
                                     <VisualStateGroup>
                                         <VisualState x:Name="Normal">

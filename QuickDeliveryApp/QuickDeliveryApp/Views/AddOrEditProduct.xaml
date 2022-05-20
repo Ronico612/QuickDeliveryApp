@@ -23,7 +23,7 @@
                 <Frame CornerRadius="4" BorderColor="DarkGray" HeightRequest="100" WidthRequest="80" Padding="0,2" Margin="160,0">
                     <Image x:Name="theImage" Source="{Binding ImgSource}" Aspect="AspectFill" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>
                 </Frame>
-                <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" Style="{StaticResource basicButtonStyle}" WidthRequest="90" HeightRequest="40" Padding="0" HorizontalOptions="Center"/>
+                <Button Text="בחר תמונה" Command="{Binding ChooseImageCommand}" Style="{StaticResource basicButtonStyle}" WidthRequest="90" HeightRequest="30" Padding="0" HorizontalOptions="Center"/>
                 <Label Text="{Binding ImgSourceError}" IsVisible="{Binding ShowImgSourceError}" Style="{StaticResource labelErrorStyle}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center"/>
             </StackLayout>
             <!-- שם מוצר -->
@@ -91,7 +91,7 @@
                 <Label Text="קטגוריית מוצר" Grid.Column="1" Style="{StaticResource labelNameStyle}"/>
             </Grid>
             <Picker Title="בחר קטגוריה" ItemsSource="{Binding ProductTypes}" Style="{StaticResource entryStyle}" SelectedItem="{Binding Type, Mode=TwoWay}" ItemDisplayBinding="{Binding ProductTypeName}"/>
-            <Button Text="אישור" Command="{Binding AddOrEditCommand}" Style="{StaticResource basicButtonStyle}" Margin="10,0,10,10"/>
+            <Button Text="אישור" Command="{Binding AddOrEditCommand}" Style="{StaticResource basicButtonStyle}" Margin="10,0,10,10" HeightRequest="40"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
