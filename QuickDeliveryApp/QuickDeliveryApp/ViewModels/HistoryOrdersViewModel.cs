@@ -10,6 +10,7 @@ using QuickDeliveryApp.Models;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using QuickDeliveryApp.Views;
+using OrderDetails = QuickDeliveryApp.Models.OrderDetails;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -21,7 +22,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private ObservableCollection<OrderDetails> userOrders;
+        private ObservableCollection<Models.OrderDetails> userOrders;
         public ObservableCollection<OrderDetails> UserOrders
         {
             get
@@ -95,52 +96,12 @@ namespace QuickDeliveryApp.ViewModels
             {
                 Page p = new Views.OrderDetails();
                 p.Title = "פרטי הזמנה";
-                p.BindingContext = new  OrderDetailsViewModel(this.SelectedUserOrder, false, false, false);
+                p.BindingContext = new  OrderDetailsViewModel(SelectedUserOrder, false, false, false);
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 await tabbed.Navigation.PushAsync(p);
                 SelectedUserOrder = null;
             }
         }
 
-    }
-
-    public class OrderDetails
-    {
-        public string ShopName { get; set; }
-        public string ShopCity { get; set; }
-        public string ShopStreet { get; set; }
-        public int? ShopHouseNum { get; set; }
-        public string ShopPhone { get; set; }
-        public decimal? TotalPrice { get; set; }
-        public string OrderDate { get; set; }
-        public int OrderId { get; set; }
-        public int? OrderStatusId { get; set; }
-        public List<OrderProduct> OrderProducts { get; set; }
-        public string OrderStreet { get; set; }
-        public int? OrderHouseNum { get; set; }
-        public string OrderCity { get; set; }
-        public User User { get; set; }
-
-        public OrderDetails(Order o)
-        {
-            this.TotalPrice = o.TotalPrice;
-            this.OrderDate = o.OrderDate.ToString("dd/MM/yyyy HH:mm");
-            this.OrderId = o.OrderId;
-            this.OrderStatusId = o.StatusOrderId;
-
-            if (o.OrderProducts.Count > 0)
-            {
-                this.ShopName = o.OrderProducts.ToList()[0].Product.Shop.ShopName;
-                this.ShopCity = o.OrderProducts.ToList()[0].Product.Shop.ShopCity;
-                this.ShopStreet = o.OrderProducts.ToList()[0].Product.Shop.ShopStreet;
-                this.ShopHouseNum = o.OrderProducts.ToList()[0].Product.Shop.ShopHouseNum;
-                this.ShopPhone = o.OrderProducts.ToList()[0].Product.Shop.ShopPhone;
-                this.OrderProducts = new List<OrderProduct>(o.OrderProducts);
-                this.OrderStreet = o.OrderStreet;
-                this.OrderHouseNum = o.OrderHouseNum;
-                this.OrderCity = o.OrderCity;
-                this.User = o.User;
-            }
-        }
     }
 }

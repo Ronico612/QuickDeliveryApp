@@ -14,7 +14,7 @@
             <Label Text="{Binding Destination}" Style="{StaticResource labelStyleSmall}" Margin="20,0"/>-->
 
             <maps:Map x:Name="map" IsShowingUser="False" HorizontalOptions="FillAndExpand" Margin="15"/>
-            <Frame CornerRadius="4" BorderColor="DarkGray" Margin="15,0,15,15" BackgroundColor="#F2F4F4">
+            <Frame CornerRadius="4" BorderColor="DarkGray" Margin="15,0,15,15" BackgroundColor="#F2F4F4" IsVisible="{Binding IsShowDescription}">
                 <Label Text="*ניתן לצפות בדף מעקב אחר הזמנה דרך אזור אישי -> הזמנות בתהליך -> למעקב אחר ההזמנה" Style="{StaticResource labelStyleMedium}" LineBreakMode="NoWrap" Margin="15,0" MaxLines="3"/>
             </Frame>
         </StackLayout>

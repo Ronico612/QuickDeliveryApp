@@ -18,6 +18,24 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private bool isShowDescription;
+        public bool IsShowDescription
+        {
+            get
+            {
+                return this.isShowDescription;
+            }
+            set
+            {
+                if (this.isShowDescription != value)
+                {
+
+                    this.isShowDescription = value;
+                    OnPropertyChanged("IsShowDescription");
+                }
+            }
+        }
+
         private bool isWaiting;
         public bool IsWaiting
         {
@@ -125,7 +143,7 @@ namespace QuickDeliveryApp.ViewModels
         //connection to hub
         private DeliveryProxy deliveryProxy;
 
-        public InDeliveryViewModel(int orderId, string originAddress, string destinationAddress, int statusId)
+        public InDeliveryViewModel(int orderId, string originAddress, string destinationAddress, int statusId, bool isShowDescription = false)
         {
             this.currentOrderId = orderId;
             this.currentStatusId = statusId;
@@ -140,6 +158,7 @@ namespace QuickDeliveryApp.ViewModels
 
             this.Origin = originAddress;
             this.Destination = destinationAddress;
+            this.IsShowDescription = isShowDescription;
 
             //Open connection to delivery proxy
             this.deliveryProxy = new DeliveryProxy();
