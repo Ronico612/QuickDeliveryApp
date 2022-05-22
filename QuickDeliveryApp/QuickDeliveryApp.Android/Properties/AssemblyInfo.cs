@@ -3,6 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Android;
 using Android.App;
+using QuickDeliveryApp.Models;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -40,4 +41,4 @@ using Android.App;
 [assembly: UsesPermission(Android.Manifest.Permission.WriteExternalStorage)]
 
 //Add Google API Key
-[assembly: MetaData("com.google.android.geo.API_KEY", Value = QuickDeliveryApp.Constants.GoogleApiKey)]
+[assembly: MetaData("com.google.android.geo.API_KEY", Value = Constants.GoogleApiKey)]
