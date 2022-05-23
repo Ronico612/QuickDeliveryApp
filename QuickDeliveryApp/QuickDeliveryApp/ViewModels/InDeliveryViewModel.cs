@@ -186,6 +186,8 @@ namespace QuickDeliveryApp.ViewModels
             double lat = double.Parse(latitude), longi = double.Parse(longitude);
             if (OnDeliveryLocation != null)
                 OnDeliveryLocation(lat, longi);
+
+
         }
         public async void OnGo()
         {
