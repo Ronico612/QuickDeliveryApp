@@ -85,7 +85,10 @@ namespace QuickDeliveryApp.Views
 
             //Move the map to show the environment of the origin place! with radius of 5 KM... should be changed
             //according to the specific needs
-            MapSpan span = MapSpan.FromCenterAndRadius(pin1.Position, Distance.FromKilometers(5));
+            Position center = new Position((pin1.Position.Latitude + pin2.Position.Latitude) / 2, (pin1.Position.Longitude + pin2.Position.Longitude) / 2);
+            //double distance = Math.Sqrt(Math.Pow(pin1.Position.Latitude - pin2.Position.Latitude,2) + Math.Pow(pin1.Position.Longitude - pin2.Position.Longitude, 2));
+            MapSpan span = MapSpan.FromCenterAndRadius(center, Distance.BetweenPositions(pin1.Position, pin2.Position));
+            
             
             map.MoveToRegion(span);
 

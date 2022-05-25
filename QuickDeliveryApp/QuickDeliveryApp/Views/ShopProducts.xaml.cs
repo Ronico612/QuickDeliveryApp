@@ -16,6 +16,7 @@ namespace QuickDeliveryApp.Views
         public ShopProducts()
         {
             InitializeComponent();
+            
         }
     }
 }
