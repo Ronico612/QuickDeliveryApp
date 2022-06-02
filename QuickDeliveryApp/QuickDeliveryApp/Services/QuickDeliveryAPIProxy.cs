@@ -150,6 +150,36 @@ namespace QuickDeliveryApp.Services
             }
         }
 
+        public async Task<bool> Logout(User u)
+        {
+            try
+            {
+                JsonSerializerOptions options = new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+                string json = JsonSerializer.Serialize<User>(u, options);
+                StringContent content = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await this.client.PostAsync($"{this.baseUri}/Logout", content);
+                if (response.IsSuccessStatusCode)
+                {
+
+                    string jsonContent = await response.Content.ReadAsStringAsync();
+                    bool success = JsonSerializer.Deserialize<bool>(jsonContent, options);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
         public async Task<List<City>> GetCitiesAsync()
         {
             try

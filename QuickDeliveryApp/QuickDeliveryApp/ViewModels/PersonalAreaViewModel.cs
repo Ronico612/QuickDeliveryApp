@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
+using QuickDeliveryApp.Services;
 
 namespace QuickDeliveryApp.ViewModels
 {
@@ -56,8 +57,10 @@ namespace QuickDeliveryApp.ViewModels
 
 
         public ICommand LogoutCommand => new Command(Logout);
-        public void Logout()
+        public async void Logout()
         {
+            QuickDeliveryAPIProxy proxy = QuickDeliveryAPIProxy.CreateProxy();
+            await proxy.Logout(App.CurrentUser);
             App.CurrentUser = null;
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
