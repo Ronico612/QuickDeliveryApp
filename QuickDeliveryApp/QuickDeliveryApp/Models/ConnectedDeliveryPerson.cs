@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace QuickDeliveryApp.Models
 {
-    public class ConnectedDeliveryPerson:DeliveryPerson
+    public class ConnectedDeliveryPerson : DeliveryPerson
     {
-        //connection to hub
+        // Connection to hub
         private DeliveryProxy deliveryProxy;
         
         public ConnectedDeliveryPerson()
@@ -60,7 +60,6 @@ namespace QuickDeliveryApp.Models
                     List<string> orderIds = new List<string>();
                     foreach (Order o in orders)
                         orderIds.Add(o.OrderId.ToString());
-
 
                     await this.deliveryProxy.UpdateDeliveryLocation(orderIds.ToArray(), location.Latitude.ToString(), location.Longitude.ToString());
                     return true;

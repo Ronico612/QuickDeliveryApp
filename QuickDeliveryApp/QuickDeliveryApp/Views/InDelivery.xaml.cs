@@ -74,6 +74,7 @@ namespace QuickDeliveryApp.Views
                 Address = ""
             };
             map.Pins.Add(pin1);
+
             Pin pin2 = new Pin
             {
                 Type = PinType.Place,
@@ -86,10 +87,7 @@ namespace QuickDeliveryApp.Views
             //Move the map to show the environment of the origin place! with radius of 5 KM... should be changed
             //according to the specific needs
             Position center = new Position((pin1.Position.Latitude + pin2.Position.Latitude) / 2, (pin1.Position.Longitude + pin2.Position.Longitude) / 2);
-            //double distance = Math.Sqrt(Math.Pow(pin1.Position.Latitude - pin2.Position.Latitude,2) + Math.Pow(pin1.Position.Longitude - pin2.Position.Longitude, 2));
             MapSpan span = MapSpan.FromCenterAndRadius(center, Distance.BetweenPositions(pin1.Position, pin2.Position));
-            
-            
             map.MoveToRegion(span);
 
             //Create the polyline between origin and destination
@@ -99,7 +97,8 @@ namespace QuickDeliveryApp.Views
                 StrokeColor = Xamarin.Forms.Color.Blue,
                 StrokeWidth = 15
             };
-            //run through each leg of the route, then, through each step
+
+            //Run through each leg of the route, then, through each step
             foreach (Leg leg in directions.Routes[0].Legs)
             {
                 foreach (Step step in leg.Steps)
@@ -113,7 +112,6 @@ namespace QuickDeliveryApp.Views
                     {
                         path.Geopath.Add(pos);
                     }
-
                 }
             }
             //Add the line to the map!

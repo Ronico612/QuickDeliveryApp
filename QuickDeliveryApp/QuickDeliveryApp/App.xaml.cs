@@ -25,8 +25,6 @@ namespace QuickDeliveryApp
 
         //Define connected delivery object for cases where the user is a delivery person
         public ConnectedDeliveryPerson DeliveryPerson { get; set; }
-        public delegate void OrderStatusEventHandler(Object sender, int orderId, int statusId);
-        public event OrderStatusEventHandler OnOrderStatusUpdate;
 
         public List<string> Cities { get; set; }
         public List<Street> Streets { get; set; }
@@ -103,6 +101,8 @@ namespace QuickDeliveryApp
             }
         }
 
+        public string ServerStatus { get; set; }
+
         public List<Shop> AllShops { get; private set; }
 
         public bool goToPaymentAfterLogin;
@@ -121,8 +121,6 @@ namespace QuickDeliveryApp
             this.goToPaymentAfterLogin = false;
             this.DeliveryPerson = null;
         }
-
-       public string ServerStatus { get; set; }
 
         public void UpdateShoppingCartPage()
         {
@@ -148,24 +146,10 @@ namespace QuickDeliveryApp
             };
         }
 
-        protected override void OnSleep()
-        {
-        }
-
-        protected override void OnResume()
-        {
-        }
-
         public async Task GetAllShops()
         {
             QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
             this.AllShops = await quickDeliveryAPIProxy.GetShopsAsync();
-        }
-
-        public void CallOrderStatusUpdate(int orderId, int statusId)
-        {
-            if (OnOrderStatusUpdate != null)
-                OnOrderStatusUpdate(this, orderId, statusId);
         }
     }
 }

@@ -227,7 +227,6 @@ namespace QuickDeliveryApp.ViewModels
             this.IsTakenFromShop = this.isCalledFromDeliveryPerson && SelectedOrderDetails.OrderStatusId == 3; // taken
             this.InitStatusOrderDetails();
             this.ShowInDelivery = isCalledFromUserCurrentOrders;
-
         }
 
         private async void InitStatusOrderDetails()
@@ -251,13 +250,12 @@ namespace QuickDeliveryApp.ViewModels
             App app = (App)Application.Current;
             if (await proxy.UpdateStatusOrder(SelectedOrderDetails.OrderId, app.CurrentUser.UserId, 3)) // taken
             {
-                app.CallOrderStatusUpdate(SelectedOrderDetails.OrderId, 3); // מודיע למשתמש שההזמנה נלקחה מהחנות
                 this.IsApproved = false;
                 this.IsTakenFromShop = true;
                 this.InitStatusOrderDetails();
                 if (app.DeliveryPerson != null)
                 {
-                    app.DeliveryPerson.UpdateOrderStatus(SelectedOrderDetails.OrderId, 3);
+                    app.DeliveryPerson.UpdateOrderStatus(SelectedOrderDetails.OrderId, 3); // מודיע למשתמש שההזמנה נלקחה מהחנות
                 }
             }
             else
@@ -271,14 +269,13 @@ namespace QuickDeliveryApp.ViewModels
             App app = (App)Application.Current;
             if (await proxy.UpdateStatusOrder(SelectedOrderDetails.OrderId, app.CurrentUser.UserId, 4)) // brought
             {
-                app.CallOrderStatusUpdate(SelectedOrderDetails.OrderId, 4); // מודיע למשתמש שההזמנה נמסרה ללקוח
                 await App.Current.MainPage.DisplayAlert("", "הזמנה טופלה בהצלחה, תודה!", "בסדר");
                 await app.MainPage.Navigation.PopAsync();
                 this.IsApproved = false;
                 this.IsTakenFromShop = false;
                 if (app.DeliveryPerson != null)
                 {
-                    app.DeliveryPerson.UpdateOrderStatus(SelectedOrderDetails.OrderId, 4);
+                    app.DeliveryPerson.UpdateOrderStatus(SelectedOrderDetails.OrderId, 4); // מודיע למשתמש שההזמנה נמסרה ללקוח
                 }
             }
             else

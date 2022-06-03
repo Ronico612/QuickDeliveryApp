@@ -1,4 +1,104 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="QuickDeliveryApp.Views.AddDeliveryPerson" Collapsed="true">
+    <Position X="4.75" Y="4.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AddDeliveryPerson.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.AddDeliveryPersonViewModel" Collapsed="true">
+    <Position X="4.75" Y="5.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>BAIAAAAAEAggAAACJAAgAAAAgAAgCQAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AddDeliveryPersonViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.AddOrEditShop" Collapsed="true">
+    <Position X="1.25" Y="4.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>Views\AddOrEditShop.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.AddOrEditShopViewModel" Collapsed="true">
+    <Position X="1.25" Y="5.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>gAyAAqQIFoBgwbKmZgIAAeaCgQHCAlEC0IBSCsDksiY=</HashCode>
+      <FileName>ViewModels\AddOrEditShopViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.AdminShowUsersViewModel" Collapsed="true">
+    <Position X="8.25" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAACAAAAAAAAAAIAAAAgAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\AdminShowUsersViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.AdminShowUsers" Collapsed="true">
+    <Position X="8.25" Y="2.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AdminShowUsers.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.AdminDeliveryPManagement" Collapsed="true">
+    <Position X="4.75" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AdminDeliveryPManagement.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.AdminShopsManagement" Collapsed="true">
+    <Position X="1.25" Y="2.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\AdminShopsManagement.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.AdminDeliveryPManagementViewModel" Collapsed="true">
+    <Position X="4.75" Y="3.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAEAAIAAAAAAAgAAQAAAAAEACAAAAggA=</HashCode>
+      <FileName>ViewModels\AdminDeliveryPManagementViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.AdminShopsManagementViewModel" Collapsed="true">
+    <Position X="1.25" Y="3.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AABAAABASAAAAAAAIAAYAAAAgIAAAAAAIAAAAEAAAAA=</HashCode>
+      <FileName>ViewModels\AdminShopsManagementViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.AdminViewModel" Collapsed="true">
+    <Position X="4.75" Y="1.5" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAIIAAAAAAAAIAAAAAAAgEAAAAAQAAAAICAAAAA=</HashCode>
+      <FileName>ViewModels\AdminViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.Admin" Collapsed="true">
+    <Position X="4.75" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Admin.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

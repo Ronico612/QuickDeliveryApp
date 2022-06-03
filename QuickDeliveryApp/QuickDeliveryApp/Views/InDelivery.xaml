@@ -19,8 +19,6 @@
                     <Label Text="ההזמנה אושרה על ידי השליח וכבר בדרך אליך" Style="{StaticResource labelStyleMedium}" IsVisible="{Binding IsApproved}" LineBreakMode="NoWrap" Margin="70,0" MaxLines="2" HorizontalTextAlignment="Center"/>
                     <Label Text="ההזמנה נאספה מהחנות ובדרך אליך" Style="{StaticResource labelStyleMedium}" IsVisible="{Binding IsTakenFromShop}" LineBreakMode="NoWrap" Margin="30,0" MaxLines="2" HorizontalTextAlignment="Center"/>
                     <Label Text="ההזמנה נמסרה לך, אנו מודים לך על הזמנתך" Style="{StaticResource labelStyleMedium}" IsVisible="{Binding IsBrought}" LineBreakMode="NoWrap" Margin="70,0" MaxLines="2" HorizontalTextAlignment="Center"/>
-                    <!--<Label Text="{Binding Origin}" Style="{StaticResource labelStyleSmall}" Margin="20,20,20,0"/>
-                    <Label Text="{Binding Destination}" Style="{StaticResource labelStyleSmall}" Margin="20,0"/>-->
                 </StackLayout>
         </Grid>
             <maps:Map x:Name="map" IsShowingUser="False" HorizontalOptions="FillAndExpand" Margin="15"/>

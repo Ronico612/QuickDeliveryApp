@@ -108,27 +108,10 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        private int currentOrderId;
+        private int currentStatusId;
         private string origin;
-        public string Origin
-        {
-            get => this.origin;
-            set
-            {
-                this.origin = value;
-                OnPropertyChanged("Origin");
-            }
-        }
-
         private string destination;
-        public string Destination
-        {
-            get => this.destination;
-            set
-            {
-                this.destination = value;
-                OnPropertyChanged("Destination");
-            }
-        }
 
         public GooglePlace RouteOrigin { get; private set; }
         public GooglePlace RouteDestination { get; private set; }
@@ -137,10 +120,7 @@ namespace QuickDeliveryApp.ViewModels
         public event Action OnUpdateMapEvent;
         public event Action<double, double> OnDeliveryLocation;
 
-        private int currentOrderId;
-        private int currentStatusId;
-
-        //connection to hub
+        //Connection to hub
         private DeliveryProxy deliveryProxy;
 
         public InDeliveryViewModel(int orderId, string originAddress, string destinationAddress, int statusId, bool isShowDescription = false)
@@ -148,16 +128,13 @@ namespace QuickDeliveryApp.ViewModels
             this.currentOrderId = orderId;
             this.currentStatusId = statusId;
 
-            App app = (App)Application.Current;
-            app.OnOrderStatusUpdate += App_OnOrderStatusUpdate;
-
             this.IsWaiting = statusId == 1;
             this.IsApproved = statusId == 2;
             this.IsTakenFromShop = statusId == 3;
             this.IsBrought = statusId == 4;
 
-            this.Origin = originAddress;
-            this.Destination = destinationAddress;
+            this.origin = originAddress;
+            this.destination = destinationAddress;
             this.IsShowDescription = isShowDescription;
 
             //Open connection to delivery proxy
@@ -165,8 +142,6 @@ namespace QuickDeliveryApp.ViewModels
             this.deliveryProxy.RegisterToUpdateDeliveryLocation(UpdateDeliveryLocation);
             this.deliveryProxy.RegisterToUpdateOrderStatus(UpdateStatusByServer);
             ConnectToDeliveryProxy(orderId);
-            
-
         }
 
         private async void ConnectToDeliveryProxy(int orderId)
@@ -174,10 +149,17 @@ namespace QuickDeliveryApp.ViewModels
             string[] orders = { orderId.ToString() };
             await this.deliveryProxy.Connect(orders);
         }
-        //this method will be called by delivery proxy when the order status is changing
+
+        //This method will be called by delivery proxy when the order status is changing
         public void UpdateStatusByServer(string orderId, string statusId)
         {
-
+            if ((currentOrderId.ToString() == orderId) && (currentStatusId.ToString() != statusId))
+            {
+                this.IsWaiting = statusId == "1";
+                this.IsApproved = statusId == "2";
+                this.IsTakenFromShop = statusId == "3";
+                this.IsBrought = statusId == "4";
+            }
         }
 
         //This method update the delivery guy location
@@ -186,25 +168,24 @@ namespace QuickDeliveryApp.ViewModels
             double lat = double.Parse(latitude), longi = double.Parse(longitude);
             if (OnDeliveryLocation != null)
                 OnDeliveryLocation(lat, longi);
-
-
         }
+
         public async void OnGo()
         {
             try
             {
                 GoogleMapsApiService service = new GoogleMapsApiService();
-                //find auto complete places first for origin and destination
-                GooglePlaceAutoCompleteResult originPlaces = await service.GetPlaces(Origin);
-                GooglePlaceAutoCompleteResult destPlaces = await service.GetPlaces(Destination);
-                //extract the exact first google place for origin and destination
-                //note that here i am taking the first suggestion but it will be better if you will
-                //ask the user to choose which suggestion is better for him
+                //Find auto complete places first for origin and destination
+                GooglePlaceAutoCompleteResult originPlaces = await service.GetPlaces(origin);
+                GooglePlaceAutoCompleteResult destPlaces = await service.GetPlaces(destination);
+                //Extract the exact first google place for origin and destination
+                //Note that here i am taking the first suggestion but it will be better if you will
+                //Ask the user to choose which suggestion is better for him
                 GooglePlace place1 = await service.GetPlaceDetails(originPlaces.AutoCompletePlaces[0].PlaceId);
                 GooglePlace place2 = await service.GetPlaceDetails(destPlaces.AutoCompletePlaces[0].PlaceId);
-                //get directions to move from origin to destination
+                //Get directions to move from origin to destination
                 GoogleDirection direction = await service.GetDirections($"{place1.Latitude}", $"{place1.Longitude}", $"{place2.Latitude}", $"{place2.Longitude}");
-                //update the properties so the main page class will have access to the information and fire the event to update the map
+                //Update the properties so the main page class will have access to the information and fire the event to update the map
                 RouteOrigin = place1;
                 RouteDestination = place2;
                 RouteDirections = direction;
@@ -215,17 +196,6 @@ namespace QuickDeliveryApp.ViewModels
             catch (Exception e)
             {
                 Console.WriteLine(e.Message);
-            }
-        }
-
-        private void App_OnOrderStatusUpdate(object sender, int orderId, int statusId)
-        {
-            if ((currentOrderId == orderId) && (currentStatusId != statusId))
-            {
-                this.IsWaiting = statusId == 1;
-                this.IsApproved = statusId == 2;
-                this.IsTakenFromShop = statusId == 3;
-                this.IsBrought = statusId == 4;
             }
         }
     }
