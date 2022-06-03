@@ -27,6 +27,12 @@ namespace QuickDeliveryApp.Models
             string[] arr = new string[0];
             await this.deliveryProxy.Connect(arr);
         }
+        
+        private async void DisconnectToServer(int orderId)
+        {
+            string[] orders = { orderId.ToString() };
+            await this.deliveryProxy.Disconnect(orders);
+        }
 
         public async void UpdateOrderStatus(int orderId, int statusId)
         {
@@ -35,6 +41,10 @@ namespace QuickDeliveryApp.Models
             {
                 o.StatusOrderId = statusId;
                 await this.deliveryProxy.UpdateOrderStatus(orderId.ToString(), statusId.ToString());
+                if (orderId == 4)
+                {
+                    this.DisconnectToServer(orderId);
+                }
             }
         }
 

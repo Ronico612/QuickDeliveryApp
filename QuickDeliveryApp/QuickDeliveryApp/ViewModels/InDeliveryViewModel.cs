@@ -141,13 +141,18 @@ namespace QuickDeliveryApp.ViewModels
             this.deliveryProxy = new DeliveryProxy();
             this.deliveryProxy.RegisterToUpdateDeliveryLocation(UpdateDeliveryLocation);
             this.deliveryProxy.RegisterToUpdateOrderStatus(UpdateStatusByServer);
-            ConnectToDeliveryProxy(orderId);
         }
 
-        private async void ConnectToDeliveryProxy(int orderId)
+        public async void ConnectToDeliveryProxy()
         {
-            string[] orders = { orderId.ToString() };
+            string[] orders = { currentOrderId.ToString() };
             await this.deliveryProxy.Connect(orders);
+        }
+
+        public async void DisconnectToDeliveryProxy()
+        {
+            string[] orders = { currentOrderId.ToString() };
+            await this.deliveryProxy.Disconnect(orders);
         }
 
         //This method will be called by delivery proxy when the order status is changing

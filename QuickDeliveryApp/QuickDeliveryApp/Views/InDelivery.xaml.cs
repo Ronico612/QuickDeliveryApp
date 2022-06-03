@@ -25,6 +25,7 @@ namespace QuickDeliveryApp.Views
         {
             base.OnAppearing();
             InDeliveryViewModel context = (InDeliveryViewModel)this.BindingContext;
+            context.ConnectToDeliveryProxy();
             context.OnUpdateMapEvent += OnUpdateMap;
             context.OnDeliveryLocation += OnUpdateDeliveryPosition;
             context.OnGo();
@@ -35,6 +36,7 @@ namespace QuickDeliveryApp.Views
         {
             base.OnDisappearing();
             InDeliveryViewModel context = (InDeliveryViewModel)this.BindingContext;
+            context.DisconnectToDeliveryProxy();
             context.OnUpdateMapEvent -= OnUpdateMap;
         }
 
