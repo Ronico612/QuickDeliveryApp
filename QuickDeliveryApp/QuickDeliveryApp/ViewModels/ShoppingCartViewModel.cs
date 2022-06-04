@@ -19,7 +19,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-       
+        #region ProductsInShoppingCart
         private ObservableCollection<ProductShoppingCart> productsInShoppingCart;
         public ObservableCollection<ProductShoppingCart> ProductsInShoppingCart
         {
@@ -31,13 +31,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.productsInShoppingCart != value)
                 {
-
                     this.productsInShoppingCart = value;
                     OnPropertyChanged("ProductsInShoppingCart");
                 }
             }
         }
+        #endregion
 
+        #region SelectedProduct
         private ProductShoppingCart selectedProduct;
         public ProductShoppingCart SelectedProduct
         {
@@ -49,12 +50,12 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.selectedProduct != value)
                 {
-
                     this.selectedProduct = value;
                     OnPropertyChanged("SelectedProduct");
                 }
             }
         }
+        #endregion
 
         public App App { get; set; }
 
@@ -86,7 +87,6 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-
         public ICommand RemoveCountProductCommand => new Command<ProductShoppingCart>(RemoveCountProduct);
         public async void RemoveCountProduct(ProductShoppingCart productShoppingCart)
         {
@@ -115,7 +115,6 @@ namespace QuickDeliveryApp.ViewModels
             else
             {
                 productShoppingCart.Count++;
-
             }
         }
 
@@ -130,20 +129,17 @@ namespace QuickDeliveryApp.ViewModels
                   App.UpdateShoppingCartPage();
             }
         }
-        
 
         public ICommand ShowSelectedProductCommand => new Command(ShowSelectedProduct);
         public async void ShowSelectedProduct()
         {
             if (SelectedProduct != null)
             {
-
                 Page p = new ProductSelected();
                 p.Title = SelectedProduct.ProductName;
                 p.BindingContext = new ProductSelectedViewModel(this.SelectedProduct);
                 NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
                 await tabbed.Navigation.PushAsync(p);
-
             }
         }
 

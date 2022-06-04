@@ -20,6 +20,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region ShopProducts
         private ObservableCollection<Product> shopProducts;
         public ObservableCollection<Product> ShopProducts
         {
@@ -36,6 +37,7 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
         public ShopProductsManagementViewModel()
         {
@@ -49,7 +51,6 @@ namespace QuickDeliveryApp.ViewModels
             List<Product> products = currentShop.Products.Where(p => p.IsDeleted == false).OrderBy(p => p.AgeProductTypeId).ThenBy(p => p.ProductTypeId).ThenBy(p => p.ProductName).ToList();
             this.ShopProducts = new ObservableCollection<Product>(products);
         }
-
 
         public ICommand DeleteProductCommand => new Command<Product>(DeleteProduct);
         public async void DeleteProduct(Product productToDelete)
@@ -79,7 +80,6 @@ namespace QuickDeliveryApp.ViewModels
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);
         }
-
 
         public ICommand AddProductCommand => new Command(AddProduct);
         public async void AddProduct()

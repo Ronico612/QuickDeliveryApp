@@ -22,6 +22,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region ServerStatus
         private string serverStatus;
         public string ServerStatus
         {
@@ -32,7 +33,9 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("ServerStatus");
             }
         }
+        #endregion
 
+        #region Shop
         private Shop shop;
         public Shop Shop
         {
@@ -49,9 +52,9 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
-        private List<string> allCities;
-
+        #region FilteredCities
         private ObservableCollection<string> filteredCities;
         public ObservableCollection<string> FilteredCities
         {
@@ -69,9 +72,9 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
-        private List<Street> allStreets;
-
+        #region FilteredStreets
         private ObservableCollection<string> filteredStreets;
         public ObservableCollection<string> FilteredStreets
         {
@@ -89,7 +92,9 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region IsAdded
         private bool isAdded;
         public bool IsAdded
         {
@@ -107,10 +112,10 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
         #region ImgSource
         private string imgSource;
-
         public string ImgSource
         {
             get => imgSource;
@@ -153,7 +158,6 @@ namespace QuickDeliveryApp.ViewModels
 
             this.ImgSourceError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
-
         #endregion
 
         #region ShopName
@@ -316,11 +320,9 @@ namespace QuickDeliveryApp.ViewModels
             else
                 this.ShopCityError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
-
         #endregion
 
         #region ShopStreet
-
         private string shopStreet;
         public string ShopStreet
         {
@@ -606,8 +608,10 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-        public ICommand AddOrEditCommand => new Command(AddOrEdit);
+        private List<string> allCities;
+        private List<Street> allStreets;
 
+        public ICommand AddOrEditCommand => new Command(AddOrEdit);
         public AddOrEditShopViewModel(Shop s)
         {
             App app = (App)Application.Current;

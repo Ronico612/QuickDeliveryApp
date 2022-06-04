@@ -18,26 +18,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public ICommand ShopProductsManagementCommand => new Command(ShopProductsManagement);
-        public async void ShopProductsManagement()
-        {
-            Page p = new ShopProductsManagement();
-            p.Title = "ניהול מוצרים";
-            p.BindingContext = new ShopProductsManagementViewModel();
-            NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
-            await tabbed.Navigation.PushAsync(p);
-        }
-
-        public ICommand ShopOrdersCommand => new Command(ShopOrders);
-        public async void ShopOrders()
-        {
-            Page p = new ShopOrders();
-            p.Title = "הזמנות";
-            p.BindingContext = new ShopOrdersViewModel();
-            NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
-            await tabbed.Navigation.PushAsync(p);
-        }
-
+        #region ShopName
         private string shopName;
         public string ShopName
         {
@@ -48,7 +29,9 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("ShopName");
             }
         }
+        #endregion
 
+        #region ShopCity
         private string shopCity;
         public string ShopCity
         {
@@ -59,6 +42,7 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("ShopCity");
             }
         }
+        #endregion
 
         public ShopManagerViewModel()
         {
@@ -77,6 +61,26 @@ namespace QuickDeliveryApp.ViewModels
                     this.ShopCity = currentShop.ShopCity;
                 }
             }
+        }
+
+        public ICommand ShopProductsManagementCommand => new Command(ShopProductsManagement);
+        public async void ShopProductsManagement()
+        {
+            Page p = new ShopProductsManagement();
+            p.Title = "ניהול מוצרים";
+            p.BindingContext = new ShopProductsManagementViewModel();
+            NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+            await tabbed.Navigation.PushAsync(p);
+        }
+
+        public ICommand ShopOrdersCommand => new Command(ShopOrders);
+        public async void ShopOrders()
+        {
+            Page p = new ShopOrders();
+            p.Title = "הזמנות";
+            p.BindingContext = new ShopOrdersViewModel();
+            NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
+            await tabbed.Navigation.PushAsync(p);
         }
     }
 }

@@ -18,6 +18,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region Users
         private ObservableCollection<User> users;
         public ObservableCollection<User> Users
         {
@@ -34,6 +35,7 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
         public AdminShowUsersViewModel()
         {
@@ -47,6 +49,5 @@ namespace QuickDeliveryApp.ViewModels
             userList = userList.OrderBy(u => u.UserFname).ThenBy(u => u.UserLname).ThenBy(u => u.UserEmail).ToList();
             this.Users = new ObservableCollection<User>(userList);
         }
-
     }
 }

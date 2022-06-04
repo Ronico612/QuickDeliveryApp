@@ -17,7 +17,6 @@ namespace QuickDeliveryApp.DTO
 
     public class Northeast
     {
-
         [JsonProperty("lat")]
         public double Lat { get; set; }
 
@@ -27,7 +26,6 @@ namespace QuickDeliveryApp.DTO
 
     public class Southwest
     {
-
         [JsonProperty("lat")]
         public double Lat { get; set; }
 
@@ -37,7 +35,6 @@ namespace QuickDeliveryApp.DTO
 
     public class Bounds
     {
-
         [JsonProperty("northeast")]
         public Northeast Northeast { get; set; }
 
@@ -47,7 +44,6 @@ namespace QuickDeliveryApp.DTO
 
     public class DistanceOp
     {
-
         [JsonProperty("text")]
         public string Text { get; set; }
 
@@ -57,7 +53,6 @@ namespace QuickDeliveryApp.DTO
 
     public class Duration
     {
-
         [JsonProperty("text")]
         public string Text { get; set; }
 
@@ -67,7 +62,6 @@ namespace QuickDeliveryApp.DTO
 
     public class EndLocation
     {
-
         [JsonProperty("lat")]
         public double Lat { get; set; }
 
@@ -77,7 +71,6 @@ namespace QuickDeliveryApp.DTO
 
     public class StartLocation
     {
-
         [JsonProperty("lat")]
         public double Lat { get; set; }
 
@@ -87,14 +80,12 @@ namespace QuickDeliveryApp.DTO
 
     public class Polyline
     {
-
         [JsonProperty("points")]
         public string Points { get; set; }
     }
 
     public class Step
     {
-
         [JsonProperty("distance")]
         public DistanceOp Distance { get; set; }
 
@@ -122,7 +113,6 @@ namespace QuickDeliveryApp.DTO
 
     public class Leg
     {
-
         [JsonProperty("distance")]
         public DistanceOp Distance { get; set; }
 
@@ -153,14 +143,12 @@ namespace QuickDeliveryApp.DTO
 
     public class OverviewPolyline
     {
-
         [JsonProperty("points")]
         public string Points { get; set; }
     }
 
     public class Route
     {
-
         [JsonProperty("bounds")]
         public Bounds Bounds { get; set; }
 
@@ -185,7 +173,6 @@ namespace QuickDeliveryApp.DTO
 
     public class GoogleDirection
     {
-
         [JsonProperty("geocoded_waypoints")]
         public IList<GeocodedWaypoint> GeocodedWaypoints { get; set; }
 

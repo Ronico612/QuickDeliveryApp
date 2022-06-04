@@ -70,6 +70,7 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
+        #region ServerStatus
         private string serverStatus;
         public string ServerStatus
         {
@@ -80,6 +81,7 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("ServerStatus");
             }
         }
+        #endregion
 
         public AddDeliveryPersonViewModel()
         {

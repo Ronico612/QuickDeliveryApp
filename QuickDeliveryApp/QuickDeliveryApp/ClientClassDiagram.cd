@@ -196,14 +196,6 @@
       <FileName>Views\HistoryDelivery.xaml.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="QuickDeliveryApp.ViewModels.ChooseOrderViewModel" Collapsed="true">
-    <Position X="1.75" Y="19.25" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>AAEAACABAAAAAAAAIAAAAAAQgAAAAAAAAABAAAAAAAA=</HashCode>
-      <FileName>ViewModels\ChooseOrderViewModel.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="QuickDeliveryApp.ViewModels.OrdersInProcessViewModel" Collapsed="true">
     <Position X="5.25" Y="19.25" Width="2.25" />
     <TypeIdentifier>
@@ -219,6 +211,431 @@
       <FileName>ViewModels\HistoryDeliveryViewModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.ChooseOrderViewModel" Collapsed="true">
+    <Position X="1.75" Y="19.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAEAACABAAAAAAAAIAAAAAAQgAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ChooseOrderViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.PersonalAreaViewModel" Collapsed="true">
+    <Position X="4.75" Y="22" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIBAAAAAMAAAgIAAAAAIAhAAAAAAAAAAAAAAgAIA=</HashCode>
+      <FileName>ViewModels\PersonalAreaViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.UserDetailsViewModel" Collapsed="true">
+    <Position X="1.25" Y="24.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>IQWgIlDAMCN0yMIqZAjBKMgIgREiBxEhIkYA+IkgADA=</HashCode>
+      <FileName>ViewModels\UserDetailsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.UserCurrentOrdersViewModel" Collapsed="true">
+    <Position X="4.75" Y="24.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAoAAAQIAQgAACgAAAAgAAAAAgAAA=</HashCode>
+      <FileName>ViewModels\UserCurrentOrdersViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.HistoryOrdersViewModel" Collapsed="true">
+    <Position X="8.5" Y="24.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAAAAAAAoAAAQIAQgAACgAAAAgAAAAAgAAA=</HashCode>
+      <FileName>ViewModels\HistoryOrdersViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.OrderDetailsViewModel" Collapsed="true">
+    <Position X="7" Y="26.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AUAAQABACCQAAIAEaCAEBABAiJIAAMCCAEAAgAFACDA=</HashCode>
+      <FileName>ViewModels\OrderDetailsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.PersonalArea" Collapsed="true">
+    <Position X="4.75" Y="21" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\PersonalArea.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.UserDetails" Collapsed="true">
+    <Position X="1.25" Y="23.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\UserDetails.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.UserCurrentOrders" Collapsed="true">
+    <Position X="4.75" Y="23.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\UserCurrentOrders.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.HistoryOrders" Collapsed="true">
+    <Position X="8.5" Y="23.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\HistoryOrders.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.OrderDetails" Collapsed="true">
+    <Position X="7" Y="25.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\OrderDetails.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.Login" Collapsed="true">
+    <Position X="7.75" Y="29.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAgAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\LogIn.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.Shops" Collapsed="true">
+    <Position X="1.75" Y="29.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Shops.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.LoginViewModel" Collapsed="true">
+    <Position X="7.75" Y="30.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>4YGgshjAuaf8yPsr5IjRKMwtgREjJxUjIkYR/skAAbE=</HashCode>
+      <FileName>ViewModels\LoginViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.ShopsViewModel" Collapsed="true">
+    <Position X="1.75" Y="30.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAA4QAAAAAAgIwAIAAMACAAAAIABBA=</HashCode>
+      <FileName>ViewModels\ShopsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.ShopProductsViewModel" Collapsed="true">
+    <Position X="1.75" Y="32.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>BBlAIAARAABAAoAA4UAAAAAAgCAAAAAgAAAwBAQIiAA=</HashCode>
+      <FileName>ViewModels\ShopProductsViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.ProductSelectedViewModel" Collapsed="true">
+    <Position X="1.75" Y="34.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAgAAAAIABgASAAIAABAAAAgABQAAAAEAAABABAIYA=</HashCode>
+      <FileName>ViewModels\ProductSelectedViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.ShoppingCartViewModel" Collapsed="true">
+    <Position X="4.75" Y="30.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAAIABAABAAEAA4QAgAIACgBAAAAAQAAAgAgAkACA=</HashCode>
+      <FileName>ViewModels\ShoppingCartViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.PayViewModel" Collapsed="true">
+    <Position X="4.75" Y="32.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AECgIhDBIABky4AKZAigKMAAgwAiBhEAIkYg4IJgACA=</HashCode>
+      <FileName>ViewModels\PayViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.InDeliveryViewModel" Collapsed="true">
+    <Position X="4.75" Y="34.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>CQEAAAAAEAAAgAAQIQAAAgMAgIIRAAaCAAQERAAAAAA=</HashCode>
+      <FileName>ViewModels\InDeliveryViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.ShoppingCart" Collapsed="true">
+    <Position X="4.75" Y="29.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ShoppingCart.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.ShopProducts" Collapsed="true">
+    <Position X="1.75" Y="31.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ShopProducts.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.ProductSelected" Collapsed="true">
+    <Position X="1.75" Y="33.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ProductSelected.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.Pay" Collapsed="true">
+    <Position X="4.75" Y="31.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\Pay.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.InDelivery" Collapsed="true">
+    <Position X="4.75" Y="33.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAACAgAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Views\InDelivery.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.TheMainTabbedPage" Collapsed="true">
+    <Position X="5" Y="27.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AiAAAAAAABAAAAECAAAAAAAAAAEAAAIAAAAQAAAAEgA=</HashCode>
+      <FileName>Views\TheMainTabbedPage.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.TheMainTabbedPageViewModel" Collapsed="true">
+    <Position X="5" Y="28.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\TheMainTabbedPageViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.Views.ServerStatus" Collapsed="true">
+    <Position X="10.5" Y="29.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Views\ServerStatus.xaml.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.ViewModels.ServerStatusViewModel" Collapsed="true">
+    <Position X="10.5" Y="30.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAIAAgAAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\ServerStatusViewModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.AgeProductType" Collapsed="true">
+    <Position X="1.75" Y="36.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAABAAAQ=</HashCode>
+      <FileName>Models\AgeProductType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.AllStatusOfOrder" Collapsed="true">
+    <Position X="6" Y="36" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAEAAAAAAAABAAAQAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\AllStatusOfOrder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Order" />
+      <Property Name="StatusOrder" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.ConnectedDeliveryPerson" Collapsed="true">
+    <Position X="11" Y="39.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQCAAAACAAAAgAAAAIAAAAAAAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>Models\ConnectedDeliveryPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.Constants" Collapsed="true">
+    <Position X="5.5" Y="41.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAEAAAAAAAAA=</HashCode>
+      <FileName>Models\Constants.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.DeliveryPerson" Collapsed="true">
+    <Position X="11" Y="38.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Models\DeliveryPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.FileInfo" Collapsed="true">
+    <Position X="5.5" Y="40.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\FileInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.Order" Collapsed="true">
+    <Position X="8.5" Y="37.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAABAAABAAAFAgAQAAAIAAgAAAAAQAAAAAAKAAAAAAg=</HashCode>
+      <FileName>Models\Order.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="OrderProducts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.OrderDetails" Collapsed="true">
+    <Position X="8.5" Y="38.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>GAABAAABAAAEAAAAAAAIASAAAAAIQhAAAAAAAgAAAAg=</HashCode>
+      <FileName>Models\OrderDetails.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="User" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="OrderProducts" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.OrderProduct" Collapsed="true">
+    <Position X="6" Y="37.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAECAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Models\OrderProduct.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Product" />
+      <Property Name="Order" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.Product" Collapsed="true">
+    <Position X="2.75" Y="37.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>UAAAAAARCQAAAAAAAgAQgAAAAACAAAAAACAAAQAJAAA=</HashCode>
+      <FileName>Models\Product.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ProductType" />
+      <Property Name="AgeProductType" />
+      <Property Name="Shop" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.ProductShoppingCart" Collapsed="true">
+    <Position X="2.75" Y="39.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAJAAAQCQAgAAkAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\ProductShoppingCart.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.ProductType" Collapsed="true">
+    <Position X="3.5" Y="36.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>Models\ProductType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.Shop" Collapsed="true">
+    <Position X="0.5" Y="37.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAAAAAAgAAASAAAAAAAhAAACEAAwAAEAQ=</HashCode>
+      <FileName>Models\Shop.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ShopManager" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.ShopManager" Collapsed="true">
+    <Position X="11" Y="37.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAEAAAAAAAAAiAAAgAAAEAAAAAAAA=</HashCode>
+      <FileName>Models\ShopManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.StatusOrder" Collapsed="true">
+    <Position X="6" Y="36.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAABAgAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\StatusOrder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Orders" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="QuickDeliveryApp.Models.User" Collapsed="true">
+    <Position X="11" Y="36.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAABEABEAgAAQEAAgACAAAAAIAABgGCAIAEAA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="DeliveryPerson" />
+      <Property Name="ShopManager" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Property Name="Orders" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="QuickDeliveryApp.DTO.City" Collapsed="true">
+    <Position X="0.75" Y="40.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EEAAAAAAAAAAABAAAAAAAAAAAAAMAAgAAAAAABgAIAA=</HashCode>
+      <FileName>DTO\City.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.DTO.Street" Collapsed="true">
+    <Position X="0.75" Y="41.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAAAAAABAAAAAAAAAAAAAgAAAAAAAAAgQ=</HashCode>
+      <FileName>DTO\Street.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.DTO.GoogleDirection" Collapsed="true">
+    <Position X="2.5" Y="40.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAEAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTO\GoogleDirection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.DTO.GooglePlace" Collapsed="true">
+    <Position X="2.5" Y="41.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAACAAAAAAIAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTO\GooglePlace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.DTO.GooglePlaceAutoCompletePrediction" Collapsed="true">
+    <Position X="2.5" Y="42.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAGAACAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>DTO\GooglePlaceAutoCompletePrediction.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Services.DeliveryProxy" Collapsed="true">
+    <Position X="1.25" Y="45" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AQQAAAAgAAAAAAACAAAQAIAAEIAAEAAAgAAAAgAAAAI=</HashCode>
+      <FileName>Services\DeliveryProxy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Services.GoogleMapsApiService" Collapsed="true">
+    <Position X="1.25" Y="45.75" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAQIABAAAAAABAABAAAAAAAAAAAAABAA=</HashCode>
+      <FileName>Services\GoogleMapsApiService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuickDeliveryApp.Services.QuickDeliveryAPIProxy" Collapsed="true">
+    <Position X="1.25" Y="44.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>EiKAACACQIAhFggTAQAAAorCUYQAkoAKANAGxTMABQA=</HashCode>
+      <FileName>Services\QuickDeliveryAPIProxy.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

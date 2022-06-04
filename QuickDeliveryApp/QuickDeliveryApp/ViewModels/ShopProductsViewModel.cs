@@ -21,6 +21,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region FilteredProducts
         private ObservableCollection<Product> filteredProducts;
         public ObservableCollection<Product> FilteredProducts
         {
@@ -32,13 +33,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.filteredProducts != value)
                 {
-
                     this.filteredProducts = value;
                     OnPropertyChanged("FilteredProducts");
                 }
             }
         }
+        #endregion
 
+        #region AgeTypes
         private ObservableCollection<AgeProductType> ageTypes;
         public ObservableCollection<AgeProductType> AgeTypes
         {
@@ -50,13 +52,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.ageTypes != value)
                 {
-
                     this.ageTypes = value;
                     OnPropertyChanged("AgeTypes");
                 }
             }
         }
+        #endregion
 
+        #region ProductTypes
         private ObservableCollection<ProductType> productTypes;
         public ObservableCollection<ProductType> ProductTypes
         {
@@ -68,13 +71,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.productTypes != value)
                 {
-
                     this.productTypes = value;
                     OnPropertyChanged("ProductTypes");
                 }
             }
         }
+        #endregion
 
+        #region SelectedAgeType
         private AgeProductType selectedAgeType;
         public AgeProductType SelectedAgeType
         {
@@ -86,13 +90,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.selectedAgeType != value)
                 {
-
                     this.selectedAgeType = value;
                     OnPropertyChanged("SelectedAgeType");
                 }
             }
         }
+        #endregion
 
+        #region SelectedProductType
         private ProductType selectedProductType;
         public ProductType SelectedProductType
         {
@@ -104,13 +109,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.selectedProductType != value)
                 {
-
                     this.selectedProductType = value;
                     OnPropertyChanged("SelectedProductType");
                 }
             }
         }
+        #endregion
 
+        #region SelectedProduct
         private Product selectedProduct;
         public Product SelectedProduct
         {
@@ -122,70 +128,19 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.selectedProduct != value)
                 {
-
                     this.selectedProduct = value;
                     OnPropertyChanged("SelectedProduct");
                 }
             }
         }
+        #endregion
 
         public Shop CurrentShop;
+
         public ShopProductsViewModel(Shop selected)
         {
             CurrentShop = selected;
             InitAgeTypes();   
-        }
-
-        private void InitProducts()
-        {
-            this.FilteredProducts = new ObservableCollection<Product>();
-            foreach (Product p in this.CurrentShop.Products)
-            {
-                if (p.AgeProductTypeId == SelectedAgeType.AgeProductTypeId && p.ProductTypeId == selectedProductType.ProductTypeId && p.IsDeleted == false)
-                {
-                    if (this.FilteredProducts.Where(a => a.ProductId == p.ProductId).FirstOrDefault() == null)
-                        this.FilteredProducts.Add(p);
-                }
-            }    
-        }
-
-        private void InitAgeTypes()
-        {
-            GetAgeTypes();
-            if (AgeTypes != null && AgeTypes.Count > 0)
-            {
-                this.SelectedAgeType = AgeTypes.First();
-                ShowProductTypesForSelectedAge();
-                //InitProducts();
-                IsRefreshing = false;
-            }
-        }
-
-        private void GetAgeTypes()
-        {
-            this.AgeTypes = new ObservableCollection<AgeProductType>();
-            foreach(Product p in this.CurrentShop.Products)
-            {
-                if (this.AgeTypes.Where(a => a.AgeProductTypeId == p.AgeProductTypeId).FirstOrDefault() == null && p.IsDeleted == false)
-                    this.AgeTypes.Add(p.AgeProductType);
-            }
-        }
-
-
-        private void ShowProductTypesForSelectedAge()
-        {
-            this.ProductTypes = new ObservableCollection<ProductType>();
-            foreach (Product p in this.CurrentShop.Products)
-            {
-                if (p.AgeProductTypeId == SelectedAgeType.AgeProductTypeId && p.IsDeleted == false)
-                {
-                    if (this.ProductTypes.Where(a => a.ProductTypeId == p.ProductTypeId).FirstOrDefault() == null)
-                        this.ProductTypes.Add(p.ProductType);
-                }
-                
-            }
-            this.SelectedProductType = ProductTypes.First();
-            InitProducts();
         }
 
         #region Refresh
@@ -209,8 +164,58 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-        public ICommand ShowProductTypesCommand => new Command(ShowProductTypesForSelectedAge);
+        private void InitAgeTypes()
+        {
+            GetAgeTypes();
+            if (AgeTypes != null && AgeTypes.Count > 0)
+            {
+                this.SelectedAgeType = AgeTypes.First();
+                ShowProductTypesForSelectedAge();
+                //InitProducts();
+                IsRefreshing = false;
+            }
+        }
+
+        private void GetAgeTypes()
+        {
+            this.AgeTypes = new ObservableCollection<AgeProductType>();
+            foreach (Product p in this.CurrentShop.Products)
+            {
+                if (this.AgeTypes.Where(a => a.AgeProductTypeId == p.AgeProductTypeId).FirstOrDefault() == null && p.IsDeleted == false)
+                    this.AgeTypes.Add(p.AgeProductType);
+            }
+        }
+
         public ICommand ShowProductsCommand => new Command(InitProducts);
+        private void InitProducts()
+        {
+            this.FilteredProducts = new ObservableCollection<Product>();
+            foreach (Product p in this.CurrentShop.Products)
+            {
+                if (p.AgeProductTypeId == SelectedAgeType.AgeProductTypeId && p.ProductTypeId == selectedProductType.ProductTypeId && p.IsDeleted == false)
+                {
+                    if (this.FilteredProducts.Where(a => a.ProductId == p.ProductId).FirstOrDefault() == null)
+                        this.FilteredProducts.Add(p);
+                }
+            }    
+        }
+
+        public ICommand ShowProductTypesCommand => new Command(ShowProductTypesForSelectedAge);
+        private void ShowProductTypesForSelectedAge()
+        {
+            this.ProductTypes = new ObservableCollection<ProductType>();
+            foreach (Product p in this.CurrentShop.Products)
+            {
+                if (p.AgeProductTypeId == SelectedAgeType.AgeProductTypeId && p.IsDeleted == false)
+                {
+                    if (this.ProductTypes.Where(a => a.ProductTypeId == p.ProductTypeId).FirstOrDefault() == null)
+                        this.ProductTypes.Add(p.ProductType);
+                }
+            }
+            this.SelectedProductType = ProductTypes.First();
+            InitProducts();
+        }
+
         public ICommand ShowProductCommand => new Command(ShowProduct);
         public async void ShowProduct()
         {

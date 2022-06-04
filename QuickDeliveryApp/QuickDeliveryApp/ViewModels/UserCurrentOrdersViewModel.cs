@@ -20,6 +20,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region UserOrders
         private ObservableCollection<OrderDetails> userOrders;
         public ObservableCollection<OrderDetails> UserOrders
         {
@@ -31,13 +32,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.userOrders != value)
                 {
-
                     this.userOrders = value;
                     OnPropertyChanged("UserOrders");
                 }
             }
         }
+        #endregion
 
+        #region SelectedUserOrder
         private OrderDetails selectedUserOrder;
         public OrderDetails SelectedUserOrder
         {
@@ -49,12 +51,12 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.selectedUserOrder != value)
                 {
-
                     this.selectedUserOrder = value;
                     OnPropertyChanged("SelectedUserOrder");
                 }
             }
         }
+        #endregion
 
         public App App { get; set; }
 
@@ -82,7 +84,6 @@ namespace QuickDeliveryApp.ViewModels
                     UserOrders.Add(userOrderDetails);
                 }
             }
-
             this.UserOrders = new ObservableCollection<OrderDetails>(this.UserOrders);
         }
 

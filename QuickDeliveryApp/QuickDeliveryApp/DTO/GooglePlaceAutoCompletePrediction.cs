@@ -19,7 +19,6 @@ namespace QuickDeliveryApp.DTO
 
         [JsonProperty("structured_formatting")]
         public StructuredFormatting StructuredFormatting { get; set; }
-
     }
 
     public class StructuredFormatting

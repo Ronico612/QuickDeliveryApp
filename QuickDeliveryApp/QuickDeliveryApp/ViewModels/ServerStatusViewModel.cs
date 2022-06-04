@@ -13,6 +13,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region IsShowLogo
         private bool isShowLogo;
         public bool IsShowLogo
         {
@@ -23,7 +24,9 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("IsShowLogo");
             }
         }
+        #endregion
 
+        #region ServerStatus
         private string serverStatus;
         public string ServerStatus
         {
@@ -34,5 +37,6 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("ServerStatus");
             }
         }
+        #endregion
     }
 }

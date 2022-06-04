@@ -55,7 +55,6 @@ namespace QuickDeliveryApp.ViewModels
             await tabbed.Navigation.PushAsync(p);
         }
 
-
         public ICommand LogoutCommand => new Command(Logout);
         public async void Logout()
         {

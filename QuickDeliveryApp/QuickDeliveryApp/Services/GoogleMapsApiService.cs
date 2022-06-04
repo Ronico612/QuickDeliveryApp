@@ -25,6 +25,7 @@ namespace QuickDeliveryApp.Services
 
             return httpClient;
         }
+
         public static void Initialize(string googleMapsKey)
         {
             _googleMapsKey = googleMapsKey;

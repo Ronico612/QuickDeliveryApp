@@ -20,6 +20,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region AdminShops
         private ObservableCollection<Shop> adminShops;
         public ObservableCollection<Shop> AdminShops
         {
@@ -36,6 +37,7 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
         public AdminShopsManagementViewModel()
         {
@@ -79,7 +81,6 @@ namespace QuickDeliveryApp.ViewModels
             await tabbed.Navigation.PushAsync(p);
         }
 
-
         public ICommand AddShopCommand => new Command(AddShop);
         public async void AddShop()
         {
@@ -91,7 +92,5 @@ namespace QuickDeliveryApp.ViewModels
             NavigationPage tabbed = (NavigationPage)Application.Current.MainPage;
             await tabbed.Navigation.PushAsync(p);
         }
-
-
     }
 }

@@ -20,6 +20,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region DeliveryPersons
         private ObservableCollection<User> deliveryPersons;
         public ObservableCollection<User> DeliveryPersons
         {
@@ -36,6 +37,7 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
         public AdminDeliveryPManagementViewModel()
         {
@@ -49,7 +51,6 @@ namespace QuickDeliveryApp.ViewModels
             deliveryPersons = deliveryPersons.OrderBy(u => u.UserFname).ThenBy(u => u.UserLname).ToList();
             this.DeliveryPersons = new ObservableCollection<User>(deliveryPersons);
         }
-
 
         public ICommand DeleteDeliveryPersonCommand => new Command<User>(DeleteDeliveryPerson);
         public async void DeleteDeliveryPerson(User delPToDelete)

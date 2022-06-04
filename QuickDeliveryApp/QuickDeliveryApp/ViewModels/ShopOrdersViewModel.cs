@@ -20,6 +20,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region ShopOrders
         private ObservableCollection<OrderDetails> shopOrders;
         public ObservableCollection<OrderDetails> ShopOrders
         {
@@ -31,13 +32,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.shopOrders != value)
                 {
-
                     this.shopOrders = value;
                     OnPropertyChanged("ShopOrders");
                 }
             }
         }
+        #endregion
 
+        #region SelectedShopOrder
         private OrderDetails selectedShopOrder;
         public OrderDetails SelectedShopOrder
         {
@@ -49,12 +51,12 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.selectedShopOrder != value)
                 {
-
                     this.selectedShopOrder = value;
                     OnPropertyChanged("SelectedShopOrder");
                 }
             }
         }
+        #endregion
 
         public App App { get; set; }
 
@@ -73,7 +75,6 @@ namespace QuickDeliveryApp.ViewModels
         private async Task GetShopOrders()
         {
             Shop currentShop = this.App.AllShops.Where(s => s.ShopManagerId == this.App.CurrentUser.UserId).FirstOrDefault();
-
             QuickDeliveryAPIProxy quickDeliveryAPIProxy = QuickDeliveryAPIProxy.CreateProxy();
             List<Order> orders = await quickDeliveryAPIProxy.GetShopOrders(currentShop.ShopId);
             ShopOrders.Clear();

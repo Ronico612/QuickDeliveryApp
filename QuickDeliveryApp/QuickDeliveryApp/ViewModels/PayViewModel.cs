@@ -22,6 +22,7 @@ namespace QuickDeliveryApp.ViewModels
 
         public App App { get; set; }
 
+        #region ServerStatus
         private string serverStatus;
         public string ServerStatus
         {
@@ -32,7 +33,9 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("ServerStatus");
             }
         }
+        #endregion
 
+        #region ProductsInShoppingCart
         private ObservableCollection<ProductShoppingCart> productsInShoppingCart;
         public ObservableCollection<ProductShoppingCart> ProductsInShoppingCart
         {
@@ -44,15 +47,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.productsInShoppingCart != value)
                 {
-
                     this.productsInShoppingCart = value;
                     OnPropertyChanged("ProductsInShoppingCart");
                 }
             }
         }
+        #endregion
 
-        private List<string> allCities;
-
+        #region FilteredCities
         private ObservableCollection<string> filteredCities;
         public ObservableCollection<string> FilteredCities
         {
@@ -64,15 +66,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.filteredCities != value)
                 {
-
                     this.filteredCities = value;
                     OnPropertyChanged("FilteredCities");
                 }
             }
         }
+        #endregion
 
-        private List<Street> allStreets;
-
+        #region FilteredStreets
         private ObservableCollection<string> filteredStreets;
         public ObservableCollection<string> FilteredStreets
         {
@@ -84,13 +85,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.filteredStreets != value)
                 {
-
                     this.filteredStreets = value;
                     OnPropertyChanged("FilteredStreets");
                 }
             }
         }
+        #endregion
 
+        #region RowsHeight
         private int rowsHeight;
         public int RowsHeight
         {
@@ -102,12 +104,12 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.rowsHeight != value)
                 {
-
                     this.rowsHeight = value;
                     OnPropertyChanged("RowsHeight");
                 }
             }
         }
+        #endregion  
 
         #region City
         private string city;
@@ -225,11 +227,9 @@ namespace QuickDeliveryApp.ViewModels
             else
                 this.CityError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
-
         #endregion
 
         #region Street
-
         private string street;
         public string Street
         {
@@ -412,16 +412,15 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.userNumCard != value)
                 {
-
                     this.userNumCard = value;
                     OnPropertyChanged("UserNumCard");
                 }
             }
         }
-
         #endregion
 
-        public ICommand PayCommand => new Command(Pay);
+        private List<string> allCities;
+        private List<Street> allStreets;
 
         public PayViewModel()
         {
@@ -460,6 +459,7 @@ namespace QuickDeliveryApp.ViewModels
                 return true;
         }
 
+        public ICommand PayCommand => new Command(Pay);
         public async void Pay()
         {
             if (!IsFormValid())

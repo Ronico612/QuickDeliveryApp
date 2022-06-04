@@ -18,6 +18,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region IsShowDescription
         private bool isShowDescription;
         public bool IsShowDescription
         {
@@ -29,13 +30,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isShowDescription != value)
                 {
-
                     this.isShowDescription = value;
                     OnPropertyChanged("IsShowDescription");
                 }
             }
         }
+        #endregion
 
+        #region IsWaiting
         private bool isWaiting;
         public bool IsWaiting
         {
@@ -47,13 +49,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isWaiting != value)
                 {
-
                     this.isWaiting = value;
                     OnPropertyChanged("IsWaiting");
                 }
             }
         }
+        #endregion
 
+        #region IsApproved
         private bool isApproved;
         public bool IsApproved
         {
@@ -65,13 +68,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isApproved != value)
                 {
-
                     this.isApproved = value;
                     OnPropertyChanged("IsApproved");
                 }
             }
         }
+        #endregion
 
+        #region IsTakenFromShop
         private bool isTakenFromShop;
         public bool IsTakenFromShop
         {
@@ -83,13 +87,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isTakenFromShop != value)
                 {
-
                     this.isTakenFromShop = value;
                     OnPropertyChanged("IsTakenFromShop");
                 }
             }
         }
+        #endregion
 
+        #region IsBrought
         private bool isBrought;
         public bool IsBrought
         {
@@ -101,12 +106,12 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isBrought != value)
                 {
-
                     this.isBrought = value;
                     OnPropertyChanged("IsBrought");
                 }
             }
         }
+        #endregion
 
         private int currentOrderId;
         private int currentStatusId;

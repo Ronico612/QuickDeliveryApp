@@ -59,7 +59,6 @@ namespace QuickDeliveryApp.Helpers
                 currentLng += (sum & 1) == 1 ? ~(sum >> 1) : (sum >> 1);
 
                 yield return new Position(Convert.ToDouble(currentLat) / 1E5, Convert.ToDouble(currentLng) / 1E5);
-
             }
         }
 
@@ -107,6 +106,5 @@ namespace QuickDeliveryApp.Helpers
 
             return str.ToString();
         }
-
     }
 }

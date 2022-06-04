@@ -74,6 +74,7 @@ namespace QuickDeliveryApp.Services
 
             if (proxy == null)
                 proxy = new QuickDeliveryAPIProxy(baseUri, basePhotosUri, baseDataUri);
+
             return proxy;
         }
 
@@ -714,7 +715,6 @@ namespace QuickDeliveryApp.Services
                 Console.WriteLine(e.Message);
                 return -1;
             }
-
         }
 
         public async Task<int> AddShopAsync(Shop s)
@@ -751,7 +751,6 @@ namespace QuickDeliveryApp.Services
         {
             try
             {
-
                 HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/UpdateShop?shopId={shopId}&shopName={shopName}&shopStreet={shopStreet}&shopHouseNum={shopHouseNum}&shopCity={shopCity}&shopPhone={shopPhone}&shopManagerId={shopManagerId}");
                 if (response.IsSuccessStatusCode)
                 {
@@ -836,7 +835,6 @@ namespace QuickDeliveryApp.Services
         {
             try
             {
-
                 HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetDeliveryPersons");
                 if (response.IsSuccessStatusCode)
                 {
@@ -887,7 +885,6 @@ namespace QuickDeliveryApp.Services
                 Console.WriteLine(e.Message);
                 return -1;
             }
-
         }
 
         public async Task<bool> DeleteDeliveryPerson(int dpId)
@@ -922,7 +919,6 @@ namespace QuickDeliveryApp.Services
         {
             try
             {
-
                 HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/IsDeliveyPerson?userId={userId}");
                 if (response.IsSuccessStatusCode)
                 {
@@ -959,7 +955,6 @@ namespace QuickDeliveryApp.Services
         {
             try
             {
-
                 HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetWaitingOrders");
                 if (response.IsSuccessStatusCode)
                 {
@@ -1016,7 +1011,6 @@ namespace QuickDeliveryApp.Services
         {
             try
             {
-
                 HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/UpdateStatusOrder?orderId={orderId}&userId={userId}&statusId={statusId}");
                 if (response.IsSuccessStatusCode)
                 {
@@ -1101,7 +1095,6 @@ namespace QuickDeliveryApp.Services
         {
             try
             {
-
                 HttpResponseMessage response = await this.client.GetAsync($"{this.baseUri}/GetUsers");
                 if (response.IsSuccessStatusCode)
                 {
@@ -1126,7 +1119,7 @@ namespace QuickDeliveryApp.Services
             }
         }
 
-        //Upload file to server (only images!)
+        //Upload product file to server (only images!)
         public async Task<bool> UploadProductImage(Models.FileInfo fileInfo, string targetFileName)
         {
             try
@@ -1149,6 +1142,7 @@ namespace QuickDeliveryApp.Services
             }
         }
 
+        //Upload shop file to server (only images!)
         public async Task<bool> UploadShopImage(Models.FileInfo fileInfo, string targetFileName)
         {
             try

@@ -18,6 +18,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region FilteredShops
         private ObservableCollection<Shop> filteredShops;
         public ObservableCollection<Shop> FilteredShops
         {
@@ -34,7 +35,9 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region SelectedShop
         private Shop selectedShop;
         public Shop SelectedShop
         {
@@ -51,7 +54,9 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region SearchTerm
         private string searchTerm;
         public string SearchTerm
         {
@@ -69,6 +74,7 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
         public ShopsViewModel()
         {

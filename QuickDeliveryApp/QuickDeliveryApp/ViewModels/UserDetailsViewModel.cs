@@ -21,6 +21,7 @@ namespace QuickDeliveryApp.ViewModels
 
         public App App { get; set; }
 
+        #region ServerStatus
         private string serverStatus;
         public string ServerStatus
         {
@@ -31,9 +32,9 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("ServerStatus");
             }
         }
+        #endregion
 
-        private List<string> allCities;
-
+        #region FilteredCities
         private ObservableCollection<string> filteredCities;
         public ObservableCollection<string> FilteredCities
         {
@@ -45,15 +46,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.filteredCities != value)
                 {
-
                     this.filteredCities = value;
                     OnPropertyChanged("FilteredCities");
                 }
             }
         }
+        #endregion
 
-        private List<Street> allStreets;
-
+        #region FilteredStreets
         private ObservableCollection<string> filteredStreets;
         public ObservableCollection<string> FilteredStreets
         {
@@ -65,12 +65,12 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.filteredStreets != value)
                 {
-
                     this.filteredStreets = value;
                     OnPropertyChanged("FilteredStreets");
                 }
             }
         }
+        #endregion
 
         #region Phone
         private string phone;
@@ -585,6 +585,9 @@ namespace QuickDeliveryApp.ViewModels
                 this.ShowValidityCreditCardError = false;
         }
         #endregion
+
+        private List<string> allCities;
+        private List<Street> allStreets;
 
         public UserDetailsViewModel()
         {

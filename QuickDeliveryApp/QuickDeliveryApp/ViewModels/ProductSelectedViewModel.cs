@@ -21,6 +21,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region CurrentProduct
         private Product currentProduct;
         public Product CurrentProduct
         {
@@ -32,13 +33,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.currentProduct != value)
                 {
-
                     this.currentProduct = value;
                     OnPropertyChanged("CurrentProduct");
                 }
             }
         }
+        #endregion
 
+        #region IsGoToShoppingCart
         private bool isGoToShoppingCart;
         public bool IsGoToShoppingCart
         {
@@ -50,13 +52,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isGoToShoppingCart != value)
                 {
-
                     this.isGoToShoppingCart = value;
                     OnPropertyChanged("IsGoToShoppingCart");
                 }
             }
         }
+        #endregion
 
+        #region IsAddedText
         private string isAddedText;
         public string IsAddedText
         {
@@ -68,13 +71,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isAddedText != value)
                 {
-
                     this.isAddedText = value;
                     OnPropertyChanged("IsAddedText");
                 }
             }
         }
+        #endregion
 
+        #region ErrorProductText
         private bool errorProductText;
         public bool ErrorProductText
         {
@@ -92,7 +96,9 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region IsEnabledButtonAddProduct
         private bool isEnabledButtonAddProduct;
         public bool IsEnabledButtonAddProduct
         {
@@ -104,12 +110,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isEnabledButtonAddProduct != value)
                 {
-
                     this.isEnabledButtonAddProduct = value;
                     OnPropertyChanged("IsEnabledButtonAddProduct");
                 }
             }
         }
+        #endregion
+
+        #region IconSource
         private string iconSource;
         public string IconSource
         {
@@ -121,13 +129,12 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.iconSource != value)
                 {
-
                     this.iconSource = value;
                     OnPropertyChanged("IconSource");
                 }
             }
         }
-
+        #endregion
 
         public ProductSelectedViewModel(Product selectedProduct)
         {
@@ -210,6 +217,5 @@ namespace QuickDeliveryApp.ViewModels
             TheMainTabbedPage theTabs = (TheMainTabbedPage)tabbed.CurrentPage;
             theTabs.CurrentTab(theTabs.shoppingCart);
         }
-
     }
 }

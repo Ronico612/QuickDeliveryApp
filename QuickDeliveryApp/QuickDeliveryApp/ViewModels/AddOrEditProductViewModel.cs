@@ -22,6 +22,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region Product
         private Product product;
         public Product Product
         {
@@ -33,13 +34,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.product != value)
                 {
-
                     this.product = value;
                     OnPropertyChanged("Product");
                 }
             }
         }
+        #endregion
 
+        #region IsAdded
         private bool isAddded;
         public bool IsAdded
         {
@@ -51,16 +53,15 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isAddded != value)
                 {
-
                     this.isAddded = value;
                     OnPropertyChanged("IsAddded");
                 }
             }
         }
+        #endregion
 
         #region ImgSource
         private string imgSource;
-
         public string ImgSource
         {
             get => imgSource;
@@ -103,7 +104,6 @@ namespace QuickDeliveryApp.ViewModels
 
             this.ImgSourceError = ERROR_MESSAGES.REQUIRED_FIELD;
         }
-
         #endregion
 
         #region ProductName
@@ -341,7 +341,6 @@ namespace QuickDeliveryApp.ViewModels
                 this.ShowAgeTypeError = true;
                 this.AgeTypeError = ERROR_MESSAGES.REQUIRED_FIELD;
             }
-
             else
                 this.ShowAgeTypeError = false;   
         }
@@ -390,12 +389,12 @@ namespace QuickDeliveryApp.ViewModels
                 this.ShowTypeError = true;
                 this.TypeError = ERROR_MESSAGES.REQUIRED_FIELD;
             }
-
             else
                 this.ShowTypeError = false;
         }
         #endregion
 
+        #region ServerStatus
         private string serverStatus;
         public string ServerStatus
         {
@@ -406,6 +405,7 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("ServerStatus");
             }
         }
+        #endregion
 
         public AddOrEditProductViewModel(Product p)
         {
@@ -496,7 +496,6 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
         #endregion
-
       
         public ICommand AddOrEditCommand => new Command(AddOrEdit);
         public async void AddOrEdit()

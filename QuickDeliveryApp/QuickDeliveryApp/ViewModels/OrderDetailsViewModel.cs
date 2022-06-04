@@ -16,6 +16,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region SelectedOrderDetails
         private OrderDetails selectedOrderDetails;
         public OrderDetails SelectedOrderDetails
         {
@@ -33,7 +34,9 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region RowsHeight
         private int rowsHeight;
         public int RowsHeight
         {
@@ -51,7 +54,9 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region IsApproved
         private bool isApproved;
         public bool IsApproved
         {
@@ -69,7 +74,9 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
+        #region IsTakenFromShop
         private bool isTakenFromShop;
         public bool IsTakenFromShop
         {
@@ -81,13 +88,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isTakenFromShop != value)
                 {
-
                     this.isTakenFromShop = value;
                     OnPropertyChanged("IsTakenFromShop");
                 }
             }
         }
+        #endregion
 
+        #region ApprovedByDeliveryPersonDate
         private DateTime approvedByDeliveryPersonDate;
         public DateTime ApprovedByDeliveryPersonDate
         {
@@ -99,13 +107,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.approvedByDeliveryPersonDate != value)
                 {
-
                     this.approvedByDeliveryPersonDate = value;
                     OnPropertyChanged("ApprovedByDeliveryPersonDate");
                 }
             }
         }
+        #endregion
 
+        #region IsShowApprovedByDeliveryPersonDate
         private bool isShowApprovedByDeliveryPersonDate;
         public bool IsShowApprovedByDeliveryPersonDate
         {
@@ -117,13 +126,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isShowApprovedByDeliveryPersonDate != value)
                 {
-
                     this.isShowApprovedByDeliveryPersonDate = value;
                     OnPropertyChanged("IsShowApprovedByDeliveryPersonDate");
                 }
             }
         }
+        #endregion
 
+        #region TakenFromShopDate
         private DateTime takenFromShopDate;
         public DateTime TakenFromShopDate
         {
@@ -135,13 +145,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.takenFromShopDate != value)
                 {
-
                     this.takenFromShopDate = value;
                     OnPropertyChanged("TakenFromShopDate");
                 }
             }
         }
+        #endregion
 
+        #region IsShowTakenFromShopDate
         private bool isShowTakenFromShopDate;
         public bool IsShowTakenFromShopDate
         {
@@ -153,13 +164,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isShowTakenFromShopDate != value)
                 {
-
                     this.isShowTakenFromShopDate = value;
                     OnPropertyChanged("IsShowTakenFromShopDate");
                 }
             }
         }
+        #endregion
 
+        #region BroughtToUserDate
         private DateTime broughtToUserDate;
         public DateTime BroughtToUserDate
         {
@@ -171,13 +183,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.broughtToUserDate != value)
                 {
-
                     this.broughtToUserDate = value;
                     OnPropertyChanged("BroughtToUserDate");
                 }
             }
         }
+        #endregion
 
+        #region IsShowBroughtToUserDate
         private bool isShowBroughtToUserDate;
         public bool IsShowBroughtToUserDate
         {
@@ -189,13 +202,14 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.isShowBroughtToUserDate != value)
                 {
-
                     this.isShowBroughtToUserDate = value;
                     OnPropertyChanged("IsShowBroughtToUserDate");
                 }
             }
         }
+        #endregion
 
+        #region ShowInDelivery
         private bool showInDelivery;
         public bool ShowInDelivery
         {
@@ -207,12 +221,12 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (this.showInDelivery != value)
                 {
-
                     this.showInDelivery = value;
                     OnPropertyChanged("ShowInDelivery");
                 }
             }
         }
+        #endregion
 
         private bool isCalledFromDeliveryPerson;
         private bool isShowOrderStatus; 

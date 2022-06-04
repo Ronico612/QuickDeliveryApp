@@ -37,6 +37,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region ServerStatus
         private string serverStatus;
         public string ServerStatus
         {
@@ -47,7 +48,9 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("ServerStatus");
             }
         }
+        #endregion
 
+        #region IsRegister
         private bool isRegister;
         public bool IsRegister
         {
@@ -58,7 +61,9 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("IsRegister");
             }
         }
+        #endregion
 
+        #region TitleText
         private string titleText;
         public string TitleText
         {
@@ -69,6 +74,9 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("TitleText");
             }
         }
+        #endregion
+
+        #region GoToText
         private string goToText;
         public string GoToText
         {
@@ -79,6 +87,7 @@ namespace QuickDeliveryApp.ViewModels
                 OnPropertyChanged("GoToText");
             }
         }
+        #endregion
 
         #region FName
         private string fName;
@@ -490,7 +499,6 @@ namespace QuickDeliveryApp.ViewModels
         #endregion
 
         #region Street
-
         private string street;
         public string Street
         {
@@ -825,8 +833,7 @@ namespace QuickDeliveryApp.ViewModels
         }
         #endregion
 
-        private List<string> allCities;
-
+        #region FilteredCities
         private ObservableCollection<string> filteredCities;
         public ObservableCollection<string> FilteredCities
         {
@@ -844,9 +851,9 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
-        private List<Street> allStreets;
-
+        #region FilteredStreets
         private ObservableCollection<string> filteredStreets;
         public ObservableCollection<string> FilteredStreets
         {
@@ -864,6 +871,10 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
+
+        private List<string> allCities;
+        private List<Street> allStreets;
 
         public ICommand SubmitCommand { protected set; get; }
 

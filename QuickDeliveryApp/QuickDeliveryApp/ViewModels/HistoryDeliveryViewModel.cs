@@ -18,6 +18,7 @@ namespace QuickDeliveryApp.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        #region Orders
         private ObservableCollection<Order> orders;
         public ObservableCollection<Order> Orders
         {
@@ -34,6 +35,7 @@ namespace QuickDeliveryApp.ViewModels
                 }
             }
         }
+        #endregion
 
         public HistoryDeliveryViewModel()
         {
