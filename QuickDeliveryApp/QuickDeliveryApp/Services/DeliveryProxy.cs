@@ -52,26 +52,35 @@ namespace QuickDeliveryApp.Services
         //Connect gets a list of groups the user belongs to!
         public async Task Connect(string[] orders)
         {
-            await hubConnection.StartAsync();
+            if (hubConnection.State == HubConnectionState.Disconnected)
+                await hubConnection.StartAsync();
             await hubConnection.InvokeAsync("OnConnect", orders);
         }
 
         //Use this method when the chat is finished so the connection will not stay open
         public async Task Disconnect(string[] orders)
         {
-            await hubConnection.InvokeAsync("OnDisconnect", orders);
-            await hubConnection.StopAsync();
+            if (hubConnection.State == HubConnectionState.Connected)
+            {
+                await hubConnection.InvokeAsync("OnDisconnect", orders);
+                await hubConnection.StopAsync();
+            }
+            
         }
 
         //This message send message to all clients!
         public async Task UpdateOrderStatus(string orderId, string statusId)
         {
+            if (hubConnection.State == HubConnectionState.Disconnected)
+                await hubConnection.StartAsync();
             await hubConnection.InvokeAsync("UpdateOrderStatus", orderId, statusId);
         }
 
         //This method send a message to specific group
         public async Task UpdateDeliveryLocation(string[] orders, string latitude, string longitude)
         {
+            if (hubConnection.State == HubConnectionState.Disconnected)
+                await hubConnection.StartAsync();
             await hubConnection.InvokeAsync("UpdateDeliveryLocation", orders, latitude, longitude);
         }
 

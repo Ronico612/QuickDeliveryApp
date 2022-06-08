@@ -59,7 +59,7 @@ namespace QuickDeliveryApp.Models
         {
             try
             {
-                var location = await Geolocation.GetLastKnownLocationAsync();
+                var location = await Geolocation.GetLocationAsync();
 
                 if (location != null && this.Orders != null)
                 {
