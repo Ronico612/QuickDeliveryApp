@@ -161,7 +161,7 @@ namespace QuickDeliveryApp.ViewModels
         }
 
         //This method will be called by delivery proxy when the order status is changing
-        public void UpdateStatusByServer(string orderId, string statusId)
+        public async void UpdateStatusByServer(string orderId, string statusId)
         {
             if ((currentOrderId.ToString() == orderId) && (currentStatusId.ToString() != statusId))
             {
@@ -169,6 +169,13 @@ namespace QuickDeliveryApp.ViewModels
                 this.IsApproved = statusId == "2";
                 this.IsTakenFromShop = statusId == "3";
                 this.IsBrought = statusId == "4";
+
+                if (IsBrought)
+                {
+                    App app = (App)Application.Current;
+                    await App.Current.MainPage.DisplayAlert("ההזמנה נמסרה!", "תודה שקנית אצלנו", "אישור", FlowDirection.RightToLeft);
+                    await app.MainPage.Navigation.PopToRootAsync();
+                }
             }
         }
 
