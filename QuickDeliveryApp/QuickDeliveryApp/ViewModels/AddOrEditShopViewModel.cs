@@ -808,6 +808,7 @@ namespace QuickDeliveryApp.ViewModels
             }
         }
 
+        // לבחור תמונה ולעדכן בעמוד את התמונה שנבחרה
         #region Upload Image Code
         FileResult imageFileResult;
         public event Action<ImageSource> SetImageSourceEvent;

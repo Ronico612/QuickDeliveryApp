@@ -171,7 +171,6 @@ namespace QuickDeliveryApp.ViewModels
             {
                 this.SelectedAgeType = AgeTypes.First();
                 ShowProductTypesForSelectedAge();
-                //InitProducts();
                 IsRefreshing = false;
             }
         }

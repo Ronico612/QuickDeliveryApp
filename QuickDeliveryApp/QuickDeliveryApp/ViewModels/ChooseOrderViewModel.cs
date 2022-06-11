@@ -59,7 +59,7 @@ namespace QuickDeliveryApp.ViewModels
             {
                 if (app.DeliveryPerson != null)
                 {
-                    app.DeliveryPerson.Orders.Add(orderToDeliver);
+                    app.DeliveryPerson.Orders.Add(orderToDeliver); // מוסיף את ההזמנה לרשימת ההזמנות של השליח
                     app.DeliveryPerson.UpdateOrderStatus(orderToDeliver.OrderId, 2); // מודיע למשתמש שההזמנה אושרה
                 }
                 await App.Current.MainPage.DisplayAlert("", "איסוף הזמנה עודכן בהצלחה, אנא פנה למשלוחים בתהליך", "בסדר");
